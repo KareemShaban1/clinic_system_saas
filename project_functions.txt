@@ -1,0 +1,48 @@
+Events 
+   Add Events
+   Delete Event
+   Restore Events
+   Delete Events Forever
+
+Patients
+   Add Patient
+   Delete Patient
+   Edit Patient
+   Restore Patients
+   Delete Patients Forever
+   show Patient Profile
+
+Reservations
+   Add Reservation
+   Edit Reservation
+   Delete Reservation
+   Restore Reservations
+   Delete Reservations Forever
+   Show Reservations 
+   Add Drugs
+   show Prescription
+   Add Chronic diseases
+   show Chronic diseases
+   Add Rays
+   Show Rays
+   Add Number of Reservations
+   Edit Number of Reservations
+
+
+Medicines
+   Add Medicine
+   Show Medicines
+   Edit Medicine
+   Delete Medicine
+   Show Deleted Medicines
+   Restore Medicine
+   Delete Medicine Forever
+
+Users 
+   Add Users
+   Edit Users 
+   Delete Users
+
+Settings 
+   Add Settings 
+   Update Settings   
