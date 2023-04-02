@@ -6,7 +6,9 @@ return [
           'Add_Prescription'=>'أضافة روشتة',
           'Drug_Name'=>'أسم الدواء',
           'Drug_Dose'=>'الجرعة',
-          'Quantity'=>'الكمية',
+          'Drug_Type'=>'نوع الدواء',
+          'Period'=>'الفترة',
+          'Frequency'=>'التكرار',
           'Notes'=>'الملاحظات',
           'Add_Drug'=>'أضافة دواء',
           'Delete'=>'حذف',
@@ -17,8 +19,7 @@ return [
           'Patient_Name'=>'أسم المريض',
           'Date'=>'التاريخ',
           'Time'=>'الوقت',
-          ''=>'',
-          ''=>'',
+         
           ''=>'',
 
 ];

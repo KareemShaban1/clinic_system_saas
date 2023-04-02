@@ -40,6 +40,7 @@ return [
           'Patient_Profile'=>'ملف المريض',
           'Patient_Information'=>'معلومات المريض',
           'Reservations'=>'الحجوزات',
+          'Add_Online_Reservation'=>'أضافة حجز أونلاين ',
           'Reservation_Count'=>'عدد الكشوفات',
           'Reservation_Number'=>'كشف رقم',
           'Number_of_Reservation'=>'رقم الكشف',

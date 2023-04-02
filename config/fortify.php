@@ -149,7 +149,7 @@ return [
         // return route('dashboard');
       
         //or if you have a bunch of redirection options
-        if (Auth::user()->power == "Admin") {
+        if (Auth::user()->role() == "Admin") {
            return route('admin.dashboard.index');
         }
         elseif (Auth::user()->power == "Doctor") {

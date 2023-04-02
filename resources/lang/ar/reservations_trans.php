@@ -7,6 +7,7 @@ return [
           'Reservations'=>'الحجوزات',
           'All_Reservations'=>'كل الحجوزات',
           'Today_Reservations'=>'حجوزات اليوم',
+          'Daily_Report'=>'التقرير اليومى',
           'Id'=>'Id',
           'Patient_Name'=>'أسم المريض',
           'Number_of_Reservation'=>'رقم الكشف',
@@ -15,6 +16,7 @@ return [
           'Payment'=>'حالة الدفع',
           'Rays_Analysis'=>'الأشعة / التحاليل',
           'Chronic_Diseases'=>'الأمراض المزمنة',
+          'Glasses_Distance'=>'مقاسات النظارة',
           'Prescription'=>'الروشتة',
           'Control'=>'التحكم',
           'Check'=>'كشف',
@@ -29,6 +31,7 @@ return [
           'Entered'=>'دخول',
           'Finished'=>'أنتهاء',
           'Add_Rays'=>'أضافة أشاعة',
+          'Rays' =>'الأشعة / التحاليل',
           'Show'=>'عرض',
 
           // add reservation
@@ -58,9 +61,15 @@ return [
           'Drug_Name'=>'أسم المرض',
           'Drug_Dose'=>'الجرعة',
           'Quantity'=>'الكمية',
-          ''=>'',
-          ''=>'',
-          ''=>'',
+
+          'Rays_Name'=>'أسم الأشعة / التحليل',
+          'Rays_Type'=>'نوع الأشعة / التحليل',
+          'Rays_Date'=>'تاريخ الأشعة / التحليل',
+          'Rays_Image'=>'صورة الأشعة / التحليل',
+          'Rays_Number'=>'رقم الأشعة / التحليل',
+          
+          'Total'=>'الأجمالى',
+          'English'=>'English',
           ''=>'',
           ''=>'',
           ''=>'',

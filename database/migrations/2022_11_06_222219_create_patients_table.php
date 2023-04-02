@@ -14,27 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            
             $table->id('patient_id');
-
             $table->string('name');
-
             $table->string('age')->nullable();
-
             $table->string('address');
-
             $table->string('email')->nullable();
-
+            $table->string('patient_code')->nullable();
             $table->char('phone', 20);
-
-            $table->enum('blood_group',['A+','A-','B+','B-','O+','O-','AB+','AB-'])->nullable();
-
-            $table->enum('gender',['male','female']);
-            
+            $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();
+            $table->enum('gender', ['male', 'female']);
             $table->softDeletes();
-            
             $table->timestamps();
-
         });
     }
 

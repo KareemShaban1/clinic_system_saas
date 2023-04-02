@@ -58,9 +58,16 @@ return [
           'Drug_Name'=>'Drug Name',
           'Drug_Dose'=>'Drug Dose',
           'Quantity'=>'Quantity',
-          ''=>'',
-          ''=>'',
-          ''=>'',
+
+          'Rays_Name'=>'Rays Name',
+          'Rays_Type'=>'Rays Type',
+          'Rays_Date'=>'Rays Date',
+          'Rays_Image'=>'Rays Image',
+          'Rays Number'=>'Rays Number',
+          
+          
+          'Daily_Report'=>'Daily Report',
+          'Total'=>'Total',
           ''=>'',
           ''=>'',
           ''=>'',

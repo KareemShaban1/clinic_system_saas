@@ -52,6 +52,6 @@ class Calendar extends Component
  
         $this->events = json_encode($events);
  
-        return view('livewire.calendar');
+        return view('backend.pages.livewire.calendar');
     }
 }

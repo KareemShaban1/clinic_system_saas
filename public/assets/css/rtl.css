@@ -23890,12 +23890,20 @@ div.style-customizer .content-chooser input[type=radio]:checked ~ label {
     }
 
     .dash-div {
-      background-color: var(--dark);
-      height: 400px;
+      background-color: #bfe7c8;
+      /* height: 400px; */
       /* justify-content:center; */
       margin: 5px;
-      padding: 10px 10px;
-      margin-bottom: 20px;
+      padding: 30px 10px;
+      /* margin-bottom: 20px; */
       border-radius: 5px;
     }
 
+
+    /* .res_control{
+      display: flex;
+    } */
+
+    .res_control a {
+      margin: 1px;
+    }

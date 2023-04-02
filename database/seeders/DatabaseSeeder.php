@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PatientSeeder::class);
         $this->call(SettingsSeeder::class);
+        $this->call(ReservationControlSeeder::class);
+        $this->call(RolePermissionSeeder::class);
         $this->call(MedicineSeeder::class);
-       
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

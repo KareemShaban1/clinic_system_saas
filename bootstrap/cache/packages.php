@@ -3,11 +3,11 @@
   array (
     'providers' => 
     array (
-      0 => 'Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider',
+      0 => 'Mccarlosen\\LaravelMpdf\\LaravelMpdfServiceProvider',
     ),
     'aliases' => 
     array (
-      'PDF' => 'Meneses\\LaravelMpdf\\Facades\\LaravelMpdf',
+      'PDF' => 'Mccarlosen\\LaravelMpdf\\Facades\\LaravelMpdf',
     ),
   ),
   'jenssegers/agent' => 
@@ -56,6 +56,18 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
+  'laravelcollective/html' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Collective\\Html\\HtmlServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Form' => 'Collective\\Html\\FormFacade',
+      'Html' => 'Collective\\Html\\HtmlFacade',
+    ),
+  ),
   'livewire/livewire' => 
   array (
     'providers' => 
@@ -65,6 +77,37 @@
     'aliases' => 
     array (
       'Livewire' => 'Livewire\\Livewire',
+    ),
+  ),
+  'macsidigital/laravel-api-client' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MacsiDigital\\API\\Providers\\APIServiceProvider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
+  'macsidigital/laravel-oauth2-client' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MacsiDigital\\OAuth2\\Providers\\OAuth2ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
+  'macsidigital/laravel-zoom' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MacsiDigital\\Zoom\\Providers\\ZoomServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Zoom' => 'MacsiDigital\\Zoom\\Facades\\Zoom',
     ),
   ),
   'mcamara/laravel-localization' => 
@@ -142,6 +185,13 @@
     'aliases' => 
     array (
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
+    ),
+  ),
+  'spatie/laravel-permission' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
 );

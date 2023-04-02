@@ -17,7 +17,7 @@ return [
           'Disease_Number'=>'Disease Number',
           'Id'=>'Id',
           'Add'=>'Add',
-          ''=>'',
+          'Edit'=>'Edit',
           ''=>'',
           ''=>'',
           ''=>'',

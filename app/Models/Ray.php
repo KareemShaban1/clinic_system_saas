@@ -11,4 +11,14 @@ class Ray extends Model
     protected $fillable=[
         'image'
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo(
+            Patient::class,
+            'patient_id',
+        );
+    }
+
+    
 }

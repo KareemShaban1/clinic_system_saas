@@ -21,9 +21,12 @@ class MedicineSeeder extends Seeder
         Medicine::truncate();
   
         $json = file_get_contents("database/data/data.json");
+
+        $json1 = file_get_contents("database/data/aliases.json");
         // $json = File::get("database/data/data.json");
         // $json = Storage::disk('local')->get('/data/drugs.json');
         $medicines = json_decode($json,true);
+        $brands = json_decode($json1,true);
         switch (json_last_error()) {
             case JSON_ERROR_NONE:
                 echo ' - No errors';
@@ -49,7 +52,7 @@ class MedicineSeeder extends Seeder
         }
 
         foreach ($medicines as $key => $value) {
-            // var_dump([$value]);
+            // var_dump([$key][1]);
             Medicine::create(
                
                 [
@@ -62,24 +65,24 @@ class MedicineSeeder extends Seeder
             ]);
         }
 
-        // dd(count($medicines["DB00001"]));
-        // $index = 0;
-        // foreach ($medicines as $key => $value) {
-        //     // var_dump([$value]);
-        //     Medicine::updateOrCreate(
-        //         [
-        //             'drugbank_id'=>$key
-        //         ],
-        //         [
-        //             'brand_name'=>implode($value)
-        //         // "drugbank_id" => $value["drugbank_id"],
-        //         // "name" => $value["name"],
-        //         // "type" => $value["type"],
-        //         // "group" => $value["groups"],
-        //         // "categories" => $value["categories"],
-        //         // "description" => $value["description"],
-        //     ]);
-        // }
+      
+        foreach ($brands as $key => $value) {
+            // var_dump([$key[0]]);
+            // $medicine = Medicine::where('drugbank_id',$key[0])->get(); 
+            Medicine::where('drugbank_id',[$key][0])->update(
+                // [
+                //     'drugbank_id'=>$key[0]
+                // ],
+                [
+                    'brand_name'=>implode(' | ',$value)
+                // "drugbank_id" => $value["drugbank_id"],
+                // "name" => $value["name"],
+                // "type" => $value["type"],
+                // "group" => $value["groups"],
+                // "categories" => $value["categories"],
+                // "description" => $value["description"],
+            ]);
+        }
 
         
     }

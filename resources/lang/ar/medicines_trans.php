@@ -11,6 +11,7 @@ return [
           'Medicines'=>'الأدوية',
           'All_Medicines'=>'جميع الأدوية',
           'Add_Medicines'=>'أضافة دواء',
+          'Edit_Medicines'=>'تعديل دواء',
           'Show_Medicines'=>'عرض الدواء',
           'Type'=>'النوع',
           'Categories'=>'التصنيفات',

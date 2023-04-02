@@ -1,3 +1,5 @@
+=== Completed
+
 Events 
    Add Events
    Delete Event
@@ -11,6 +13,8 @@ Patients
    Restore Patients
    Delete Patients Forever
    show Patient Profile
+   Show Patient card
+   Print Patient Card
 
 Reservations
    Add Reservation
@@ -20,14 +24,22 @@ Reservations
    Delete Reservations Forever
    Show Reservations 
    Add Drugs
-   show Prescription
+   Show Prescription
+   Print Prescription
    Add Chronic diseases
+   Edit Chronic diseases
    show Chronic diseases
    Add Rays
+   Edit Rays
    Show Rays
+   Add Glasses Distance
+   Edit Glasses Distance
+   Show Glasses Distance
    Add Number of Reservations
    Edit Number of Reservations
-
+   Edit Reservation Control
+   Show Daily Reservation Report
+   Print Daily Reservation Report
 
 Medicines
    Add Medicine
@@ -38,6 +50,10 @@ Medicines
    Restore Medicine
    Delete Medicine Forever
 
+Fees
+   Show Daily Fees
+   Show All Fees
+
 Users 
    Add Users
    Edit Users 
@@ -46,3 +62,6 @@ Users
 Settings 
    Add Settings 
    Update Settings   
+
+=== In progress
+

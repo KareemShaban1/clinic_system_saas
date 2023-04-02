@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Cairo',
 
     /*
     |--------------------------------------------------------------------------
@@ -182,11 +182,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         // Barryvdh\DomPDF\ServiceProvider::class,
-        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         // niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         \Chatify\ChatifyServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
 
         /*
@@ -222,7 +222,7 @@ return [
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
         // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         // 'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         'Chatify' => Chatify\Facades\ChatifyMessenger::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,

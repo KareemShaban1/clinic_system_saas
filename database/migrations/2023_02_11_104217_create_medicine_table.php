@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('drugbank_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('brand_name')->nullable();
+            $table->longtext('brand_name')->nullable();
             $table->string('drug_dose')->nullable();
             $table->string('type')->nullable();
             $table->string('group')->nullable();

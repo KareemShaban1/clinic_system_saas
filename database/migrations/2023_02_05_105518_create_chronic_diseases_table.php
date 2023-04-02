@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('measure');
             $table->date('date');
             $table->longtext('notes')->nullable();
-            $table->unsignedBigInteger('patient_id');
-            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
-            $table->unsignedBigInteger('reservation_id');
-            $table->foreign('reservation_id')->references('reservation_id')->on('reservations')->onDelete('cascade');
+            $table->foreignId('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
+            $table->foreignId('reservation_id')->references('reservation_id')->on('reservations')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

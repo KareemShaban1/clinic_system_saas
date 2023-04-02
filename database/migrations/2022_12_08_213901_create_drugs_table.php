@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('drugs', function (Blueprint $table) {
             $table->id();
+
             $table->string('drug_name');
+            $table->string('drug_type');
             $table->string('drug_dose');
-            $table->string('quantity');
+            $table->string('frequency');
+            $table->string('period');
             $table->string('notes')->nullable();
-            $table->unsignedBigInteger('reservation_id');
-            $table->foreign('reservation_id')->references('reservation_id')->on('reservations')->cascadOnDelete();
+            $table->foreignId('reservation_id')->references('reservation_id')->on('reservations')->cascadOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

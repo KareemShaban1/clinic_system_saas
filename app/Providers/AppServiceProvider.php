@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\ReservationControl;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +26,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
+        view()->composer('backend.layouts.main-sidebar', function ($view) {
+            $collection = ReservationControl::all();
+            $setting = $collection->flatMap(function ($collection) {
+                return [$collection->key => $collection->value];
+            });
+    
+            $view->with('setting', $setting);
+        });
     }
 }

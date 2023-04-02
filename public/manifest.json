@@ -1,0 +1,17 @@
+{
+    "name": "clinic-system",
+    "short_name": "clinic-system",
+    "start_url": "/index.php",
+    "background_color": "#6777ef",
+    "description": "clinic managment system",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "logo.PNG",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

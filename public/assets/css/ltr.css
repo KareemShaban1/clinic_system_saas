@@ -22880,24 +22880,22 @@ div.style-customizer .content-chooser input[type=radio]:checked ~ label {
   .fc-right .fc-button-group .fc-button {
     padding: 6px 13px !important; } }
 
+   /* custum */
+   .cost-span {
+    background-color: var(--dark);
+    /* width: 150px; */
+    justify-content:center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    /* border-radius: 10px; */
+  }
 
-    /* custum */
-    .cost-span {
-      background-color: var(--dark);
-      /* width: 150px; */
-      justify-content:center;
-      padding: 10px 20px;
-      margin-bottom: 20px;
-      /* border-radius: 10px; */
-    }
-
-    .dash-div {
-      background-color: var(--dark);
-      height: 300px;
-      /* justify-content:center; */
-      margin: 5px;
-      padding: 10px 10px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-    }
-
+  .dash-div {
+    background-color: var(--dark);
+    /* height: 400px; */
+    /* justify-content:center; */
+    margin: 5px;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
