@@ -1,4 +1,4 @@
-=== Completed
+=========== Backend ==============
 
 Events 
    Add Events
@@ -63,5 +63,13 @@ Settings
    Add Settings 
    Update Settings   
 
-=== In progress
+=========== Frontend ============== 
 
+- Home Page
+
+- Patient Dashboard
+   - Dashboard
+
+   - Appointment
+      - Add Appointment
+      - show All Patient Appointments

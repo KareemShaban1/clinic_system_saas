@@ -34,6 +34,9 @@ class ReservationControlSeeder extends Seeder
             ['key' => 'show_fees', 'value' => 1],
             ['key' => 'show_users', 'value' => 1],
             ['key' => 'show_settings', 'value' => 1],
+
+            // ['key' => 'reservation_numbers', 'value' => 1],
+            ['key' => 'reservation_slots', 'value' => 0],
            
         ];
 

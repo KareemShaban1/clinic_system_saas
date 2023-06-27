@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('reservations_trans.Number_of_Reservation')}}
+    {{trans('backend/reservations_trans.Number_of_Reservation')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">  {{trans('reservations_trans.Number_of_Reservation')}}</h4>
+            <h4 class="mb-0">  {{trans('backend/reservations_trans.Number_of_Reservation')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('reservations_trans.Number_of_Reservation')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('reservations_trans.Reservations')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/reservations_trans.Number_of_Reservation')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/reservations_trans.Reservations')}}</li>
             </ol>
         </div>
     </div>
@@ -45,14 +45,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{trans('reservations_trans.Reservation_Date')}} <span class="text-danger">*</span></label>
+                                <label> {{trans('backend/reservations_trans.Reservation_Date')}} <span class="text-danger">*</span></label>
                                 <input class="form-control" value="{{ old('reservation_date', $num_of_res->reservation_date) }}"   name="reservation_date" id="datepicker-action" data-date-format="yyyy-mm-dd" >
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
-                                <label>{{trans('reservations_trans.Number_of_Reservations')}}  </label>
+                                <label>{{trans('backend/reservations_trans.Number_of_Reservations')}}  </label>
                                 <input class="form-control" type="text" name="num_of_reservations" value="{{ old('num_of_reservations', $num_of_res->num_of_reservations) }}"  >
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                     </div>
 
              
-                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('reservations_trans.Edit')}}</button>
+                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/reservations_trans.Edit')}}</button>
 
 
                 </form>

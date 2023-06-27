@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\StorePatientRequest;
+use App\Http\Requests\Api\UpdatePatientRequest;
+use App\Http\Resources\PatientResource;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 class PatientController extends Controller
@@ -10,44 +13,43 @@ class PatientController extends Controller
     //
     public function index(Request $request){
 
-        return Patient::all();
-    }
- 
-    public function show($id){
+        // بتحولها بشكل أتوماتيك laravel ال  json response ل model مش محتاج أحول ال 
 
-       
-        return Patient::find($id) ?? response()->json(['status'=>'Not found'],404);
+        $patients = Patient::all();
+        return  PatientResource::collection($patients);
+
+        // we use resource when we want to customize json response 
+    } 
+ 
+    public function show(Patient $patient){
+
+        return new PatientResource($patient);
+
+        //// return patient based on id or return json response when patient is not found
+        // return Patient::find(1) ?? response()->json(['status'=>'Not found'],404);
       
     }
 
-    public function create(Request $request){
+    public function store(StorePatientRequest $request){
 
-            $patient = new Patient();
-            $patient->name = $request->get('name');
-            $patient->age = $request->get('age');
-            $patient->address = $request->get('address');
-            $patient->email = $request->get('email');
-            $patient->phone = $request->get('phone');
-            $patient->blood_group = $request->get('blood_group');
-            $patient->save();
-            return $patient;
+            
+            $request->validated();
+            
+            $patient = Patient::create($request->all());
+
+            return new PatientResource($patient);
+           
     }
 
-    public function update(Request $request,$id){
+    public function update(UpdatePatientRequest $request,$id){
 
         $patient = Patient::find($id);
 
         if(!$patient){
             return response()->json(['status'=>'Not Found'],404);
         }
-        $patient->name = $request->get('name');
-        $patient->age = $request->get('age');
-        $patient->address = $request->get('address');
-        $patient->email = $request->get('email');
-        $patient->phone = $request->get('phone');
-        $patient->blood_group = $request->get('blood_group');
-        $patient->save();
-        return $patient;
+        $patient->update($request->all());
+        return new PatientResource($patient);
 }
 
 public function delete($id){

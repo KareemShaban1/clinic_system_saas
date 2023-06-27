@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{trans('reservations_trans.Today_Reservations')}}
+{{trans('backend/reservations_trans.Today_Reservations')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{trans('reservations_trans.Today_Reservations')}} : {{$current_date}}    </h4>
+            <h4 class="mb-0">{{trans('backend/reservations_trans.Today_Reservations')}} : {{$currentDate}}    </h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('reservations_trans.Today_Reservations')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('reservations_trans.Reservations')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/reservations_trans.Today_Reservations')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/reservations_trans.Reservations')}}</li>
 
             </ol>
         </div>
@@ -34,7 +34,7 @@
             align-items: center; 
             justify-content:center;">
                 <a href="{{Route('backend.reservations.today_reservation_report')}}" class="btn btn-info ">
-                    {{trans('reservations_trans.Daily_Report')}}
+                    {{trans('backend/reservations_trans.Daily_Report')}}
                 </a>
             </div>
 
@@ -42,28 +42,28 @@
                     <thead>
                         <tr>
                             @if (App::getLocale() == 'ar')
-                            <th>{{trans('reservations_trans.Number_of_Reservation')}}</th>
+                            <th>{{trans('backend/reservations_trans.Number_of_Reservation')}}</th>
                             @endif
-                            <th>{{trans('reservations_trans.Patient_Name')}}</th>
+                            <th>{{trans('backend/reservations_trans.Patient_Name')}}</th>
                             @if (App::getLocale() == 'ar')
-                            <th>{{trans('reservations_trans.Reservation_Type')}}</th>
+                            <th>{{trans('backend/reservations_trans.Reservation_Type')}}</th>
                             @endif
-                            <th>{{trans('reservations_trans.Payment')}}</th>
-                            <th>{{trans('reservations_trans.Reservation_Status')}}</th>
+                            <th>{{trans('backend/reservations_trans.Payment')}}</th>
+                            <th>{{trans('backend/reservations_trans.Reservation_Status')}}</th>
 
-                            @if($setting['show_ray'] == 1)
-                            <th>{{trans('reservations_trans.Rays_Analysis')}}</th>
+                            @if($settings['show_ray'] == 1)
+                            <th>{{trans('backend/reservations_trans.Rays_Analysis')}}</th>
                             @endif
-                            @if($setting['show_chronic_diseases'] == 1)
-                            <th>{{trans('reservations_trans.Chronic_Diseases')}}</th>
+                            @if($settings['show_chronic_diseases'] == 1)
+                            <th>{{trans('backend/reservations_trans.Chronic_Diseases')}}</th>
                             @endif
-                            @if($setting['show_glasses_distance'] == 1)
-                            <th>{{trans('reservations_trans.Glasses_Distance')}}</th>
+                            @if($settings['show_glasses_distance'] == 1)
+                            <th>{{trans('backend/reservations_trans.Glasses_Distance')}}</th>
                             @endif
-                            @if($setting['show_prescription'] == 1)
-                            <th>{{trans('reservations_trans.Prescription')}}</th>
+                            @if($settings['show_prescription'] == 1)
+                            <th>{{trans('backend/reservations_trans.Prescription')}}</th>
                             @endif
-                            <th>{{trans('reservations_trans.Control')}}</th>
+                            <th>{{trans('backend/reservations_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,11 +79,11 @@
                             @if (App::getLocale() == 'ar')
                             <td>
                                 @if( $reservation->res_type == "check" )
-                                {{trans('reservations_trans.Check')}}
+                                {{trans('backend/reservations_trans.Check')}}
                                 @elseif ($reservation->res_type == "recheck")
-                                {{trans('reservations_trans.Recheck')}}
+                                {{trans('backend/reservations_trans.Recheck')}}
                                 @elseif ($reservation->res_type == "consultation")
-                                {{trans('reservations_trans.Consultation')}}
+                                {{trans('backend/reservations_trans.Consultation')}}
                                 @endif
                             </td>
                             @endif
@@ -91,16 +91,16 @@
                         <td>
                             @if( $reservation->payment == "paid" )
                                 <span class="badge badge-rounded badge-success p-2 mb-2">
-                                    {{trans('reservations_trans.Paid')}}
+                                    {{trans('backend/reservations_trans.Paid')}}
                                 </span>
                             @elseif ($reservation->payment == "not paid")
                                 <span class="badge badge-rounded badge-danger p-2 mb-2">
-                                    {{trans('reservations_trans.Not_Paid')}}
+                                    {{trans('backend/reservations_trans.Not_Paid')}}
                                 </span>
                             @endif
                             <div class="res_control">
-                                <a href="{{Route('backend.reservations.payment_status',[$reservation->reservation_id,"paid"])}}" class="btn btn-success btn-sm">{{trans('reservations_trans.Done')}}  </a>
-                                <a href="{{Route('backend.reservations.payment_status',[$reservation->reservation_id,"not paid"])}}" class="btn btn-danger btn-sm">{{trans('reservations_trans.Not_Done')}} </a>
+                                <a href="{{Route('backend.reservations.payment_status',[$reservation->reservation_id,"paid"])}}" class="btn btn-success btn-sm">{{trans('backend/reservations_trans.Done')}}  </a>
+                                <a href="{{Route('backend.reservations.payment_status',[$reservation->reservation_id,"not paid"])}}" class="btn btn-danger btn-sm">{{trans('backend/reservations_trans.Not_Done')}} </a>
                             </div>
                              
                          </td>
@@ -108,74 +108,74 @@
                         <td>
                             @if ( $reservation->status == "waiting" )
                                 <span class="badge badge-rounded badge-warning text-white p-2 mb-2">
-                                    {{trans('reservations_trans.Waiting')}}
+                                    {{trans('backend/reservations_trans.Waiting')}}
                                 </span>
                              @elseif ( $reservation->status == "entered")
                                 <span class="badge badge-rounded badge-success p-2 mb-2">
-                                    {{trans('reservations_trans.Entered')}}
+                                    {{trans('backend/reservations_trans.Entered')}}
                                 </span>
                              @elseif ( $reservation->status == "finished")
                                  <span class="badge badge-rounded badge-danger p-2 mb-2">
-                                    {{trans('reservations_trans.Finished')}}
+                                    {{trans('backend/reservations_trans.Finished')}}
                                 </span>
                              @endif
 
                              <div class="res_control">
                                 <a href="{{Route('backend.reservations.reservation_status',[$reservation->reservation_id,"waiting"])}}" class="btn btn-warning btn-sm text-white">
-                                    {{trans('reservations_trans.Waiting')}}
+                                    {{trans('backend/reservations_trans.Waiting')}}
                                 </a>
                                 <a href="{{Route('backend.reservations.reservation_status',[$reservation->reservation_id,"entered"])}}" class="btn btn-success btn-sm">
-                                    {{trans('reservations_trans.Entered')}}
+                                    {{trans('backend/reservations_trans.Entered')}}
                                 </a>
                                 <a href="{{Route('backend.reservations.reservation_status',[$reservation->reservation_id,"finished"])}}" class="btn btn-danger btn-sm">
-                                    {{trans('reservations_trans.Finished')}}
+                                    {{trans('backend/reservations_trans.Finished')}}
                                 </a>
                             </div>
                          </td>
 
-                         @if($setting['show_ray'] == 1)
+                         @if($settings['show_ray'] == 1)
                             <td>
                                 <div class="res_control">
                                     <a href="{{Route('backend.rays.add',$reservation->reservation_id)}}" class="btn btn-success btn-sm">
-                                        {{trans('reservations_trans.Add')}}
+                                        {{trans('backend/reservations_trans.Add')}}
                                     </a>
                                     <a href="{{Route('backend.rays.show',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
-                                        {{trans('reservations_trans.Show')}}
+                                        {{trans('backend/reservations_trans.Show')}}
                                     </a>
                                 </div>    
                             </td>
                          @endif
 
-                         @if($setting['show_chronic_diseases'] == 1)
+                         @if($settings['show_chronic_diseases'] == 1)
 
                             <td>
                                 <div class="res_control">
                                     <a href="{{Route('backend.chronic_diseases.add',$reservation->reservation_id)}}" class="btn btn-success btn-sm">
-                                        {{trans('reservations_trans.Add')}}
+                                        {{trans('backend/reservations_trans.Add')}}
                                     </a>
                                     <a href="{{Route('backend.chronic_diseases.show',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
-                                        {{trans('reservations_trans.Show')}}
+                                        {{trans('backend/reservations_trans.Show')}}
                                     </a>
                                 </div>    
                             </td>
 
                          @endif   
 
-                         @if($setting['show_glasses_distance'] == 1)
+                         @if($settings['show_glasses_distance'] == 1)
                          <td>
                             
                             @if(App\Models\GlassesDistance::where('reservation_id',$reservation->reservation_id)->first())
                             <div class="res_control"> 
                             <a href="{{Route('backend.glasses_distance.edit',$reservation->reservation_id)}}" class="btn btn-success btn-sm">
-                                    {{trans('reservations_trans.Edit')}}
+                                    {{trans('backend/reservations_trans.Edit')}}
                                 </a>
                                 <a href="{{Route('backend.glasses_distance.glasses_distance_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
-                                {{trans('reservations_trans.Show')}}
+                                {{trans('backend/reservations_trans.Show')}}
                             </a>
                             </div>
                             @else
                                 <a href="{{Route('backend.glasses_distance.add',$reservation->reservation_id)}}" class="btn btn-success btn-sm">
-                                    {{trans('reservations_trans.Add')}}
+                                    {{trans('backend/reservations_trans.Add')}}
                                 </a>
                             @endif
                                
@@ -184,19 +184,19 @@
                          @endif
 
 
-                         @if($setting['show_prescription'] == 1)
+                         @if($settings['show_prescription'] == 1)
                          <td>
                             <div class="res_control">
                              <a href="{{Route('backend.drugs.add',$reservation->reservation_id)}}" class="btn btn-success btn-sm">
-                                 {{trans('reservations_trans.Add')}}
+                                 {{trans('backend/reservations_trans.Add')}}
                              </a>
                              
                              <a href="{{Route('backend.drugs.english_drug_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
-                                 {{trans('reservations_trans.English')}}
+                                 {{trans('backend/reservations_trans.English')}}
                              </a>
 
                              <a href="{{Route('backend.drugs.drug_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
-                                 {{trans('reservations_trans.Show')}}
+                                 {{trans('backend/reservations_trans.Show')}}
                              </a>
                             </div>
                          </td>
@@ -235,9 +235,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>    
+
 @endsection

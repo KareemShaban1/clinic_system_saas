@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('glasses_distance_trans.Glasses_Distance')}}
+    {{trans('backend/glasses_distance_trans.Glasses_Distance')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{trans('glasses_distance_trans.Glasses_Distance')}}</h4>
+            <h4 class="mb-0">{{trans('backend/glasses_distance_trans.Glasses_Distance')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('glasses_distance_trans.All_Glasses_Distance')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('glasses_distance_trans.Glasses_Distance')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/glasses_distance_trans.All_Glasses_Distance')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/glasses_distance_trans.Glasses_Distance')}}</li>
             </ol>
         </div>
     </div>
@@ -32,10 +32,10 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('glasses_distance_trans.Id')}}</th>
-                            <th>{{trans('glasses_distance_trans.Reservation_Id')}}</th>
+                            <th>{{trans('backend/glasses_distance_trans.Id')}}</th>
+                            <th>{{trans('backend/glasses_distance_trans.Reservation_Id')}}</th>
 
-                            <th>{{trans('glasses_distance_trans.Control')}}</th>
+                            <th>{{trans('backend/glasses_distance_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,9 +78,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>
+
 @endsection

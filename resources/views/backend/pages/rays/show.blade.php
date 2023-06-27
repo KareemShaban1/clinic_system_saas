@@ -86,7 +86,7 @@
     </script>
     
 @section('title')
-{{trans('rays_trans.Rays')}}
+{{trans('backend/rays_trans.Rays')}}
 @stop
 @endsection
 @section('page-header')
@@ -94,12 +94,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{trans('rays_trans.Rays')}}</h4>
+            <h4 class="mb-0">{{trans('backend/rays_trans.Rays')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
                 <li class="breadcrumb-item"><a href="{{Route('backend.reservations.index')}}" class="default-color">{{trans('reservations_trans.Reservations')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('rays_trans.Rays')}}</li>
+                <li class="breadcrumb-item active">{{trans('backend/rays_trans.Rays')}}</li>
             </ol>
         </div>
     </div>
@@ -120,12 +120,12 @@
                     @forelse($rays as $ray)
                     <h5 class="card-header">
                         <span class="badge badge-rounded badge-info ">
-                       <h5 class="text-white">  {{trans('rays_trans.Rays_Number')}}    {{$loop->index+1}} </h5>
+                       <h5 class="text-white">  {{trans('backend/rays_trans.Rays_Number')}}    {{$loop->index+1}} </h5>
                         </span>
                         <div style="float: left">
                             <a href="{{Route('backend.rays.edit',$ray->id)}}" class="btn btn-warning btn-sm">
                                 
-                                <span> {{trans('rays_trans.Edit')}} <i class="fa fa-edit"></i></span>
+                                <span> {{trans('backend/rays_trans.Edit')}} <i class="fa fa-edit"></i></span>
                             </a>
                             </div>
                     </h5>
@@ -133,7 +133,7 @@
 
                         <div class="row mb-4">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500">{{trans('rays_trans.Id')}} <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                <h5 class="f-w-500">{{trans('backend/rays_trans.Id')}} <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->id}}</span>
                             </div>
@@ -141,7 +141,7 @@
 
                         <div class="row mb-4">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{trans('rays_trans.Rays_Name')}}  <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                <h5 class="f-w-500"> {{trans('backend/rays_trans.Rays_Name')}}  <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_name}}</span>
                             </div>
@@ -150,7 +150,7 @@
                         
                         <div class="row mb-4">
                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                  <h5 class="f-w-500"> {{trans('rays_trans.Rays_Type')}}   <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                  <h5 class="f-w-500"> {{trans('backend/rays_trans.Rays_Type')}}   <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                               </div>
                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_type}}</span>
                               </div>
@@ -158,7 +158,7 @@
 
                         <div class="row mb-4">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{trans('rays_trans.Rays_Date')}}   <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                <h5 class="f-w-500"> {{trans('backend/rays_trans.Rays_Date')}}   <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_date}}</span>
                             </div>
@@ -167,7 +167,7 @@
 
                         <div class="row mb-4">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{trans('rays_trans.Notes')}}  <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                <h5 class="f-w-500"> {{trans('backend/rays_trans.Notes')}}  <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->notes}}</span>
                             </div>
@@ -175,13 +175,13 @@
 
                         <div class="row mb-4">
                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                  <h5 class="f-w-500">  {{trans('rays_trans.Rays_Image')}}  <span class="{{trans('rays_trans.pull')}}">:</span></h5>
+                                  <h5 class="f-w-500">  {{trans('backend/rays_trans.Rays_Image')}}  <span class="{{trans('backend/rays_trans.pull')}}">:</span></h5>
                               </div>
 
                               <?php $images =explode('|',$ray->image); ?>
                               @foreach($images as $key => $value)
                                  <div class="img-magnifier-container">
-                                    <img  src="{{ URL::asset('storage/'.$value)}}" id="{{$value}}"   width="350" height="350">
+                                    <img  src="{{ URL::asset('storage/rays/'.$value)}}" id="{{$value}}"   width="350" height="350">
                                     <script>
                                         magnify("{{$value}}", 2);
 

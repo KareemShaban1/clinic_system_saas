@@ -16,9 +16,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('laravel_files.welcome');
 });
 
+
 require __DIR__.'/backend.php';
+
+require __DIR__.'/frontend.php';
 
 

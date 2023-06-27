@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('roles_trans.Roles')}}
+    {{trans('backend/roles_trans.Roles')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('roles_trans.Roles')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/roles_trans.Roles')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('roles_trans.All_Roles')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('roles_trans.Roles')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/roles_trans.All_Roles')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/roles_trans.Roles')}}</li>
             </ol>
         </div>
     </div>
@@ -32,10 +32,10 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('roles_trans.Id')}}</th>
-                            <th>{{trans('roles_trans.Role_Name')}}</th>
-                            <th>{{trans('roles_trans.Guard_Name')}}</th>
-                            <th>{{trans('roles_trans.Control')}}</th>
+                            <th>{{trans('backend/roles_trans.Id')}}</th>
+                            <th>{{trans('backend/roles_trans.Role_Name')}}</th>
+                            <th>{{trans('backend/roles_trans.Guard_Name')}}</th>
+                            <th>{{trans('backend/roles_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,9 +80,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>
+
 @endsection

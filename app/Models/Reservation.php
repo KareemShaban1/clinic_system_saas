@@ -15,6 +15,11 @@ class Reservation extends Model
     
     protected $primaryKey = 'reservation_id';   
 
+    protected $hidden = [
+        'created_at','updated_at','deleted_at'
+
+    ];
+
     protected $fillable = [
         
         'patient_id',
@@ -24,7 +29,10 @@ class Reservation extends Model
         'cost',
         'payment',
         'res_date',
+        'res_status',
         'status',
+        'month',
+        'slot'
     ];
     
 
@@ -39,6 +47,37 @@ class Reservation extends Model
         );
     }
 
+    public function ray()
+    {
+        return $this->belongsTo(
+            Ray::class,
+            'reservation_id',
+        );
+    }
+
+    public function chronic_desease()
+    {
+        return $this->belongsTo(
+            ChronicDiseases::class,
+            'reservation_id',
+        );
+    }
+
+    public function glasses_distance()
+    {
+        return $this->belongsTo(
+            GlassesDistance::class,
+            'reservation_id',
+        );
+    }
+
+    public function prescription()
+    {
+        return $this->belongsTo(
+            Drug::class,
+            'reservation_id',
+        );
+    }
    
 
 }

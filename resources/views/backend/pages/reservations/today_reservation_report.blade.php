@@ -7,10 +7,7 @@
           <title>Document</title>
           <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet" />
           <link href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.dataTables.min.css" rel="stylesheet" />
-          {{-- <link href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css" rel="stylesheet" />
-          <link href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" rel="stylesheet" />
-       --}}
-          <style>
+            <style>
         body{
         direction: rtl;
         font-family: 'XBRiyaz',sans-serif;
@@ -44,20 +41,20 @@
     <table >
         <thead>
             <tr>
-                <th class="title" colspan="6"> {{trans('reservations_trans.Daily_Report')}} </th>
+                <th class="title" colspan="6"> {{trans('backend/reservations_trans.Daily_Report')}} </th>
             </tr>
             <tr>
-                <th>{{trans('reservations_trans.Number_of_Reservation')}}</th>
+                <th>{{trans('backend/reservations_trans.Number_of_Reservation')}}</th>
 
-                <th>{{trans('reservations_trans.Patient_Name')}}</th>
+                <th>{{trans('backend/reservations_trans.Patient_Name')}}</th>
 
-                <th>{{trans('reservations_trans.Reservation_Type')}}</th>
+                <th>{{trans('backend/reservations_trans.Reservation_Type')}}</th>
                 
-                <th>{{trans('reservations_trans.Payment')}}</th>
+                <th>{{trans('backend/reservations_trans.Payment')}}</th>
                 
-                <th>{{trans('reservations_trans.Reservation_Status')}}</th>
+                <th>{{trans('backend/reservations_trans.Reservation_Status')}}</th>
 
-                <th>{{trans('reservations_trans.Cost')}}</th>
+                <th>{{trans('backend/reservations_trans.Cost')}}</th>
                 
               
             </tr>
@@ -73,22 +70,22 @@
 
             <td>
                 @if( $reservation->res_type == "check" )
-                {{trans('reservations_trans.Check')}}
+                {{trans('backend/reservations_trans.Check')}}
                 @elseif ($reservation->res_type == "recheck")
-                {{trans('reservations_trans.Recheck')}}
+                {{trans('backend/reservations_trans.Recheck')}}
                 @elseif ($reservation->res_type == "consultation")
-                {{trans('reservations_trans.Consultation')}}
+                {{trans('backend/reservations_trans.Consultation')}}
                 @endif
             </td>
 
             <td>
                 @if( $reservation->payment == "paid" )
                     <span class="badge badge-rounded badge-success p-2 mb-2">
-                        {{trans('reservations_trans.Paid')}}
+                        {{trans('backend/reservations_trans.Paid')}}
                     </span>
                 @elseif ($reservation->payment == "not paid")
                     <span class="badge badge-rounded badge-danger p-2 mb-2">
-                        {{trans('reservations_trans.Not_Paid')}}
+                        {{trans('backend/reservations_trans.Not_Paid')}}
                     </span>
                 @endif
                 
@@ -98,15 +95,15 @@
              <td>
                 @if ( $reservation->status == "waiting" )
                     <span class="badge badge-rounded badge-warning text-white p-2 mb-2">
-                        {{trans('reservations_trans.Waiting')}}
+                        {{trans('backend/reservations_trans.Waiting')}}
                     </span>
                  @elseif ( $reservation->status == "entered")
                     <span class="badge badge-rounded badge-success p-2 mb-2">
-                        {{trans('reservations_trans.Entered')}}
+                        {{trans('backend/reservations_trans.Entered')}}
                     </span>
                  @elseif ( $reservation->status == "finished")
                      <span class="badge badge-rounded badge-danger p-2 mb-2">
-                        {{trans('reservations_trans.Finished')}}
+                        {{trans('backend/reservations_trans.Finished')}}
                     </span>
                  @endif
 
@@ -119,7 +116,7 @@
             @endforeach
 
             <tr>
-            <td colspan="5">{{trans('reservations_trans.Total')}}</td>
+            <td colspan="5">{{trans('backend/reservations_trans.Total')}}</td>
            
             <td>{{$cost_sum}}</td>
 

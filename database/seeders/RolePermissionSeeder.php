@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 class RolePermissionSeeder extends Seeder
 {
     /**
@@ -18,16 +19,38 @@ class RolePermissionSeeder extends Seeder
         //
 
         $arrayOfPermissionsNames = [
-            'المرضى','patient index','patient add','patient edit','patient show','patient delete'
+            'عرض المرضى',
+            'أضافة مريض',
+            'تعديل مريض',
+            'عرض مريض',
+            'حذف مريض',
+
+            'عرض الكشوفات',
+            'أضافة كشف',
+            'تعديل كشف',
+            'عرض كشف',
+            'حذف كشف',
+
+            'عرض الدواء',
+            'أضافة دواء',
+            'تعديل دواء',
+            'عرض دواء',
+            'حذف دواء',
+
+            'عرض الحسابات',
+            'الحسابات اليومية',
+            'الحسابات الشهرية',
+            'جميع الحسابات',
         ];
 
-        $permissions = collect($arrayOfPermissionsNames)->map(function($permission){
+        $permissions = collect($arrayOfPermissionsNames)->map(function ($permission) {
             return ['name'=>$permission , 'guard_name'=>'web' ];
-        }); 
+        });
 
         Permission::insert($permissions->toArray());
 
-        $role = Role::create(['name'=>'super-admin'])->givePermissionTo($arrayOfPermissionsNames);
 
-           }
+        Role::create(['name'=>'super-admin'])->givePermissionTo($arrayOfPermissionsNames);
+
+    }
 }

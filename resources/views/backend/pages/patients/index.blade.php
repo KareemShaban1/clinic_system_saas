@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('patients_trans.Patients')}}
+    {{trans('backend/patients_trans.Patients')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{trans('patients_trans.Patients')}}</h4>
+            <h4 class="mb-0">{{trans('backend/patients_trans.Patients')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('patients_trans.All_Patients')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('patients_trans.Patients')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/patients_trans.All_Patients')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/patients_trans.Patients')}}</li>
             </ol>
         </div>
     </div>
@@ -32,16 +32,16 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('patients_trans.Id')}}</th>
-                            <th>{{trans('patients_trans.Patient_Name')}}</th>
-                            <th>{{trans('patients_trans.Number_of_Reservations')}}</th>
-                            <th>{{trans('patients_trans.Phone')}}</th>
-                            <th>{{trans('patients_trans.Address')}}</th>
-                            <th>{{trans('patients_trans.Age')}}</th>
-                            <th>{{trans('patients_trans.Add_Reservation')}}</th>
-                            <th>{{trans('patients_trans.Add_Online_Reservation')}}</th>
+                            <th>{{trans('backend/patients_trans.Id')}}</th>
+                            <th>{{trans('backend/patients_trans.Patient_Name')}}</th>
+                            <th>{{trans('backend/patients_trans.Number_of_Reservations')}}</th>
+                            <th>{{trans('backend/patients_trans.Phone')}}</th>
+                            <th>{{trans('backend/patients_trans.Address')}}</th>
+                            <th>{{trans('backend/patients_trans.Age')}}</th>
+                            <th>{{trans('backend/patients_trans.Add_Reservation')}}</th>
+                            <th>{{trans('backend/patients_trans.Add_Online_Reservation')}}</th>
                             <th></th>
-                            <th>{{trans('patients_trans.Control')}}</th>
+                            <th>{{trans('backend/patients_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,13 +57,13 @@
                             <td>{{ $patient->age }}</td>
                             <td>
                                 <a href="{{Route('backend.reservations.add',$patient->patient_id)}}" class="btn btn-info btn-sm">
-                                    {{trans('patients_trans.Add_Reservation')}}
+                                    {{trans('backend/patients_trans.Add_Reservation')}}
                                 </a>
                             </td>
 
                             <td>
                                 <a href="{{Route('backend.online_reservations.add',$patient->patient_id)}}" class="btn btn-info btn-sm">
-                                    {{trans('patients_trans.Add_Online_Reservation')}}
+                                    {{trans('backend/patients_trans.Add_Online_Reservation')}}
                                 </a>
                             </td>
                             <td>
@@ -104,9 +104,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>
+{{--  --}}
 @endsection

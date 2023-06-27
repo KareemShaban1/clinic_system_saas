@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('patients_trans.Edit_Patient')}}
+    {{trans('backend/patients_trans.Edit_Patient')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('patients_trans.Edit_Patient')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/patients_trans.Edit_Patient')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('patients_trans.Edit_Patient')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('patients_trans.Patients')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/patients_trans.Edit_Patient')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/patients_trans.Patients')}}</li>
             </ol>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{{trans('patients_trans.Patient_Name')}}<span class="text-danger">*</span></label>
+                                <label>{{trans('backend/patients_trans.Patient_Name')}}<span class="text-danger">*</span></label>
                                 <input  type="text" value="{{$patient->name}}" name="name"  class="form-control">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -55,7 +55,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{trans('patients_trans.Age')}} </label>
+                                <label> {{trans('backend/patients_trans.Age')}} </label>
                                 <input  class="form-control" value="{{$patient->age}}" name="age" type="number" >
                                 @error('age')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>{{trans('patients_trans.Address')}} <span class="text-danger">*</span></label>
+                                <label>{{trans('backend/patients_trans.Address')}} <span class="text-danger">*</span></label>
                                 <input  type="text" value="{{$patient->address}}" name="address"  class="form-control">
                                 @error('address')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{trans('patients_trans.Email')}} </label>
+                                <label> {{trans('backend/patients_trans.Email')}} </label>
                                 <input  class="form-control" value="{{$patient->email}}" name="email" type="email" >
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -89,7 +89,7 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{trans('patients_trans.Phone')}} <span class="text-danger">*</span></label>
+                                <label> {{trans('backend/patients_trans.Phone')}} <span class="text-danger">*</span></label>
                                 <input  class="form-control" value="{{$patient->phone}}" name="phone" type="phone" >
                                 @error('phone')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -103,18 +103,18 @@
                             <div class="col-md-6">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="gender"> {{trans('patients_trans.Patient_Gender')}} <span class="text-danger">*</span></label>
+                                        <label for="gender"> {{trans('backend/patients_trans.Patient_Gender')}} <span class="text-danger">*</span></label>
                                         
                                         <select class="custom-select mr-sm-2" name="gender"
                                         @if($patient->gender == old('gender', $patient->gender)) selected @endif> 
-                                            <option selected disabled>{{trans('patients_trans.Choose')}}</option>
+                                            <option selected disabled>{{trans('backend/patients_trans.Choose')}}</option>
                                             
                                             <option value="Male"  @if(old('gender', $patient->gender) == 'male') selected @endif>
-                                                {{trans('patients_trans.Male')}}
+                                                {{trans('backend/patients_trans.Male')}}
                                             </option>
     
                                             <option value="Female"  @if(old('gender', $patient->gender) == 'female') selected @endif>
-                                                {{trans('patients_trans.Female')}}
+                                                {{trans('backend/patients_trans.Female')}}
                                             </option>
                                         </select>
                                         @error('gender')
@@ -126,11 +126,11 @@
                             <div class="col-md-6">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="blood_group">  {{trans('patients_trans.Blood_Group')}} <span class="text-danger">*</span></label>
+                                        <label for="blood_group">  {{trans('backend/patients_trans.Blood_Group')}} <span class="text-danger">*</span></label>
                                         
                                         <select class="custom-select mr-sm-2" name="blood_group"
                                         @if($patient->blood_group == old('blood_group', $patient->blood_group)) selected @endif>
-                                            <option selected disabled>{{trans('patients_trans.Choose')}}</option>
+                                            <option selected disabled>{{trans('backend/patients_trans.Choose')}}</option>
                                             <option  value="A+"  @if(old('blood_group', $patient->blood_group) == 'A+') selected @endif>A+</option>
                                             <option  value="A-"  @if(old('blood_group', $patient->blood_group) == 'A-') selected @endif>A-</option>
                                             <option  value="B+"  @if(old('blood_group', $patient->blood_group) == 'B+') selected @endif>B+</option>
@@ -150,7 +150,7 @@
                             </div>
                    </div> 
 
-                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('patients_trans.Edit')}}</button>
+                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/patients_trans.Edit')}}</button>
 
 
                 </form>

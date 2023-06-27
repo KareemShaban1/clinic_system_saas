@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{trans('glasses_distance_trans.Glasses_Distance')}}
+{{trans('backend/glasses_distance_trans.Glasses_Distance')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('glasses_distance_trans.Glasses_Distance')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/glasses_distance_trans.Glasses_Distance')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('glasses_distance_trans.Add_Glasses_Distance')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('glasses_distance_trans.Glasses_Distance')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/glasses_distance_trans.Add_Glasses_Distance')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/glasses_distance_trans.Glasses_Distance')}}</li>
             </ol>
         </div>
     </div>
@@ -38,7 +38,7 @@
                         </div>
                 @endif --}}
 
-                <form action="{{Route('backend.glasses_distance.store')}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{Route('backend.glasses_distance.store')}}" method="post" enctype="multipart/form-data" >
                     @csrf
                     
              
@@ -52,8 +52,8 @@
                             <thead>
                                 <tr>
                                     <th><input class="form-control" name="reservation_id" hidden value="{{$reservation->reservation_id}}"  type="text"></th>
-                                    <th colspan="3">{{trans('glasses_distance_trans.Right')}}</th>
-                                    <th colspan="3">{{trans('glasses_distance_trans.Left')}}</th>
+                                    <th colspan="3">{{trans('backend/glasses_distance_trans.Right')}}</th>
+                                    <th colspan="3">{{trans('backend/glasses_distance_trans.Left')}}</th>
                                 </tr>
                             </thead>
 
@@ -75,7 +75,7 @@
 
                                     <td>
                                         <input type="text" name="SPH_R_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.SPH_R_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.SPH_R_D')}}">
                                         @error('SPH_R_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -83,7 +83,7 @@
                                     
                                     <td>
                                         <input type="text" name="CYL_R_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.CYL_R_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.CYL_R_D')}}">
                                         @error('CYL_R_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -91,7 +91,7 @@
                                     
                                     <td>
                                         <input type="text" name="AX_R_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.AX_R_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.AX_R_D')}}">
                                         @error('AX_R_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -99,7 +99,7 @@
                                     
                                     <td>
                                         <input type="text" name="SPH_L_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.SPH_L_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.SPH_L_D')}}">
                                         @error('SPH_L_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -107,7 +107,7 @@
                                     
                                     <td>
                                         <input type="text" name="CYL_L_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.CYL_L_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.CYL_L_D')}}">
                                         @error('CYL_L_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -115,7 +115,7 @@
                                     
                                     <td>
                                         <input type="text" name="AX_L_D" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.AX_L_D')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.AX_L_D')}}">
                                         @error('AX_L_D')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -131,7 +131,7 @@
 
                                     <td>
                                         <input type="text" name="SPH_R_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.SPH_R_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.SPH_R_N')}}">
                                         @error('SPH_R_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -139,7 +139,7 @@
                                     
                                     <td>
                                         <input type="text" name="CYL_R_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.CYL_R_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.CYL_R_N')}}">
                                         @error('CYL_R_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -147,7 +147,7 @@
                                     
                                     <td>
                                         <input type="text" name="AX_R_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.AX_R_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.AX_R_N')}}">
                                         @error('AX_R_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -155,7 +155,7 @@
                                     
                                     <td>
                                         <input type="text" name="SPH_L_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.SPH_L_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.SPH_L_N')}}">
                                         @error('SPH_L_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -163,7 +163,7 @@
                                     
                                     <td>
                                         <input type="text" name="CYL_L_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.CYL_L_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.CYL_L_N')}}">
                                         @error('CYL_L_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -171,7 +171,7 @@
                                     
                                     <td>
                                         <input type="text" name="AX_L_N" class="form-control" 
-                                        placeholder="{{trans('glasses_distance_trans.AX_L_N')}}">
+                                        placeholder="{{trans('backend/glasses_distance_trans.AX_L_N')}}">
                                         @error('AX_L_N')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
@@ -187,7 +187,7 @@
                     </div>
                 </div>
 
-             <button type="submit" class="btn btn-primary">{{trans('glasses_distance_trans.Add')}}</button>
+             <button type="submit" class="btn btn-primary">{{trans('backend/glasses_distance_trans.Add')}}</button>
 
             </form>
 

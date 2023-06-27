@@ -12,13 +12,15 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    { 
         Schema::create('patients', function (Blueprint $table) {
             $table->id('patient_id');
             $table->string('name');
+            // $table->string('image')->nullable();
             $table->string('age')->nullable();
             $table->string('address');
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
+            $table->string('password')->nullable();
             $table->string('patient_code')->nullable();
             $table->char('phone', 20);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();

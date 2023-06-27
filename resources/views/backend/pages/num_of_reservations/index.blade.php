@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{trans('reservations_trans.Reservations')}}
+{{trans('backend/reservations_trans.Reservations')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('reservations_trans.Reservations')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/reservations_trans.Reservations')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('reservations_trans.All_Reservations')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('reservations_trans.Reservations')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/reservations_trans.All_Reservations')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/reservations_trans.Reservations')}}</li>
             </ol>
         </div>
     </div>
@@ -32,9 +32,9 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('reservations_trans.Reservation_Date')}}</th>
-                            <th>{{trans('reservations_trans.Number_of_Reservations')}}</th>
-                            <th>{{trans('reservations_trans.Control')}}</th>
+                            <th>{{trans('backend/reservations_trans.Reservation_Date')}}</th>
+                            <th>{{trans('backend/reservations_trans.Number_of_Reservations')}}</th>
+                            <th>{{trans('backend/reservations_trans.Control')}}</th>
 
                             
                         </tr>
@@ -78,9 +78,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>    
+   
 @endsection

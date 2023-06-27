@@ -1,12 +1,12 @@
 @extends('backend.layouts.master')
 @section('css')
 @section('title')
-{{trans('online_reservations_trans.All_Online_Reservations')}}@stop
+{{trans('backend/online_reservations_trans.All_Online_Reservations')}}@stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
 @section('PageTitle')
-{{trans('online_reservations_trans.All_Online_Reservations')}}@stop
+{{trans('backend/online_reservations_trans.All_Online_Reservations')}}@stop
 <!-- breadcrumb -->
 @endsection
 @section('content')
@@ -23,13 +23,13 @@
                                         <thead>
                                         <tr class="alert-success">
                                             <th>#</th>
-                                            <th>{{trans('online_reservations_trans.User_Name')}}</th>
-                                            <th>{{trans('online_reservations_trans.Patient_Name')}} </th>
-                                            <th>{{trans('online_reservations_trans.Title')}} </th>
-                                            <th>{{trans('online_reservations_trans.Time_Date')}} </th>
-                                            <th>{{trans('online_reservations_trans.Duration')}}</th>
-                                            <th>{{trans('online_reservations_trans.Link')}}</th>
-                                            <th>{{trans('online_reservations_trans.Controls')}}</th>
+                                            <th>{{trans('backend/online_reservations_trans.User_Name')}}</th>
+                                            <th>{{trans('backend/online_reservations_trans.Patient_Name')}} </th>
+                                            <th>{{trans('backend/online_reservations_trans.Title')}} </th>
+                                            <th>{{trans('backend/online_reservations_trans.Time_Date')}} </th>
+                                            <th>{{trans('backend/online_reservations_trans.Duration')}}</th>
+                                            <th>{{trans('backend/online_reservations_trans.Link')}}</th>
+                                            <th>{{trans('backend/online_reservations_trans.Controls')}}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -47,8 +47,9 @@
                                                     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#Delete_receipt{{$online_reservation->meeting_id}}" ><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
-                                        @include('backend.online_reservations.delete')
+                                        @include('backend.pages.online_reservations.delete')
                                         @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -61,9 +62,5 @@
     <!-- row closed -->
 @endsection
 @section('js')
-<script>
-          $(document).ready( function () {
-              $('#table_id').DataTable();
-          } );
-      </script>
+
 @endsection

@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Traits;
-use Auth;
-trait AuthorizeCheck {
 
-          public function authorizeCheck($permission){
+use Illuminate\Support\Facades\Auth;
 
-                    if(!Auth::user()->can($permission)){
+trait AuthorizeCheck
+{
+    public function authorizeCheck($permission)
+    {
 
-                              throw new \Illuminate\Auth\Access\AuthorizationException(__('You Are unauthorized '));
-                    }
+        if(!Auth::user()->can($permission)) {
 
-          }
+            throw new \Illuminate\Auth\Access\AuthorizationException(__('You Are unauthorized '));
+        }
+
+    }
 }

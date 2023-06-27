@@ -16,15 +16,17 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id('reservation_id');
             $table->foreignId('patient_id')->references('patient_id')->on('patients')->cascadeOnDelete();
-            $table->string('res_num');
+            $table->string('res_num')->nullable();
+            $table->string('slot')->nullable();
             $table->longText('first_diagnosis')->nullable();
             $table->longText('final_diagnosis')->nullable();
-            $table->enum('res_type', ['check', 'recheck' ,'consultation'])->default('check');
+            $table->enum('res_type', ['check', 'recheck' ,'consultation','other'])->default('check');
             $table->string('cost')->nullable();
             $table->enum('payment', ['paid', 'not paid'])->default('not paid');
             $table->date('res_date');
             $table->string('month');
-            $table->enum('status',['waiting','entered','finished'])->default('waiting');
+            $table->enum('res_status',['waiting','entered','finished','cancelled'])->default('waiting');
+            $table->enum('status',['active','inactive'])->default('inactive');
             $table->softDeletes();
             $table->timestamps();
             

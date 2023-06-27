@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend\ReservationsControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\OnlineReservation;
-use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Carbon\Carbon;
 
@@ -16,8 +15,10 @@ class FeeController extends Controller
         
         // get current date on egypt
         $current_date = Carbon::now('Egypt')->format('Y-m-d');
+
         // get reservation based on reservation_date (today reservations)
         $reservations = Reservation::where('res_date', $current_date)->get();
+        
         // get sum of cost of (today reservations)
         $cost_sum = Reservation::where('res_date', $current_date)->where('payment','paid')->sum('cost'); 
 
@@ -25,9 +26,7 @@ class FeeController extends Controller
 
         $month_res = Reservation::where('month', $current_month)->get();
 
-        $online_reservation = OnlineReservation::where('res_date', $current_date)->get();
-
-
+        $online_reservation = OnlineReservation::where('start_at', $current_date)->get();
         
         return view('backend.pages.fees.today',compact('current_date','reservations','cost_sum'));
         

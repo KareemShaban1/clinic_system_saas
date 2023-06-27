@@ -3,121 +3,96 @@
 namespace App\Http\Controllers\Backend\ReservationsControllers;
 
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreChronicDiseaseRequest;
-
+use App\Http\Requests\Backend\StoreChronicDiseaseRequest;
+use App\Http\Requests\Backend\UpdateChronicDiseaseRequest;
 use App\Models\Reservation;
-use App\Models\ChronicDiseases;
-
+use App\Models\ChronicDisease;
 use Illuminate\Support\Facades\DB;
 
 class ChronicDiseasesController extends Controller
 {
+    protected $reservation;
+    protected $chronicDisease;
 
-    public function index(){
-
+    public function __construct(Reservation $reservation, ChronicDisease $chronicDisease)
+    {
+        $this->reservation = $reservation;
+        $this->chronicDisease = $chronicDisease;
     }
 
-
-    public function add( $id){
-
-        // get reservation based on reservation_id
-        $reservation = Reservation::findOrFail($id);
-
-        return view('backend.pages.chronic_diseases.add',compact('reservation'));
-
+    public function index()
+    {
+        // Logic for fetching and displaying chronic diseases index page
+        
     }
 
-    public function store(StoreChronicDiseaseRequest $request){
-       
+    public function add($id)
+    {
+        $reservation = $this->reservation->findOrFail($id);
 
-        $request->validate();
+        return view('backend.pages.chronic_diseases.add', compact('reservation'));
+    }
 
-        try{
+    public function store(StoreChronicDiseaseRequest $request)
+    {
+        $request->validated();
 
-            $title = $request->title;
-            $measure = $request->measure;
-            $notes = $request->notes;
-            $date = $request->date;
-            $patient_id = $request->patient_id;
-            $reservation_id = $request->reservation_id;
- 
-            for($i = 0; $i < count($title) ; $i++){     
-                $data=[
-                    'title' => $title[$i],
-                    'measure'=>$measure[$i],
-                    'date'=>$date[$i],
-                    'notes' => $notes[$i],
-                    'patient_id' => $patient_id[$i],
-                    'reservation_id' => $reservation_id[$i],
+        try {
+            foreach ($request->title as $index => $title) {
+                $data = [
+                    'title' => $title,
+                    'measure' => $request->measure[$index],
+                    'date' => $request->date[$index],
+                    'notes' => $request->notes[$index],
+                    'patient_id' => $request->patient_id[$index],
+                    'reservation_id' => $request->reservation_id[$index],
                 ];
                 DB::table('chronic_diseases')->insert($data);
             }
-            return redirect()->route('backend.reservations.index')->with('chronic_diseases','Sales Added Successfully');
-
-        }
-        catch (\Exception $e) {
+            
+            return redirect()->route('backend.reservations.index')->with('success', 'Chronic diseases added successfully');
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
     }
 
-    public function show($id){
+    public function show($id)
+    {
+        $reservations = $this->reservation->findOrFail($id);
+        $chronicDiseases = $this->chronicDisease->where('reservation_id', $id)->get();
 
-        // get reservation based on reservation_id
-        $reservations = Reservation::findOrFail($id);
-
-        // get drugs based on reservation_id
-        $chronic_diseases = DB::table('chronic_diseases')->where('reservation_id',$id)->get();
-
-        return view('backend.pages.chronic_diseases.show',compact('chronic_diseases','reservations'));
-
+        return view('backend.pages.chronic_diseases.show', compact('chronicDiseases', 'reservations'));
     }
 
-    public function edit( $id){
+    public function edit($id)
+    {
+        $chronicDisease = $this->chronicDisease->findOrFail($id);
 
-        // get reservation based on reservation_id
-        $chronic_disease = ChronicDiseases::findOrFail($id);
-
-        return view('backend.pages.chronic_diseases.edit',compact('chronic_disease'));
-
+        return view('backend.pages.chronic_diseases.edit', compact('chronicDisease'));
     }
 
-    public function update(StoreChronicDiseaseRequest $request,$id){
-       
+    public function update(UpdateChronicDiseaseRequest $request, $id)
+    {
+        $request->validated();
 
-        
-        try{
+        try {
+            $chronicDisease = $this->chronicDisease->findOrFail($id);
 
-            $request->validate();
-
-            $chronic_disease = ChronicDiseases::findOrFail($id);
-            $title = $request->title;
-            $measure = $request->measure;
-            $notes = $request->notes;
-            $date = $request->date;
-            $patient_id = $request->patient_id;
-            $reservation_id = $request->reservation_id;
- 
-
-            for($i = 0; $i < count($title) ; $i++){     
-                $data=[
-                    'title' => $title[$i],
-                    'measure'=>$measure[$i],
-                    'date'=>$date[$i],
-                    'notes' => $notes[$i],
-                    'patient_id' => $patient_id[$i],
-                    'reservation_id' => $reservation_id[$i],
+            foreach ($request->title as $index => $title) {
+                $data = [
+                    'title' => $title,
+                    'measure' => $request->measure[$index],
+                    'date' => $request->date[$index],
+                    'notes' => $request->notes[$index],
+                    'patient_id' => $request->patient_id[$index],
+                    'reservation_id' => $request->reservation_id[$index],
                 ];
-                DB::table('chronic_diseases')->where('id',$chronic_disease->id)->update($data);
+                $this->chronicDisease->where('id', $chronicDisease->id)->update($data);
             }
-            return redirect()->route('backend.reservations.index')->with('chronic_diseases','Sales Added Successfully');
 
-        }
-        catch (\Exception $e) {
+            return redirect()->route('backend.reservations.index')->with('success', 'Chronic diseases updated successfully');
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
     }
 }

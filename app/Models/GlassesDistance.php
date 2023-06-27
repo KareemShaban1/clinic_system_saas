@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class GlassesDistance extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'reservation_id',
+        'SPH_R_D',
+        'CYL_R_D',
+        'AX_R_D',
+        'SPH_L_D',
+        'CYL_L_D',
+        'AX_L_D',
+        'SPH_R_N',
+        'CYL_R_N',
+        'AX_R_N',
+        'SPH_L_N',
+        'CYL_L_N',
+        'AX_L_N'
+    ];
 }

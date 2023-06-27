@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{trans('events_trans.Events')}}
+{{trans('backend/events_trans.Events')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('events_trans.Events')}} </h4>
+            <h4 class="mb-0"> {{trans('backend/events_trans.Events')}} </h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('events_trans.All_Events')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('events_trans.Events')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/events_trans.All_Events')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/events_trans.Events')}}</li>
             </ol>
         </div>
     </div>
@@ -34,10 +34,10 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('events_trans.Id')}}</th>
-                            <th>{{trans('events_trans.Event_Title')}}</th>
-                            <th>{{trans('events_trans.Event_Date')}} </th>
-                            <td>{{trans('events_trans.Control')}}</td>
+                            <th>{{trans('backend/events_trans.Id')}}</th>
+                            <th>{{trans('backend/events_trans.Event_Title')}}</th>
+                            <th>{{trans('backend/events_trans.Event_Date')}} </th>
+                            <td>{{trans('backend/events_trans.Control')}}</td>
                             
                         </tr>
                     </thead>
@@ -74,9 +74,5 @@
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-</script>  
+
 @endsection

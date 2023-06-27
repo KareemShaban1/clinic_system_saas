@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{{trans('users_trans.User_Name')}}<span class="text-danger">*</span></label>
+                                <label>{{trans('backend/users_trans.User_Name')}}<span class="text-danger">*</span></label>
                                 <input  type="text" value="{{$user->name}}" name="name"  class="form-control">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -46,7 +46,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{trans('users_trans.Email')}}  <span class="text-danger">*</span></label>
+                                <label> {{trans('backend/users_trans.Email')}}  <span class="text-danger">*</span></label>
                                 <input  class="form-control" value="{{$user->email}}" name="email" type="text" >
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{{trans('users_trans.Password')}} <span class="text-danger">*</span></label>
+                                <label>{{trans('backend/users_trans.Password')}} <span class="text-danger">*</span></label>
                                 <input  type="password"  name="password"  class="form-control">
                             </div>
                         </div>
@@ -73,16 +73,16 @@
                             {{-- <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="power"> {{trans('users_trans.User_Type')}}<span class="text-danger">*</span></label>
+                                        <label for="power"> {{trans('backend/users_trans.User_Type')}}<span class="text-danger">*</span></label>
                                         
                                         <select class="custom-select mr-sm-2" name="power"
                                         @if($user->power == old('power', $user->power)) selected @endif> 
-                                            <option selected disabled>{{trans('users_trans.Choose')}}</option>
+                                            <option selected disabled>{{trans('backend/users_trans.Choose')}}</option>
                                             <option value="Admin"  @if(old('power', $user->power) == 'Admin') selected @endif>
-                                                {{trans('users_trans.Admin')}}
+                                                {{trans('backend/users_trans.Admin')}}
                                             </option>
                                             <option value="Doctor"  @if(old('power', $user->power) == 'Doctor') selected @endif>
-                                                {{trans('users_trans.Doctor')}}
+                                                {{trans('backend/users_trans.Doctor')}}
                                             </option>
                                         </select>
                                         @error('power')
@@ -104,7 +104,7 @@
 
 
 
-                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('users_trans.Edit')}}</button>
+                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/users_trans.Edit')}}</button>
 
 
                 </form>

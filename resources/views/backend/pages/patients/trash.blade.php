@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('patients_trans.Deleted_Patients')}}
+    {{trans('backend/patients_trans.Deleted_Patients')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('patients_trans.Deleted_Patients')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/patients_trans.Deleted_Patients')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('patients_trans.Deleted_Patients')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('patients_trans.Patients')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/patients_trans.Deleted_Patients')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/patients_trans.Patients')}}</li>
             </ol>
         </div>
     </div>
@@ -31,12 +31,12 @@
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
-                            <th>{{trans('patients_trans.Id')}}</th>
-                            <th>{{trans('patients_trans.Patient_Name')}}</th>
-                            <th>{{trans('patients_trans.Phone')}}</th>
-                            <th>{{trans('patients_trans.Address')}}</th>
-                            <th>{{trans('patients_trans.Age')}}</th>
-                            <th>{{trans('patients_trans.Control')}}</th>
+                            <th>{{trans('backend/patients_trans.Id')}}</th>
+                            <th>{{trans('backend/patients_trans.Patient_Name')}}</th>
+                            <th>{{trans('backend/patients_trans.Phone')}}</th>
+                            <th>{{trans('backend/patients_trans.Address')}}</th>
+                            <th>{{trans('backend/patients_trans.Age')}}</th>
+                            <th>{{trans('backend/patients_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +56,7 @@
                                     
                                     <button type="submit" class="btn btn-success btn-sm" >
                                         <i class="fa fa-edit"></i>
-                                        {{trans('patients_trans.Restore')}}
+                                        {{trans('backend/patients_trans.Restore')}}
                                     </button>   
                                 </form>
                                
@@ -67,7 +67,7 @@
                                     
                                     <button type="submit" class="btn btn-danger btn-sm" >
                                         <i class="fa fa-trash"></i> 
-                                        {{trans('patients_trans.Delete_Forever')}}
+                                        {{trans('backend/patients_trans.Delete_Forever')}}
                                     </button>   
                                 </form>
 

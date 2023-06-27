@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OnlineReservation;
 use App\Http\Traits\MeetingZoomTrait;
+use App\Http\Traits\ZoomMeetingTrait;
 use App\Models\Patient;
 use MacsiDigital\Zoom\Facades\Zoom;
 use Carbon\carbon;
 class OnlineReservationController extends Controller
 {
     //
-    use MeetingZoomTrait;
+    use ZoomMeetingTrait;
 
     public function index(){
 

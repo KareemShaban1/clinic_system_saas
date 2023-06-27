@@ -1,0 +1,244 @@
++---app
+|   +---Console
+|   |       Kernel.php
+|   +---Exceptions
+|   |       Handler.php
+|   +---Http
+|   |   +---Controllers
+|   |   |    +---Api
+|   |   |    |   PatientController.php
+|   |   |    |   ReservationController.php
+|   |   |    +---Backend
+|   |   |    |   +---ReservationsControllers
+|   |   |    |   |   ChronicDiseasesController.php
+|   |   |    |   |   DrugController.php
+|   |   |    |   |   FeeController.php
+|   |   |    |   |   GlassesDistanceControoler.php
+|   |   |    |   |   MedicineController.php
+|   |   |    |   |   NumberOfReservationController.php
+|   |   |    |   |   OnlineReservationController.php
+|   |   |    |   |   RaysController.php
+|   |   |    |   |   ReservationControlControoler.php
+|   |   |    |   |   ReservationController.php
+|   |   |    |   |   ReservationSlotsController.php
+|   |   |    |   DashboardController.php
+|   |   |    |   EventController.php
+|   |   |    |   PatientController.php
+|   |   |    |   RolesPermissionsController.php
+|   |   |    |   SettingsController.php
+|   |   |    |   UserController.php
+|   |   |    |
+|   |   |    +---Frontend
+|   |   |    |   AppointmentController.php
+|   |   |    |   HomeController.php
+|   |   |    |
+|   |   +---Livewire
+|   |   |   Calendar.php
+|   |   |   
+|   |   +---Middleware
+|   |   |       Authenticate.php
+|   |   |       EncryptCookies.php
+|   |   |       PreventRequestsDuringMaintenance.php
+|   |   |       RedirectIfAuthenticated.php
+|   |   |       TrimStrings.php
+|   |   |       TrustHosts.php
+|   |   |       TrustProxies.php
+|   |   |       VerifyCsrfToken.php
+|   |   |
+|   |   +---Requests
+|   |   |   +---Api
+|   |   |   |   StorePatientRequest.php
+|   |   |   |   StoreReservationRequest.php
+|   |   |   |   UpdatePatientRequest.php
+|   |   |   |   UpdateReservationRequest.php
+|   |   |   +---Backend
+|   |   |   |   StoreChronicDiseaseRequest.php
+|   |   |   |   StoreDrugRequest.php
+|   |   |   |   StoreGlassesDistanceRequest.php
+|   |   |   |   StoreMedicineRequest.php
+|   |   |   |   StoreOnlineReservationRequest.php
+|   |   |   |   StorePatientRequest.php
+|   |   |   |   StoreRayRequest.php
+|   |   |   |   StoreReservationRequest.php
+|   |   |   |   StoreRoleRequest.php
+|   |   |   |   StoreSettingRequest.php
+|   |   |   |   StoreUserRequest.php
+|   |   |   |   UpdateChronicDiseaseRequest.php
+|   |   |   |   UpdatePatientRequest.php
+|   |   |   |   UpdateRayRequest.php
+|   |   |   |   UpdateReservationRequest.php
+|   |   |   +---Frontend
+|   |   |   |   StorePatientRequest.php
+|   |   |   |   StoreReservationRequest.php
+|   |   |   |   UpdatePatientRequest.php
+|   |   |   |   UpdateReservationRequest.php
+|   |   |   
+|   |   +---Traits
+|   |   |   AuthorizeCheck.php
+|   |   |   TimeSlotsTraint.php
+|   |   |   UploadImageTrait.php
+|   |   |   ZoomMeetingTrait.php
+|   |    \---Kernel.php   
+|   |   
+|   +---Models
+|   |   +---Scopes
+|   |   |   StoreScope
+|   |   ChFavorite.php
+|   |   ChMessage.php
+|   |   ChronicDiseases.php
+|   |   Drug.php
+|   |   Event.php
+|   |   Fee.php
+|   |   GlassesDistance.php
+|   |   Medicine.php
+|   |   NumberOfReservations.php
+|   |   OnlineReservation.php
+|   |   Patient.php
+|   |   Ray.php
+|   |   Reservation.php
+|   |   ReservationControl.php
+|   |   ReservationSlots.php
+|   |   Settings.php
+|   |   User.php
+|   |     
+|   \---Proviers
+|          AppServiceProvider.php
+|          AuthServiceProvider.php
+|          BroadcastServiceProvider.php
+|          EventServiceProvider.php
+|          FortifyServiceProvider.php
+|          JetstreamServiceProvider.php
+|          RouteServiceProvider.php
+|   
++---database
+|   \---factories
+|           AdminFactory.php
+|           CategoryFactory.php
+|           ProductFactory.php
+|           StoreFactory.php
+|           UserFactory.php
+|   \---migrations
+|           
+|   \---seeders
+|           AdminSeeder.php
+|           DatabaseSeeder.php
+|           UserSeeder.php
+|           WebsitePartsSeeder.php
+|
+\---resources
+    |
+    |
+    \---views
+        |   
+        +---backend
+        |   |   
+        |   +---auth
+        |   |   reset.blade.php
+        |   |   verify.blade.php
+        |   | 
+        |   +---layouts
+        |   |   reset.blade.php
+        |   |   verify.blade.php   
+        |   |
+        |   +---pages
+        |   |   +---chronic_diseases
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   show.blade.php          
+        |   |   +---dashboard
+        |   |   |   index.blade.php  
+        |   |   +---drugs
+        |   |   |   add.blade.php  
+        |   |   |   arabic_prescription_pdf.blade.php 
+        |   |   |   english_prescription_pdf.blade.php    
+        |   |   |   show.blade.php  
+        |   |   +---events
+        |   |   |   add.blade.php  
+        |   |   |   show.blade.php
+        |   |   |   trash.blade.php 
+        |   |   +---fees
+        |   |   |   index.blade.php  
+        |   |   |   month.blade.php    
+        |   |   |   today.blade.php   
+        |   |   +---glasses_distance
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php   
+        |   |   |   glasses_distance_pdf.blade.php
+        |   |   |   index.blade.php   
+        |   |   +---medicine
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php  
+        |   |   |   index.blade.php     
+        |   |   |   show.blade.php
+        |   |   |   trash.blade.php            
+        |   |   +---num_of_reservations
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php    
+        |   |   +---online_reservations
+        |   |   |   add.blade.php  
+        |   |   |   delete.blade.php    
+        |   |   |   index.blade.php    
+        |   |   +---patients
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php    
+        |   |   |   patient_card.blade.php                    
+        |   |   |   show.blade.php
+        |   |   |   trash.blade.php                        
+        |   |   +---rays
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   show.blade.php  
+        |   |   +---reservation_control
+        |   |   |   index.blade.php  
+        |   |   +---reservation_slots
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php  
+        |   |   +---reservations
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php  
+        |   |   |   reservation_pdf.blade.php  
+        |   |   |   show.blade.php    
+        |   |   |   today_reservation_report.blade.php 
+        |   |   |   today.blade.php  
+        |   |   |   trash.blade.php    
+        |   |   +---roles
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php  
+        |   |   +---settings
+        |   |   |   index.blade.php   
+        |   |   +---users
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php  
+        |           
+        +---frontend
+        |   |   
+        |   +---auth
+        |   |   reset.blade.php
+        |   |   verify.blade.php
+        |   | 
+        |   +---layouts
+        |   |   reset.blade.php
+        |   |   verify.blade.php   
+        |   |
+        |   +---Patient_Dashboard
+        |   |   +---appointement
+        |   |   |   add.blade.php  
+        |   |   |   edit.blade.php    
+        |   |   |   index.blade.php  
+        |   |   |   show_chronic_disease.blade.php  
+        |   |   |   show_glasses_distance.blade.php    
+        |   |   |   show_prescription_arabic.blade.php 
+        |   |   |   show_prescription_english.blade.php    
+        |   |   |   show_ray.blade.php   
+        |   |   +---dashboard
+        |   |   |   index.blade.php     
+        |   |   +---patient                               
+        |   home.blade.php
+        | 
+       

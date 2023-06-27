@@ -1,0 +1,30 @@
+-- Permissions 
+   - we add premissions from RolePermissionSeeder in seeders folder 
+   - to add permission to controller we use AuthorizeCheck trait 
+
+------------------------------------------------------------------------------
+
+-- Patient Controller notes 
+   - In this code, the Patient, Reservation, and Settings models are 
+     injected into the constructor of the PatientController class. 
+     This allows you to access the injected models using $this->patient, 
+     $this->reservation, and $this->settings within the class methods.
+   - By using Dependency Injection, the code becomes more flexible, maintainable,
+     and testable. It also promotes better separation of concerns by 
+     allowing you to easily swap out dependencies or mock them during testing.
+
+------------------------------------------------------------------------------
+
+--  ChronicDiseasesController
+   - In the updated code, the Reservation and ChronicDisease models are injected into 
+     the constructor. This allows Laravel's service container to automatically resolve 
+     the dependencies when creating an instance of the ChronicDiseasesController class. 
+
+------------------------------------------------------------------------------
+
+-- RaysController 
+
+   - Utilize Model Dependency Injection:
+     Instead of using the GlassesDistance and Reservation models directly 
+     in the controller methods, you can utilize model dependency injection 
+     by type hinting the corresponding models in the method parameters.

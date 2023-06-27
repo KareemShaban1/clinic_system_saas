@@ -10,70 +10,69 @@ class NumberOfReservationsController extends Controller
 {
     //
 
-    public function index(){
+    public function index()
+    {
 
         $num_of_reservations = NumberOfReservations::all();
-        
-        return view('backend.pages.num_of_reservations.index',compact('num_of_reservations'));
+
+        return view('backend.pages.num_of_reservations.index', compact('num_of_reservations'));
     }
 
-    public function add(){
+    public function add()
+    {
 
-        $num_of_reservations =new NumberOfReservations;
-        
-        return view('backend.pages.num_of_reservations.add',compact('num_of_reservations'));
+        $num_of_reservations = new NumberOfReservations;
+
+        return view('backend.pages.num_of_reservations.add', compact('num_of_reservations'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $request->validate([
             'reservation_date' => 'required',
             'num_of_reservations' => 'required',
-            
-            ]);
 
-            $num_of_reservations = new NumberOfReservations;
+        ]);
 
-            $num_of_reservations->reservation_date = $request->reservation_date;
-            $num_of_reservations->num_of_reservations = $request->num_of_reservations;
-            $num_of_reservations->save();
+        $data = $request->all();
 
-            return redirect()->route('backend.patients.index');
+        // $num_of_reservations = new NumberOfReservations;
+        // $num_of_reservations->reservation_date = $request->reservation_date;
+        // $num_of_reservations->num_of_reservations = $request->num_of_reservations;
+        // $num_of_reservations->save();
+        NumberOfReservations::create($data);
 
-
+        return redirect()->route('backend.patients.index');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
         $num_of_res =  NumberOfReservations::findOrFail($id);
 
-        return view('backend.num_of_reservations.edit',compact('num_of_res'));
-
-
+        return view('backend.pages.num_of_reservations.edit', compact('num_of_res'));
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
 
         $request->validate([
             'reservation_date' => 'required',
             'num_of_reservations' => 'required',
-            ]);
+        ]);
 
-            try{
-
+        try {
+            $data = $request->all();
             $num_of_reservations = NumberOfReservations::findOrFail($id);
-            $num_of_reservations->reservation_date = $request->reservation_date;
-            $num_of_reservations->num_of_reservations = $request->num_of_reservations;
-            $num_of_reservations->save();
-
+            $num_of_reservations->update($data);
             return redirect()->route('backend.num_of_reservations.index');
-
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
+    }
 
-
+    public function destroy($id){
 
     }
 }

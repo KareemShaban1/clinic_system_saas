@@ -24,6 +24,7 @@ class SettingsSeeder extends Seeder
             ['key' => 'specifications', 'value' => 'عيون'],
             ['key' => 'qualifications', 'value' => ''],
             ['key' => 'clinic_name', 'value' => ''],
+            ['key' => 'clinic_type', 'value' => ''],
             ['key' => 'clinic_address', 'value' => ''],
             ['key' => 'phone', 'value' => ''],
             ['key' => 'website', 'value' => ''],

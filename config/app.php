@@ -184,9 +184,11 @@ return [
         // Barryvdh\DomPDF\ServiceProvider::class,
         // niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
         \Chatify\ChatifyServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
 
         /*
@@ -220,12 +222,13 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
-        // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         // 'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         // 'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        'PDF' => Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::class,
         'Chatify' => Chatify\Facades\ChatifyMessenger::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
 
 
     ])->toArray(),

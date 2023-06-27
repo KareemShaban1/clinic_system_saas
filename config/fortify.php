@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Features;
 
 return [
@@ -140,25 +141,29 @@ return [
         Features::twoFactorAuthentication([
             'confirm' => true,
             'confirmPassword' => true,
-            // 'window' => 0,
         ]),
     ],
 
-    'home' => function(){
-        //if you want to go to a specific route
-        // return route('dashboard');
+    'redirects'=>[
+        // if patient register successfylly , e will redirected to this path '/patient/dashboard'
+        'register'=>'/patient/dashboard'
+    ],
+
+    // 'home' => function(){
+    //     //if you want to go to a specific route
+    //     // return route('dashboard');
       
-        //or if you have a bunch of redirection options
-        if (Auth::user()->role() == "Admin") {
-           return route('admin.dashboard.index');
-        }
-        elseif (Auth::user()->power == "Doctor") {
-            return route('admin.dashboard.index');
-         }
+    //     //or if you have a bunch of redirection options
+    //     // if (Auth::user()->role() == "Admin") {
+    //     //    return route('admin.dashboard.index');
+    //     // }
+    //     // elseif (Auth::user()->power == "Doctor") {
+    //     //     return route('admin.dashboard.index');
+    //     //  }
          
-        // else{
-        //    return route('guest.dashboard');
-        // }
-    }
+    //     // else{
+    //     //    return route('guest.dashboard');
+    //     // }
+    // }
 
 ];

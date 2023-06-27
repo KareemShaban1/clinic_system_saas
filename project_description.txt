@@ -1,0 +1,86 @@
+Patient can register (create account) , login 
+patient has dashboard to 
+          add Appointments 
+          show his Appointments ,
+          show his Rays / Analysis
+          show his Chronic diseases
+          show his Glasses Distance
+          show his Prescription
+
+Admin / Doctor can 
+      - Events 
+          Add Events
+          Delete Event
+          Restore Events
+          Delete Events Forever
+
+      - Patients
+          Add Patient
+          Delete Patient
+          Edit Patient
+          Restore Patients
+          Delete Patients Forever
+          show Patient Profile
+          Show Patient card
+          Print Patient Card
+
+      - Reservations
+          Add Reservation
+          Edit Reservation
+          Delete Reservation
+          Restore Reservations
+          Delete Reservations Forever
+          Show Reservations 
+          Add Drugs
+          Show Prescription
+          Print Prescription
+          Add Chronic diseases
+          Edit Chronic diseases
+          show Chronic diseases
+          Add Rays
+          Edit Rays
+          Show Rays
+          Add Glasses Distance
+          Edit Glasses Distance
+          Show Glasses Distance
+          Add Number of Reservations
+          Edit Number of Reservations
+          Edit Reservation Control
+          Show Daily Reservation Report
+          Print Daily Reservation Report
+
+      - Online Reservation 
+          Add Online Reservation
+          Delete Online Reservation
+
+      - Medicines
+          Add Medicine
+          Show Medicines
+          Edit Medicine
+          Delete Medicine
+          Show Deleted Medicines
+          Restore Medicine
+          Delete Medicine Forever
+          
+      - Fees
+          Show Daily Fees
+          show Montly Fees
+          Show All Fees
+
+      - Users 
+          Add Users
+          Edit Users 
+          Assign Role to User 
+          Delete Users
+
+      - Roles 
+          Add Role
+          Edit Role 
+          Show Role
+            
+      - Settings 
+          Add Settings 
+          Update Settings   
+
+      - System Settings     
+          Update System Settings   

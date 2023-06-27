@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class NumberOfReservations extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'reservation_date',
+        'num_of_reservations'
+    ];
 }

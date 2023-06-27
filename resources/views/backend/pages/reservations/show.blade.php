@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{trans('reservations_trans.Show_Reservation')}}
+{{trans('backend/reservations_trans.Show_Reservation')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('reservations_trans.Show_Reservation')}}</h4>
+            <h4 class="mb-0"> {{trans('backend/reservations_trans.Show_Reservation')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('reservations_trans.Show_Reservation')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('reservations_trans.Reservations')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/reservations_trans.Show_Reservation')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/reservations_trans.Reservations')}}</li>
             </ol>
         </div>
     </div>
@@ -44,23 +44,23 @@
                                                 <ul class="nav nav-tabs">
                                                     <li class="nav-item">
                                                         <a href="#info" data-toggle="tab" class="nav-link active show">
-                                                        {{trans('reservations_trans.Reservation_Information')}} 
+                                                        {{trans('backend/reservations_trans.Reservation_Information')}} 
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="#chronic_disease" data-toggle="tab" class="nav-link">
-                                                            {{trans('reservations_trans.Chronic_Diseases')}} 
+                                                            {{trans('backend/reservations_trans.Chronic_Diseases')}} 
                                                         </a>
                                                     </li>
 
                                                     <li class="nav-item">
                                                         <a href="#rays" data-toggle="tab" class="nav-link">
-                                                            {{trans('reservations_trans.Rays')}} 
+                                                            {{trans('backend/reservations_trans.Rays')}} 
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a href="#prescription" data-toggle="tab" class="nav-link">
-                                                            {{trans('reservations_trans.Prescription')}} 
+                                                            {{trans('backend/reservations_trans.Prescription')}} 
                                                         </a>
                                                     </li>
 
@@ -76,7 +76,7 @@
 
                                                                       <h5 class="card-header">
                                                                       <span class="badge badge-rounded badge-warning ">
-                                                                      <h5> {{trans('reservations_trans.Reservation_Information')}}</h5>
+                                                                      <h5> {{trans('backend/reservations_trans.Reservation_Information')}}</h5>
                                                                       </span>
                                                                       </h5>
 
@@ -84,7 +84,7 @@
                               
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Id')}} <span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Id')}} <span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$reservation->reservation_id}}</span>
                                                                               </div>
@@ -93,7 +93,7 @@
                                                                           
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Number_of_Reservation')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Number_of_Reservation')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$reservation->res_num}}</span>
                                                                               </div>
@@ -101,7 +101,7 @@
                               
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.First_Diagnosis')}} <span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.First_Diagnosis')}} <span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$reservation->first_diagnosis}}</span>
                                                                               </div>
@@ -109,15 +109,15 @@
                               
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Reservation_Type')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Reservation_Type')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span> <p> 
                                                                                   @if( $reservation->res_type == "check" )
-                                                                                  {{trans('reservations_trans.Check')}}
+                                                                                  {{trans('backend/reservations_trans.Check')}}
                                                                                   @elseif ($reservation->res_type == "recheck")
-                                                                                  {{trans('reservations_trans.Recheck')}}
+                                                                                  {{trans('backend/reservations_trans.Recheck')}}
                                                                                   @elseif ($reservation->res_type == "consultation")
-                                                                                  {{trans('reservations_trans.Consultation')}}
+                                                                                  {{trans('backend/reservations_trans.Consultation')}}
                                                                                   @endif
                                                                               </p></span>
                                                                               </div>
@@ -125,20 +125,20 @@
 
                                                                           <div class="row mb-4">
                                                                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                <h5 class="f-w-500">{{trans('reservations_trans.Reservation_Status')}}<span class="pull-left">:</span></h5>
+                                                                                <h5 class="f-w-500">{{trans('backend/reservations_trans.Reservation_Status')}}<span class="pull-left">:</span></h5>
                                                                             </div>
                                                                             <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span> <p> 
                                                                                 @if ( $reservation->status == "waiting" )
                                                                                 <span class="badge badge-rounded badge-warning text-white p-2 mb-2">
-                                                                                    {{trans('reservations_trans.Waiting')}}
+                                                                                    {{trans('backend/reservations_trans.Waiting')}}
                                                                                 </span>
                                                                              @elseif ( $reservation->status == "entered")
                                                                                 <span class="badge badge-rounded badge-success p-2 mb-2">
-                                                                                    {{trans('reservations_trans.Entered')}}
+                                                                                    {{trans('backend/reservations_trans.Entered')}}
                                                                                 </span>
                                                                              @elseif ( $reservation->status == "finished")
                                                                                  <span class="badge badge-rounded badge-danger p-2 mb-2">
-                                                                                    {{trans('reservations_trans.Finished')}}
+                                                                                    {{trans('backend/reservations_trans.Finished')}}
                                                                                 </span>
                                                                              @endif
                                                                             </p></span>
@@ -148,14 +148,14 @@
                               
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Payment')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Payment')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span> <p> 
                                                                                   @if( $reservation->payment == "paid" )
-                                                                                  <span class="badge badge-rounded badge-success">{{trans('reservations_trans.Paid')}}</span>
+                                                                                  <span class="badge badge-rounded badge-success">{{trans('backend/reservations_trans.Paid')}}</span>
                                                                                   
                                                                                   @elseif ($reservation->payment == "not paid")
-                                                                                  <span class="badge badge-rounded badge-danger">{{trans('reservations_trans.Not_Paid')}}</span>
+                                                                                  <span class="badge badge-rounded badge-danger">{{trans('backend/reservations_trans.Not_Paid')}}</span>
                                                                                   @endif
                                                                               </p></span>
                                                                               </div>
@@ -164,7 +164,7 @@
                                                                                           
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Reservation_Date')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Reservation_Date')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$reservation->res_date}}</span>
                                                                               </div>
@@ -172,7 +172,7 @@
                               
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500">{{trans('reservations_trans.Final_Diagnosis')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500">{{trans('backend/reservations_trans.Final_Diagnosis')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$reservation->final_diagnosis}}</span>
                                                                               </div>
@@ -197,7 +197,7 @@
                                                             @forelse($chronic_diseases as $chronic_disease)
                                                                       <h5 class="card-header">
                                                                           <span class="badge badge-rounded badge-warning ">
-                                                                         <h5>  {{trans('reservations_trans.Chronic_Diasease_Number')}}   {{$loop->index+1}} </h5>
+                                                                         <h5>  {{trans('backend/reservations_trans.Chronic_Diasease_Number')}}   {{$loop->index+1}} </h5>
                                                                           </span>
                                                                       </h5>
                                                                       <div class="card-body">
@@ -213,7 +213,7 @@
                                                                       
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500"> {{trans('reservations_trans.Disease_Name')}}<span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500"> {{trans('backend/reservations_trans.Disease_Name')}}<span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->title}}</span>
                                                                               </div>
@@ -221,7 +221,7 @@
                                                   
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500"> {{trans('reservations_trans.Disease_Measure')}}  <span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500"> {{trans('backend/reservations_trans.Disease_Measure')}}  <span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->measure}}</span>
                                                                               </div>
@@ -229,7 +229,7 @@
                                                   
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500"> {{trans('reservations_trans.Disease_Date')}}  <span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500"> {{trans('backend/reservations_trans.Disease_Date')}}  <span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->date}}</span>
                                                                               </div>
@@ -237,7 +237,7 @@
                                                   
                                                                           <div class="row mb-4">
                                                                               <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                  <h5 class="f-w-500"> {{trans('reservations_trans.Notes')}}   <span class="pull-left">:</span></h5>
+                                                                                  <h5 class="f-w-500"> {{trans('backend/reservations_trans.Notes')}}   <span class="pull-left">:</span></h5>
                                                                               </div>
                                                                               <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->notes}}</span>
                                                                               </div>
@@ -269,14 +269,14 @@
                                                                       @forelse($drugs as $drug)
                                                                                 <h5 class="card-header">
                                                                                 <span class="badge badge-rounded badge-warning ">
-                                                                                <h5>  {{trans('reservations_trans.Prescription_Number')}}    {{$loop->index+1}} </h5>
+                                                                                <h5>  {{trans('backend/reservations_trans.Prescription_Number')}}    {{$loop->index+1}} </h5>
                                                                                 </span>
                                                                                 </h5>
                                                                                 <div class="card-body">
                                                             
                                                                                 <div class="row mb-4">
                                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                          <h5 class="f-w-500">{{trans('reservations_trans.Id')}} <span class="pull-left">:</span></h5>
+                                                                                          <h5 class="f-w-500">{{trans('backend/reservations_trans.Id')}} <span class="pull-left">:</span></h5>
                                                                                 </div>
                                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$drug->id}}</span>
                                                                                 </div>
@@ -285,7 +285,7 @@
                                                                                 
                                                                                 <div class="row mb-4">
                                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Drug_Name')}} <span class="pull-left">:</span></h5>
+                                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Drug_Name')}} <span class="pull-left">:</span></h5>
                                                                                 </div>
                                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$drug->drug_name}}</span>
                                                                                 </div>
@@ -293,7 +293,7 @@
                                                             
                                                                                 <div class="row mb-4">
                                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Drug_Dose')}}  <span class="pull-left">:</span></h5>
+                                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Drug_Dose')}}  <span class="pull-left">:</span></h5>
                                                                                 </div>
                                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$drug->drug_dose}}</span>
                                                                                 </div>
@@ -301,7 +301,7 @@
                                                             
                                                                                 <div class="row mb-4">
                                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Quantity')}}  <span class="pull-left">:</span></h5>
+                                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Quantity')}}  <span class="pull-left">:</span></h5>
                                                                                 </div>
                                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$drug->quantity}}</span>
                                                                                 </div>
@@ -309,7 +309,7 @@
                                                             
                                                                                 <div class="row mb-4">
                                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Notes')}}  <span class="pull-left">:</span></h5>
+                                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Notes')}}  <span class="pull-left">:</span></h5>
                                                                                 </div>
                                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$drug->notes}}</span>
                                                                                 </div>
@@ -334,14 +334,14 @@
 
                                                             <h5 class="card-header">
                                                                 <span class="badge badge-rounded badge-warning ">
-                                                                <h5>  {{trans('reservations_trans.Rays_Number')}}    {{$loop->index+1}} </h5>
+                                                                <h5>  {{trans('backend/reservations_trans.Rays_Number')}}    {{$loop->index+1}} </h5>
                                                                 </span>
                                                                 </h5>
                                                                 <div class="card-body">
                                             
                                                                 <div class="row mb-4">
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                          <h5 class="f-w-500">{{trans('reservations_trans.Id')}} <span class="pull-left">:</span></h5>
+                                                                          <h5 class="f-w-500">{{trans('backend/reservations_trans.Id')}} <span class="pull-left">:</span></h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->id}}</span>
                                                                 </div>
@@ -350,7 +350,7 @@
                                                                 
                                                                 <div class="row mb-4">
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Rays_Name')}} <span class="pull-left">:</span></h5>
+                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Rays_Name')}} <span class="pull-left">:</span></h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_name}}</span>
                                                                 </div>
@@ -358,7 +358,7 @@
                                             
                                                                 <div class="row mb-4">
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Rays_Date')}}  <span class="pull-left">:</span></h5>
+                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Rays_Date')}}  <span class="pull-left">:</span></h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_date}}</span>
                                                                 </div>
@@ -366,7 +366,7 @@
                                             
                                                                 <div class="row mb-4">
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Rays_Type')}}  <span class="pull-left">:</span></h5>
+                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Rays_Type')}}  <span class="pull-left">:</span></h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$ray->ray_type}}</span>
                                                                 </div>
@@ -374,13 +374,13 @@
                                             
                                                                 <div class="row mb-4">
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                          <h5 class="f-w-500"> {{trans('reservations_trans.Rays_Image')}}  <span class="pull-left">:</span></h5>
+                                                                          <h5 class="f-w-500"> {{trans('backend/reservations_trans.Rays_Image')}}  <span class="pull-left">:</span></h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6">
                                                                     <?php $images =explode('|',$ray->image); ?>
                                                                     @foreach($images as $key => $value)
                                                                       
-                                                                          <img  src="{{ URL::asset('storage/'.$value)}}"   width="200" height="200">
+                                                                          <img  src="{{ URL::asset('storage/rays/'.$value)}}"   width="200" height="200">
                                                                        @endforeach
                                                                 </div>
                                                                 </div>

@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{trans('users_trans.Add_User')}}
+    {{trans('backend/users_trans.Add_User')}}
 @stop
 @endsection
 @section('page-header')
@@ -10,12 +10,12 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{trans('users_trans.Add_User')}}</h4>
+            <h4 class="mb-0">{{trans('backend/users_trans.Add_User')}}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('users_trans.Add_User')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('users_trans.Users')}}</li>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/users_trans.Add_User')}}</a></li>
+                <li class="breadcrumb-item active">{{trans('backend/users_trans.Users')}}</li>
             </ol>
         </div>
     </div>
@@ -36,7 +36,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{{trans('users_trans.User_Name')}}<span class="text-danger">*</span></label>
+                                <label>{{trans('backend/users_trans.User_Name')}}<span class="text-danger">*</span></label>
                                 <input  type="text" name="name"  class="form-control">
                                 @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -54,7 +54,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{trans('users_trans.Email')}} <span class="text-danger">*</span></label>
+                                <label> {{trans('backend/users_trans.Email')}} <span class="text-danger">*</span></label>
                                 <input  class="form-control" name="email" type="email" >
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -70,7 +70,7 @@
                            
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label> {{trans('users_trans.Password')}} <span class="text-danger">*</span></label>
+                            <label> {{trans('backend/users_trans.Password')}} <span class="text-danger">*</span></label>
                             <input  class="form-control" name="password" type="password" >
                             @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -85,13 +85,13 @@
                        
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>{{trans('users_trans.Roles')}}</strong>
+                                    <strong>{{trans('backend/users_trans.Roles')}}</strong>
                                     {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
                                 </div>
                             </div>
                    </div>
 
-                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('users_trans.Add')}}</button>
+                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/users_trans.Add')}}</button>
 
 
                 </form>
