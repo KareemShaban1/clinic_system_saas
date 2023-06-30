@@ -2,7 +2,7 @@
 <title>@yield("title")</title>
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}" type="image/x-icon" />
+<link rel="shortcut icon" href="{{ URL::asset('backend/assets/images/favicon.ico') }}" type="image/x-icon" />
 
 <!-- Font -->
 <link rel="stylesheet"
@@ -11,7 +11,7 @@
 <!--- Style css -->
 
 
-<link href="{{ URL::asset('assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
@@ -26,7 +26,7 @@
 
 <!--- Style css -->
 @if (App::getLocale() == 'en' || App::getLocale() == 'it')
-    <link href="{{ URL::asset('assets/css/ltr.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('backend/assets/css/ltr.css') }}" rel="stylesheet">
 @else
-    <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('backend/assets/css/rtl.css') }}" rel="stylesheet">
 @endif

@@ -64,7 +64,7 @@ Admin / Doctor can
           
       - Fees
           Show Daily Fees
-          show Montly Fees
+          show Monthly Fees
           Show All Fees
 
       - Users 
@@ -84,3 +84,42 @@ Admin / Doctor can
 
       - System Settings     
           Update System Settings   
+
+
+-------------------------------------------------------------
+
+EventController 
+    index       => get all events 
+    show        => show calendar page
+    destroy     => delete event 
+    trash       => get trash / temporary deleted events
+    restore     => restore deleted event
+    forceDelete => delete event permanently
+
+PatientController 
+    index       =>  get all patients
+    show        =>  show patient information 
+    patientPdf  =>  show patient card 
+    create      =>  show add patient view / page 
+    store       =>  store patient information 
+    edit        =>  show edit patient view / page
+    update      =>  update existing patient data
+    destroy     =>  delete patient 
+    trash       =>  get trash / temporary deleted patients
+    restore     =>  restore deleted patients
+    forceDelete =>  delete patient permanently
+    
+
+ReservationControl
+    index                  =>  get all reservations
+    todayReservationReport =>  show today reservations with report
+    show                   =>  show reservation information 
+    create                 =>  show add reservation view / page 
+    store                  =>  store reservation information 
+    edit                   =>  show edit reservation view / page
+    update                 =>  update existing reservation data
+    destroy                =>  delete reservation 
+    trash                  =>  get trash / temporary deleted reservations
+    restore                =>  restore deleted reservations
+    forceDelete            =>  delete reservation permanently
+

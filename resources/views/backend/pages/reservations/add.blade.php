@@ -93,7 +93,7 @@
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
 
                                         @for ($i = 1; $i <= count($slots); $i++)
-                                            @if ($today_reservation_slots == $slots[$i]['slot_start_time'])
+                                            @if ($todayReservationSlots == $slots[$i]['slot_start_time'])
                                                 <option value="{{ $slots[$i]['slot_start_time'] }}" disabled
                                                     style="background:gainsboro"> {{ $slots[$i]['slot_start_time'] }} -
                                                     {{ $slots[$i]['slot_end_time'] }}</option>

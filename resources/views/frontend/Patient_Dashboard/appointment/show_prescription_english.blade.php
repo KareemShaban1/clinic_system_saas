@@ -4,7 +4,7 @@
     <head>
     
 
-  <title>{{trans('drugs_trans.Prescription')}}</title>
+  <title>{{trans('frontend/drugs_trans.Prescription')}}</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
 <style>
@@ -148,27 +148,27 @@ table td{
                     <header class="row">
                       <div class=" info">
                         <div  >
-                          <p >{{trans('drugs_trans.Doctor')}} : {{$settings['doctor_name']}}</p>
+                          <p >{{trans('frontend/drugs_trans.Doctor')}} : {{$settings['doctor_name']}}</p>
                         </div>
                   
                         <div >
-                          <p >{{trans('drugs_trans.Clinic_Name')}} : {{$settings['clinic_name']}} </p>
-                          <p >{{trans('drugs_trans.Clinic_Address')}}  : {{$settings['clinic_address']}} </p>
+                          <p >{{trans('frontend/drugs_trans.Clinic_Name')}} : {{$settings['clinic_name']}} </p>
+                          <p >{{trans('frontend/drugs_trans.Clinic_Address')}}  : {{$settings['clinic_address']}} </p>
                         </div>
                         
                   
                       </div>
                       <div class="row datetime">
                         <div class="column">
-                          <p>{{trans('drugs_trans.Date')}} : {{Carbon\Carbon::now('Egypt')->format('Y-m-d')}}</p>
+                          <p>{{trans('frontend/drugs_trans.Date')}} : {{Carbon\Carbon::now('Egypt')->format('Y-m-d')}}</p>
                         </div>
                         <div class="column">
-                          <p>{{trans('drugs_trans.Time')}} : {{Carbon\Carbon::now('Egypt')->format('g:i A')}}</p>
+                          <p>{{trans('frontend/drugs_trans.Time')}} : {{Carbon\Carbon::now('Egypt')->format('g:i A')}}</p>
 
                         </div>
                         
                       </div>
-                      <p style="margin-left:15px;font-size:18px;font-weight:bold;">{{trans('drugs_trans.Patient_Name')}} : {{$reservation->patient->name}}</p>    
+                      <p style="margin-left:15px;font-size:18px;font-weight:bold;">{{trans('frontend/drugs_trans.Patient_Name')}} : {{$reservation->patient->name}}</p>    
 
                       
 
@@ -178,10 +178,10 @@ table td{
                     <table>
                     <thead>
                               <tr>
-                                  <th scope="col">{{trans('drugs_trans.Drug_Name')}}</th>
-                                  <th scope="col">{{trans('drugs_trans.Drug_Dose')}}</th>
-                                  <th scope="col">{{trans('drugs_trans.Quantity')}}</th>
-                                  <th scope="col">{{trans('drugs_trans.Notes')}}</th>
+                                  <th scope="col">{{trans('frontend/drugs_trans.Drug_Name')}}</th>
+                                  <th scope="col">{{trans('frontend/drugs_trans.Drug_Dose')}}</th>
+                                  <th scope="col">{{trans('frontend/drugs_trans.Quantity')}}</th>
+                                  <th scope="col">{{trans('frontend/drugs_trans.Notes')}}</th>
                                   
                               </tr>
                           </thead>

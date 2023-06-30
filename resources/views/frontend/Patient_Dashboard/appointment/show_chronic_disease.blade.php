@@ -106,13 +106,13 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0">{{ trans('rays_trans.Rays') }}</h4>
+            <h4 class="mb-0">{{ trans('frontend/chronic_diseases_trans.Chronic_Disease') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="{{ Route('backend.reservations.index') }}"
-                        class="default-color">{{ trans('reservations_trans.Reservations') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('rays_trans.Rays') }}</li>
+                <li class="breadcrumb-item"><a href=""
+                        class="default-color">{{ trans('frontend/chronic_diseases_trans.Reservations') }}</a></li>
+                <li class="breadcrumb-item active">{{ trans('frontend/chronic_diseases_trans.Chronic_Disease') }}</li>
             </ol>
         </div>
     </div>
@@ -131,65 +131,69 @@
 
 
                     @forelse ($chronic_diseases as $chronic_disease)
-                    <h5 class="card-header">
-                        <span class="badge badge-rounded badge-info ">
-                            <h5 class="text-white"> {{ trans('chronic_diseases_trans.Chronic_Disease_Number') }}
-                                {{ $loop->index + 1 }} </h5>
-                        </span>
-                    </h5>
-                    <div class="card-body">
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500">{{ trans('chronic_diseases_trans.Id') }} <span
-                                        class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
+                        <h5 class="card-header">
+                            <span class="badge badge-rounded badge-info ">
+                                <h5 class="text-white">
+                                    {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Number') }}
+                                    {{ $loop->index + 1 }} </h5>
+                            </span>
+                        </h5>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                    <h5 class="f-w-500">{{ trans('frontend/chronic_diseases_trans.Id') }} <span
+                                            class="{{ trans('frontend/chronic_diseases_trans.pull') }}">:</span></h5>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                    <span>{{ $chronic_disease->reservation_id }}</span>
+                                </div>
                             </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                <span>{{ $chronic_disease->reservation_id }}</span>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                    <h5 class="f-w-500">
+                                        {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Name') }}<span
+                                            class="{{ trans('frontend/chronic_diseases_trans.pull') }}">:</span></h5>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                    <span>{{ $chronic_disease->title }}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Name') }}<span
-                                        class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                            </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                <span>{{ $chronic_disease->title }}</span>
-                            </div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Measure') }} <span
-                                        class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                    <h5 class="f-w-500">
+                                        {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Measure') }} <span
+                                            class="{{ trans('frontend/chronic_diseases_trans.pull') }}">:</span></h5>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                    <span>{{ $chronic_disease->measure }}</span>
+                                </div>
                             </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                <span>{{ $chronic_disease->measure }}</span>
+
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                    <h5 class="f-w-500">
+                                        {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Date') }} <span
+                                            class="{{ trans('frontend/chronic_diseases_trans.pull') }}">:</span></h5>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{ $chronic_disease->date }}</span>
+                                </div>
                             </div>
+
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                    <h5 class="f-w-500"> {{ trans('frontend/chronic_diseases_trans.Notes') }} <span
+                                            class="{{ trans('frontend/chronic_diseases_trans.pull') }}">:</span></h5>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                    <span>{{ $chronic_disease->notes }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Other rows omitted for brevity -->
+
                         </div>
-
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Date') }} <span
-                                        class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                            </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{ $chronic_disease->date }}</span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Notes') }} <span
-                                        class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                            </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                <span>{{ $chronic_disease->notes }}</span>
-                            </div>
-                        </div>
-
-                        <!-- Other rows omitted for brevity -->
-
-                    </div>
-                @empty
+                    @empty
                         <div>لا توجد أشعة لهذا الحجز بعد </div>
                     @endforelse
                 </div>
@@ -203,119 +207,3 @@
 @endsection
 @section('js')
 @endsection
-
-
-
-{{-- @extends('frontend.layouts.master')
-
-@section('css')
-@endsection
-
-@section('title')
-    {{ trans('chronic_diseases_trans.Chronic_Disease') }}
-@stop
-
-@section('page-header')
-    <!-- breadcrumb -->
-    <div class="page-title">
-        <div class="row">
-            <div class="col-sm-6">
-                <h4 class="mb-0">{{ trans('chronic_diseases_trans.Chronic_Disease') }}</h4>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
-                    <li class="breadcrumb-item"><a href="#"
-                            class="default-color">{{ trans('chronic_diseases_trans.Show_Chronic_Disease') }}</a></li>
-                    <li class="breadcrumb-item active">{{ trans('chronic_diseases_trans.Chronic_Diseases') }}</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <!-- breadcrumb -->
-@endsection
-
-@section('content')
-    <!-- row -->
-    <div class="row">
-        <div class="col-md-12 mb-30">
-            <div class="card card-statistics h-100">
-                <div class="card-body">
-                    <div class="my-post-content pt-4">
-                        @forelse ($chronic_diseases as $chronic_disease)
-                            <h5 class="card-header">
-                                <span class="badge badge-rounded badge-info ">
-                                    <h5 class="text-white"> {{ trans('chronic_diseases_trans.Chronic_Disease_Number') }}
-                                        {{ $loop->index + 1 }} </h5>
-                                </span>
-                            </h5>
-                            <div class="card-body">
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                        <h5 class="f-w-500">{{ trans('chronic_diseases_trans.Id') }} <span
-                                                class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                        <span>{{ $chronic_disease->reservation_id }}</span>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                        <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Name') }}<span
-                                                class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                        <span>{{ $chronic_disease->title }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                        <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Measure') }} <span
-                                                class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                        <span>{{ $chronic_disease->measure }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                        <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Disease_Date') }} <span
-                                                class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{ $chronic_disease->date }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                        <h5 class="f-w-500"> {{ trans('chronic_diseases_trans.Notes') }} <span
-                                                class="{{ trans('chronic_diseases_trans.pull') }}">:</span></h5>
-                                    </div>
-                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                        <span>{{ $chronic_disease->notes }}</span>
-                                    </div>
-                                </div>
-
-                                <!-- Other rows omitted for brevity -->
-
-                            </div>
-                        @empty
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="alert alert-info">
-                                        {{ trans('chronic_diseases_trans.No_Data_Available') }}
-                                    </div>
-                                </div>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- row closed -->
-@endsection
-
-@section('js')
-@endsection --}}

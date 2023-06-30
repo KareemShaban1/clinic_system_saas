@@ -49,7 +49,8 @@ class RaysController extends Controller
 
             $data = $request->except('images');
             $image_path = $this->handleImageUpload($request, $this->ray);
-            $data['image'] = implode('|', $image_path);
+            // dd($image_path);
+            $data['image'] =  $image_path;
             $this->ray->create($data);
 
             return redirect()->route('backend.reservations.index')->with('success', 'Reservation added successfully');

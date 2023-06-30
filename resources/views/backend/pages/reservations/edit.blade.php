@@ -66,8 +66,8 @@
                                             class="text-danger">*</span></label>
                                     <select name="res_num" class="custom-select mr-sm-2"
                                         value="{{ old('res_num', $reservation->res_num) }}">
-                                        @for ($i = 1; $i <= $number_of_res; $i++)
-                                            @if ($today_reservation_res_num == $i)
+                                        @for ($i = 1; $i <= $numberOfRes; $i++)
+                                            @if ($reservationResNum == $i)
                                                 <option value="{{ $i }}" selected
                                                     style="background:gainsboro">{{ $i }}</option>
                                             @else
@@ -91,7 +91,7 @@
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
 
                                         @for ($i = 1; $i <= count($slots); $i++)
-                                            @if ($today_reservation_slots == $slots[$i]['slot_start_time'])
+                                            @if ($reservationSlot == $slots[$i]['slot_start_time'])
                                                 <option value="{{$slots[$i]['slot_start_time']}}" selected
                                                     style="background:gainsboro"> {{ $slots[$i]['slot_start_time'] }} -
                                                     {{ $slots[$i]['slot_end_time'] }}</option>

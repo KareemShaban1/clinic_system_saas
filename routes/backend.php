@@ -30,7 +30,7 @@ Route::group(
                 Route::get('/', 'index')->name('index');
                 Route::get('/show/{patient_id}', 'show')->name('show');
                 Route::get('/patient_card/{patient_id}', 'patient_card')->name('patient_card');
-                Route::get('/patient_pdf/{patient_id}', 'patient_pdf')->name('patient_pdf');
+                Route::get('/patient_pdf/{patient_id}', 'patientPdf')->name('patient_pdf');
                 Route::get('/add', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{patient_id}', 'edit')->name('edit');

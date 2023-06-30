@@ -36,14 +36,10 @@ Route::group([
             Route::get('/add', 'add')->name('add');
             Route::post('/store', 'store')->name('store');
             Route::get('/edit/{reservation_id}', 'edit')->name('edit');
-            Route::get('/rays_index', 'rays_index')->name('rays_index');
+            Route::get('/rays_index', 'rays_index')->name('patient_rays');
             Route::get('/patient_chronic_disease', 'patient_chronic_disease')->name('patient_chronic_disease');
 
-            // Route::post('/update/{reservation_id}','update')->name('update');
-            // Route::delete('/delete/{reservation_id}','destroy')->name('destroy');
-            // Route::get('/trash','trash')->name('trash');
-            // Route::put('/restore/{reservation_id}','restore')->name('restore');
-            // Route::delete('/force_delete/{reservation_id}','forceDelete')->name('forceDelete');
+
 
         }
     );

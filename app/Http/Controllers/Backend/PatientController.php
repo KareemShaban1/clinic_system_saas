@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\StorePatientRequest;
-use App\Http\Requests\Api\UpdatePatientRequest;
+use App\Http\Requests\Backend\StorePatientRequest;
+use App\Http\Requests\Backend\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Models\Reservation;
 use App\Models\Settings;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Traits\AuthorizeCheck;
+use Illuminate\Support\Facades\Hash;
 
 class PatientController extends Controller
 {
@@ -48,14 +49,13 @@ class PatientController extends Controller
         return view('backend.pages.patients.show', compact('patient'));
     }
 
-    public function patient_pdf($id)
+    public function patientPdf($id)
     {
         $patient = $this->patient->find($id);
 
         // get settings of the app from settings table
         $collection = $this->settings->select('key', 'value')->get();
         $settings = $collection->pluck('value', 'key');
-
 
         $data = [
             'patient'=>  $patient,
@@ -78,7 +78,6 @@ class PatientController extends Controller
     {
         $this->authorizeCheck('أضافة مريض');
 
-        // return pateint add view
         return view('backend.pages.patients.add');
     }
 
@@ -88,10 +87,17 @@ class PatientController extends Controller
 
         try {
             $request->validated();
+
             $data = $request->all();
+            
+            $data['password'] = Hash::make($request->password);
+            
             $this->patient->create($data);
+            
             return redirect()->route('backend.patients.index')->with('success', 'Patient added successfully');
+        
         } catch (\Exception $e) {
+
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
@@ -116,7 +122,6 @@ class PatientController extends Controller
 
             $data = $request->all();
 
-            // get patient based on patient_id
             $patient = $this->patient->findOrFail($id);
 
             $patient->update($data);
@@ -131,10 +136,9 @@ class PatientController extends Controller
     public function destroy($id)
     {
         $this->authorizeCheck('حذف مريض');
-        // get patient based on patient_id
+        
         $patient =$this->patient->findOrFail($id);
 
-        // delete selected patient
         $patient->delete();
 
         return redirect()->route('backend.patients.index');
@@ -144,7 +148,6 @@ class PatientController extends Controller
 
     public function trash()
     {
-        // get all deleted patients
         $patients = $this->patient->onlyTrashed()->get();
         return view('backend.pages.patients.trash', compact('patients'));
     }
@@ -153,10 +156,8 @@ class PatientController extends Controller
 
     public function restore($id)
     {
-        // get deleted patient based on patient_id
         $patients = $this->patient->onlyTrashed()->findOrFail($id);
 
-        // restore deleted patient
         $patients->restore();
 
         return redirect()->route('backend.patients.index');
@@ -165,10 +166,8 @@ class PatientController extends Controller
 
     public function forceDelete($id)
     {
-        // get deleted patient based on patient_id
         $patients = $this->patient->onlyTrashed()->findOrFail($id);
 
-        // delete deleted patient forever
         $patients->forceDelete();
 
         return redirect()->route('backend.patients.index');

@@ -30,13 +30,13 @@ class ChronicDiseasesController extends Controller
     {
         $reservation = $this->reservation->findOrFail($id);
 
-        return view('backend.pages.chronic_diseases.add', compact('reservation'));
+        return view('backend.pages.chronicDiseases.add', compact('reservation'));
     }
 
     public function store(StoreChronicDiseaseRequest $request)
     {
         $request->validated();
-
+        // dd($request->all());
         try {
             foreach ($request->title as $index => $title) {
                 $data = [
@@ -59,16 +59,16 @@ class ChronicDiseasesController extends Controller
     public function show($id)
     {
         $reservations = $this->reservation->findOrFail($id);
-        $chronicDiseases = $this->chronicDisease->where('reservation_id', $id)->get();
+        $chronic_diseases = $this->chronicDisease->where('reservation_id', $id)->get();
 
-        return view('backend.pages.chronic_diseases.show', compact('chronicDiseases', 'reservations'));
+        return view('backend.pages.chronicDiseases.show', compact('chronic_diseases', 'reservations'));
     }
 
     public function edit($id)
     {
-        $chronicDisease = $this->chronicDisease->findOrFail($id);
+        $chronic_disease = $this->chronicDisease->findOrFail($id);
 
-        return view('backend.pages.chronic_diseases.edit', compact('chronicDisease'));
+        return view('backend.pages.chronicDiseases.edit', compact('chronic_disease'));
     }
 
     public function update(UpdateChronicDiseaseRequest $request, $id)

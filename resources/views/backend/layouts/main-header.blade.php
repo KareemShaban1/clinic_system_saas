@@ -11,16 +11,17 @@
                     <a id="button-toggle" class="button-toggle-nav inline-block ml-20 pull-left"
                         href="javascript:void(0);"><i class="zmdi zmdi-menu ti-align-right"></i></a>
                 </li>
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <div class="search">
                         <a class="search-btn not_click" href="javascript:void(0);"></a>
                         <div class="search-box not-click">
                             <input type="text" class="not-click form-control" placeholder="Search" value=""
                                 name="search">
-                            <button class="search-button" type="submit"> <i class="fa fa-search not-click"></i></button>
+                            <button class="search-button" type="submit"> <i
+                                    class="fa fa-search not-click"></i></button>
                         </div>
                     </div>
-                </li> --}}
+                </li>
             </ul>
             <!-- top bar right -->
             <ul class="nav navbar-nav ml-auto">
@@ -29,10 +30,10 @@
                         aria-haspopup="true" aria-expanded="false">
                         @if (App::getLocale() == 'ar')
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{ URL::asset('backend/assets/images/flags/EG.png') }}" alt="">
+                            <img src="{{ asset('backend/assets/images/flags/EG.png') }}" alt="">
                         @else
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{ URL::asset('backend/assets/images/flags/US.png') }}" alt="">
+                            <img src="{{ asset('backend/assets/images/flags/US.png') }}" alt="">
                         @endif
                     </button>
                     <div class="dropdown-menu">
@@ -53,7 +54,7 @@
 
                     <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ URL::asset('backend/assets/images/user.png') }}" alt="avatar">
+                        <img src="{{ asset('backend/assets/images/user.png') }}" alt="avatar">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">

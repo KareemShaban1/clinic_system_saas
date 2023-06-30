@@ -25,7 +25,6 @@ class StorePatientRequest extends FormRequest
     {
         return [
             //
-            
                 'name' => 'required',
                 'age' => 'nullable|max:3|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'address' => 'required',
@@ -33,8 +32,6 @@ class StorePatientRequest extends FormRequest
                 'phone' => 'required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'email'=>'nullable|unique:patients,email',
                 'blood_group'=>'required'
-            
-            
         ];
     }
 }

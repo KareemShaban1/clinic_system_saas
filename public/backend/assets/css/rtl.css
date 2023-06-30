@@ -569,10 +569,10 @@ pre code {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  align-items: center;
   margin-left: -15px;
-  margin-right: -15px; }
+  margin-right: -15px;
+ }
 
 .no-gutters {
   margin-left: 0;
@@ -21132,7 +21132,10 @@ ul.list-unstyled li {
   transition: all 0.9s ease;
   width: 100%; }
   .content-wrapper .page-title {
-    padding: 0px; }
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: antiquewhite;
+}
   .content-wrapper .breadcrumb {
     background: transparent;
     margin-bottom: 1.4rem; }

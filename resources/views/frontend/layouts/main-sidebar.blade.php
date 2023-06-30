@@ -39,9 +39,8 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="rays-menu" class="collapse" data-parent="#sidebarnav">
-                            {{-- <li> <a href="{{Route('frontend.appointment.add')}}">{{ trans('frontend/sidebar_trans.Add_Ray_Analysis') }}</a>
-                            </li> --}}
-                            <li> <a href="{{Route('frontend.appointment.rays_index')}}">{{ trans('frontend/sidebar_trans.All_Rays_Analysis') }}</a>
+                            
+                            <li> <a href="{{Route('frontend.appointment.patient_rays')}}">{{ trans('frontend/sidebar_trans.All_Rays_Analysis') }}</a>
                             </li>
 
                         </ul>

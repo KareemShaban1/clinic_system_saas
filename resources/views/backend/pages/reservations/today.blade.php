@@ -191,11 +191,11 @@
                                  {{trans('backend/reservations_trans.Add')}}
                              </a>
                              
-                             <a href="{{Route('backend.drugs.english_drug_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
+                             <a href="{{Route('backend.drugs.english_prescription_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
                                  {{trans('backend/reservations_trans.English')}}
                              </a>
 
-                             <a href="{{Route('backend.drugs.drug_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
+                             <a href="{{Route('backend.drugs.arabic_prescription_pdf',$reservation->reservation_id)}}" class="btn btn-info btn-sm">
                                  {{trans('backend/reservations_trans.Show')}}
                              </a>
                             </div>

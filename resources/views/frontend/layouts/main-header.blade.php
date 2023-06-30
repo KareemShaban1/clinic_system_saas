@@ -30,13 +30,13 @@
                         aria-haspopup="true" aria-expanded="false">
                         @if (App::getLocale() == 'ar')
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
+                            <img src="{{ URL::asset('backend/assets/images/flags/EG.png') }}" alt="">
                         @elseif (App::getLocale() == 'it')
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{ URL::asset('assets/images/flags/IT.png') }}" alt="">
+                            <img src="{{ URL::asset('backend/assets/images/flags/IT.png') }}" alt="">
                         @else
                             {{ LaravelLocalization::getCurrentLocaleName() }}
-                            <img src="{{ URL::asset('assets/images/flags/US.png') }}" alt="">
+                            <img src="{{ URL::asset('backend/assets/images/flags/US.png') }}" alt="">
                         @endif
                     </button>
                     <div class="dropdown-menu">
@@ -57,7 +57,7 @@
 
                     <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ URL::asset('assets/images/user.png') }}" alt="avatar">
+                        <img src="{{ URL::asset('backend/assets/images/user.png') }}" alt="avatar">
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
