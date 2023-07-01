@@ -1,9 +1,10 @@
-<?php 
+<?php
+
 
 return [
 
           'Choose'=>'أختار من القائمة',
- 
+
           'Reservations'=>'الحجوزات',
           'All_Reservations'=>'كل الحجوزات',
           'Today_Reservations'=>'حجوزات اليوم',
@@ -30,6 +31,7 @@ return [
           'Waiting'=>'أنتظار',
           'Entered'=>'دخول',
           'Finished'=>'أنتهاء',
+          'Cancelled'=>'تم الألغاء',
           'Add_Rays'=>'أضافة أشاعة',
           'Rays' =>'الأشعة / التحاليل',
           'Show'=>'عرض',
@@ -40,7 +42,7 @@ return [
           'Cost'=>'المبلغ',
           'Reservation_Date'=>'تاريخ الكشف',
           'Add'=>'أضافة',
- 
+
 
           'Number_of_Reservations'=>'عدد الكشوفات',
           'Edit'=>'تعديل',
@@ -67,7 +69,7 @@ return [
           'Rays_Date'=>'تاريخ الأشعة / التحليل',
           'Rays_Image'=>'صورة الأشعة / التحليل',
           'Rays_Number'=>'رقم الأشعة / التحليل',
-          
+
           'Total'=>'الأجمالى',
           'English'=>'English',
           'Arabic'=>'عربى',
@@ -79,13 +81,11 @@ return [
           'Duration'=>'المدة',
           'Total_Reservation'=>'أجمالى الكشوفات',
 
-          'Status'=>'حالة الكشف',
-          'Active'=>' نشط',
-          'Inactive'=>'غير نشط',
+          'Acceptance'=>'حالة الكشف',
+          'Approved'=>' موافقة',
+          'Not_Approved'=>'رفض ',
 
 
 
 
 ];
-
-?>

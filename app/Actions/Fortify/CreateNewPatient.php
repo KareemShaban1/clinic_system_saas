@@ -42,7 +42,7 @@ class CreateNewPatient implements CreatesNewUsers
         ])->validate();
 
         return
-         Patient::create([
+            Patient::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),

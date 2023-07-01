@@ -26,7 +26,7 @@ return new class extends Migration
             $table->date('res_date');
             $table->string('month');
             $table->enum('res_status',['waiting','entered','finished','cancelled'])->default('waiting');
-            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->enum('acceptance',['approved','not_approved'])->default('not_approved');
             $table->softDeletes();
             $table->timestamps();
             

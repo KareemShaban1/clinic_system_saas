@@ -53,8 +53,11 @@ NOTE:
         }
     });
 
+    var date = new Date();
+    date.setDate(date.getDate()-1);
 
     $('#datepicker-action').datepicker({
+        startDate: date,
         todayBtn: "linked",
         clearBtn: true,
         autoclose: true,

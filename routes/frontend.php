@@ -27,7 +27,7 @@ Route::group([
         ],
         function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/get_res_slot_number', 'get_res_slot_number')->name('get_res_slot_number');
+            Route::get('/get_res_slot_number', 'getResNumberOrSlot')->name('get_res_slot_number');
             Route::get('/show_ray/{reservation_id}', 'show_ray')->name('show_ray');
             Route::get('/show_chronic_disease/{reservation_id}', 'show_chronic_disease')->name('show_chronic_disease');
             Route::get('/show_glasses_distance/{reservation_id}', 'show_glasses_distance')->name('show_glasses_distance');
@@ -49,5 +49,5 @@ Route::group([
 
     Route::get('/patient/dashboard', [HomeController::class, 'dashboard'])->name('patient.dashboard');
 
-    Route::get('/get_reservation_slots', [HomeController::class, 'get_reservation_slots']);
+    // Route::get('/get_reservation_slots', [AppointmentsController::class, 'getResNumberOrSlot']);
 });

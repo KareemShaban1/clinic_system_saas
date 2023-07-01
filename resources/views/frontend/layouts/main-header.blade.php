@@ -52,6 +52,7 @@
                     <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>
                 </li>
 
+                <x-frontend.notification-menu count="7" />
 
                 <li class="nav-item dropdown mr-30">
 

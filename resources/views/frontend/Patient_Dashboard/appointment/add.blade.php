@@ -227,7 +227,7 @@
 
 @section('js')
 
-<script>
+{{-- <script>
     $(document).ready(function() {
 
         // $('input[name="res_date"]').on('change', function() {
@@ -303,6 +303,63 @@
 
 
     });
-</script>
+</script> --}}
+<script>
+    $(document).ready(function() {
 
+        $('#datepicker-action').change(function() {
+            var selectedDate = $(this).val();
+
+            // Perform an AJAX request to fetch the updated number of reservations
+            $.ajax({
+                url: "{{ URL::to('/appointment/get_res_slot_number') }}", // Replace with the actual URL to handle the AJAX request
+                method: 'GET',
+                data: {
+                    res_date: selectedDate,
+                },
+                success: function(response) {
+
+                    // Clear the existing options
+                    $('select[name="res_num"]').empty();
+                    // Add the updated options
+                    for (var i = 1; i <= response.reservationsCount; i++) {
+                        console.log(response.todayReservationResNum.includes(i));
+                        if (response.todayReservationResNum.includes(i)) {
+                            var option = '<option value="' + i +
+                                '" disabled style="background:gainsboro">' + i +
+                                '</option>';
+                        } else {
+                            var option = '<option value="' + i + '">' + i + '</option>';
+                        }
+                        $('select[name="res_num"]').append(option);
+                    }
+
+
+
+                    // Clear the current options
+                    $('#slot-select').empty();
+                    // Add the new options based on the response
+                    $.each(response.slots, function(index, slot) {
+                        var option = $('<option>').val(slot.slot_start_time).text(
+                            slot.slot_start_time + ' - ' + slot.slot_end_time);
+
+                        if (response.today_reservation_slots.includes(slot
+                                .slot_start_time)) {
+                            option.attr('disabled',
+                                true); // Disable the option if reserved
+                            option.css('background', 'gainsboro');
+                        }
+                        $('#slot-select').append(option);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle the error response
+                    console.log(error);
+                }
+            });
+        });
+
+
+    });
+</script>
 @endsection

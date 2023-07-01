@@ -49,7 +49,6 @@ class RaysController extends Controller
 
             $data = $request->except('images');
             $image_path = $this->handleImageUpload($request, $this->ray);
-            // dd($image_path);
             $data['image'] =  $image_path;
             $this->ray->create($data);
 

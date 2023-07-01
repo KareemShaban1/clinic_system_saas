@@ -41,7 +41,7 @@
 
                 <div class="dash-div row">
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-30">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="clearfix">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-30">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="clearfix">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-30">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="clearfix">
@@ -113,9 +113,7 @@
                         </div>
                     </div>
 
-
-
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-30">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="clearfix">
@@ -138,8 +136,8 @@
                             </div>
                         </div>
                     </div>
-
-
+                </div>    
+                <div class="dash-div row">
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
@@ -163,7 +161,6 @@
                             </div>
                         </div>
                     </div>
-
 
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
@@ -190,8 +187,6 @@
                             </div>
                         </div>
                     </div>
-
-
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
                         <div class="card card-statistics h-100">
@@ -247,7 +242,7 @@
 
                 <div class="row card-body p-2">
 
-                    <div style="height: 400px;" class="col-9 col-xl-9 col-md-12 col-sm-12 mb-30">
+                    <div  class="col-9 col-xl-9 col-md-12 col-sm-12 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="tab nav-border" style="position: relative;">
@@ -704,7 +699,6 @@
                 </div>
 
 
-                {{-- @livewire('calendar')   --}}
 
             </div>
         </div>

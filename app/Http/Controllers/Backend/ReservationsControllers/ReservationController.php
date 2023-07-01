@@ -20,6 +20,7 @@ use App\Models\ {
 use App\Http\Controllers\Controller;
 use App\Http\Traits\TimeSlotsTrait;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ReservationController extends Controller
@@ -63,10 +64,27 @@ class ReservationController extends Controller
     public function index()
     {
         $reservations = $this->reservation->get();
-        $settings = $this->reservationControl->pluck('value', 'key');
+        $reservation_settings = $this->reservationControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 
-        return view('backend.pages.reservations.index', compact('reservations', 'settings', 'clinic_type'));
+        return view('backend.pages.reservations.index', 
+        compact('reservations', 'reservation_settings', 'clinic_type'));
+    }
+
+
+
+    public function todayReservations()
+    {
+        $currentDate = Carbon::now()->format('Y-m-d');
+        $reservations = $this->reservation->whereDate('res_date', Carbon::now())->get();
+        $reservation_settings = $this->reservationControl->pluck('value', 'key');
+        $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
+
+
+        return view(
+            'backend.pages.reservations.today',
+            compact('reservations', 'reservation_settings', 'currentDate','clinic_type')
+        );
     }
 
     public function todayReservationReport()
@@ -84,55 +102,32 @@ class ReservationController extends Controller
         return $pdf->stream('Report.pdf');
     }
 
-    public function todayReservations()
-    {
-        $reservations = $this->reservation->whereDate('res_date', Carbon::now())->get();
-        $settings = $this->reservationControl->pluck('value', 'key');
-
-        return view('backend.pages.reservations.today', compact('reservations', 'settings'));
-    }
-
     // ...
 
     public function add($id)
     {
-        $slots = [];
-        $reservationSlots = null;
-        $todayReservationSlots = null;
-        $todayReservationResNum = null;
-        $numberOfRes = null;
-
-        $settings = $this->reservationControl->pluck('value', 'key');;
+        $settings = $this->reservationControl->pluck('value', 'key');
+        ;
 
         $patient = $this->patient->findOrFail($id);
 
         $currentDate = Carbon::now('Egypt')->addHour()->format('Y-m-d');
 
-        // if system use reservation numbers not slots
-        if ($settings['reservation_slots'] == 0) {
-            $todayReservationResNum = $this->reservation->where('res_date', $currentDate)->value('res_num');
-            $numberOfRes = $this->numberOfReservations->where('reservation_date', $currentDate)->value('num_of_reservations');
-            if ($numberOfRes === null) {
-                return redirect()->route('backend.num_of_reservations.add');
-            }
-        }
-        // if system use reservation slots not numbers
-        if ($settings['reservation_slots'] == 1) {
-            $todayReservationSlots = $this->reservation->where('res_date', $currentDate)->value('slot');
-            $reservationSlots = $this->reservationSlots->where('date', $currentDate)->first();
-            if ($reservationSlots === null) {
-                return redirect()->route('backend.reservation_slots.add');
-            }
-            $slots = $this->getTimeSlot($reservationSlots->duration, $reservationSlots->start_time, $reservationSlots->end_time);
-        }
 
-        return view('backend.pages.reservations.add', compact('patient', 'reservation', 'numberOfRes', 'todayReservationSlots', 'todayReservationResNum', 'slots', 'settings'));
+        return view(
+            'backend.pages.reservations.add',
+            compact(
+                'patient',
+                'settings'
+            )
+        );
     }
 
     public function store(StoreReservationRequest $request)
     {
         try {
-            $data = $request->validated();
+            $request->validated();
+            $data = $request->all();
             $data['month'] = substr($request->res_date, 5, 7 - 5);
             $this->reservation->create($data);
 
@@ -140,25 +135,6 @@ class ReservationController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
-    }
-
-    public function reservationStatus($id, $res_status)
-    {
-        $reservation = $this->reservation->findOrFail($id);
-        $reservation->res_status = $res_status;
-        $reservation->save();
-
-        return redirect()->route('backend.reservations.index');
-    }
-
-
-    public function paymentStatus($id, $payment)
-    {
-        $reservation = $this->reservation->findOrFail($id);
-        $reservation->payment = $payment;
-        $reservation->save();
-
-        return redirect()->route('backend.reservations.index');
     }
 
     public function show($id)
@@ -191,11 +167,16 @@ class ReservationController extends Controller
 
         $reservationSlots = ReservationSlots::where('date', $reservation->res_date)->first();
 
-        // dd($reservation,$reservationSlot ,$reservationSlots );
         $slots = $reservationSlots
         ? $this->getTimeSlot($reservationSlots->duration, $reservationSlots->start_time, $reservationSlots->end_time)
         : [];
 
+        if($reservation->res_num) {
+            $reservationType = 'reservation_number';
+        }
+        if($reservation->slot) {
+            $reservationType = 'slot';
+        }
         return view(
             'backend.pages.reservations.edit',
             compact(
@@ -204,10 +185,127 @@ class ReservationController extends Controller
                 'reservationResNum',
                 'settings',
                 'slots',
-                'reservationSlot'
+                'reservationSlot',
+                'reservationType'
             )
         );
     }
 
 
+    public function update(UpdateReservationRequest $request, $id)
+    {
+        try {
+            $reservation = $this->reservation->findOrFail($id);
+            $reservation->fill($request->validated());
+            $reservation->save();
+
+            return redirect()->route('backend.reservations.index')->with('success', 'Reservation updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
+    }
+
+    public function destroy($id)
+    {
+        $reservation = $this->reservation->findOrFail($id);
+        $reservation->delete();
+
+        return redirect()->route('backend.reservations.index');
+    }
+
+    public function trash()
+    {
+        $reservations = $this->reservation->onlyTrashed()->get();
+
+        return view('backend.pages.reservations.trash', compact('reservations'));
+    }
+
+    public function restore($id)
+    {
+        $reservation = $this->reservation->onlyTrashed()->findOrFail($id);
+        $reservation->restore();
+
+        return redirect()->route('backend.reservations.index');
+    }
+
+    public function forceDelete($id)
+    {
+        $reservation = $this->reservation->onlyTrashed()->findOrFail($id);
+        $reservation->forceDelete();
+
+        return redirect()->route('backend.reservations.index');
+    }
+
+
+
+    public function getResNumberOrSlotAdd(Request $request)
+    {
+
+        $res_date =  $request->res_date;
+
+        // if system use reservation numbers not slots
+        $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
+            return intval($item);
+        })->toArray();
+        $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+
+
+        // if system use reservation slots not numbers
+        $reservation_slots = Reservation::where('res_date', $res_date)
+        ->where('slot', '<>', 'null')->pluck('slot')->toArray();
+        $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+        $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
+
+
+        // Create an associative array or Laravel collection with the values
+        $data = [
+            'reservationsCount' => $number_of_res,
+            'todayReservationResNum' => $reservation_res_num,
+            'slots' => $slots,
+            'number_of_slot' => $number_of_slot,
+            'today_reservation_slots' =>  $reservation_slots
+        ];
+
+        // Return the data as JSON response
+        return response()->json($data);
+
+    }
+
+    public function getResNumberOrSlotEdit(Request $request)
+    {
+
+        $res_date =  $request->res_date;
+        $res_id = $request->res_id;
+
+        $reservation = Reservation::findOrFail($res_id);
+
+        // if system use reservation numbers not slots
+        $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
+            return intval($item);
+        })->toArray();
+        $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+
+
+        // if system use reservation slots not numbers
+        $reservation_slots = Reservation::where('res_date', $res_date)
+        ->where('slot', '<>', 'null')->pluck('slot')->toArray();
+        $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+        $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
+
+
+        // Create an associative array or Laravel collection with the values
+        $data = [
+            'reservation'=>$reservation,
+            'reservationsCount' => $number_of_res,
+            'todayReservationResNum' => $reservation_res_num,
+            'slots' => $slots,
+            'number_of_slot' => $number_of_slot,
+            'today_reservation_slots' =>  $reservation_slots
+        ];
+
+        // Return the data as JSON response
+        return response()->json($data);
+
+    }
+    
 }

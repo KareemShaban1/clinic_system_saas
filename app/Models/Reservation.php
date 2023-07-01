@@ -30,13 +30,13 @@ class Reservation extends Model
         'payment',
         'res_date',
         'res_status',
-        'status',
+        'acceptance',
         'month',
         'slot'
     ];
     
 
-    // Inverse of one-to-many (One Resrvation belongs to one Patient)
+    // Inverse of one-to-many (One Reservation belongs to one Patient)
     // belongTo() come with one to one relationship 
     // every reservation belong to one patient 
     public function patient()

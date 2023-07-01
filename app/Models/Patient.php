@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class Patient extends User
 {
-    use HasFactory;
-    use SoftDeletes;
-
+    use HasFactory , Notifiable  , HasRoles , SoftDeletes;
 
     protected $table = 'patients';
 

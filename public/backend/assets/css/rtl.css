@@ -569,10 +569,11 @@ pre code {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  margin-left: -15px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   margin-right: -15px;
- }
+  margin-left: -15px; 
+}
 
 .no-gutters {
   margin-left: 0;
@@ -9664,6 +9665,7 @@ span.CodeMirror-selectedtext {
   overflow: hidden; }
 
 .note-editor.note-frame .note-editing-area .note-editable {
+  height: 100px;
   padding: 10px;
   overflow: auto;
   color: #000;
@@ -15695,7 +15697,6 @@ button.toast-close-button {
 .datepicker table tr td.active:hover:active,
 .datepicker table tr td.active.disabled:active,
 .datepicker table tr td.active.disabled:hover:active,
-.datepicker table tr td.active.active,
 .datepicker table tr td.active:hover.active,
 .datepicker table tr td.active.disabled.active,
 .datepicker table tr td.active.disabled:hover.active,
@@ -15707,7 +15708,10 @@ button.toast-close-button {
 .datepicker table tr td.active:hover[disabled],
 .datepicker table tr td.active.disabled[disabled],
 .datepicker table tr td.active.disabled:hover[disabled] {
-  background-color: #0044cc; }
+  background-color: #0044cc; 
+}
+.datepicker table tr td.active.active,
+
 
 .datepicker table tr td.active:active,
 .datepicker table tr td.active:hover:active,
@@ -22897,7 +22901,7 @@ select.form-control-sm:not([size]):not([multiple]) {
   height: 35px; }
 
 .datepicker table tr td.today {
-  background: #84ba3f;
+  background: #969b91;
   color: #ffffff; }
   .datepicker table tr td.today:hover {
     background: #84ba3f;

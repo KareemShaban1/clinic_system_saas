@@ -14,7 +14,7 @@ Route::group(
             'localeCookieRedirect',
             'localizationRedirect',
             'localeViewPath']
-          ],
+    ],
     function () {
 
         // Dashboard Part
@@ -63,7 +63,24 @@ Route::group(
                 Route::get('/trash', 'trash')->name('trash');
                 Route::put('/restore/{reservation_id}', 'restore')->name('restore');
                 Route::delete('/force_delete/{reservation_id}', 'forceDelete')->name('forceDelete');
+                Route::get('/get_res_slot_number_add', 'getResNumberOrSlotAdd');
+                Route::get('/get_res_slot_number_edit', 'getResNumberOrSlotEdit');
 
+
+            }
+        );
+
+        Route::group(
+            [
+            'prefix'=>'/reservations_options',
+            'as'=>'reservations_options.',
+            'controller'=>'ReservationsControllers\ReservationOptionsController',],
+            function () {
+                Route::get('/status/{reservation_id}/{res_status}', 'reservationStatus')->name('reservation_status');
+                Route::get('/payment/{reservation_id}/{payment}', 'paymentStatus')->name('payment_status');
+                Route::get('/acceptance/{reservation_id}/{status}', 'ReservationAcceptance')->name('reservation_acceptance');
+
+                
             }
         );
 

@@ -18,9 +18,9 @@
         <!--=================================
  preloader -->
 
-        <div id="pre-loader">
+        {{-- <div id="pre-loader">
             <img src="{{ URL::asset('backend/assets/images/pre-loader/loader-01.svg') }}" alt="">
-        </div>
+        </div> --}}
 
         <!--=================================
  preloader -->
@@ -29,23 +29,20 @@
 
         @include('backend.layouts.main-sidebar')
 
-        <!--=================================
- Main content -->
+        <!--================================= Main content -->
         <!-- main-content -->
+
         <div class="content-wrapper">
 
             @yield('page-header')
 
             @yield('content')
 
-            <!--=================================
- wrapper -->
 
-            <!--=================================
- footer -->
 
-            @include('backend.layouts.footer')
-        </div><!-- main content wrapper end-->
+            {{-- @include('backend.layouts.footer') --}}
+            
+        </div>
     </div>
     </div>
     </div>

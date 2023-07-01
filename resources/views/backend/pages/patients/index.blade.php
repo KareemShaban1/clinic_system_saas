@@ -1,6 +1,12 @@
 @extends('backend.layouts.master')
 @section('css')
-
+<style>
+    tfoot input {
+        width: 70%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
 @section('title')
     {{trans('backend/patients_trans.Patients')}}
 @stop
@@ -96,6 +102,21 @@
                         </tr>
                         @endforeach
                     </tbody>
+
+                    {{-- <tfoot>
+                        <tr>
+                            <th>{{trans('backend/patients_trans.Id')}}</th>
+                            <th>{{trans('backend/patients_trans.Patient_Name')}}</th>
+                            <th>{{trans('backend/patients_trans.Number_of_Reservations')}}</th>
+                            <th>{{trans('backend/patients_trans.Phone')}}</th>
+                            <th>{{trans('backend/patients_trans.Address')}}</th>
+                            <th>{{trans('backend/patients_trans.Age')}}</th>
+                            <th>{{trans('backend/patients_trans.Add_Reservation')}}</th>
+                            <th>{{trans('backend/patients_trans.Add_Online_Reservation')}}</th>
+                            <th></th>
+                            <th>{{trans('backend/patients_trans.Control')}}</th>
+                        </tr>
+                    </tfoot> --}}
                 </table>
             </div>
         </div>

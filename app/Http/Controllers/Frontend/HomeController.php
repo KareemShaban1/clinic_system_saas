@@ -17,31 +17,31 @@ class HomeController extends Controller
     //
     public function index()
     {
-        
+
         return view('frontend.home');
     }
 
     public function dashboard()
     {
-          // get all reservations 
-          $all_reservations_count = Reservation::where('patient_id',Auth::user('patient')->patient_id)->count();
-          
-          $approved_reservations_count = Reservation::
-          where('patient_id',Auth::user('patient')->patient_id)
-          ->where('status','active')
-          ->count();
-          
-          $not_approved_reservations_count = Reservation::
-          where('patient_id',Auth::user('patient')->patient_id)
-          ->where('status','inactive')
-          ->count();
-          return view('frontend.Patient_Dashboard.dashboard.index',
-          compact(
-            'all_reservations_count',
-            'approved_reservations_count',
-            'not_approved_reservations_count'
-    ));
+        // get all reservations
+        $all_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)->count();
+
+        $approved_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)
+        ->where('acceptance', 'approved')
+        ->count();
+
+        $not_approved_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)
+        ->where('acceptance', 'not_approved')
+        ->count();
+        return view(
+            'frontend.Patient_Dashboard.dashboard.index',
+            compact(
+                'all_reservations_count',
+                'approved_reservations_count',
+                'not_approved_reservations_count'
+            )
+        );
     }
 
-    
+
 }

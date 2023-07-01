@@ -152,7 +152,7 @@ return [
     // 'home' => function(){
     //     //if you want to go to a specific route
     //     // return route('dashboard');
-      
+
     //     //or if you have a bunch of redirection options
     //     // if (Auth::user()->role() == "Admin") {
     //     //    return route('admin.dashboard.index');
@@ -160,7 +160,7 @@ return [
     //     // elseif (Auth::user()->power == "Doctor") {
     //     //     return route('admin.dashboard.index');
     //     //  }
-         
+
     //     // else{
     //     //    return route('guest.dashboard');
     //     // }
