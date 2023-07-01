@@ -312,7 +312,7 @@
                                                                 <td>{{ $patient->patient_id }}</td>
                                                                 <td>{{ $patient->name }}</td>
                                                                 <th>
-                                                                    {{ count(App\Models\Reservation::where('patient_id', $patient->patient_id)->get()) }}
+                                                                    {{ $patient->reservations_count }}
                                                                 </th>
                                                                 <td>{{ $patient->phone }}</td>
 
@@ -387,7 +387,7 @@
                                                             <th>{{ trans('backend/reservations_trans.Payment') }}</th>
                                                             <th>{{ trans('backend/reservations_trans.Reservation_Status') }}
                                                             </th>
-                                                            <th>{{ trans('backend/reservations_trans.Status') }}</th>
+                                                            <th>{{ trans('backend/reservations_trans.Acceptance') }}</th>
 
 
                                                             <th>{{ trans('backend/reservations_trans.Control') }}</th>

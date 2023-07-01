@@ -17,6 +17,7 @@ return [
 
   'Reservations'=>'الحجوزات',
   'Online_Reservations'=>'الحجوزات الأونلاين',
+  'Add_Online_Reservation'=>'أضافة حجز أونلاين',
   'All_Online_Reservations'=>' كل الحجوزات الأونلاين',
   'Add_Reservarion'=>'إضافة حجز',
   'Today_Reservations'=>'حجوزات اليوم',

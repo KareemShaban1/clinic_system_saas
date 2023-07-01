@@ -32,7 +32,8 @@ class DashboardController extends Controller
         // get reservation where res_date = current_date
         $today_res_count = Reservation::where('res_date', $current_date)->count();
 
-        $medicines_count = Medicine::count();
+        // $medicines_count = Medicine::count();
+        $medicines_count = 7759;
 
         $today_payment = Reservation::where('res_date', $current_date)->sum('cost');
 
@@ -40,9 +41,9 @@ class DashboardController extends Controller
 
         $month_payment = Reservation::where('month', $current_month)->where('payment', 'paid')->sum('cost');
 
-        $patients= Patient::latest()->take(5)->get();
-
-        $reservations = Reservation::latest()->take(5)->get();
+        $patients= Patient::select('patient_id','name','phone')->withCount('reservations')->latest()->take(5)->get();
+        
+        $reservations = Reservation::with('patient:patient_id,name')->latest()->take(5)->get();
 
         $online_reservations = OnlineReservation::latest()->take(5)->get();
 

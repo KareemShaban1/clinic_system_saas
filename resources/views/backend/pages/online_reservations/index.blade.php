@@ -4,11 +4,24 @@
 {{trans('backend/online_reservations_trans.All_Online_Reservations')}}@stop
 @endsection
 @section('page-header')
-    <!-- breadcrumb -->
-@section('PageTitle')
-{{trans('backend/online_reservations_trans.All_Online_Reservations')}}@stop
+<!-- breadcrumb -->
+<div class="page-title">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4 class="mb-0"> {{ trans('backend/online_reservations_trans.All_Online_Reservations') }}</h4>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
+                <li class="breadcrumb-item"><a href="#"
+                        class="default-color">{{ trans('backend/online_reservations_trans.All_Online_Reservations') }}</a></li>
+                <li class="breadcrumb-item active">{{ trans('backend/online_reservations_trans.Online_Reservations') }}</li>
+            </ol>
+        </div>
+    </div>
+</div>
 <!-- breadcrumb -->
 @endsection
+
 @section('content')
     <!-- row -->
     <div class="row">
@@ -36,7 +49,7 @@
                                         @foreach($online_reservations as $online_reservation)
                                             <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                         
+                                        
                                                 <td>{{$online_reservation->created_by}}</td>
                                                 <td>{{$online_reservation->patient->name}}</td>
                                                 <td>{{$online_reservation->topic}}</td>

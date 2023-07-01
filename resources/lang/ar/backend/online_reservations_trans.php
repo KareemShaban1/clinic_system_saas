@@ -1,9 +1,10 @@
-<?php 
+<?php
+
 
 return [
 
           'Choose'=>'أختار من القائمة',
- 
+
           'Reservations'=>'الحجوزات',
           'All_Reservations'=>'كل الحجوزات',
           'Today_Reservations'=>'حجوزات اليوم',
@@ -40,8 +41,8 @@ return [
           'Cost'=>'المبلغ',
           'Reservation_Date'=>'تاريخ الكشف',
           'Add'=>'أضافة',
- 
-         
+
+
           'Patient_Name'=>'أسم المريض',
           'User_Name'=>'أسم المستخدم',
           'Title'=>'عنوان الميتنج',
@@ -50,6 +51,7 @@ return [
           'Link'=>'الرابط',
           'Controls'=>'التحكم',
           'All_Online_Reservations'=>'كل الحجوزات الأونلاين',
+          'Online_Reservations'=>'الحجوزات الأونلاين',
 
           'Close'=>'ألغاء',
           'Submit'=>'تأكيد',
@@ -61,5 +63,3 @@ return [
 
 
 ];
-
-?>

@@ -100,9 +100,10 @@
                                 <div class="clearfix"></div>
                             </a>
                             <ul id="online_reservations-menu" class="collapse" data-parent="#sidebarnav">
-                                <li> <a href="{{ Route('backend.online_reservations.index') }}">
+                                <li> 
+                                    <a href="{{ Route('backend.online_reservations.index') }}">
                                         {{ trans('backend/sidebar_trans.All_Online_Reservations') }}</a> </li>
-
+                                        
                             </ul>
                         </li>
                     @endif

@@ -63,7 +63,7 @@ class ReservationController extends Controller
 
     public function index()
     {
-        $reservations = $this->reservation->get();
+        $reservations = $this->reservation->with('patient:patient_id,name')->get();
         $reservation_settings = $this->reservationControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 

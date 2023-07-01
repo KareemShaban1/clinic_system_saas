@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\ReservationsControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NumberOfReservations;
+use Illuminate\Validation\Rule;
 
 class NumberOfReservationsController extends Controller
 {
@@ -21,7 +22,7 @@ class NumberOfReservationsController extends Controller
     public function add()
     {
 
-        $num_of_reservations = new NumberOfReservations;
+        $num_of_reservations = new NumberOfReservations();
 
         return view('backend.pages.num_of_reservations.add', compact('num_of_reservations'));
     }
@@ -30,17 +31,16 @@ class NumberOfReservationsController extends Controller
     {
 
         $request->validate([
-            'reservation_date' => 'required',
-            'num_of_reservations' => 'required',
-
+        'reservation_date' => 'required',
+        'num_of_reservations' => 'required|integer',
+        'num_of_reservations' => Rule::unique('number_of_reservations')->where(function ($query) use ($request) {
+            return $query->where('reservation_date', $request->reservation_date);
+        }),
+        ],[
+            'num_of_reservations.unique'=>'عدد الحجوزات موجود بالنسبة لليوم'
         ]);
 
         $data = $request->all();
-
-        // $num_of_reservations = new NumberOfReservations;
-        // $num_of_reservations->reservation_date = $request->reservation_date;
-        // $num_of_reservations->num_of_reservations = $request->num_of_reservations;
-        // $num_of_reservations->save();
         NumberOfReservations::create($data);
 
         return redirect()->route('backend.patients.index');
@@ -59,8 +59,13 @@ class NumberOfReservationsController extends Controller
 
         $request->validate([
             'reservation_date' => 'required',
-            'num_of_reservations' => 'required',
-        ]);
+            'num_of_reservations' => 'required|integer',
+            'num_of_reservations' => Rule::unique('number_of_reservations')->where(function ($query) use ($request) {
+                return $query->where('reservation_date', $request->reservation_date);
+            }),
+            ],[
+                'num_of_reservations.unique'=>'عدد الحجوزات موجود بالنسبة لليوم'
+            ]);
 
         try {
             $data = $request->all();
@@ -72,7 +77,8 @@ class NumberOfReservationsController extends Controller
         }
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
     }
 }

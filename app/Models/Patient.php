@@ -11,7 +11,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Patient extends User
 {
-    use HasFactory , Notifiable  , HasRoles , SoftDeletes;
+    use HasFactory ;
+    use Notifiable  ;
+    use HasRoles ;
+    use SoftDeletes;
 
     protected $table = 'patients';
 
@@ -33,12 +36,12 @@ class Patient extends User
         'blood_group',
         'patient_code',
         'gender',
-        // 'image' 
+        // 'image'
     ];
 
     protected static function booted()
     {
-         
+
         // while creating order make order number take next available number
         static::creating(function (Patient $patient) {
             //20230001 - 20230002
@@ -48,11 +51,11 @@ class Patient extends User
 
     public static function getNextPatientCodeNumber()
     {
-        // SELECT MAX(number) FROM patients 
+        // SELECT MAX(number) FROM patients
         $year = Carbon::now()->year;
-        $number = Patient::whereYear('created_at' , $year)->max('patient_code');
+        $number = Patient::whereYear('created_at', $year)->max('patient_code');
 
-        
+
         // if there is number in this year add 1 to this number
         if ($number) {
             return $number + 1;
@@ -63,10 +66,10 @@ class Patient extends User
 
     public function reservations()
     {
-        // $this refer to patient object 
+        // $this refer to patient object
         // One-to-Many (One patient has many reservations)
         return $this->hasMany(
-            Reservation::class,    // Related model 
+            Reservation::class, // Related model
             'patient_id',           // FK in the related model
             'patient_id'            // PK in the current model
         );
@@ -79,5 +82,5 @@ class Patient extends User
             'patient_id',
         );
     }
-    
+
 }
