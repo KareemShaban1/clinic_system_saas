@@ -35,10 +35,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        },
-        "files": [
-            "App/Http/Traits/TimeSlotsTrait.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
