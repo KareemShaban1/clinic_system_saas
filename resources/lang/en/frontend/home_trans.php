@@ -2,14 +2,14 @@
 
 
 return [
-          'Home'=>'الرئيسية',
-          'Services'=>'الخدمات',
-          'About Us'=>'عنا',
-          'Doctors'=>'الأطباء',
+          'Home'=>'Home',
+          'Services'=>'Services',
+          'About Us'=>'About Us',
+          'Doctors'=>'Doctors',
           'Blogs'=>'Blogs',
-          'Register'=>'أنشاء حساب',
-          'LogIn'=>'تسجل دخول', 
-          'stay safe, stay healthy'=>'ابق آمنًا ، حافظ على صحتك',
+          'Register'=>'Register',
+          'Log In'=>'Log In', 
+          'stay safe, stay healthy'=>'Stay Safe, Stay Healthy',
           ''=>'',
           ''=>'',
           ''=>'',

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Events\AppointmentApproved;
+use App\Events\PatientMakeAppointment;
+use App\Events\PatientRegistration;
+use App\Listeners\PatientRegistrationNotification;
+use App\Listeners\SendMakeAppointmentNotification;
 use App\Listeners\SendNotificationToPatient;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,6 +26,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         AppointmentApproved::class=>[
             SendNotificationToPatient::class
+        ],
+        PatientRegistration::class=>[
+            PatientRegistrationNotification::class
+        ],
+        PatientMakeAppointment::class=>[
+            SendMakeAppointmentNotification::class
         ]
     ];
 

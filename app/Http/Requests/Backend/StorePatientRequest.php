@@ -31,7 +31,7 @@ class StorePatientRequest extends FormRequest
                 'address' => 'required',
                 'gender' => 'required',
                 'phone' => 'required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
-                'email'=>'nullable|unique',
+                'email'=>'nullable|unique:patients',
                 'blood_group'=>'required'
             
             

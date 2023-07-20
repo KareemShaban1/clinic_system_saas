@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Events\PatientRegistration;
 use App\Models\Patient;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Illuminate\Support\Facades\Hash;
@@ -41,8 +42,8 @@ class CreateNewPatient implements CreatesNewUsers
             'gender.required'=>'برجاء أدخال نوع المريض ',            
         ])->validate();
 
-        return
-            Patient::create([
+        // return
+        $patient =    Patient::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
@@ -52,6 +53,10 @@ class CreateNewPatient implements CreatesNewUsers
             'gender' => $input['gender'],
             'address' => $input['address'],
         ]);
+
+        event(new PatientRegistration($patient));
+
+        return $patient;
 
     }
 }

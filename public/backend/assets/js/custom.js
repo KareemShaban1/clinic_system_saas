@@ -413,8 +413,8 @@ NOTE: This file contains all scripts for the actual Template.
   *************************/
 
   POTENZA.summernoteeditor = function () {
-    if ($('#summernote').exists()) {
-      $('#summernote').summernote({
+    if ($('.summernote').exists()) {
+      $('.summernote').summernote({
         height: 100,                 // set editor height
         minHeight: null,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor

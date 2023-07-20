@@ -21,6 +21,8 @@
 <link href="{{ asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
+<link rel="stylesheet" href="{{ asset('backend/assets/css/summernote.min.css') }}">
+
 @livewireStyles
 
 <!--- Style css -->

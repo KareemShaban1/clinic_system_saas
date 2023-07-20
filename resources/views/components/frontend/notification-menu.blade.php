@@ -16,8 +16,7 @@
         </div>
         <div class="dropdown-divider"></div>
         @foreach ($notifications as $notification)
-            <a href="{{$notification->data['url']}}" class="dropdown-item 
-                @if($notification->unread() ) text-danger @endif">
+            <a href="{{$notification->data['url']}}?notification_id={{$notification->id}}" class="dropdown-item @if($notification->unread()) text-danger @endif">
                 {{$notification->data['body']}}
                 <small class="float-right text-muted time">{{$notification->created_at->diffForHumans()}}</small> </a>
         @endforeach

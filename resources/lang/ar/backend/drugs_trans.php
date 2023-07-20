@@ -4,6 +4,12 @@ return [
           
           'Prescription'=>'الروشتة',
           'Add_Prescription'=>'أضافة روشتة',
+          'Drugs'=>'الأدوية',
+          'Prescription_Image'=>'صورة الروشتة',
+          'Reservation_Id'=>'Reservation Id',
+          'Prescriptions'=>'الروشتات',
+          'Prescription_Number'=>'روشتة رقم',
+          'Add'=>'أضافة',
           'Drug_Name'=>'أسم الدواء',
           'Drug_Dose'=>'الجرعة',
           'Drug_Type'=>'نوع الدواء',

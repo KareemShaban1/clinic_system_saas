@@ -24,6 +24,14 @@
           font-family: Montserrat-Bold;
           src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
         }
+        @font-face {
+          font-family: "XBRiyaz";
+          src: url(../fonts/Almarai-Regular.ttf);
+          src: url(../fonts/Almarai-Bold.ttf);
+          src: url(../fonts/Almarai-Regular.ttf);
+          src: url(../fonts/Almarai-Regular.ttf);
+          
+          }
         
         /*//////////////////////////////////////////////////////////////////
         [ RESTYLE TAG ]*/
@@ -36,7 +44,7 @@
         
         body, html {
                   height: 100%;
-                  font-family: Poppins-Regular, sans-serif;
+                  font-family: 'XBRiyaz';
                   direction: rtl;
         }
         
@@ -135,14 +143,12 @@
         /*//////////////////////////////////////////////////////////////////
         [ Utility ]*/
         .txt1 {
-          font-family: Poppins-Regular;
           font-size: 13px;
           line-height: 1.5;
           color: #999999;
         }
         
         .txt2 {
-          font-family: Poppins-Regular;
           font-size: 20px;
           line-height: 1.5;
           color: #666666;
@@ -169,11 +175,12 @@
           justify-content: center;
           align-items: center;
           padding: 15px;
-          background: #9053c7;
+          background-color: black;
+          /* background: #9053c7;
           background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
           background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
           background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-          background: linear-gradient(-135deg, #57b846, #0c5460);
+          background: linear-gradient(-135deg, #57b846, #0c5460); */
         }
         
         .wrap-login100 {
@@ -224,7 +231,6 @@
         }
         
         .login100-form-title {
-          font-family: Poppins-Bold;
           font-size: 24px;
           color: #333333;
           line-height: 1.2;
@@ -338,7 +344,6 @@
         }
         
         .login100-form-btn {
-          font-family: Montserrat-Bold;
           font-size: 15px;
           line-height: 1.5;
           color: #fff;

@@ -47,8 +47,7 @@
     </div>
     </div>
 
-    <!--=================================
- footer -->
+    <!--================================= footer -->
 
     @include('backend.layouts.footer-scripts')
 

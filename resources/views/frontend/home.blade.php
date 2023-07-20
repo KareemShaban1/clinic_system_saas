@@ -5,33 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medcare </title>
+    <title>Kari care </title>
     <!-- Page Icon -->
     <link rel="shortcut icon" href="image/heartbeat-solid.svg" type="image/x-icon">
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- Custom Css File Link -->
     @if (App::getLocale() == 'en' || App::getLocale() == 'it')
-    <link rel="stylesheet" href="{{ asset('frontend/home/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('frontend/home/css/style.css') }}">
     @else
-    <link rel="stylesheet" href="{{ asset('frontend/home/css/rtl_style.css') }}">
+        <link rel="stylesheet" href="{{ asset('frontend/home/css/rtl_style.css') }}">
     @endif
+
+    <style>
+@keyframes fade-in-out {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#animated-text {
+  animation: fade-in-out 3s infinite;
+  animation-delay: 1s;
+  transition: opacity 0.5s;
+}
+
+
+    </style>
 </head>
 
 <body>
     <!-- Header Section Starts -->
     <div class="header">
-        <a href="#" class="logo"><i class="fas fa-heartbeat"></i> medcare</a>
+        <a href="#" class="logo"><i class="fas fa-heartbeat"></i> Kari care </a>
         <nav class="navbar" style="display: flex; justify-content: flex-end;">
-            <a href="#home">{{ trans('front_home_trans.Home') }}</a>
-            <a href="#services">{{ trans('front_home_trans.Services') }}</a>
-            <a href="#about">{{ trans('front_home_trans.About Us') }}</a>
-            <a href="#doctors">{{ trans('front_home_trans.Doctors') }}</a>
-            <a href="#blogs">{{ trans('front_home_trans.Blogs') }}</a>
-            <a href="{{ URL::to('/patient/register') }}">{{ trans('front_home_trans.Register') }}</a>
-            <a href="{{ URL::to('/patient/login') }}">{{ trans('front_home_trans.LogIn') }}</a>
-          
- 
+            <a href="#home">{{ trans('frontend/home_trans.Home') }}</a>
+            {{-- <a href="#services">{{ trans('frontend/home_trans.Services') }}</a> --}}
+            <a href="#about">{{ trans('frontend/home_trans.About Us') }}</a>
+            {{-- <a href="#doctors">{{ trans('frontend/home_trans.Doctors') }}</a> --}}
+            <a href="#blogs">{{ trans('frontend/home_trans.Blogs') }}</a>
+            <a href="{{ URL::to('/patient/register') }}">{{ trans('frontend/home_trans.Register') }}</a>
+            <a href="{{ URL::to('/patient/login') }}">{{ trans('frontend/home_trans.Log In') }}</a>
+
+
 
         </nav>
         <div id="menu-btn" class="fas fa-bars"></div>
@@ -44,40 +60,39 @@
             <img src="{{ asset('frontend/home/image/home-img.svg') }}" alt="home-img.svg">
         </div>
         <div class="content">
-            <h3>{{ trans('front_home_trans.stay safe, stay healthy') }}</h3>
+            <h3>{{ trans('frontend/home_trans.stay safe, stay healthy') }}</h3>
             {{-- <p>Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Rem Sed Autem Vero? Magnam, Est Laboriosam!</p> --}}
-            <a href="#" class="btn">contact us <span class="fas fa-chevron-right"></span> </a>
+            <a href="#" class="btn">{{ trans('frontend/home_trans.contact us') }} <span class="fas fa-chevron-left"></span> </a>
         </div>
     </section>
     <!-- Home Section End -->
 
     <!-- icons section starts  -->
     <section class="icons-container">
+        
         <div class="icons">
             <i class="fas fa-user-md"></i>
-            <h3>140+</h3>
-            <p>doctors at work</p>
+            <h3>1</h3>
+            <p>{{ trans('frontend/home_trans.Numbers_Of_Doctors') }}</p> 
         </div>
+        
         <div class="icons">
             <i class="fas fa-users"></i>
             <h3>1040+</h3>
-            <p>satisfied patients</p>
+            <p>{{ trans('frontend/home_trans.Numbers_Of_Patients') }}</p>
         </div>
+        
         <div class="icons">
-            <i class="fas fa-procedures"></i>
+            <i class="fas fa-notes-medical"></i>
             <h3>500+</h3>
-            <p>bed facility</p>
+            <p>{{ trans('frontend/home_trans.Numbers_Of_Reservations') }}</p>
         </div>
-        <div class="icons">
-            <i class="fas fa-hospital"></i>
-            <h3>80+</h3>
-            <p>available hospitals</p>
-        </div>
+        
     </section>
     <!-- icons section End  -->
 
     <!-- Service section Starts  -->
-    <section class="services" id="services">
+    {{-- <section class="services" id="services">
         <h1 class="heading">our <span>services</span></h1>
         <div class="box-container">
             <div class="box">
@@ -117,31 +132,35 @@
                 <a href="#" class="btn">learn more <span class="fas fa-chevron-right"></span> </a>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Service section End  -->
+
 
     <!-- About section Starts  -->
     <section class="about" id="about">
-        <h1 class="heading"><span>about</span> us</h1>
+        <h1 class="heading">
+            <span> {{ trans('frontend/home_trans.About_Us') }} </span> 
+        </h1>
         <div class="row">
             <div class="image">
                 <img src="{{ asset('frontend/home/image/about-img.svg') }}" alt="">
             </div>
             <div class="content">
-                <h3>we take care of your healthy life</h3>
-                <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex Cupiditate Ullam In
+                <h3>{{ trans('frontend/home_trans.we take care of your healthy life') }}</h3>
+                {{-- <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex Cupiditate Ullam In
                     Assumenda Maiores Et Culpa Odit Tempora Ipsam Qui, Quisquam Quis Facere Iste Fuga, Minus Nesciunt.
                 </p>
                 <p>Lorem Ipsum Dolor, Sit Amet Consectetur Adipisicing Elit. Natus Vero Ipsam Laborum Porro Voluptates
-                    Voluptatibus A Nihil Temporibus Deserunt Vel?</p>
-                <a href="#" class="btn">learn more <span class="fas fa-chevron-right"></span> </a>
+                    Voluptatibus A Nihil Temporibus Deserunt Vel?</p> --}}
+                {{-- <a href="#" class="btn">learn more <span class="fas fa-chevron-right"></span> </a> --}}
             </div>
         </div>
     </section>
     <!-- About section End  -->
 
+
     <!-- Doctors section Starts  -->
-    <section class="doctors" id="doctors">
+    {{-- <section class="doctors" id="doctors">
         <h1 class="heading">our <span>doctors</span></h1>
         <div class="box-container">
             <div class="box">
@@ -211,8 +230,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Doctors section Ends  -->
+
 
     <!-- Book section Starts  -->
     {{-- <section class="book" id="book">
@@ -284,7 +304,7 @@
     <!-- Review section End  -->
 
     <!-- Blogs section Starts -->
-    <section class="blogs" id="blogs">
+    {{-- <section class="blogs" id="blogs">
         <h1 class="heading">our <span>blogs</span></h1>
         <div class="box-container">
             <div class="box">
@@ -330,50 +350,53 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Blogs section End -->
+
+    <section class="blogs">
+        <h1 class="heading"> {{ trans('frontend/home_trans.Our_Blogs') }} </h1>
+        <div id="animation-container" style="margin:0; padding:0; width:100%; height:50vh; display:flex; justify-content:center; align-items:center; font-size:50pt; font-family: 'Slabo 27px', serif;">
+            <span id="animated-text" style="font-size:50pt; font-family: 'Slabo 27px', serif; opacity: 0;">Coming soon</span>
+        </div>
+    </section>
+
 
     <!-- Footer section Starts  -->
     <section class="footer">
         <div class="box-container">
             <div class="box">
-                <h3>quick links</h3>
-                <a href="#"> <i class="fas fa-chevron-right"></i> home</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> services</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> about</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> doctors</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> book</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> review</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> blogs</a>
+                <h3>{{ trans('frontend/home_trans.Quick_Links') }}</h3>
+                <a href="#"> <i class="fas fa-chevron-left"></i> {{ trans('frontend/home_trans.Home') }}</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> {{ trans('frontend/home_trans.About Us') }}</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> {{ trans('frontend/home_trans.Blogs') }}</a>
             </div>
             <div class="box">
-                <h3>our services</h3>
-                <a href="#"> <i class="fas fa-chevron-right"></i> dental care</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> message therapy</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis</a>
-                <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service</a>
+                <h3>{{ trans('frontend/home_trans.Our_Services') }}</h3>
+                <a href="#"> <i class="fas fa-chevron-left"></i> dental care</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> message therapy</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> cardioloty</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> diagnosis</a>
+                <a href="#"> <i class="fas fa-chevron-left"></i> ambulance service</a>
             </div>
             <div class="box">
-                <h3>contact info</h3>
-                <a href="#"> <i class="fas fa-phone"></i> +123-456-7859</a>
-                <a href="#"> <i class="fas fa-phone"></i> +356-481-0286</a>
-                <a href="#"> <i class="fas fa-envelope"></i> medcare.info.com</a>
-                <a href="#"> <i class="fas fa-envelope"></i> medcare.info.@gmail.com</a>
-                <a href="#"> <i class="fas fa-map-marker-alt"></i> dhaka, Bangladesh - 1000</a>
+                <h3>{{ trans('frontend/home_trans.Contact_Info') }}</h3>
+                <a href="#"> <i class="fas fa-phone"></i> +01111111111</a>
+                <a href="#"> <i class="fas fa-phone"></i> +01111111111</a>
+                <a href="#"> <i class="fas fa-envelope"></i> clinic.@gmail.com</a>
+                <a href="#"> <i class="fas fa-envelope"></i> clinic.@gmail.com</a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> Egypt</a>
             </div>
             <div class="box">
-                <h3>follow us</h3>
+                <h3>{{ trans('frontend/home_trans.Follow_Us') }}</h3>
 
                 <a href="#"> <i class="fab fa-facebook-f"></i> facebook</a>
                 <a href="#"> <i class="fab fa-twitter"></i> twitter</a>
                 <a href="#"> <i class="fab fa-linkedin"></i> linkedin</a>
                 <a href="#"> <i class="fab fa-instagram"></i> instagram</a>
-                <a href="#"> <i class="fab fa-youtube"></i> youtube</a>
-                <a href="#"> <i class="fab fa-pinterest"></i> pinterest</a>
+                {{-- <a href="#"> <i class="fab fa-youtube"></i> youtube</a> --}}
+                {{-- <a href="#"> <i class="fab fa-pinterest"></i> pinterest</a> --}}
             </div>
         </div>
-        <div class="credit">created by <span>zaki chowdhury</span> | all right reserved</div>
     </section>
     <!-- Footer section End  -->
 

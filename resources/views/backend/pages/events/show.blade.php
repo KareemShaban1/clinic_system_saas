@@ -3,7 +3,7 @@
 @section('css')
 
 @section('title')
-     {{trans('backend/events_trans.Calendar')}}
+    {{trans('backend/events_trans.Calendar')}}
 @stop
 
 @endsection

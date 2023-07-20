@@ -107,7 +107,7 @@ class ReservationController extends Controller
     public function add($id)
     {
         $settings = $this->reservationControl->pluck('value', 'key');
-        ;
+        
 
         $patient = $this->patient->findOrFail($id);
 

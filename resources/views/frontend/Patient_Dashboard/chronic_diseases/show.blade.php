@@ -3,8 +3,8 @@
 
     <style>
         /*======================
-            404 page
-        =======================*/
+                404 page
+            =======================*/
 
 
         .page_404 {
@@ -290,7 +290,8 @@
                     @forelse ($chronic_diseases as $chronic_disease)
                         <h5 class="card-header">
                             <span class="badge badge-rounded badge-info ">
-                                <h5 class="text-white"> {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Number') }}
+                                <h5 class="text-white">
+                                    {{ trans('frontend/chronic_diseases_trans.Chronic_Disease_Number') }}
                                     {{ $loop->index + 1 }} </h5>
                             </span>
 
@@ -370,7 +371,6 @@
                                             <div class="four_zero_four_bg">
                                                 <h1 class="text-center ">404</h1>
 
-
                                             </div>
 
                                             <div class="contant_box_404">
@@ -387,34 +387,7 @@
                                 </div>
                             </div>
                         </section>
-                        {{-- <section>
-                            <div class="center">
-                                <div class="error">
-                                  <div class="number">4</div>
-                                  <div class="illustration">
-                                    <div class="circle"></div>
-                                    <div class="clip">
-                                      <div class="paper">
-                                        <div class="face">
-                                          <div class="eyes">
-                                            <div class="eye eye-left"></div>
-                                            <div class="eye eye-right"></div>
-                                          </div>
-                                          <div class="rosyCheeks rosyCheeks-left"></div>
-                                          <div class="rosyCheeks rosyCheeks-right"></div>
-                                          <div class="mouth"></div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="number">4</div>
-                                </div>
-                              
-                                <div class="text">  لا توجد أمراض مزمنة </div>
-                                <a class="button" href="#">Back Home</a>
-                              </div>
-                              
-                        </section> --}}
+                    
                     @endforelse
                 </div>
 

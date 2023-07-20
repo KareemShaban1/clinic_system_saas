@@ -24,8 +24,6 @@ class UpdatePatientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            
                 'name' => 'required',
                 'age' => 'nullable|max:3|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'address' => 'required',
@@ -33,8 +31,6 @@ class UpdatePatientRequest extends FormRequest
                 'phone' => 'required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'email'=>'nullable',
                 'blood_group'=>'required'
-            
-           
         ];
     }
 

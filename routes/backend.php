@@ -144,13 +144,14 @@ Route::group(
         // Drugs / Prescription Part
         Route::group(
             [
-            'prefix'=>'/drugs',
-            'as'=>'drugs.',
-            'controller'=>'ReservationsControllers\DrugController',],
+            'prefix'=>'/prescription',
+            'as'=>'prescription.',
+            'controller'=>'ReservationsControllers\PrescriptionController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
+                Route::post('/upload_prescription', 'UploadPrescription')->name('UploadPrescription');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
                 Route::get('/arabic_prescription_pdf/{reservation_id}', 'arabic_prescription_pdf')->name('arabic_prescription_pdf');
                 Route::get('/english_prescription_pdf/{reservation_id}', 'english_prescription_pdf')->name('english_prescription_pdf');

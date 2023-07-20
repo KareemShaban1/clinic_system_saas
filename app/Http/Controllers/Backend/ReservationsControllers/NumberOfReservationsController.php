@@ -33,9 +33,9 @@ class NumberOfReservationsController extends Controller
         $request->validate([
         'reservation_date' => 'required',
         'num_of_reservations' => 'required|integer',
-        'num_of_reservations' => Rule::unique('number_of_reservations')->where(function ($query) use ($request) {
-            return $query->where('reservation_date', $request->reservation_date);
-        }),
+        // 'num_of_reservations' => Rule::unique('number_of_reservations')->where(function ($query) use ($request) {
+        //     return $query->where('reservation_date', $request->reservation_date);
+        // }),
         ],[
             'num_of_reservations.unique'=>'عدد الحجوزات موجود بالنسبة لليوم'
         ]);

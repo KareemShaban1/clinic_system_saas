@@ -32,7 +32,7 @@ NOTE: This file includes all admin Template plugins and Shortcodes. If you don't
 ======================================
 [ End table content ]
 ======================================*/
-/*!
+/*
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -101,8 +101,7 @@ section {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-   ;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -7834,7 +7833,7 @@ a.text-dark:hover {
   font-size: 9px;
   font-weight: 400; }
 
-/*!
+/*
  * FullCalendar v3.8.1
  * Docs & License: https://fullcalendar.io/
  * (c) 2017 Adam Shaw
@@ -21070,15 +21069,9 @@ ul.list-unstyled li {
 
 .admin-header .nav-link .notification-status {
   position: absolute;
-  top: 12px;
-  right: 30%;
-  width: 5px;
-  min-width: 5px;
-  height: 5px;
-  min-height: 5px;
-  padding: 0;
-  border-radius: 100%;
-  line-height: 5px; }
+  top: 5px;
+  right: 10%;
+}
 
 .admin-header .dropdown-item {
   font-size: 14px;
@@ -22853,7 +22846,8 @@ select.form-control-sm:not([size]):not([multiple]) {
   padding: 6px 5px 5px;
   font-weight: 500;
   line-height: 6px;
-  border-radius: 3px !important; }
+  border-radius: 3px !important;
+}
 
 /*toastr page*/
 .controls input[type=checkbox] {
@@ -23914,3 +23908,12 @@ div.style-customizer .content-chooser input[type=radio]:checked ~ label {
     .res_control a {
       margin: 1px;
     }
+
+    .admin-header .nav-link .notification-status {
+      position: absolute;
+      top: 5px;
+      right: 10%;
+      border-radius: 10px !important;
+      font-size: 10px;
+    }
+    

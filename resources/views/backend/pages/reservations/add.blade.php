@@ -155,14 +155,14 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label for="acceptance"> {{ trans('backend/reservations_trans.Status') }}<span
+                                <label for="acceptance"> {{ trans('backend/reservations_trans.Acceptance') }}<span
                                         class="text-danger">*</span></label>
                                 <select class="custom-select mr-sm-2" name="acceptance">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="approved">{{ trans('backend/reservations_trans.Approved') }}
                                     </option>
                                     <option value="not_approved">
-                                        {{ trans('backend/reservations_trans.Not_Acceptance') }}
+                                        {{ trans('backend/reservations_trans.Not_Approved') }}
                                     </option>
                                 </select>
 

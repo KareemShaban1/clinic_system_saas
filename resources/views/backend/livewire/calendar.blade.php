@@ -1,5 +1,4 @@
 <div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div id='calendar-container' wire:ignore>
@@ -72,6 +71,7 @@
                 });
             });
         </script>
+
         {{-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' /> --}}
         <link rel="stylesheet" href="{{ asset('backend/assets/calendar/main.min.css') }}">
     @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\PatientMakeAppointment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\StoreReservationRequest;
 use App\Http\Traits\TimeSlotsTrait;
@@ -103,7 +104,9 @@ class AppointmentsController extends Controller
         $data["acceptance"] = 'not_approved';
         $data["res_status"] = 'waiting';
         $data['month'] = substr($request->res_date, 5, 7 - 5);
-        Reservation::create($data);
+        $reservation = Reservation::create($data);
+        
+        event(new PatientMakeAppointment($reservation));
 
         return redirect()->route('frontend.appointment.index')->with('success', 'Reservation added successfully');
     }

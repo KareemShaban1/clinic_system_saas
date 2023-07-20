@@ -507,7 +507,7 @@ section:nth-child(even){
         top:115%; right: 2rem;
         border-radius: .5rem;
         box-shadow: var(--box-shadow);
-        width: 30rem;
+        /* width: 30rem; */
         border: var(--border);
         background: #fff;
         transform: scale(0);

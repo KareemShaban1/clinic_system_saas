@@ -91,7 +91,7 @@
                     @if ($setting['show_online_reservations'] == 1)
                         <!-- menu Online Reservations-->
                         <li>
-                            <a href="javascript:void(0);" data-toggle="collapse"
+                            <a  data-toggle="collapse"
                                 data-target="#online_reservations-menu">
                                 <div class="pull-left"><i class="fa fa-stethoscope"></i><span
                                         class="right-nav-text">{{ trans('backend/sidebar_trans.Online_Reservations') }}</span>

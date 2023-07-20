@@ -107,7 +107,7 @@ class FortifyServiceProvider extends ServiceProvider
         } 
         elseif (Config::get('fortify.guard') == 'patient') {
 
-            //// this method will be used in "patient" guard only
+            /// this method will be used in "patient" guard only
             Fortify::authenticateUsing([new CustomAuthentication,'authenticatePatient']);
             
             // create new "patient" using custom class

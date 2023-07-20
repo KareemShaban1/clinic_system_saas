@@ -11,7 +11,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">
         <div class="dropdown-header notifications">
-            <strong>Notifications</strong>
+            <strong>{{ trans('backend/dashboard_trans.Notifications') }}</strong>
             <span class="badge badge-pill badge-warning">{{ $newCount }}</span>
         </div>
         <div class="dropdown-divider"></div>

@@ -46,11 +46,6 @@
 
                     @csrf
 
-
-
-
-
-
                     <div class="row mb-4">
 
                         <div class="col-lg-3 col-md-4 col-sm-6 col-6">
@@ -58,11 +53,11 @@
                             </h5>
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
-                            <select class="custom-select mr-sm-2" name="show_ray" value="{{ $setting['show_ray'] }}">
+                            <select class="custom-select mr-sm-2" name="show_ray" value="{{ $settings['show_ray'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_ray'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_ray'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_ray'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_ray'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -75,11 +70,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_chronic_diseases"
-                                value="{{ $setting['show_chronic_diseases'] }}">
+                                value="{{ $settings['show_chronic_diseases'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_chronic_diseases'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_chronic_diseases'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_chronic_diseases'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_chronic_diseases'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -92,11 +87,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_glasses_distance"
-                                value="{{ $setting['show_glasses_distance'] }}">
+                                value="{{ $settings['show_glasses_distance'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_glasses_distance'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_glasses_distance'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_glasses_distance'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_glasses_distance'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -110,11 +105,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_prescription"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_prescription'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_prescription'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_prescription'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_prescription'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -135,11 +130,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="reservation_slots"
-                                value="{{ $setting['reservation_slots'] }}">
+                                value="{{ $settings['reservation_slots'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['reservation_slots'] == 1) selected @endif value="1">
+                                <option @if ($settings['reservation_slots'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['reservation_slots'] == 0) selected @endif value="0">
+                                <option @if ($settings['reservation_slots'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -158,11 +153,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_events"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_events'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_events'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_events'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_events'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -176,11 +171,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_patients"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_patients'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_patients'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_patients'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_patients'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -193,11 +188,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_reservations"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_reservations'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_reservations'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_reservations'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_reservations'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -211,11 +206,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_online_reservations"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_online_reservations'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_online_reservations'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_online_reservations'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_online_reservations'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -229,11 +224,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_medicines"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_medicines'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_medicines'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_medicines'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_medicines'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -247,11 +242,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_num_of_res"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_num_of_res'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_num_of_res'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_num_of_res'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_num_of_res'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -265,11 +260,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_drugs"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_drugs'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_drugs'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_drugs'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_drugs'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -283,11 +278,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_fees"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_fees'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_fees'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_fees'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_fees'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -301,11 +296,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_users"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_users'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_users'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_users'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_users'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>
@@ -319,11 +314,11 @@
                         </div>
                         <div class="col-lg-3 col-md-8 col-sm-6 col-6">
                             <select class="custom-select mr-sm-2" name="show_settings"
-                                value="{{ $setting['show_prescription'] }}">
+                                value="{{ $settings['show_prescription'] }}">
                                 <option selected disabled>{{ trans('backend/reservation_control_trans.Choose') }}</option>
-                                <option @if ($setting['show_settings'] == 1) selected @endif value="1">
+                                <option @if ($settings['show_settings'] == 1) selected @endif value="1">
                                     {{ trans('backend/reservation_control_trans.Show') }}</option>
-                                <option @if ($setting['show_settings'] == 0) selected @endif value="0">
+                                <option @if ($settings['show_settings'] == 0) selected @endif value="0">
                                     {{ trans('backend/reservation_control_trans.Hide') }}</option>
                             </select>
                         </div>

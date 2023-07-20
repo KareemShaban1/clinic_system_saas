@@ -13,11 +13,12 @@ class ReservationControlController extends Controller
     {
 
         $collection = ReservationControl::all();
-        $setting["setting"] = $collection->flatMap(function ($collection) {
+        $settings["settings"] = $collection->flatMap(function ($collection) {
             return [$collection->key => $collection->value];
         });
+        // dd($settings);
 
-        return view('backend.pages.reservation_control.index', $setting);
+        return view('backend.pages.reservation_control.index', $settings);
     }
 
     public function update(Request $request)

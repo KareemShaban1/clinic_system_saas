@@ -32,13 +32,13 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 {{-- <div class="login100-pic js-tilt" data-tilt>
-					<img src="{{asset('frontend/auth/images/img-01.png')}}" alt="IMG">
-	      </div> --}}
+                    <img src="{{ asset('frontend/auth/images/img-01.png') }}" alt="IMG">
+                </div> --}}
 
-                <form method="POST"  action="{{ Route('login') }}">
+                <form method="POST" action="{{ Route('login') }}">
                     @csrf
                     <span class="login100-form-title">
-                        تسجيل الدخول
+                        {{ trans('frontend/auth_trans.Log In') }}
                     </span>
 
                     <div class="row">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                   
+
 
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn">
@@ -71,11 +71,11 @@
                         </button>
                     </div>
 
-                 
+
 
                     <div class="text-center p-t-100">
-                        <a class="txt2" href="{{Route('register')}}">
-                              أنشاء حساب جديد
+                        <a class="txt2" href="{{ Route('register') }}">
+                            أنشاء حساب جديد
                             <i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
                         </a>
                     </div>

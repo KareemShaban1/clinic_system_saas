@@ -157,19 +157,21 @@
                                         <span class="badge badge-rounded badge-danger text-white p-2 mb-2">
                                             {{ trans('backend/reservations_trans.Not_Approved') }}
                                         </span>
+                                    
+                                        <div class="res_control">
+                                            <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'approved']) }}"
+                                                class="btn btn-success btn-sm text-white">
+                                                {{-- {{ trans('backend/reservations_trans.Approved') }} --}}
+                                                <i class="fa-solid fa-check"></i>
+                                            </a>
+
+                                            <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'not_approved']) }}"
+                                                class="btn btn-danger btn-sm text-white">
+                                                <i class="fa-solid fa-xmark"></i>
+                                                {{-- {{ trans('backend/reservations_trans.Not_Approved') }} --}}
+                                            </a>
+                                        </div>
                                     @endif
-
-                                    <div class="res_control">
-                                        <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'approved']) }}"
-                                            class="btn btn-success btn-sm text-white">
-                                            {{ trans('backend/reservations_trans.Approved') }}
-                                        </a>
-
-                                        <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'not_approved']) }}"
-                                            class="btn btn-danger btn-sm text-white">
-                                            {{ trans('backend/reservations_trans.Not_Approved') }}
-                                        </a>
-                                    </div>
 
 
                                 </td>
@@ -190,7 +192,7 @@
                                         @else
                                             <div class="res_control">
                                                 <a href="{{ Route('backend.rays.add', $reservation->reservation_id) }}"
-                                                    class="btn btn-success btn-sm">
+                                                    class="btn btn-dark btn-sm">
                                                     {{ trans('backend/reservations_trans.Add') }}
                                                 </a>
 
@@ -215,7 +217,7 @@
                                                 </a>
                                             @else
                                                 <a href="{{ Route('backend.chronic_diseases.add', $reservation->reservation_id) }}"
-                                                    class="btn btn-success btn-sm">
+                                                    class="btn btn-dark btn-sm">
                                                     {{ trans('backend/reservations_trans.Add') }}
                                                 </a>
                                             @endif
@@ -240,7 +242,7 @@
                                             </div>
                                         @else
                                             <a href="{{ Route('backend.glasses_distance.add', $reservation->reservation_id) }}"
-                                                class="btn btn-success btn-sm">
+                                                class="btn btn-dark btn-sm">
                                                 {{ trans('backend/reservations_trans.Add') }}
                                             </a>
                                         @endif
@@ -254,18 +256,18 @@
 
 
                                             @if (App\Models\Drug::where('reservation_id', $reservation->reservation_id)->first())
-                                                <a href="{{ Route('backend.drugs.arabic_prescription_pdf', $reservation->reservation_id) }}"
+                                                <a href="{{ Route('backend.prescription.arabic_prescription_pdf', $reservation->reservation_id) }}"
                                                     class="btn btn-info btn-sm">
                                                     {{ trans('backend/reservations_trans.Arabic') }}
                                                 </a>
 
-                                                <a href="{{ Route('backend.drugs.english_prescription_pdf', $reservation->reservation_id) }}"
+                                                <a href="{{ Route('backend.prescription.english_prescription_pdf', $reservation->reservation_id) }}"
                                                     class="btn btn-info btn-sm">
                                                     {{ trans('backend/reservations_trans.English') }}
                                                 </a>
                                             @else
-                                                <a href="{{ Route('backend.drugs.add', $reservation->reservation_id) }}"
-                                                    class="btn btn-success btn-sm">
+                                                <a href="{{ Route('backend.prescription.add', $reservation->reservation_id) }}"
+                                                    class="btn btn-dark btn-sm">
                                                     {{ trans('backend/reservations_trans.Add') }}
                                                 </a>
                                             @endif

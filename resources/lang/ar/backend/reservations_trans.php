@@ -82,7 +82,7 @@ return [
           'Total_Reservation'=>'أجمالى الكشوفات',
 
           'Acceptance'=>'حالة الكشف',
-          'Approved'=>' موافقة',
+          'Approved'=>' قبول',
           'Not_Approved'=>'رفض ',
 
 

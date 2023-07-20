@@ -8,7 +8,7 @@ NOTE:
 
 */
 
- 
+
 (function($) {
    
     "use strict";
