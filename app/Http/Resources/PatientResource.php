@@ -23,6 +23,7 @@ class PatientResource extends JsonResource
             'blood_group'=>$this->blood_group,
             'patient_code'=>$this->patient_code,
             'gender'=>$this->gender
+            
         ];
     }
 }

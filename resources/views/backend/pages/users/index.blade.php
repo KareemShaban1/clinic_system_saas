@@ -12,12 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{trans('backend/users_trans.Users')}}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/users_trans.All_Users')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('backend/users_trans.Users')}}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -70,7 +64,7 @@
                                         <i class="fa fa-trash"></i> 
                                     </button>   
                                 </form> --}}
-                               
+                                
                                 {{-- <a href="" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash"></i> 
                                     
@@ -87,6 +81,43 @@
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        var lang = "{{ App::getLocale() }}";
+        var dataTableOptions = {
+            responsive: true,
+            columnDefs: [{
+                    responsivePriority: 1,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 3
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 4
+                },
+                // {
+                //     responsivePriority: 4,
+                //     targets: 6
+                // },
+                // Add more columnDefs for other columns, if needed
+            ],
+            oLanguage: {
+                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
+                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
+                oPaginate: {
+                    sFirst: lang === 'ar' ? "الأول" : "First",
+                    sLast: lang === 'ar' ? "الأخير" : "Last",
+                    sNext: lang === 'ar' ? "التالى" : "Next",
+                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+                },
+            },
+        };
 
-@endsection
+        $('#table_id').DataTable(dataTableOptions);
+    });
+</script>
+@endpush

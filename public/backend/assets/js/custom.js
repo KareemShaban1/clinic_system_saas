@@ -225,10 +225,10 @@ NOTE: This file contains all scripts for the actual Template.
   *************************/
   POTENZA.datatables = function () {
     if ($('#datatable').exists()) {
-      loadScript(plugin_path + 'bootstrap-datatables/jquery.dataTables.min.js', function () {
-        loadScript(plugin_path + 'bootstrap-datatables/dataTables.bootstrap4.min.js', function () {
-          $('#datatable').DataTable();
-        });
+      loadScript(plugin_path + '/bootstrap-datatables/jquery.dataTables.min.js', function () {
+        // loadScript(plugin_path + '/bootstrap-datatables/dataTables.bootstrap4.min.js', function () {
+        //   $('#datatable').DataTable();
+        // });
       });
     }
   };

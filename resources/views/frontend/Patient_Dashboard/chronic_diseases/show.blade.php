@@ -22,6 +22,7 @@
             background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
             height: 400px;
             background-position: center;
+            background-size: cover;
         }
 
 
@@ -253,24 +254,18 @@
             color: #04cba0;
         }
     </style>
+
 @section('title')
     {{ trans('frontend/chronic_diseases_trans.Chronic_Disease') }}
 @stop
 @endsection
+
 @section('page-header')
 <!-- breadcrumb -->
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
             <h4 class="mb-0">{{ trans('frontend/chronic_diseases_trans.Chronic_Disease') }}</h4>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('frontend/chronic_diseases_trans.Show_Chronic_Disease') }}</a>
-                </li>
-                <li class="breadcrumb-item active">{{ trans('frontend/chronic_diseases_trans.Chronic_Disease') }}</li>
-            </ol>
         </div>
     </div>
 </div>
@@ -366,7 +361,7 @@
                         <section class="page_404">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-12 ">
+                                    <div class="col-sm-12 col-12">
                                         <div class="col-sm-10 col-sm-offset-1  text-center">
                                             <div class="four_zero_four_bg">
                                                 <h1 class="text-center ">404</h1>

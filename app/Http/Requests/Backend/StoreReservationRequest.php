@@ -30,7 +30,7 @@ class StoreReservationRequest extends FormRequest
                 'payment'=>'required',
                 'cost'=>'required|max:4|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'res_date' => 'required',
-                'acceptance'=>'required',
+                // 'acceptance'=>'required',
     
         ];
     }
@@ -44,7 +44,7 @@ class StoreReservationRequest extends FormRequest
                 'cost.max'=>'يجب أن لا يزيد المبلغ عن أريع خانات',
                 'cost.regex'=>'يجب أن يكون المبلغ أرقام',
                 'res_date.required'=>'برجاء أدخال تاريخ الكشف',
-                'acceptance.required'=>'برجاء أدخال حالة الكشف',
+                // 'acceptance.required'=>'برجاء أدخال حالة الكشف',
         ];
     }
 }

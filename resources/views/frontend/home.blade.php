@@ -38,7 +38,7 @@
     <!-- Header Section Starts -->
     <div class="header">
         <a href="#" class="logo"><i class="fas fa-heartbeat"></i> Kari care </a>
-        <nav class="navbar" style="display: flex; justify-content: flex-end;">
+        <nav class="navbar" >
             <a href="#home">{{ trans('frontend/home_trans.Home') }}</a>
             {{-- <a href="#services">{{ trans('frontend/home_trans.Services') }}</a> --}}
             <a href="#about">{{ trans('frontend/home_trans.About Us') }}</a>
@@ -46,6 +46,9 @@
             <a href="#blogs">{{ trans('frontend/home_trans.Blogs') }}</a>
             <a href="{{ URL::to('/patient/register') }}">{{ trans('frontend/home_trans.Register') }}</a>
             <a href="{{ URL::to('/patient/login') }}">{{ trans('frontend/home_trans.Log In') }}</a>
+
+
+            <a href="{{ URL::to('/admin/login') }}">{{ trans('frontend/home_trans.Admin Panel') }}</a>
 
 
 
@@ -78,13 +81,13 @@
         
         <div class="icons">
             <i class="fas fa-users"></i>
-            <h3>1040+</h3>
+            <h3>{{ $patients }}</h3>
             <p>{{ trans('frontend/home_trans.Numbers_Of_Patients') }}</p>
         </div>
         
         <div class="icons">
             <i class="fas fa-notes-medical"></i>
-            <h3>500+</h3>
+            <h3>{{ $reservations }}</h3>
             <p>{{ trans('frontend/home_trans.Numbers_Of_Reservations') }}</p>
         </div>
         
@@ -356,7 +359,7 @@
     <section class="blogs">
         <h1 class="heading"> {{ trans('frontend/home_trans.Our_Blogs') }} </h1>
         <div id="animation-container" style="margin:0; padding:0; width:100%; height:50vh; display:flex; justify-content:center; align-items:center; font-size:50pt; font-family: 'Slabo 27px', serif;">
-            <span id="animated-text" style="font-size:50pt; font-family: 'Slabo 27px', serif; opacity: 0;">Coming soon</span>
+            <span id="animated-text" style="font-size:50pt; font-family: 'Slabo 27px', serif; opacity: 0; text-align:center">Coming soon</span>
         </div>
     </section>
 

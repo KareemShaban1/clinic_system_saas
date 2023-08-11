@@ -35,4 +35,19 @@ class UpdatePatientRequest extends FormRequest
         
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            
+            'name.required' => 'أسم المريض مطلوب',
+            // 'age' => 'nullable|max:3|regex:/^([0-9\s\-\+\(\)]*)$/',
+            // 'address' => 'required',
+            // 'gender' => 'required',
+            // 'phone' => 'required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
+            // 'email'=>'nullable|unique:patients,email',
+            // 'blood_group'=>'required'
+        
+        ];
+    }
 }

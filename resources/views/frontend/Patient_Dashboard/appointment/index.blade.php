@@ -12,13 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('frontend/reservations_trans.Reservations') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('frontend/reservations_trans.All_Reservations') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('frontend/reservations_trans.Reservations') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -30,21 +23,23 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
+            <div class="table-responsive">
                 <table id="table_id" class="display">
                     <thead>
                         <tr>
                             <th>#</th>
-                            @if (App::getLocale() == 'ar')
+                            
                                 <th>{{ trans('frontend/reservations_trans.Number_of_Reservation') }}</th>
-                            @endif
+                            
 
                             <th>{{ trans('frontend/reservations_trans.Reservation_Date') }}</th>
-                            @if (App::getLocale() == 'ar')
+                            
                                 <th>{{ trans('frontend/reservations_trans.Reservation_Type') }}</th>
-                            @endif
+                            
 
                             <th>{{ trans('frontend/reservations_trans.Payment') }}</th>
 
+                            <th>{{ trans('frontend/reservations_trans.Acceptance') }}</th>
                             <th>{{ trans('frontend/reservations_trans.Reservation_Status') }}</th>
 
                             @if ($setting['show_ray'] == 1)
@@ -98,6 +93,18 @@
                                         </span>
                                     @endif
 
+                                </td>
+
+                                <td>
+                                    @if ($reservation->acceptance == 'approved')
+                                    <span class="badge badge-rounded badge-success text-white p-2 m-2">
+                                        {{ trans('backend/reservations_trans.Approved') }}
+                                    </span>
+                                @elseif ($reservation->acceptance == 'not_approved')
+                                    <span class="badge badge-rounded badge-danger text-white p-2 m-2">
+                                        {{ trans('backend/reservations_trans.Not_Approved') }}
+                                    </span>
+                                @endif    
                                 </td>
 
                                 <td>
@@ -182,6 +189,7 @@
 
                     </tbody>
                 </table>
+            </div>
 
             </div>
         </div>
@@ -189,12 +197,31 @@
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
 <script>
     $(document).ready(function() {
-        $('#table_id').DataTable({
-            // "scrollX": true
-        });
+        var lang = "{{ App::getLocale() }}";
+        var dataTableOptions = {
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 1, targets: 2 },
+                { responsivePriority: 2, targets: 3 },
+                { responsivePriority: 3, targets: 5 },
+                // Add more columnDefs for other columns, if needed
+            ],
+            oLanguage: {
+                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
+                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
+                oPaginate: {
+                    sFirst: lang === 'ar' ? "الأول" : "First",
+                    sLast: lang === 'ar' ? "الأخير" : "Last",
+                    sNext: lang === 'ar' ? "التالى" : "Next",
+                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+                },
+            },
+        };
+
+        $('#table_id').DataTable(dataTableOptions);
     });
 </script>
-@endsection
+@endpush

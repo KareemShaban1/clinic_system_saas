@@ -49,8 +49,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>أسم المريض<span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control">
+                                <label for="name">أسم المريض<span class="text-danger">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control">
                                 @error('name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -59,8 +59,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> السن </label>
-                                <input class="form-control" name="age" type="number">
+                                <label for="age"> السن </label>
+                                <input class="form-control" id="age" name="age" type="number">
                                 @error('age')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -73,8 +73,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>العنوان <span class="text-danger">*</span></label>
-                                <input type="text" name="address" class="form-control">
+                                <label for="address">العنوان <span class="text-danger">*</span></label>
+                                <input type="text" id="address" name="address" class="form-control">
                                 @error('address')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -85,8 +85,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> رقم الهاتف <span class="text-danger">*</span></label>
-                                <input class="form-control" name="phone" type="phone">
+                                <label for="phone"> رقم الهاتف <span class="text-danger">*</span></label>
+                                <input class="form-control" id="phone" name="phone" type="phone">
                                 @error('phone')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -97,8 +97,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> البريد الألكترونى <span class="text-danger">*</span></label>
-                                <input class="form-control" name="email" type="email">
+                                <label for="email"> البريد الألكترونى <span class="text-danger">*</span></label>
+                                <input class="form-control" id="email" name="email" type="email">
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -107,8 +107,8 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> كلمة المرور <span class="text-danger">*</span></label>
-                                <input class="form-control" name="password" type="password">
+                                <label for="password"> كلمة المرور <span class="text-danger">*</span></label>
+                                <input class="form-control" id="password" name="password" type="password">
                                 @error('password')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-md-6">
 
-                                    <select class="custom-select mr-sm-2" name="gender" style="width: 360px;">
+                                    <select class="custom-select mr-sm-2" id="gender" name="gender" style="width: 360px;">
                                         <option selected disabled>أختار من القائمة</option>
                                         <option value="male">ذكر</option>
                                         <option value="female">أنثى</option>
@@ -144,9 +144,8 @@
                                 <div class="col-md-6">
                                     <label for="blood_group"> فصيلة الدم </label>
                                 </div>
-
                                 <div class="col-md-6">
-                                    <select class="custom-select mr-sm-2" name="blood_group" style="width: 360px;">
+                                    <select class="custom-select mr-sm-2" id="blood_group" name="blood_group" style="width: 360px;">
                                         <option selected disabled>أختار من القائمة</option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>

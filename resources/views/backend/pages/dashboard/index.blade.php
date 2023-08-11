@@ -5,28 +5,28 @@
 @endsection
 
 @section('css')
-<style type="text/css">
-    a[disabled="disabled"] {
-        pointer-events: none;
-    }
-</style>
+    <style type="text/css">
+        a[disabled="disabled"] {
+            pointer-events: none;
+        }
+    </style>
 @endsection
 
 @section('page-header')
     <!-- breadcrumb -->
     <div class="page-title">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-12">
                 <h4 class="mb-0"> {{ trans('backend/dashboard_trans.Dashboard') }} </h4>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                    <li class="breadcrumb-item"><a href="#"
-                            class="default-color">{{ trans('backend/dashboard_trans.Home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{ trans('backend/dashboard_trans.Dashboard') }}</li>
-                </ol>
+
+            @if (config('app.env') !== 'production')
+            <div class="col-sm-6 col-12">
+                <a href="{{ URL(env('APP_URL') . '/log-viewer') }}" target="blank">
+                    Log Viewer
+                </a>
             </div>
+            @endif
         </div>
     </div>
     <!-- breadcrumb -->
@@ -35,6 +35,8 @@
 
 
 @section('content')
+
+
     <!-- row -->
     <div class="row">
         <div class="col-md-12 col-sm-12 mb-30">
@@ -45,7 +47,7 @@
 
                     <div class="dash-div row">
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -68,7 +70,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -92,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -117,7 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -141,8 +143,9 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="dash-div row">
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -167,7 +170,7 @@
                         </div>
 
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20 ">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -192,7 +195,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20 ">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -216,7 +219,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-20">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -242,20 +245,20 @@
 
                     </div>
 
+                    <div class="row card-body p-2 last-jobs">
 
-
-                    <div class="row card-body p-2">
-
-                        <div class="col-9 col-xl-9 col-md-12 col-sm-12 mb-30">
+                        <div class="col-12 col-xl-9 col-md-12 col-sm-12 mb-30">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
+
                                     <div class="tab nav-border" style="position: relative;">
                                         <div class="d-block d-md-flex justify-content-between">
 
                                             <div class="d-block w-100">
                                                 <h5 class="card-title">اخرالعمليات علي النظام</h5>
                                             </div>
-                                            <div class="d-block d-md-flex nav-tabs-custom">
+
+                                            <div class="d-block d-md-flex nav-tabs-custom p-0">
                                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                                     <li class="nav-item">
@@ -282,11 +285,11 @@
                                                     </li>
 
 
-
                                                 </ul>
                                             </div>
 
                                         </div>
+
                                         <div class="tab-content" id="myTabContent">
 
                                             {{-- patients Table --}}
@@ -587,11 +590,12 @@
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div style="height: 400px;" class="col-3 col-lg-3 col-md-12 col-sm-12 ">
+                        <div style="height: 400px;" class="col-12 col-lg-3 col-md-12 col-sm-12 ">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="col-12 px-0">
@@ -699,75 +703,79 @@
                             </div>
                         </div>
 
-
-
                     </div>
 
+                    @include('backend.pages.dashboard.charts')
+                    
 
-
-                </div>
             </div>
         </div>
     </div>
+
+
+    
+    
     <!-- row closed -->
 @endsection
+
 @section('js')
-<script>
-    
-    $(document).ready(function() {
+    <script>
 
-$('#datepicker-action').change(function() {
-    var selectedDate = $(this).val();
-    // Perform an AJAX request to fetch the updated number of reservations
-    $.ajax({
-        url: "{{ URL::to('/backend/reservations/get_res_slot_number_add') }}", // Replace with the actual URL to handle the AJAX request
-        method: 'GET',
-        data: {
-            res_date: selectedDate,
-        },
-        success: function(response) {
+        $(document).ready(function() {
+            
 
-            // Clear the existing options
-            $('select[name="res_num"]').empty();
-            // Add the updated options
-            for (var i = 1; i <= response.reservationsCount; i++) {
-                console.log(response.todayReservationResNum.includes(i));
-                if (response.todayReservationResNum.includes(i)) {
-                    var option = '<option value="' + i +
-                        '" disabled style="background:gainsboro">' + i +
-                        '</option>';
-                } else {
-                    var option = '<option value="' + i + '">' + i + '</option>';
-                }
-                $('select[name="res_num"]').append(option);
-            }
+            $('#datepicker-action').change(function() {
+                var selectedDate = $(this).val();
+                // Perform an AJAX request to fetch the updated number of reservations
+                $.ajax({
+                    url: "{{ URL::to('/backend/reservations/get_res_slot_number_add') }}", // Replace with the actual URL to handle the AJAX request
+                    method: 'GET',
+                    data: {
+                        res_date: selectedDate,
+                    },
+                    success: function(response) {
+
+                        // Clear the existing options
+                        $('select[name="res_num"]').empty();
+                        // Add the updated options
+                        for (var i = 1; i <= response.reservationsCount; i++) {
+                            console.log(response.todayReservationResNum.includes(i));
+                            if (response.todayReservationResNum.includes(i)) {
+                                var option = '<option value="' + i +
+                                    '" disabled style="background:gainsboro">' + i +
+                                    '</option>';
+                            } else {
+                                var option = '<option value="' + i + '">' + i + '</option>';
+                            }
+                            $('select[name="res_num"]').append(option);
+                        }
 
 
 
-            // Clear the current options
-            $('#slot-select').empty();
-            // Add the new options based on the response
-            $.each(response.slots, function(index, slot) {
-                var option = $('<option>').val(slot.slot_start_time).text(
-                    slot.slot_start_time + ' - ' + slot.slot_end_time);
+                        // Clear the current options
+                        $('#slot-select').empty();
+                        // Add the new options based on the response
+                        $.each(response.slots, function(index, slot) {
+                            var option = $('<option>').val(slot.slot_start_time).text(
+                                slot.slot_start_time + ' - ' + slot.slot_end_time);
 
-                if (response.today_reservation_slots.includes(slot
-                        .slot_start_time)) {
-                    option.attr('disabled',
-                        true); // Disable the option if reserved
-                    option.css('background', 'gainsboro');
-                }
-                $('#slot-select').append(option);
+                            if (response.today_reservation_slots.includes(slot
+                                    .slot_start_time)) {
+                                option.attr('disabled',
+                                    true); // Disable the option if reserved
+                                option.css('background', 'gainsboro');
+                            }
+                            $('#slot-select').append(option);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle the error response
+                        console.log(error);
+                    }
+                });
             });
-        },
-        error: function(xhr, status, error) {
-            // Handle the error response
-            console.log(error);
-        }
-    });
-});
 
 
-});
-</script>
+        });
+    </script>
 @endsection

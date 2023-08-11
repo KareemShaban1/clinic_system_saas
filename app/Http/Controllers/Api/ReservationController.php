@@ -6,32 +6,34 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreReservationRequest;
 use App\Http\Requests\Api\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
+use App\Http\Traits\ApiResponseTrait;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 class ReservationController extends Controller
 {
     //
+    use ApiResponseTrait;
     public function index()
     {
 
         // بتحولها بشكل أتوماتيك laravel ال  json response ل model مش محتاج أحول ال
 
-        $reservations = Reservation::all();
-        return  ReservationResource::collection($reservations);
+        $reservations = ReservationResource::collection(Reservation::get());
+
+        return $this->apiResponse($reservations, 'All Reservations', 200);
 
         // return Reservation::all();
 
     }
 
-    public function show(Reservation $reservation)
+    public function show($id)
     {
+        $reservation = Reservation::find($id);
+        if($reservation) {
 
-        return new ReservationResource($reservation);
-
-        // return Reservation::find($id) ?? response()->json(['status'=>'Not found'], 404);
-
+            return $this->apiResponse(new ReservationResource($reservation), 'Show Reservation', 200);
+        }
+        return $this->apiResponse(null, 'Reservation Not Found', 401);
     }
 
     public function store(StoreReservationRequest $request)
@@ -41,11 +43,11 @@ class ReservationController extends Controller
 
         $data = $request->all();
         $data['month'] = substr($request->res_date, 5, 7 - 5);
+        $reservation = new ReservationResource(Reservation::create($data));
 
-        return $data;
-        // $reservation = Reservation::create($data);
-        // return $reservation;
-        // return new ReservationResource($reservation);
+        return $this->apiResponse($reservation, 'Reservation Created Successfully', 200);
+
+
 
     }
 
@@ -63,43 +65,43 @@ class ReservationController extends Controller
         return new ReservationResource($reservation);
     }
 
-public function delete($id)
-{
+    public function delete($id)
+    {
 
-    $patient = Reservation::find($id);
+        $patient = Reservation::find($id);
 
-    if(!$patient) {
-        return response()->json(['status'=>'Not Found'], 404);
+        if(!$patient) {
+            return response()->json(['status'=>'Not Found'], 404);
+        }
+
+        $patient->delete();
+        return response()->json(['status'=>'deleted'], 200);
     }
 
-    $patient->delete();
-    return response()->json(['status'=>'deleted'], 200);
-}
+    public function restore($id)
+    {
+        $patient = Reservation::onlyTrashed()->find($id);
 
-public function restore($id)
-{
-    $patient = Reservation::onlyTrashed()->find($id);
+        if(!$patient) {
+            return response()->json(['status'=>'Not Found'], 404);
+        }
 
-    if(!$patient) {
-        return response()->json(['status'=>'Not Found'], 404);
+        $patient->restore();
+
+        return response()->json(['status'=>'restored'], 200);
+
     }
 
-    $patient->restore();
+    public function forceDelete($id)
+    {
+        $patient = Reservation::onlyTrashed()->find($id);
+        if(!$patient) {
+            return response()->json(['status'=>'Not Found'], 404);
+        }
 
-    return response()->json(['status'=>'restored'], 200);
+        $patient->forceDelete();
 
-}
+        return response()->json(['status'=>'deleted forever'], 200);
 
-public function forceDelete($id)
-{
-    $patient = Reservation::onlyTrashed()->find($id);
-    if(!$patient) {
-        return response()->json(['status'=>'Not Found'], 404);
     }
-
-    $patient->forceDelete();
-
-    return response()->json(['status'=>'deleted forever'], 200);
-
-}
 }

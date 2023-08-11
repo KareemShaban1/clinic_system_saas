@@ -6,88 +6,136 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StorePatientRequest;
 use App\Http\Requests\Api\UpdatePatientRequest;
 use App\Http\Resources\PatientResource;
+use App\Http\Traits\ApiResponseTrait;
 use Illuminate\Http\Request;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
+
 class PatientController extends Controller
 {
+    use ApiResponseTrait;
     //
-    public function index(Request $request){
 
-        // بتحولها بشكل أتوماتيك laravel ال  json response ل model مش محتاج أحول ال 
-
-        $patients = Patient::all();
-        return  PatientResource::collection($patients);
-
-        // we use resource when we want to customize json response 
-    } 
- 
-    public function show(Patient $patient){
-
-        return new PatientResource($patient);
-
-        //// return patient based on id or return json response when patient is not found
-        // return Patient::find(1) ?? response()->json(['status'=>'Not found'],404);
-      
+    public function __construct()
+    {
+        // apply middleware on all controller methods except index , show
+        $this->middleware('auth:sanctum')->except('index', 'show');
     }
 
-    public function store(StorePatientRequest $request){
 
-            
-            $request->validated();
-            
-            $patient = Patient::create($request->all());
+    public function index()
+    {
 
-            return new PatientResource($patient);
-           
+        // بتحولها بشكل أتوماتيك laravel ال  json response ل model مش محتاج أحول ال
+
+        $patients =  PatientResource::collection(Patient::get());
+
+        return $this->apiResponse($patients, 'All Patient', 200);
+
+
+        // we use resource when we want to customize json response
     }
 
-    public function update(UpdatePatientRequest $request,$id){
+    public function show($id)
+    {
 
         $patient = Patient::find($id);
 
-        if(!$patient){
-            return response()->json(['status'=>'Not Found'],404);
+        if($patient) {
+
+            return $this->apiResponse(new PatientResource($patient), 'ok', 200);
         }
-        $patient->update($request->all());
-        return new PatientResource($patient);
-}
+        return $this->apiResponse('null', 'Patient Not Fount', 401);
 
-public function delete($id){
-
-    $patient = Patient::find($id);
-
-    if(!$patient){
-        return response()->json(['status'=>'Not Found'],404);
     }
-    
-    $patient->delete();
-    return response()->json(['status'=>'deleted'],200);
-}
- 
-public function restore($id){
-    $patient = Patient::onlyTrashed()->find($id);
 
-    if(!$patient){
-        return response()->json(['status'=>'Not Found'],404);
+    public function store(StorePatientRequest $request)
+    {
+
+
+        $request->validated();
+
+        $user = $request->user();
+        if (!$user->tokenCan('أضافة مريض')) {
+            return response([
+                'message' => 'Not Allowed'
+            ], 403);
+        }
+        $patient = new PatientResource(Patient::create($request->all()));
+
+        return $this->apiResponse($patient, 'Patient Created Successfully', 200);
     }
-    
-    $patient->restore();
 
-    return response()->json(['status'=>'restored'],200);
+    public function update(UpdatePatientRequest $request, $id)
+    {
 
-}
+        $patient = Patient::find($id);
 
-public function forceDelete($id){
-    $patient = Patient::onlyTrashed()->find($id);
-    if(!$patient){
-        return response()->json(['status'=>'Not Found'],404);
+        $request->validated();
+
+        $user = $request->user();
+        if (!$user->tokenCan('تعديل مريض')) {
+            return response([
+                'message' => 'Not Allowed'
+            ], 403);
+        }
+
+        if ($patient) {
+            $patient->update($request->all());
+            return $this->apiResponse(new PatientResource($patient), 'Patient Updated Successfully', 200);
+        }
+
+        return $this->apiResponse(null, 'Patient Not Found', 401);
+
     }
-    
-    $patient->forceDelete();
 
-    return response()->json(['status'=>'deleted forever'],200);
+    public function delete($id)
+    {
 
-}
+        $patient = Patient::find($id);
+
+        $user = Auth::guard('sanctum')->user();
+        if (!$user->tokenCan('حذف مريض')) {
+            return response([
+                'message' => 'Not Allowed'
+            ], 403);
+        }
+        if(!$patient) {
+            return $this->apiResponse(null, 'Patient Not Found', 401);
+        }
+        $patient->delete();
+        return $this->apiResponse(null, 'Patient Deleted Successfully', 200);
+    }
+
+
+
+    public function restore($id)
+    {
+
+        $patient = Patient::onlyTrashed()->find($id);
+
+        if(!$patient) {
+            return $this->apiResponse(null, 'Patient Not Found', 401);
+        }
+
+        $patient->restore();
+
+        return $this->apiResponse(null, 'Patient Restored Successfully', 200);
+
+    }
+
+    public function forceDelete($id)
+    {
+        $patient = Patient::onlyTrashed()->find($id);
+
+        if(!$patient) {
+            return $this->apiResponse(null, 'Patient Not Found', 401);
+        }
+        $patient->forceDelete();
+
+        return $this->apiResponse(null, 'Patient Force Deleted Successfully', 200);
+
+    }
 
 
 }

@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-حسابات اليوم
+{{ trans('backend/fees_trans.All_Fees') }}
 @stop
 @endsection
 @section('page-header')
@@ -10,14 +10,9 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> حسابات </h4>
+            <h4 class="mb-0"> {{ trans('backend/fees_trans.All_Fees') }} </h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">Home</a></li>
-                <li class="breadcrumb-item active">Page Title</li>
-            </ol>
-        </div>
+        
     </div>
 </div>
 <!-- breadcrumb -->
@@ -109,6 +104,44 @@
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
- 
-@endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        var lang = "{{ App::getLocale() }}";
+        var dataTableOptions = {
+            responsive: true,
+            columnDefs: [{
+                    responsivePriority: 1,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 4
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 5
+                },
+                {
+                    responsivePriority: 4,
+                    targets: 6
+                },
+                // Add more columnDefs for other columns, if needed
+            ],
+            oLanguage: {
+                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
+                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
+                oPaginate: {
+                    sFirst: lang === 'ar' ? "الأول" : "First",
+                    sLast: lang === 'ar' ? "الأخير" : "Last",
+                    sNext: lang === 'ar' ? "التالى" : "Next",
+                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+                },
+            },
+        };
+
+        $('#table_id').DataTable(dataTableOptions);
+    });
+</script>
+@endpush

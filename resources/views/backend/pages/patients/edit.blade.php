@@ -14,13 +14,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/patients_trans.Edit_Patient') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/patients_trans.Edit_Patient') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/patients_trans.Patients') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -40,19 +33,19 @@
 
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label>{{ trans('backend/patients_trans.Patient_Name') }}<span
+                                <label for="name">{{ trans('backend/patients_trans.Patient_Name') }}<span
                                         class="text-danger">*</span></label>
-                                <input type="text" value="{{ $patient->name }}" name="name" class="form-control">
+                                <input type="text" id="name" value="{{ $patient->name }}" name="name" class="form-control">
 
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label> {{ trans('backend/patients_trans.Age') }} </label>
-                                <input class="form-control" value="{{ $patient->age }}" name="age" type="number">
+                                <label for="age"> {{ trans('backend/patients_trans.Age') }} </label>
+                                <input class="form-control" id="age" value="{{ $patient->age }}" name="age" type="number">
 
                             </div>
                         </div>
@@ -61,20 +54,20 @@
 
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label>{{ trans('backend/patients_trans.Address') }} <span
+                                <label for="address">{{ trans('backend/patients_trans.Address') }} <span
                                         class="text-danger">*</span></label>
-                                <input type="text" value="{{ $patient->address }}" name="address"
+                                <input type="text" id="address" value="{{ $patient->address }}" name="address"
                                     class="form-control">
 
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label> {{ trans('backend/patients_trans.Email') }} </label>
-                                <input class="form-control" value="{{ $patient->email }}" name="email"
+                                <label for="email"> {{ trans('backend/patients_trans.Email') }} </label>
+                                <input class="form-control" id="email" value="{{ $patient->email }}" name="email"
                                     type="email">
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -82,11 +75,11 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label> {{ trans('backend/patients_trans.Phone') }} <span
+                                <label for="phone"> {{ trans('backend/patients_trans.Phone') }} <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" value="{{ $patient->phone }}" name="phone"
+                                <input class="form-control" id="phone" value="{{ $patient->phone }}" name="phone"
                                     type="phone">
 
                             </div>
@@ -95,13 +88,13 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
-                            <div class="col-md-4">
+                        <div class="col-md-6 col-12">
+                            <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label for="gender"> {{ trans('backend/patients_trans.Patient_Gender') }} <span
                                             class="text-danger">*</span></label>
 
-                                    <select class="custom-select mr-sm-2" name="gender"
+                                    <select class="custom-select mr-sm-2" name="gender" id="gender"
                                         @if ($patient->gender == old('gender', $patient->gender)) selected @endif>
                                         <option selected disabled>{{ trans('backend/patients_trans.Choose') }}</option>
 
@@ -117,13 +110,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="col-md-4">
+                        <div class="col-md-6 col-12">
+                            <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label for="blood_group"> {{ trans('backend/patients_trans.Blood_Group') }} <span
                                             class="text-danger">*</span></label>
 
-                                    <select class="custom-select mr-sm-2" name="blood_group"
+                                    <select class="custom-select mr-sm-2" name="blood_group" id="blood_group"
                                         @if ($patient->blood_group == old('blood_group', $patient->blood_group)) selected @endif>
                                         <option selected disabled>{{ trans('backend/patients_trans.Choose') }}</option>
                                         <option value="A+" @if (old('blood_group', $patient->blood_group) == 'A+') selected @endif>A+

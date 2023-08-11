@@ -60,6 +60,13 @@
       0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
   ),
+  'laraveldaily/laravel-charts' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'LaravelDaily\\LaravelCharts\\LaravelChartsServiceProvider',
+    ),
+  ),
   'livewire/livewire' => 
   array (
     'providers' => 
@@ -155,6 +162,17 @@
     'providers' => 
     array (
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    ),
+  ),
+  'opcodesio/log-viewer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Opcodes\\LogViewer\\LogViewerServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LogViewer' => 'Opcodes\\LogViewer\\Facades\\LogViewer',
     ),
   ),
   'simplesoftwareio/simple-qrcode' => 

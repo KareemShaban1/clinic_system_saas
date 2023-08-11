@@ -647,6 +647,8 @@ section:nth-child(even) {
     }
 
     .header .navbar.active {
+        display: block;
+        width: 90%;
         transform: scale(1);
         opacity: 1;
         transition: .2s ease-out;

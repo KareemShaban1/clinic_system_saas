@@ -54,7 +54,7 @@ class MedicineSeeder extends Seeder
         foreach ($medicines as $key => $value) {
             // var_dump([$key][1]);
             Medicine::create(
-               
+                
                 [
                 "drugbank_id" => $value["drugbank_id"],
                 "name" => $value["name"],
@@ -65,7 +65,7 @@ class MedicineSeeder extends Seeder
             ]);
         }
 
-      
+        
         foreach ($brands as $key => $value) {
             // var_dump([$key[0]]);
             // $medicine = Medicine::where('drugbank_id',$key[0])->get(); 

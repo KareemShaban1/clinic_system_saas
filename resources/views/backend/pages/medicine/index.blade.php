@@ -12,13 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/medicines_trans.Medicines') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/medicines_trans.All_Medicines') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/medicines_trans.Medicines') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -57,61 +50,89 @@
 
 
 
-                <table id="table_id" class="display">
-                    <thead>
-                        <tr>
-                            <th style="width: 100px">{{ trans('backend/medicines_trans.Id') }}</th>
-                            <th style="width: 150px">{{ trans('backend/medicines_trans.DrugBank_Id') }}</th>
-                            <th style="width: 150px">{{ trans('backend/medicines_trans.Drug_Name') }}</th>
-                            <th style="width: 150px">{{ trans('backend/medicines_trans.Brand_Name') }}</th>
-                            <th style="width: 150px">{{ trans('backend/medicines_trans.Drug_Dose') }}</th>
-                            <th style="width: 250px">{{ trans('backend/medicines_trans.Categories') }}</th>
-                            <th style="width: 150px">{{ trans('backend/medicines_trans.Control') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($medicines as $medicine)
+                <div class="table-responsive">
+                    <table id="table_id" class="table table-hover table-sm p-0">
+                        <thead>
                             <tr>
-                                <td style="width: 100px">{{ $medicine->id }}</td>
-                                <td style="width: 150px">{{ $medicine->drugbank_id }}</td>
-                                <td style="width: 150px">{{ $medicine->name }}</td>
-                                <td style="width: 150px">{{ $medicine->brand_name }}</td>
-                                <td style="width: 150px">{{ $medicine->drug_dose }}</td>
-                                <td style="width: 250px">{{ $medicine->categories }}</td>
-
-                                <td style="width: 150px">
-                                    <a href="{{ Route('backend.medicines.show', $medicine->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a href="{{ Route('backend.medicines.edit', $medicine->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-
-                                    <form action="{{ Route('backend.medicines.destroy', $medicine->id) }}"
-                                        method="post" style="display:inline">
-                                        @csrf
-                                        @method('delete')
-
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-
-
-                                </td>
-
+                                <th style="width: 100px">{{ trans('backend/medicines_trans.Id') }}</th>
+                                <th style="width: 150px">{{ trans('backend/medicines_trans.DrugBank_Id') }}</th>
+                                <th style="width: 150px">{{ trans('backend/medicines_trans.Drug_Name') }}</th>
+                                <th style="width: 150px">{{ trans('backend/medicines_trans.Brand_Name') }}</th>
+                                <th style="width: 150px">{{ trans('backend/medicines_trans.Drug_Dose') }}</th>
+                                <th style="width: 250px">{{ trans('backend/medicines_trans.Categories') }}</th>
+                                <th style="width: 150px">{{ trans('backend/medicines_trans.Control') }}</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($medicines as $medicine)
+                                <tr>
+                                    <td style="width: 100px">{{ $medicine->id }}</td>
+                                    <td style="width: 150px">{{ $medicine->drugbank_id }}</td>
+                                    <td style="width: 150px">{{ $medicine->name }}</td>
+                                    <td style="width: 150px">{{ $medicine->brand_name }}</td>
+                                    <td style="width: 150px">{{ $medicine->drug_dose }}</td>
+                                    <td style="width: 250px">{{ $medicine->categories }}</td>
+    
+                                    <td style="width: 150px">
+                                        <a href="{{ Route('backend.medicines.show', $medicine->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ Route('backend.medicines.edit', $medicine->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+    
+                                        <form action="{{ Route('backend.medicines.destroy', $medicine->id) }}"
+                                            method="post" style="display:inline">
+                                            @csrf
+                                            @method('delete')
+    
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+    
+    
+                                    </td>
+    
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        var lang = "{{ App::getLocale() }}";
+        var dataTableOptions = {
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 1, targets: 2 },
+                { responsivePriority: 2, targets: 3 },
+                { responsivePriority: 3, targets: 6 },
+                // Add more columnDefs for other columns, if needed
+            ],
+            oLanguage: {
+                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
+                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
+                oPaginate: {
+                    sFirst: lang === 'ar' ? "الأول" : "First",
+                    sLast: lang === 'ar' ? "الأخير" : "Last",
+                    sNext: lang === 'ar' ? "التالى" : "Next",
+                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+                },
+            },
+        };
 
-@endsection
+        $('#table_id').DataTable(dataTableOptions);
+    });
+</script>
+@endpush

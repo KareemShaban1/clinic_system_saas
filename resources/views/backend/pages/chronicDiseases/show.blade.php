@@ -12,12 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0">{{trans('backend/chronic_diseases_trans.Chronic')}}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/chronic_diseases_trans.Show_Chronic')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('backend/chronic_diseases_trans.Chronic')}}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -31,7 +25,7 @@
 
                 
                 <div class="my-post-content pt-4">
-                                          
+                
 
                     @foreach($chronic_diseases as $chronic_disease)
 

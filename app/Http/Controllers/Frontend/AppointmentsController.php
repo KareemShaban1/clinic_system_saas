@@ -15,9 +15,9 @@ use App\Models\{
     Patient,
     Ray,
     Reservation,
-    ReservationControl,
     ReservationSlots,
-    Settings
+    Settings,
+    SystemControl
 };
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,7 +41,7 @@ class AppointmentsController extends Controller
 
 
         // get reservation controls
-        $reservation_controls = ReservationControl::all();
+        $reservation_controls = SystemControl::all();
 
         $setting = $reservation_controls->flatMap(function ($collection) {
             return [$collection->key => $collection->value];
@@ -60,7 +60,7 @@ class AppointmentsController extends Controller
         $number_of_res = null;
 
         // get reservation settings
-        $settings = ReservationControl::pluck('value','key');
+        $settings = SystemControl::pluck('value','key');
 
         $user_id = Auth::user('patient')->patient_id;
 
@@ -152,55 +152,7 @@ class AppointmentsController extends Controller
         return $pdf->stream('Glasses' . '.pdf');
     }
 
-    // public function get_res_slot_number(Request $request)
-    // {
-    //     $res_date =  $request->res_date;
-
-    //     $today_reservation_res_num = null;
-    //     $today_reservation_slots = null;
-    //     $number_of_res = null;
-    //     $slots = [];
-    //     $number_of_slot = null;
-    //     $collection = ReservationControl::all();
-    //     $settings = $collection->flatMap(function ($collection) {
-    //         return [$collection->key => $collection->value];
-    //     });
-
-    //     // check if request reservation date has number of reservations or not
-
-    //     if ($settings['reservation_slots'] == 0) {
-    //         $today_reservation_res_num = Reservation::where('res_date', $res_date)->value('res_num');
-    //         $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
-    //     }
-
-
-
-    //     if ($settings['reservation_slots'] == 1) {
-    //         $today_reservation_slots = Reservation::where('res_date', $res_date)->value('slot');
-
-    //         // dd( $today_reservation_slots);
-    //         // check if request reservation date has number of reservations or not
-    //         $number_of_slot = ReservationSlots::where('date', $res_date)->first();
-
-    //         if ($number_of_slot) {
-    //             $slots = $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time);
-    //         }
-    //     }
-
-    //     // Create an associative array or Laravel collection with the values
-    //     $data = [
-    //         'reservationsCount' => $number_of_res,
-    //         'todayReservationResNum' => $today_reservation_res_num,
-    //         'slots' => $slots,
-    //         'number_of_slot' => $number_of_slot,
-    //         'today_reservation_slots' =>  $today_reservation_slots
-    //     ];
-
-    //     // Return the data as JSON response
-    //     return response()->json($data);
-
-    //     // return $number_of_res;
-    // }
+    
 
     public function getResNumberOrSlot(Request $request)
     {

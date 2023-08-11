@@ -24,6 +24,7 @@ class PrescriptionController extends Controller
     // add drugs to prescription
     public function add(Request $request, $id)
     {
+        
 
         // get reservation based on reservation_id
         $reservation = Reservation::findOrFail($id);

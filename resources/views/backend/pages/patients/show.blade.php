@@ -12,12 +12,7 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{trans('backend/patients_trans.Patient_Profile')}}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/patients_trans.Patient_Profile')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('backend/patients_trans.Patients')}}</li>
-            </ol>
-        </div>
+        
     </div>
 </div>
 <!-- breadcrumb -->
@@ -31,13 +26,11 @@
 
                 <div class="content-body">
                     <!-- row -->
-                    <div class="container-fluid">
+                    <div class="container-fluid p-0">
                     
                         <div class="row">
                             
-                           
-                            
-                            <div class="col-xl-12 col-xxl-8 col-lg-8">
+                            <div class="col-xl-12 col-xxl-8 col-lg-8 p-0">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="profile-tab">

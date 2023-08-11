@@ -10,25 +10,39 @@ use Illuminate\Validation\ValidationException;
 
 class MedicineController extends Controller
 {
-    public function index(Medicine $medicine)
+    public $medicine;
+
+    public function __construct(Medicine $medicine)
     {
-        $medicines = $medicine->all();
+        $this->medicine = $medicine;
+    }
+
+    public function index()
+    {
+        $this->authorizeCheck('عرض الدواء');
+
+        $medicines = $this->medicine->all();
 
         return view('backend.pages.medicine.index', compact('medicines'));
     }
 
     public function add()
     {
+        $this->authorizeCheck('أضافة دواء');
+
         return view('backend.pages.medicine.add');
     }
 
-    public function store(StoreMedicineRequest $request, Medicine $medicine)
+    public function store(StoreMedicineRequest $request)
     {
+        $this->authorizeCheck('أضافة دواء');
+
+        $request->validated();
+
         try {
-            $request->validated();
 
             $data = $request->all();
-            $medicine->create($data);
+            $this->medicine->create($data);
 
             return redirect()->route('backend.medicines.index');
         } catch (ValidationException $e) {
@@ -38,19 +52,23 @@ class MedicineController extends Controller
         }
     }
 
-    public function edit($id, Medicine $medicine)
+    public function edit($id)
     {
-        $medicine = $medicine->findOrFail($id);
+        $this->authorizeCheck('تعديل دواء');
+
+        $medicine = $this->medicine->findOrFail($id);
 
         return view('backend.pages.medicine.edit', compact('medicine'));
     }
 
-    public function update(Request $request, $id, Medicine $medicine)
+    public function update(Request $request, $id)
     {
+        $this->authorizeCheck('تعديل دواء');
+
         try {
             $data = $request->all();
 
-            $medicine = $medicine->findOrFail($id);
+            $medicine = $this->medicine->findOrFail($id);
 
             $medicine->update($data);
 
@@ -62,38 +80,47 @@ class MedicineController extends Controller
         }
     }
 
-    public function show($id, Medicine $medicine)
+    public function show($id)
     {
-        $medicine = $medicine->findOrFail($id);
+        $this->authorizeCheck('عرض دواء');
+        
+        $medicine = $this->medicine->findOrFail($id);
 
         return view('backend.pages.medicine.show', compact('medicine'));
     }
 
-    public function destroy($id, Medicine $medicine)
+    public function destroy($id)
     {
-        $medicine = $medicine->findOrFail($id);
+        $this->authorizeCheck('حذف دواء');
+        $medicine = $this->medicine->findOrFail($id);
         $medicine->delete();
 
         return redirect()->route('backend.medicines.index');
     }
 
-    public function trash(Medicine $medicine)
+    public function trash()
     {
-        $medicines = $medicine->onlyTrashed()->get();
+        $this->authorizeCheck('حذف دواء');
+        
+        $medicines = $this->medicine->onlyTrashed()->get();
         return view('backend.pages.medicine.trash', compact('medicines'));
     }
 
-    public function restore($id, Medicine $medicine)
+    public function restore($id)
     {
-        $medicine = $medicine->onlyTrashed()->findOrFail($id);
+        $this->authorizeCheck('حذف دواء');
+        
+        $medicine = $this->medicine->onlyTrashed()->findOrFail($id);
         $medicine->restore();
 
         return redirect()->route('backend.medicines.index');
     }
 
-    public function forceDelete($id, Medicine $medicine)
+    public function forceDelete($id)
     {
-        $medicine = $medicine->onlyTrashed()->findOrFail($id);
+        $this->authorizeCheck('حذف دواء');
+        
+        $medicine = $this->medicine->onlyTrashed()->findOrFail($id);
         $medicine->forceDelete();
 
         return redirect()->route('backend.medicines.index');

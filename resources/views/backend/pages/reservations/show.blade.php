@@ -12,13 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/reservations_trans.Show_Reservation') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/reservations_trans.Show_Reservation') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/reservations_trans.Reservations') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -32,14 +25,12 @@
 
                 <div class="content-body">
                     <div class="container-fluid">
-
                         <div class="row">
 
 
 
-                            <div class="col-xl-12 col-xxl-8 col-lg-8">
-                                <div class="card">
-                                    <div class="card-body">
+                            <div class="col-xl-12 col-xxl-8 col-lg-8 col-12 p-0">
+                                
                                         <div class="profile-tab">
                                             <div class="custom-tab-1">
                                                 <ul class="nav nav-tabs">
@@ -127,13 +118,12 @@
                                                                     </div>
                                                                     <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>
                                                                             <p>
+                                                                                
                                                                                 @if ($reservation->res_type == 'check')
                                                                                     {{ trans('backend/reservations_trans.Check') }}
-                                                                                    @elseif
-                                                                                    ($reservation->res_type == 'recheck')
+                                                                                @elseif($reservation->res_type == 'recheck')
                                                                                     {{ trans('backend/reservations_trans.Recheck') }}
-                                                                                    @elseif
-                                                                                    ($reservation->res_type == 'consultation')
+                                                                                @elseif($reservation->res_type == 'consultation')
                                                                                     {{ trans('backend/reservations_trans.Consultation') }}
                                                                                 @endif
                                                                             </p>
@@ -154,14 +144,12 @@
                                                                                         class="badge badge-rounded badge-warning text-white p-2 mb-2">
                                                                                         {{ trans('backend/reservations_trans.Waiting') }}
                                                                                     </span>
-                                                                                    @elseif
-                                                                                    ($reservation->status == 'entered')
+                                                                                    @elseif($reservation->status == 'entered')
                                                                                     <span
                                                                                         class="badge badge-rounded badge-success p-2 mb-2">
                                                                                         {{ trans('backend/reservations_trans.Entered') }}
                                                                                     </span>
-                                                                                    @elseif
-                                                                                    ($reservation->status == 'finished')
+                                                                                    @elseif($reservation->status == 'finished')
                                                                                     <span
                                                                                         class="badge badge-rounded badge-danger p-2 mb-2">
                                                                                         {{ trans('backend/reservations_trans.Finished') }}
@@ -184,8 +172,7 @@
                                                                                 @if ($reservation->payment == 'paid')
                                                                                     <span
                                                                                         class="badge badge-rounded badge-success">{{ trans('backend/reservations_trans.Paid') }}</span>
-                                                                                    @elseif
-                                                                                    ($reservation->payment == 'not paid')
+                                                                                    @elseif($reservation->payment == 'not paid')
                                                                                     <span
                                                                                         class="badge badge-rounded badge-danger">{{ trans('backend/reservations_trans.Not_Paid') }}</span>
                                                                                 @endif
@@ -483,8 +470,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
 

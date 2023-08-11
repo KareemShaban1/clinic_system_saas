@@ -15,13 +15,7 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('frontend/dashboard_trans.Dashboard') }} </h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                {{-- <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('frontend/dashboard_trans.Home') }}</a>
-                </li> --}}
-                <li class="breadcrumb-item active">{{ trans('frontend/dashboard_trans.Dashboard') }}</li>
-            </ol>
-        </div>
+        
     </div>
 </div>
 <!-- breadcrumb -->
@@ -33,8 +27,8 @@
         <div class="card card-statistics ">
             <div class="card-body" style="height: 500px">
 
-              <div class="row">
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+            <div class="row">
+                <div class="col-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4 ">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
                             <div class="clearfix">
@@ -60,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                <div class="col-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
                             <div class="clearfix">
@@ -86,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 ">
+                <div class="col-12 col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-4">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
                             <div class="clearfix">
@@ -111,7 +105,8 @@
 
                     </div>
                 </div>
-              </div>
+
+            </div>
             </div>
         </div>
     </div>

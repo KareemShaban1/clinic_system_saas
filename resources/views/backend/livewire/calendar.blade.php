@@ -7,11 +7,11 @@
     </div>
 
     @push('scripts')
-        {{-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js'></script> --}}
         <script src="{{ asset('backend/assets/calendar/main.min.js') }}"></script>
 
-
         <script>
+            
+        
             document.addEventListener('livewire:load', function() {
                 var Calendar = FullCalendar.Calendar;
                 var Draggable = FullCalendar.Draggable;
@@ -70,9 +70,17 @@
                     calendar.refetchEvents()
                 });
             });
+
+            window.onload = function() {
+                $('.fc-toolbar.fc-header-toolbar').addClass('row col-12 col-lg-12');
+            };
+        
+            // add the responsive classes when navigating with calendar buttons
+            $(document).on('click', '.fc-button', function(e) {
+                $('.fc-toolbar.fc-header-toolbar').addClass('row col-12 col-lg-12');
+            });
         </script>
 
-        {{-- <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.css' rel='stylesheet' /> --}}
         <link rel="stylesheet" href="{{ asset('backend/assets/calendar/main.min.css') }}">
     @endpush
 </div>

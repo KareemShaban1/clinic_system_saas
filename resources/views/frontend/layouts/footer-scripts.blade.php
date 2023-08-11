@@ -4,17 +4,12 @@
 <script src="{{ asset('backend/assets/js/plugins-jquery.js') }}"></script>
 <!-- plugin_path -->
 <script>
-    var plugin_path = 'js/';
+    var plugin_path = '{{ asset('backend/assets/js/') }}';
 </script>
 
-<!-- chart -->
-<script src="{{ asset('backend/assets/js/chart-init.js') }}"></script>
+
 <!-- calendar -->
 <script src="{{ asset('backend/assets/js/calendar.init.js') }}"></script>
-<!-- charts sparkline -->
-<script src="{{ asset('backend/assets/js/sparkline.init.js') }}"></script>
-<!-- charts morris -->
-<script src="{{ asset('backend/assets/js/morris.init.js') }}"></script>
 <!-- datepicker -->
 <script src="{{ asset('backend/assets/js/datepicker.js') }}"></script>
 <!-- sweetalert2 -->
@@ -29,8 +24,12 @@
 <!-- custom -->
 <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
 
+
 {{-- Data table --}}
 <script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script>
+
+<script src="{{ asset('backend/assets/datatables/dataTables.responsive.min.js') }}"></script>
+
 <script src="{{ asset('/sw.js') }}"></script>
 
 @livewireScripts

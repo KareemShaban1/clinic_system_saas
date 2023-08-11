@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    تعديل مستخدم
+{{ trans('backend/users_trans.Edit_User') }}
 @stop
 @endsection
 @section('page-header')
@@ -10,18 +10,13 @@
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> تعديل مستخدم</h4>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">Home</a></li>
-                <li class="breadcrumb-item active">Page Title</li>
-            </ol>
+            <h4 class="mb-0"> {{ trans('backend/users_trans.Edit_User') }}</h4>
         </div>
     </div>
 </div>
 <!-- breadcrumb -->
 @endsection
+
 @section('content')
 <!-- row -->
 <div class="row">
@@ -35,7 +30,7 @@
 
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/users_trans.User_Name') }}<span
                                         class="text-danger">*</span></label>
@@ -46,7 +41,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label> {{ trans('backend/users_trans.Email') }} <span
                                         class="text-danger">*</span></label>
@@ -57,7 +52,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/users_trans.Password') }} <span
                                         class="text-danger">*</span></label>
@@ -69,13 +64,14 @@
 
 
                     <div class="row">
-
-
-
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-12">
                             <div class="form-group">
                                 <strong>Role:</strong>
-                                {!! Form::select('roles[]', $roles, $userRole, ['class' => 'form-control', 'multiple']) !!}
+                                <select name="roles[]" class="form-control" multiple>
+                                    @foreach ($roles as $roleId => $roleName)
+                                        <option value="{{ $roleId }}" @if(in_array($roleId, $userRole)) selected @endif>{{ $roleName }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

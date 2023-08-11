@@ -108,13 +108,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0">{{ trans('frontend/rays_trans.Rays') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href=""
-                        class="default-color">{{ trans('frontend/rays_trans.Reservations') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('frontend/rays_trans.Rays') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -140,7 +133,7 @@
                         <div class="card-body">
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500">{{ trans('frontend/rays_trans.Id') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>
@@ -149,7 +142,7 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('frontend/rays_trans.Rays_Name') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>
@@ -159,7 +152,7 @@
 
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('frontend/rays_trans.Rays_Type') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>
@@ -168,7 +161,7 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('frontend/rays_trans.Rays_Date') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>
@@ -178,7 +171,7 @@
 
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('frontend/rays_trans.Notes') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>
@@ -187,7 +180,7 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('frontend/rays_trans.Rays_Image') }} <span
                                             class="{{ trans('frontend/rays_trans.pull') }}">:</span></h5>
                                 </div>

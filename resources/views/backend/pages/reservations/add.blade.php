@@ -12,19 +12,47 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/reservations_trans.Add_Reservation') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/reservations_trans.Add_Reservation') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/reservations_trans.Reservations') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
 @endsection
 @section('content')
 <!-- row -->
+
+<div style="padding: 20px; background-color:#e7e7e7;">
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <h5 class="mb-0" style="color: rgb(152, 107, 107)"> 
+                {{ trans('backend/reservations_trans.You Are Using') }}
+                @if ($settings['reservation_slots'] == 1)
+                {{ trans('backend/reservations_trans.Reservation_Slots') }}
+                @else 
+                {{ trans('backend/reservations_trans.Reservation_Numbers') }}
+                @endif
+                {{ trans('backend/reservations_trans.You Can change it from') }}
+                <a href="{{ Route('backend.system_control.index') }}" class="text-dark">
+                    {{ trans('backend/reservations_trans.here') }}
+                </a>
+            </h5>
+        </div>
+
+        <div class="col-sm-6 col-12">
+            <div>
+                <a href="{{ Route('backend.num_of_reservations.add') }}" class="text-success">
+                {{ trans('backend/reservations_trans.Add Reservation Numbers') }}
+                </a>
+            </div>
+
+            <div>
+                <a href="{{ Route('backend.reservation_slots.add') }}" class="text-success">
+                {{ trans('backend/reservations_trans.Add Reservation Slots') }}
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
@@ -39,9 +67,9 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label class="form-control-label">{{ trans('backend/reservations_trans.Patient_Name') }}
+                                <label for="patient_id" class="form-control-label">{{ trans('backend/reservations_trans.Patient_Name') }}
                                 </label>
-                                <select name="patient_id" class="custom-select mr-sm-2">
+                                <select name="patient_id" id="patient_id" class="custom-select mr-sm-2">
                                     <option value="{{ $patient->patient_id }}" selected>{{ $patient->name }}</option>
                                 </select>
 
@@ -53,9 +81,9 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{ trans('backend/reservations_trans.Reservation_Date') }} <span
+                                <label for="datepicker-action"> {{ trans('backend/reservations_trans.Reservation_Date') }} <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="res_date" id="datepicker-action"
+                                <input class="form-control"  name="res_date" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
 
                             </div>
@@ -64,9 +92,9 @@
                         @if ($settings['reservation_slots'] == 1)
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label> {{ trans('backend/reservations_trans.Reservation_Slots') }} <span
+                                    <label for="slot"> {{ trans('backend/reservations_trans.Reservation_Slots') }} <span
                                             class="text-danger">*</span></label>
-                                    <select name="slot" id="slot-select" class="custom-select mr-sm-2">
+                                    <select name="slot" id="slot" id="slot-select" class="custom-select mr-sm-2">
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}
                                         </option>
                                     </select>
@@ -76,9 +104,9 @@
                         @else
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label> {{ trans('backend/reservations_trans.Number_of_Reservation') }} <span
+                                    <label for="res_num"> {{ trans('backend/reservations_trans.Number_of_Reservation') }} <span
                                             class="text-danger">*</span></label>
-                                    <select name="res_num" class="custom-select mr-sm-2">
+                                    <select name="res_num" id="res_num" class="custom-select mr-sm-2">
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}
                                         </option>
 
@@ -98,8 +126,8 @@
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label class="form-label">{{ trans('backend/reservations_trans.Reservation_Type') }}
-                                </label>
-                                <select name="res_type" class="custom-select mr-sm-2">
+                                </label for="res_type">
+                                <select name="res_type" id="res_type" class="custom-select mr-sm-2">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="check"> {{ trans('backend/reservations_trans.Check') }}</option>
                                     <option value="recheck"> {{ trans('backend/reservations_trans.Recheck') }}</option>
@@ -113,17 +141,17 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label> {{ trans('backend/reservations_trans.Cost') }}<span
+                                <label for="cost"> {{ trans('backend/reservations_trans.Cost') }}<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="cost" type="number">
+                                <input class="form-control" id="cost" name="cost" type="number">
 
                             </div>
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label class="form-label">{{ trans('backend/reservations_trans.Payment') }}</label>
-                                <select name="payment" class="custom-select mr-sm-2">
+                                <label for="payment" class="form-label">{{ trans('backend/reservations_trans.Payment') }}</label>
+                                <select name="payment" id="payment" class="custom-select mr-sm-2">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="paid">{{ trans('backend/reservations_trans.Paid') }} </option>
                                     <option value="not paid"> {{ trans('backend/reservations_trans.Not_Paid') }}
@@ -142,7 +170,7 @@
                                 <label for="res_status">
                                     {{ trans('backend/reservations_trans.Reservation_Status') }}<span
                                         class="text-danger">*</span></label>
-                                <select class="custom-select mr-sm-2" name="res_status">
+                                <select class="custom-select mr-sm-2" id="res_status" name="res_status">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="waiting">{{ trans('backend/reservations_trans.Waiting') }}</option>
                                     <option value="entered">{{ trans('backend/reservations_trans.Entered') }}</option>
@@ -153,11 +181,11 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-4 col-sm-12">
+                        {{-- <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label for="acceptance"> {{ trans('backend/reservations_trans.Acceptance') }}<span
                                         class="text-danger">*</span></label>
-                                <select class="custom-select mr-sm-2" name="acceptance">
+                                <select class="custom-select mr-sm-2" name="acceptance" id="acceptance">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="approved">{{ trans('backend/reservations_trans.Approved') }}
                                     </option>
@@ -165,9 +193,8 @@
                                         {{ trans('backend/reservations_trans.Not_Approved') }}
                                     </option>
                                 </select>
-
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -176,10 +203,8 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/reservations_trans.First_Diagnosis') }} </label>
-                                {{-- <input type="text" name="first_diagnosis" class="form-control"> --}}
-                                <textarea id="summernote" name="first_diagnosis"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    required="">
+                                <textarea class="summernote" name="first_diagnosis"
+                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </textarea>
                             </div>
                         </div>

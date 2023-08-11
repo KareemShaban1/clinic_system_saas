@@ -13,12 +13,12 @@
 |   |   |    |   |   ChronicDiseasesController.php
 |   |   |    |   |   DrugController.php
 |   |   |    |   |   FeeController.php
-|   |   |    |   |   GlassesDistanceControoler.php
+|   |   |    |   |   GlassesDistanceController.php
 |   |   |    |   |   MedicineController.php
 |   |   |    |   |   NumberOfReservationController.php
 |   |   |    |   |   OnlineReservationController.php
 |   |   |    |   |   RaysController.php
-|   |   |    |   |   ReservationControlControoler.php
+|   |   |    |   |   SystemControlController.php
 |   |   |    |   |   ReservationController.php
 |   |   |    |   |   ReservationSlotsController.php
 |   |   |    |   DashboardController.php
@@ -37,13 +37,14 @@
 |   |   |   
 |   |   +---Middleware
 |   |   |       Authenticate.php
+|   |   |       CheckApiToken.php
 |   |   |       EncryptCookies.php
 |   |   |       PreventRequestsDuringMaintenance.php
 |   |   |       RedirectIfAuthenticated.php
 |   |   |       TrimStrings.php
 |   |   |       TrustHosts.php
 |   |   |       TrustProxies.php
-|   |   |       VerifyCsrfToken.php
+|   |   |       VerifyCsrfToken.php     
 |   |   |
 |   |   +---Requests
 |   |   |   +---Api

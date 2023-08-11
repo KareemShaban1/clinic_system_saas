@@ -56,7 +56,7 @@
                                     <li> <a href="{{ Route('backend.patients.index') }}">{{ trans('backend/sidebar_trans.All_Patients') }}
                                         </a> </li>
                                 @endcan
-                                @can('patient trash')
+                                @can('حذف مريض')
                                     <li> <a href="{{ Route('backend.patients.trash') }}">
                                             {{ trans('backend/sidebar_trans.Deleted_Patients') }} </a> </li>
                                 @endcan
@@ -237,7 +237,7 @@
 
 
                     <li>
-                        <a href="{{ Route('backend.reservation_control.index') }}"><i
+                        <a href="{{ Route('backend.system_control.index') }}"><i
                                 class="fa-sharp fa-solid fa-gear"></i><span class="right-nav-text">
                                 {{ trans('backend/sidebar_trans.System_Control') }}</span> </a>
                     </li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\TimeSlotsTrait;
+use App\Models\Patient;
 use App\Models\Reservation;
 use App\Models\ReservationSlots;
 use Carbon\Carbon;
@@ -18,7 +19,10 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('frontend.home');
+        $patients = Patient::count();
+        $reservations = Reservation::count();
+
+        return view('frontend.home',compact('patients','reservations'));
     }
 
     public function dashboard()

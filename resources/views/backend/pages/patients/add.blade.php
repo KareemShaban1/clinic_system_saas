@@ -12,13 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/patients_trans.Add_Patient') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/patients_trans.Add_Patient') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/patients_trans.Patients') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -39,7 +32,7 @@
                     @csrf
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="name">{{ trans('backend/patients_trans.Patient_Name') }}<span
                                         class="text-danger">*</span></label>
@@ -48,17 +41,17 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="age"> {{ trans('backend/patients_trans.Age') }} </label>
-                                <input class="form-control" id="name" name="age" type="number">
+                                <input class="form-control" id="age" name="age" type="number">
 
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="address">{{ trans('backend/patients_trans.Address') }} <span
                                         class="text-danger">*</span></label>
@@ -68,7 +61,7 @@
                         </div>
 
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="phone"> {{ trans('backend/patients_trans.Phone') }} <span
                                         class="text-danger">*</span></label>
@@ -79,7 +72,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="email"> {{ trans('backend/patients_trans.Email') }} </label>
                                 <input class="form-control" id="email" name="email" type="email">
@@ -87,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="password"> {{ trans('backend/patients_trans.Password') }} </label>
                                 <input class="form-control" id="password" name="password" type="password">
@@ -98,7 +91,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="gender"> {{ trans('backend/patients_trans.Patient_Gender') }} <span
                                         class="text-danger">*</span></label>
@@ -113,7 +106,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label for="blood_group"> {{ trans('backend/patients_trans.Blood_Group') }} <span
                                         class="text-danger">*</span></label>

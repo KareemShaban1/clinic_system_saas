@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\SystemControl;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PatientSeeder::class);
         $this->call(SettingsSeeder::class);
-        $this->call(ReservationControlSeeder::class);
+        $this->call(SystemControlSeeder::class);
         $this->call(MedicineSeeder::class);
 
 

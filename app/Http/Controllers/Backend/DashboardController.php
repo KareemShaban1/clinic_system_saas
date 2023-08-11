@@ -7,10 +7,10 @@ use App\Http\Traits\TimeSlotsTrait;
 use App\Models\Patient;
 use App\Models\Reservation;
 use App\Models\OnlineReservation;
-use App\Models\Medicine;
 use App\Models\ReservationSlots;
 use App\Models\User;
 use Carbon\Carbon;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class DashboardController extends Controller
 {
@@ -57,17 +57,44 @@ class DashboardController extends Controller
         $reservations = Reservation::with('patient:patient_id,name')->latest()->take(5)->get();
 
         $online_reservations = OnlineReservation::latest()->take(5)->get();
-        $daysBeforeToday = 3;
-        $daysAfterToday = 3;
-        for($i = -$daysBeforeToday; $i <= $daysAfterToday; $i++) {
-            // $date = now()->subDays($i);
-            $date = now()->addDays($i);
+
+        for($i = 0 ;$i<7 ;$i++) {
+            $date = now()->subDays($i);
             $dateFormatted = $date->format('Y-m-d');
             $activeClass = $i == 0 ? 'active show' : '';
             $number_of_slot = ReservationSlots::where('date', '=', $dateFormatted)->first();
             $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
         }
+
+
+        $user_chart_options = [
+            'chart_title' => 'Patients by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Patient',
+            'group_by_field' => 'created_at',
+            'chart_color'=>'155, 0, 0',
+            'chart_height'=>'450px',
+            'group_by_period' => 'day',
+            'chart_type' => 'bar',
+        ];
+        $user_chart = new LaravelChart($user_chart_options);
+
+
+        $reservation_chart_options = [
+            'chart_title' => 'Res by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Reservation',
+            'chart_color'=>'0, 0,67',
+            'chart_height'=>'450px',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'day',
+            'chart_type' => 'bar',
+        ];
+        $reservation_chart = new LaravelChart($reservation_chart_options);
+
         return view('backend.pages.dashboard.index', compact(
+            'user_chart',
+            'reservation_chart',
             'patients_count',
             'all_reservations_count',
             'online_reservations_count',

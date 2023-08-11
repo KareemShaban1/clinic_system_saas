@@ -23,11 +23,13 @@ class ChronicDiseasesController extends Controller
     public function index()
     {
         // Logic for fetching and displaying chronic diseases index page
-        
+
     }
 
     public function add($id)
     {
+        $this->authorizeCheck('أضافة مرض مزمن');
+
         $reservation = $this->reservation->findOrFail($id);
 
         return view('backend.pages.chronicDiseases.add', compact('reservation'));
@@ -35,8 +37,10 @@ class ChronicDiseasesController extends Controller
 
     public function store(StoreChronicDiseaseRequest $request)
     {
+        $this->authorizeCheck('أضافة مرض مزمن');
+
         $request->validated();
-        // dd($request->all());
+
         try {
             foreach ($request->title as $index => $title) {
                 $data = [
@@ -49,7 +53,7 @@ class ChronicDiseasesController extends Controller
                 ];
                 DB::table('chronic_diseases')->insert($data);
             }
-            
+
             return redirect()->route('backend.reservations.index')->with('success', 'Chronic diseases added successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
@@ -58,6 +62,8 @@ class ChronicDiseasesController extends Controller
 
     public function show($id)
     {
+        $this->authorizeCheck('عرض مرض مزمن');
+
         $reservations = $this->reservation->findOrFail($id);
         $chronic_diseases = $this->chronicDisease->where('reservation_id', $id)->get();
 
@@ -66,6 +72,8 @@ class ChronicDiseasesController extends Controller
 
     public function edit($id)
     {
+        $this->authorizeCheck('تعديل مرض مزمن');
+
         $chronic_disease = $this->chronicDisease->findOrFail($id);
 
         return view('backend.pages.chronicDiseases.edit', compact('chronic_disease'));
@@ -73,6 +81,8 @@ class ChronicDiseasesController extends Controller
 
     public function update(UpdateChronicDiseaseRequest $request, $id)
     {
+        $this->authorizeCheck('تعديل مرض مزمن');
+
         $request->validated();
 
         try {

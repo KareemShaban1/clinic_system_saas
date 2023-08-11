@@ -300,9 +300,9 @@ Route::group(
         // Reservation Control Part
         Route::group(
             [
-            'prefix'=>'/reservation_control',
-            'as'=>'reservation_control.',
-            'controller'=>'ReservationsControllers\ReservationControlController'],
+            'prefix'=>'/system_control',
+            'as'=>'system_control.',
+            'controller'=>'ReservationsControllers\SystemControlController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/update', 'update')->name('update');

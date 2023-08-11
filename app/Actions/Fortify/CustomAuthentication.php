@@ -8,12 +8,10 @@ use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class CustomAuthentication
 {
-
-          
-
 
 
           public function authenticateUser($request)
@@ -30,6 +28,20 @@ class CustomAuthentication
 
           public function authenticatePatient($request)
           {
+                    
+                    
+                    $request->validate(
+                              [
+                                        'email' => ['required'],
+                                        'password' => ['required'],
+                              ], [
+                                        'email.required'=>'برجاء أدخال البريد الألكترونى',
+                                        'password.required'=>'برجاء أدخال كلمة المرور',
+                                                  
+                              ]
+                    );
+                    
+                    
                     $email = $request->email;
                     $password = $request->password;
                     $patient = Patient::where('email', '=', $email)->first();

@@ -23,6 +23,7 @@
 
 <link rel="stylesheet" href="{{ asset('backend/assets/css/summernote.min.css') }}">
 
+
 @livewireStyles
 
 <!--- Style css -->
@@ -31,3 +32,5 @@
 @else
     <link href="{{ asset('backend/assets/css/rtl.css') }}" rel="stylesheet">
 @endif
+
+<link href="{{ asset('backend/assets/css/responsive.css') }}" rel="stylesheet">

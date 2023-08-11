@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend\ReservationsControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OnlineReservation;
-use App\Http\Traits\MeetingZoomTrait;
 use App\Http\Traits\ZoomMeetingTrait;
 use App\Models\Patient;
 use MacsiDigital\Zoom\Facades\Zoom;

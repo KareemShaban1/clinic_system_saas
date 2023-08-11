@@ -4,7 +4,9 @@
 @section('title')
     {{ trans('backend/roles_trans.Add_Role') }}
 @stop
+
 @endsection
+
 @section('page-header')
 <!-- breadcrumb -->
 <div class="page-title">
@@ -12,18 +14,13 @@
         <div class="col-sm-6">
             <h4 class="mb-0">{{ trans('backend/roles_trans.Add_Role') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('backend/roles_trans.Add_Role') }}</a>
-                </li>
-                <li class="breadcrumb-item active">{{ trans('backend/roles_trans.Roles') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
 @endsection
+
 @section('content')
+
 <!-- row -->
 <div class="row">
     <div class="col-md-12 mb-30">
@@ -36,33 +33,26 @@
 
                     @csrf
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label>{{ trans('backend/roles_trans.Role_Name') }}<span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <label for="name">{{ trans('backend/roles_trans.Role_Name') }}<span class="text-danger">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control">
+                                
                             </div>
                         </div>
-
-
                     </div>
 
-
-
                     <div class="row">
-
-
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-12">
                             <div class="form-group">
-                                <label> {{ trans('backend/roles_trans.Permissions') }} <span
-                                        class="text-danger">*</span></label>
+                                <label>{{ trans('backend/roles_trans.Permissions') }} <span class="text-danger">*</span></label>
                                 <br>
                                 @foreach ($permission as $value)
-                                    <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                                        {{ $value->name }}</label>
-                                    <br />
+                                    <label>
+                                        <input type="checkbox" name="permission[]" value="{{ $value->id }}" class="name">
+                                        {{ $value->name }}
+                                    </label>
+                                    <br>
                                 @endforeach
                                 @error('permission')
                                     <div class="alert alert-danger">{{ $message }}</div>

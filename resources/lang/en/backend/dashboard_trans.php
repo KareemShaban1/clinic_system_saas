@@ -20,6 +20,7 @@ return[
           'Last_Reservations'=>'Last Reservations',
           'Last_Online_Reservations'=>'Last Online Reservations',
 
+          'Fast_Reserve'=>'Fast Reserve'
 
 ];
 

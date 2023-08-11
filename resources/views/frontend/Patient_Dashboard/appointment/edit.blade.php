@@ -12,13 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('frontend/reservations_trans.Edit_Reservation') }} </h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('frontend/reservations_trans.Edit_Reservation') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('frontend/reservations_trans.Reservations') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -30,15 +23,7 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                {{-- @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif --}}
+                <x-frontend.alert/>
 
                 <form method="post" enctype="multipart/form-data"
                     action="{{ Route('backend.reservations.update', $reservation->reservation_id) }}" autocomplete="off">

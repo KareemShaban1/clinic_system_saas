@@ -42,7 +42,7 @@
                     </span>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-12">
                             <div class="form-group">
                                 <label> البريد الألكترونى </label>
                                 <input class="form-control" name="email" type="email">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-12">
                             <div class="form-group">
                                 <label> كلمة المرور </label>
                                 <input class="form-control" name="password" type="password">
@@ -90,7 +90,7 @@
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/auth/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <!--===============================================================================================-->
-    <script src="{{ asset('frontend/auth/endor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('frontend/auth/vendor/bootstrap/js/popper.js') }}"></script>
     <script src="{{ asset('frontend/auth/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <!--===============================================================================================-->
     <script src="{{ asset('frontend/auth/vendor/select2/select2.min.js') }}"></script>
@@ -102,8 +102,7 @@
         });
     </script>
     <!--===============================================================================================-->
-    <script src="js/main.js"></script>
-
+    <script src="{{ asset('frontend/auth/js/main.js') }}"></script>
 </body>
 
 </html>

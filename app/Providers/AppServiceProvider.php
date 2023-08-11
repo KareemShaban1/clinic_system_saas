@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\SystemControl;
 use Illuminate\Support\ServiceProvider;
-use App\Models\ReservationControl;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades;
@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         JsonResource::withoutWrapping();
 
         view()->composer('backend.layouts.main-sidebar', function ($view) {
-            $collection = ReservationControl::all();
+            $collection = SystemControl::all();
             $setting = $collection->flatMap(function ($collection) {
                 return [$collection->key => $collection->value];
             });

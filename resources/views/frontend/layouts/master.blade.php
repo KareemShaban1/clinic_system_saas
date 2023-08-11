@@ -19,7 +19,7 @@
  preloader -->
 
         <div id="pre-loader">
-            <img src="{{URL::asset('backendassets/images/pre-loader/loader-01.svg')}}" alt="">
+            <img src="{{URL::asset('backend/assets/images/pre-loader/loader-02.svg')}}" alt="">
         </div>
 
         <!--=================================
@@ -34,7 +34,9 @@
         <!-- main-content -->
         <div class="content-wrapper">
 
-            @yield('page-header')
+            <div class="page-title">
+                @yield('page-header')
+            </div>
 
             @yield('content')
 

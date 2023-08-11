@@ -1,11 +1,6 @@
 @charset "UTF-8";
 /*
 Template:  Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template
-Author: potenzaglobalsolutions.com
-Design and Developed by: potenzaglobalsolutions.com
-Version : 1.0
-
-NOTE: This file includes all admin Template plugins and Shortcodes. If you don't want to use any plugins from below. You can simply remove that line from this file.
 */
 /*================================================
 [  Table of contents  ]
@@ -1495,6 +1490,24 @@ pre code {
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent; }
+
+  .dtr-title {
+    font-weight: bold;
+    color: var(--red);
+    float: right;
+    margin-left: 10px;
+  }
+  .dtr-data{
+    display: -webkit-inline-box;
+  }
+  
+  .dtr-details{
+    text-align: right;
+  }
+  
+  .dtr-details li {
+    padding: 5px;
+  }
 
 .table td,
 .table th {
@@ -3467,7 +3480,7 @@ tbody.collapse.show {
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
   color: #495057;
-  background-color: #fff;
+  background-color: #e4dddd;
   border-color: #dee2e6 #dee2e6 #fff; }
 
 .nav-tabs .dropdown-menu {
@@ -20688,15 +20701,15 @@ ul.list-unstyled li {
       .tab .nav.nav-tabs li a i {
         padding-right: 5px; }
     .tab .nav.nav-tabs li a.active {
-      background: #84ba3f;
+      background: #1f201d;
       color: #ffffff;
       border-color: transparent; }
       .tab .nav.nav-tabs li a.active:focus {
-        background: #84ba3f;
+        background: #1f201d;
         color: #ffffff;
         border-color: transparent; }
       .tab .nav.nav-tabs li a.active:hover {
-        background: #84ba3f;
+        background: #1f201d;
         color: #ffffff;
         border-color: transparent; }
 
@@ -20988,7 +21001,8 @@ ul.list-unstyled li {
 
 .admin-header.navbar .navbar-brand-wrapper {
   transition: width .5s ease-in-out;
-  width: 230px; }
+  /* width: 230px; */
+ }
   .admin-header.navbar .navbar-brand-wrapper .navbar-brand {
     color: #5a5f61;
     font-size: 2rem;
@@ -23379,8 +23393,8 @@ textarea.form-control {
   color: #626262; }
 
 .pagination .page-item.active .page-link {
-  background: #84ba3f;
-  border-color: #84ba3f;
+  background: #2e302c;
+  border-color: #2e302c;
   color: #ffffff; }
 
 /* style-customizer */
@@ -23586,7 +23600,7 @@ div.style-customizer .content-chooser input[type=radio]:checked ~ label {
   .admin-header.navbar .navbar-brand-wrapper .brand-logo-mini {
     display: block; }
   .admin-header.navbar .navbar-brand-wrapper {
-    width: 85px; }
+    width: 10px; }
   .admin-header.navbar ul.navbar-nav li {
     margin-right: 0px; }
     .admin-header.navbar ul.navbar-nav li.mr-30 {

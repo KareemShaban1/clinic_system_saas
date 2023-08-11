@@ -12,17 +12,11 @@
         <div class="col-sm-6">
             <h4 class="mb-0">{{ trans('backend/users_trans.Add_User') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/users_trans.Add_User') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/users_trans.Users') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
 @endsection
+
 @section('content')
 <!-- row -->
 <div class="row">
@@ -30,6 +24,7 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
+                <x-backend.alert/>
 
                 <form method="post" enctype="multipart/form-data" action="{{ Route('backend.users.store') }}"
                     autocomplete="off">
@@ -41,36 +36,27 @@
                                 <label>{{ trans('backend/users_trans.User_Name') }}<span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control">
-                                @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                
                             </div>
                         </div>
 
-
                     </div>
-
-
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{ trans('backend/users_trans.Email') }} <span
+                                <label for="email"> {{ trans('backend/users_trans.Email') }} <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="email" type="email">
-                                @error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" id="email" name="email" type="email">
+                                
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label> {{ trans('backend/users_trans.Password') }} <span
+                                <label for="password"> {{ trans('backend/users_trans.Password') }} <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="password" type="password">
-                                @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <input class="form-control" id="password" name="password" type="password">
+                                
                             </div>
                         </div>
 
@@ -82,7 +68,11 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>{{ trans('backend/users_trans.Roles') }}</strong>
-                                {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
+                                <select name="roles[]" class="form-control" multiple>
+                                    @foreach ($roles as $roleId => $roleName)
+                                        <option value="{{ $roleId }}">{{ $roleName }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

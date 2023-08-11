@@ -9,7 +9,7 @@ use App\Http\Requests\Backend\ {
 use App\Models\ {
     ChronicDisease,
     NumberOfReservations,
-    ReservationControl,
+    SystemControl,
     Reservation,
     Patient,
     Drug,
@@ -18,6 +18,7 @@ use App\Models\ {
     Settings,
 };
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthorizeCheck;
 use App\Http\Traits\TimeSlotsTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,10 +26,10 @@ use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ReservationController extends Controller
 {
-    use TimeSlotsTrait;
+    use TimeSlotsTrait , AuthorizeCheck;
 
     protected $reservation;
-    protected $reservationControl;
+    protected $systemControl;
     protected $numberOfReservations;
     protected $settings;
     protected $patient;
@@ -39,7 +40,7 @@ class ReservationController extends Controller
 
     public function __construct(
         Reservation $reservation,
-        ReservationControl $reservationControl,
+        SystemControl $systemControl,
         NumberOfReservations $numberOfReservations,
         Settings $settings,
         Patient $patient,
@@ -49,7 +50,7 @@ class ReservationController extends Controller
         ReservationSlots $reservationSlots
     ) {
         $this->reservation = $reservation;
-        $this->reservationControl = $reservationControl;
+        $this->systemControl = $systemControl;
         $this->numberOfReservations = $numberOfReservations;
         $this->settings = $settings;
         $this->patient = $patient;
@@ -63,8 +64,10 @@ class ReservationController extends Controller
 
     public function index()
     {
+        $this->authorizeCheck('عرض الكشوفات');
+
         $reservations = $this->reservation->with('patient:patient_id,name')->get();
-        $reservation_settings = $this->reservationControl->pluck('value', 'key');
+        $reservation_settings = $this->systemControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 
         return view('backend.pages.reservations.index', 
@@ -77,7 +80,7 @@ class ReservationController extends Controller
     {
         $currentDate = Carbon::now()->format('Y-m-d');
         $reservations = $this->reservation->whereDate('res_date', Carbon::now())->get();
-        $reservation_settings = $this->reservationControl->pluck('value', 'key');
+        $reservation_settings = $this->systemControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 
 
@@ -106,7 +109,9 @@ class ReservationController extends Controller
 
     public function add($id)
     {
-        $settings = $this->reservationControl->pluck('value', 'key');
+        $this->authorizeCheck('أضافة كشف');
+
+        $settings = $this->systemControl->pluck('value', 'key');
         
 
         $patient = $this->patient->findOrFail($id);
@@ -125,10 +130,14 @@ class ReservationController extends Controller
 
     public function store(StoreReservationRequest $request)
     {
+        $this->authorizeCheck('أضافة كشف'); 
+
         try {
             $request->validated();
             $data = $request->all();
             $data['month'] = substr($request->res_date, 5, 7 - 5);
+            $data['acceptance'] = 'approved';
+
             $this->reservation->create($data);
 
             return redirect()->route('backend.reservations.index')->with('success', 'Reservation added successfully');
@@ -139,6 +148,8 @@ class ReservationController extends Controller
 
     public function show($id)
     {
+        $this->authorizeCheck('عرض كشف'); 
+
         // get reservation based on id
         $reservation = $this->reservation->findOrFail($id);
         // get all chronic_diseases of reservation
@@ -151,9 +162,12 @@ class ReservationController extends Controller
         return view('backend.pages.reservations.show', compact('reservation', 'chronic_diseases', 'drugs', 'rays'));
     }
 
+
     public function edit($id)
     {
-        $settings = $this->reservationControl->pluck('value', 'key');
+        $this->authorizeCheck('تعديل كشف');
+
+        $settings = $this->systemControl->pluck('value', 'key');
 
         $reservation = $this->reservation->findOrFail($id);
 
@@ -194,6 +208,8 @@ class ReservationController extends Controller
 
     public function update(UpdateReservationRequest $request, $id)
     {
+        $this->authorizeCheck('تعديل كشف');
+
         try {
             $reservation = $this->reservation->findOrFail($id);
             $reservation->fill($request->validated());
@@ -207,6 +223,7 @@ class ReservationController extends Controller
 
     public function destroy($id)
     {
+        $this->authorizeCheck('حذف كشف'); 
         $reservation = $this->reservation->findOrFail($id);
         $reservation->delete();
 
@@ -215,6 +232,7 @@ class ReservationController extends Controller
 
     public function trash()
     {
+        $this->authorizeCheck('حذف كشف'); 
         $reservations = $this->reservation->onlyTrashed()->get();
 
         return view('backend.pages.reservations.trash', compact('reservations'));
@@ -222,6 +240,7 @@ class ReservationController extends Controller
 
     public function restore($id)
     {
+        $this->authorizeCheck('حذف كشف'); 
         $reservation = $this->reservation->onlyTrashed()->findOrFail($id);
         $reservation->restore();
 
@@ -230,6 +249,7 @@ class ReservationController extends Controller
 
     public function forceDelete($id)
     {
+        $this->authorizeCheck('حذف كشف'); 
         $reservation = $this->reservation->onlyTrashed()->findOrFail($id);
         $reservation->forceDelete();
 

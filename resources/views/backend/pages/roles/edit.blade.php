@@ -50,28 +50,28 @@
 
 
                     <div class="row">
-                        
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label> {{trans('backend/roles_trans.Permissions')}} <span class="text-danger">*</span></label>
+                                <label>{{trans('backend/roles_trans.Permissions')}} <span class="text-danger">*</span></label>
                                 <br>
                                 @foreach($permission as $value)
-                                <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                                {{ $value->name }}</label>
-                                <br/>
+                                    <label>
+                                        <input type="checkbox" name="permission[]" value="{{ $value->id }}" class="name" 
+                                        {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
+                                        {{ $value->name }}
+                                    </label>
+                                    <br>
                                 @endforeach
                                 @error('permission')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
-                      
                     </div>
+                    
 
-             
 
-                   <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/roles_trans.Edit')}}</button>
+                    <button type="submit" class="btn btn-success btn-md nextBtn btn-lg " >{{trans('backend/roles_trans.Edit')}}</button>
 
 
                 </form>

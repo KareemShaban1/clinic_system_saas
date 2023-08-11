@@ -12,12 +12,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0">  {{trans('backend/reservations_trans.Number_of_Reservation')}}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/reservations_trans.Number_of_Reservation')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('backend/reservations_trans.Reservations')}}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->

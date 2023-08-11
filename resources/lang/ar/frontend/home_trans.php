@@ -23,7 +23,7 @@ return [
           'Contact_Info'=>'معلومات التواصل',
           'Follow_Us'=>'تابعنا',
           ''=>'',
-          ''=>'',
+          'Admin Panel'=>'Admin Panel',
           ''=>'',
           ''=>'',
           ''=>'',

@@ -83,6 +83,10 @@ return [
           'Active'=>' نشط',
           'Inactive'=>'غير نشط',
 
+          'Acceptance'=>'حالة الكشف',
+          'Approved'=>' قبول',
+          'Not_Approved'=>'رفض ',
+
 
 
 

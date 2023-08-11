@@ -10,13 +10,6 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{ trans('backend/online_reservations_trans.All_Online_Reservations') }}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('backend/online_reservations_trans.All_Online_Reservations') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('backend/online_reservations_trans.Online_Reservations') }}</li>
-            </ol>
-        </div>
     </div>
 </div>
 <!-- breadcrumb -->
@@ -28,11 +21,10 @@
         <div class="col-md-12 mb-30">
             <div class="card card-statistics h-100">
                 <div class="card-body">
-                    <div class="col-xl-12 mb-30">
-                        <div class="card card-statistics h-100">
-                            <div class="card-body">
+                    
+
                                 <div class="table-responsive">
-                                    <table id="table_id" class="display">
+                                    <table id="table_id" class="table table-hover table-sm p-0">
                                         <thead>
                                         <tr class="alert-success">
                                             <th>#</th>
@@ -65,15 +57,40 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                                
+                        
                 </div>
             </div>
         </div>
     </div>
     <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        var lang = "{{ App::getLocale() }}";
+        var dataTableOptions = {
+            responsive: true,
+            columnDefs: [
+                { responsivePriority: 1, targets: 2 },
+                { responsivePriority: 2, targets: 4 },
+                { responsivePriority: 3, targets: 6 },
+                { responsivePriority: 4, targets: 7 },
+                // Add more columnDefs for other columns, if needed
+            ],
+            oLanguage: {
+                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
+                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
+                oPaginate: {
+                    sFirst: lang === 'ar' ? "الأول" : "First",
+                    sLast: lang === 'ar' ? "الأخير" : "Last",
+                    sNext: lang === 'ar' ? "التالى" : "Next",
+                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+                },
+            },
+        };
 
-@endsection
+        $('#table_id').DataTable(dataTableOptions);
+    });
+</script>
+@endpush

@@ -23,6 +23,9 @@ return[
           'Last_Reservations'=>'أخر حجوزات',
           'Last_Online_Reservations'=>'أخر حجوزات أونلاين',
           'Add_Reservation'=>'أضافة حجز',
-          'Notifications'=>'الأشعارات'
+          'Notifications'=>'الأشعارات',
+          'Fast_Reserve'=>'الحجز بطريقة سريعة أخر 7 أيام ',
+          'Patients_Statistics'=>'أحصائيات المرضى',
+          'Reservations_Statistics'=>'أحصائيات الحجوزات',
 
 ];

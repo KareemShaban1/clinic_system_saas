@@ -12,12 +12,7 @@
         <div class="col-sm-6">
             <h4 class="mb-0"> {{trans('backend/chronic_diseases_trans.Chronic')}}</h4>
         </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('backend/chronic_diseases_trans.Add_Chronic')}}</a></li>
-                <li class="breadcrumb-item active">{{trans('backend/chronic_diseases_trans.Chronic')}}</li>
-            </ol>
-        </div>
+        
     </div>
 </div>
 <!-- breadcrumb -->
@@ -28,21 +23,13 @@
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-                 {{-- @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                @endif --}}
+                
+                <x-backend.alert/>
 
                 <form action="{{Route('backend.chronic_diseases.update',$chronic_disease->id)}}" method="post" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     
-             
-
+            
                 <br>
 
                 <div class="row">

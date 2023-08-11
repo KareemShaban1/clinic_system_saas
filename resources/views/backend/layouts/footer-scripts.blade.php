@@ -28,28 +28,14 @@
 {{-- Data table --}}
 <script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script>
 
-@if (App::getLocale() == 'ar')
+<script src="{{ asset('backend/assets/datatables/dataTables.responsive.min.js') }}"></script>
+
+{{-- @if (App::getLocale() == 'ar')
     <script>
         $(document).ready(function() {
-            $('#table_id').DataTable({
+            
+            var datatable = $('#table_id').DataTable({
                 responsive: true,
-                // initComplete: function() {
-                //     this.api()
-                //         .columns()
-                //         .every(function() {
-                //             var column = this;
-                //             var title = column.footer().textContent;
-
-                //             // Create input element and add event listener
-                //             $('<input type="text" placeholder="Search ' + title + '" />')
-                //                 .appendTo($(column.footer()).empty())
-                //                 .on('keyup change clear', function() {
-                //                     if (column.search() !== this.value) {
-                //                         column.search(this.value).draw();
-                //                     }
-                //                 });
-                //         });
-                // },
                 oLanguage: {
                     sZeroRecords: 'لا يوجد سجل متتطابق',
                     sEmptyTable: 'لا يوجد بيانات في الجدول',
@@ -74,7 +60,7 @@
                     sEmptyTable: 'No data available in table',
                     oPaginate: {
                         sFirst: "First",
-                        sLast: "الأخير",
+                        sLast: "Last",
                         sNext: "Next",
                         sPrevious: "Previous"
                     },
@@ -83,6 +69,7 @@
             });
         });
     </script>
-@endif
+@endif --}}
+
 @livewireScripts
 @stack('scripts')

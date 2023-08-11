@@ -71,6 +71,7 @@ return [
 
     'timezone' => 'Africa/Cairo',
 
+    'api_token'=>env('API_TOKEN'),
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

@@ -9,17 +9,19 @@
 
                 <div class="tab nav-border" style="position: relative;">
                     <div class="d-block d-md-flex justify-content-between">
-                        <div class="d-block w-100 col-3 col-sm-3">
-                            <h5 class="card-title"> الحجز بطريقة سريعة أخر 7 أيام </h5>
+
+                        <div class="d-block w-100 col-12 col-sm-3 col-md-3 p-0">
+                            <h5 class="card-title"> {{ trans('backend/dashboard_trans.Fast_Reserve') }} </h5>
                         </div>
 
-                        <div class="d-block d-md-flex nav-tabs-custom col-9 col-sm-9">
+                        <div class="d-block d-md-flex justify-content-center nav-tabs-custom col-12 col-sm-12 col-md-9 p-0">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                                 @php
                                     $daysBeforeToday = 3;
                                     $daysAfterToday = 3;
                                 @endphp
+                                {{-- <div class="row"> --}}
                                 @for ($i = -$daysBeforeToday; $i <= $daysAfterToday; $i++)
                                     @php
                                         // $date = now()->subDays($i);
@@ -27,6 +29,7 @@
                                         $dateFormatted = $date->format('Y-m-d');
                                         $activeClass = $i == 0 ? 'active show' : '';
                                     @endphp
+                                    {{-- <div class="col-6 p-0"> --}}
                                     <li class="nav-item">
                                         <a class="nav-link {{ $activeClass }}" id="{{ $dateFormatted }}-tab"
                                             data-toggle="tab" href="#{{ $dateFormatted }}" role="tab"
@@ -35,7 +38,9 @@
                                             {{ $dateFormatted }}
                                         </a>
                                     </li>
+                                    {{-- </div> --}}
                                 @endfor
+                                {{-- </div> --}}
 
                             </ul>
                         </div>
@@ -69,6 +74,7 @@
                                 aria-labelledby="{{ $dateFormatted }}-tab">
                                 <div>
 
+                                    {{-- if  --}}
                                     @if ($number_of_reservations)
 
                                         @for ($j = 1; $j <= $number_of_reservations; $j++)
@@ -79,17 +85,17 @@
                                             @endphp
 
                                             @if ($reserved == $j)
-                                                <a class="btn btn-danger btn-lg text-white" disabled="disabled">
+                                                <a class="btn btn-danger btn-lg text-white" style="margin: 10px" disabled="disabled">
                                                     {{ $reserved }}
                                                 </a>
                                             @else
-                                                <a class="btn btn-info btn-lg text-white" data-toggle="modal"
+                                                <a class="btn btn-info btn-lg text-white" style="margin: 10px" data-toggle="modal"
                                                     data-target="#addReservationModal{{ $dateFormatted }}_{{ $j }}">
                                                     {{ $j }}
                                                 </a>
                                             @endif
 
-                                            <!-- Add Reservation Modal -->
+                                            <!-- Add Reservation Modal (reservations number) -->
                                             <div class="modal fade"
                                                 id="addReservationModal{{ $dateFormatted }}_{{ $j }}"
                                                 tabindex="-1" role="dialog"
@@ -105,7 +111,7 @@
                                                                 {{ $j }}
                                                             </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
+                                                                aria-label="الغاء">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
@@ -174,9 +180,6 @@
                                                                     </div>
 
                                                                 </div>
-
-
-
 
 
                                                                 <div class="row">
@@ -305,8 +308,9 @@
 
                                                                 <button type="submit"
                                                                     class="btn btn-success btn-md nextBtn btn-lg ">{{ trans('backend/reservations_trans.Add') }}</button>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary btn-md nextBtn btn-lg mb-10"
+                                                                    data-dismiss="modal">{{ trans('backend/reservations_trans.Close') }}
+                                                                </button>
                                                             </form>
 
                                                         </div>
@@ -320,8 +324,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        
                                         @endfor
+                                    
                                     @elseif ($number_of_slot)
+                                    <div class="row">
                                         @foreach ($slots as $slot)
                                             @php
                                                 $reserved_slot = App\Models\Reservation::where('res_date', $dateFormatted)
@@ -329,20 +336,27 @@
                                                     ->value('slot');
                                             @endphp
 
+
                                             @if ($reserved_slot == $slot['slot_start_time'])
-                                                <a class="btn btn-danger btn-lg text-white" disabled="disabled">
-                                                    {{ $slot['slot_start_time'] }} - {{ $slot['slot_end_time'] }}
-                                                </a>
+                                                <div class=" p-0">
+                                                    <a class="btn btn-danger btn-lg text-white " style="margin: 5px" disabled="disabled">
+                                                        {{ $slot['slot_start_time'] }} - {{ $slot['slot_end_time'] }}
+                                                    </a>
+                                                </div>
+                                                
                                             @else
-                                                <a class="btn btn-info btn-lg text-white" data-toggle="modal"
-                                                    data-target="#addReservationModal{{ $dateFormatted }}_{{ $loop->index }}">
-
-                                                    {{ $slot['slot_start_time'] }} - {{ $slot['slot_end_time'] }}
-
-                                                </a>
+                                            
+                                                <div class=" p-0">
+                                                    <a class="btn btn-info btn-lg text-white" style="margin: 5px" data-toggle="modal"
+                                                        data-target="#addReservationModal{{ $dateFormatted }}_{{ $loop->index }}">
+                                                        {{ $slot['slot_start_time'] }} - {{ $slot['slot_end_time'] }}
+                                                    </a>
+                                                </div>
+                                                
                                             @endif
 
-                                            <!-- Add Reservation Modal -->
+
+                                            <!-- Add Reservation Modal (reservation slots) -->
                                             <div class="modal fade"
                                                 id="addReservationModal{{ $dateFormatted }}_{{ $loop->index }}"
                                                 tabindex="-1" role="dialog"
@@ -354,7 +368,7 @@
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
                                                                 id="addReservationModalLabel{{ $dateFormatted }}_{{ $loop->index }}">
-                                                                Add Reservation {{ $loop->index }}
+                                                                {{ trans('backend/reservations_trans.Add_Reservation') }}
                                                             </h5>
                                                             <button type="button" class="close"
                                                                 data-dismiss="modal" aria-label="Close">
@@ -567,7 +581,7 @@
                                                                             <label>{{ trans('backend/reservations_trans.First_Diagnosis') }}
                                                                             </label>
 
-                                                                            {{-- <textarea id="summernote" name="first_diagnosis" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea> --}}
+                                                                            <textarea class="summernote" name="first_diagnosis" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
 
                                                                         </div>
                                                                     </div>
@@ -577,8 +591,8 @@
 
                                                                 <button type="submit"
                                                                     class="btn btn-success btn-md nextBtn btn-lg ">{{ trans('backend/reservations_trans.Add') }}</button>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary btn-md nextBtn btn-lg mb-10"
+                                                                    data-dismiss="modal">{{ trans('backend/reservations_trans.Close') }}</button>
                                                             </form>
 
                                                         </div>
@@ -592,14 +606,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        
                                         @endforeach
-
+                                    </div>
 
                                     @endif
 
 
                                 </div>
                             </div>
+                        
                         @endfor
 
                     </div>

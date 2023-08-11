@@ -1,10 +1,11 @@
--- Permissions 
-   - we add premissions from RolePermissionSeeder in seeders folder 
-   - to add permission to controller we use AuthorizeCheck trait 
+-- Permissions :
+   - I add permissions from "RolePermissionSeeder" in "seeders" folder 
+   - to add permission to controller , I use "AuthorizeCheck" trait 
+   - I use "spatie" package to manage roles and permissions
 
 ------------------------------------------------------------------------------
 
--- Patient Controller notes 
+-- Patient Controller notes :
    - In this code, the Patient, Reservation, and Settings models are 
      injected into the constructor of the PatientController class. 
      This allows you to access the injected models using $this->patient, 
