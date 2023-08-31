@@ -2,5 +2,7 @@
 2- do reservations [number , slots] modal in dashboard  (done)
 
 25/8/2023
-- make backup for data
-- make zoom settings
+- make backup for data . (not done)
+- make zoom settings . (not done)
+- Make Api controllers and but logic on it . (not done)
+- add blogs (migartions , models , controllers , views ) part in project. (not done)
