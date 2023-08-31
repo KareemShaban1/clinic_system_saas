@@ -29,6 +29,8 @@ class SettingsSeeder extends Seeder
             ['key' => 'phone', 'value' => ''],
             ['key' => 'website', 'value' => ''],
             ['key' => 'email', 'value' => ''],
+            ['key' => 'zoom_api_key','value' => ''],
+            ['key' => 'zoom_api_secret','value' => ''],
         ];
 
         DB::table('settings')->insert($data);

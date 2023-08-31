@@ -58,7 +58,7 @@ class ReservationController extends Controller
         $data = $request->all();
         $data['month'] = substr($request->res_date, 5, 7 - 5);
         if(!$reservation) {
-            return response()->json(['status'=>'Reservation Not Found'], 404);
+            return response()->json(['status' => 'Reservation Not Found'], 404);
         }
         $reservation->update($data);
 
@@ -68,40 +68,40 @@ class ReservationController extends Controller
     public function delete($id)
     {
 
-        $patient = Reservation::find($id);
+        $reservation = Reservation::find($id);
 
-        if(!$patient) {
-            return response()->json(['status'=>'Not Found'], 404);
+        if(!$reservation) {
+            return response()->json(['status' => 'Not Found'], 404);
         }
 
-        $patient->delete();
-        return response()->json(['status'=>'deleted'], 200);
+        $reservation->delete();
+        return response()->json(['status' => 'deleted'], 200);
     }
 
     public function restore($id)
     {
-        $patient = Reservation::onlyTrashed()->find($id);
+        $reservation = Reservation::onlyTrashed()->find($id);
 
-        if(!$patient) {
-            return response()->json(['status'=>'Not Found'], 404);
+        if(!$reservation) {
+            return response()->json(['status' => 'Not Found'], 404);
         }
 
-        $patient->restore();
+        $reservation->restore();
 
-        return response()->json(['status'=>'restored'], 200);
+        return response()->json(['status' => 'restored'], 200);
 
     }
 
     public function forceDelete($id)
     {
-        $patient = Reservation::onlyTrashed()->find($id);
-        if(!$patient) {
-            return response()->json(['status'=>'Not Found'], 404);
+        $reservation = Reservation::onlyTrashed()->find($id);
+        if(!$reservation) {
+            return response()->json(['status' => 'Not Found'], 404);
         }
 
-        $patient->forceDelete();
+        $reservation->forceDelete();
 
-        return response()->json(['status'=>'deleted forever'], 200);
+        return response()->json(['status' => 'deleted forever'], 200);
 
     }
 }

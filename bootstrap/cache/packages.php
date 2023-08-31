@@ -21,6 +21,17 @@
       'PDF' => 'Mccarlosen\\LaravelMpdf\\Facades\\LaravelMpdf',
     ),
   ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+  ),
   'jenssegers/agent' => 
   array (
     'providers' => 
@@ -197,11 +208,25 @@
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
     ),
   ),
+  'spatie/laravel-medialibrary' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\MediaLibrary\\MediaLibraryServiceProvider',
+    ),
+  ),
   'spatie/laravel-permission' => 
   array (
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
+    ),
+  ),
+  'spatie/laravel-ray' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\LaravelRay\\RayServiceProvider',
     ),
   ),
 );

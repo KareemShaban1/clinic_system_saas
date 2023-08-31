@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Settings extends Model
 {
     use HasFactory;
+
+    public $table = 'settings';
+    public $connection = 'mysql'; // or the name of your database connection
+
 }

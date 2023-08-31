@@ -1,11 +1,13 @@
-<?php 
+<?php
+
 
 return [
 
-          
+
           'Choose'=>'Choose From List',
- 
-       
+
+          'All_Online_Reservations'=>'All Online Reservations',
+
           'User_Name'=>'User Name',
           'Patient_Name'=>'Patient Name',
           'Title'=>'Title',
@@ -16,7 +18,7 @@ return [
           'Reservation_Type'=>'Reservation Type',
           'Reservation_Status'=>'Reservation Status',
           'Payment'=>'Payment',
-         
+
           'Control'=>'Control',
           'Check'=>'Check',
           'Recheck'=>'Recheck',
@@ -29,10 +31,10 @@ return [
           'Waiting'=>'waiting',
           'Entered'=>'entered',
           'Finished'=>'finished',
-          
 
-          
-          
+
+
+
           'Daily_Report'=>'Daily Report',
           'Total'=>'Total',
           ''=>'',
@@ -43,5 +45,3 @@ return [
 
 
 ];
-
-?>

@@ -71,7 +71,7 @@ return [
 
     'timezone' => 'Africa/Cairo',
 
-    'api_token'=>env('API_TOKEN'),
+    'api_token' => env('API_TOKEN'),
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -206,6 +206,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
 
     ],
 

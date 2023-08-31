@@ -18,6 +18,7 @@ return[
 
           'Reservation_Slots'=>'Reservation Slots',
           'Add_Reservation_Slots'=>'Add Reservation Slots',
+          'Last_Processes'=>'اخرالعمليات علي النظام',
 
           'Last_Patients'=>'أخر مرضى',
           'Last_Reservations'=>'أخر حجوزات',
@@ -27,5 +28,26 @@ return[
           'Fast_Reserve'=>'الحجز بطريقة سريعة أخر 7 أيام ',
           'Patients_Statistics'=>'أحصائيات المرضى',
           'Reservations_Statistics'=>'أحصائيات الحجوزات',
+
+          'Patients'=>'المرضى',
+          'Reservations'=>'الحجوزات',
+          'Fees'=>'الحسابات',
+          'Settings'=>'الأعدادات',
+          'My_Profile'=>'ملفى',
+          'Edit_Profile'=>'تعديل ملفى',
+          'Logout'=>'تسجيل خروج',
+          'Fast_Processes'=>'إجرائات سريعة',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
 
 ];

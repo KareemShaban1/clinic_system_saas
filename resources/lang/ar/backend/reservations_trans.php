@@ -3,6 +3,8 @@
 
 return [
 
+          'pull'=>'pull-left',
+
           'Choose'=>'أختار من القائمة',
 
           'Reservations'=>'الحجوزات',

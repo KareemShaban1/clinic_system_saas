@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Backend\ReservationsControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthorizeCheck;
 use App\Models\OnlineReservation;
 use App\Models\Reservation;
 use Carbon\Carbon;
 
 class FeeController extends Controller
 {
+    use AuthorizeCheck;
     // function to get sum of cost of (today reservations)
     public function today()
     {

@@ -1,27 +1,48 @@
-<?php 
+<?php
 
-return[
-          ''=>'',
-          'Dashboard'=>'Dashboard',
-          'Users'=>'Users',
-          'Patients'=>'Pateints',
-          'Today_Reservations'=>'Today Reservations',
-          'All_Reservations'=>'All Reservations',
-          'Online_Reservations'=>'Online Reservations',
-          'Today_Fees'=>'Today Fees',
-          'Month_Fees'=>'Monthly Fees',
-          'Home'=>'Home',
-          'Medicines_Number'=>'Medicines Number',
-          
-          'Reservation_Slots'=>'Reservation Slots',
-          'Add_Reservation_Slots'=>'Add Reservation Slots',
 
-          'Last_Patients'=>'Last Patients',
-          'Last_Reservations'=>'Last Reservations',
-          'Last_Online_Reservations'=>'Last Online Reservations',
-
-          'Fast_Reserve'=>'Fast Reserve'
-
-];
-
-?>
+return [
+          '' => '',
+          'Dashboard' => 'Dashboard',
+          'Users' => 'Users',
+          'Patients' => 'Patients',
+          'Today_Reservations' => 'Today Reservations',
+          'All_Reservations' => 'All Reservations',
+          'All_Your_Reservations' => 'All Your Reservations',
+          'Online_Reservations' => 'Online Reservations',
+          'Today_Fees' => 'Today Fees',
+          'Month_Fees' => 'Month Fees',
+          'Home' => 'Home',
+          'Medicines_Number' => 'Number of Medicines',
+          'Reservation_Slots' => 'Reservation Slots',
+          'Add_Reservation_Slots' => 'Add Reservation Slots',
+          'Last_Processes' => 'Last Processes',
+          'Last_Patients' => 'Last Patients',
+          'Last_Reservations' => 'Last Reservations',
+          'Last_Online_Reservations' => 'Last Online Reservations',
+          'Add_Reservation' => 'Add Reservation',
+          'Notifications' => 'Notifications',
+          'Fast_Reserve' => 'Fast Reserve (Last 7 Days)',
+          'Patients_Statistics' => 'Patients Statistics',
+          'Reservations_Statistics' => 'Reservations Statistics',
+          'Patients' => 'Patients',
+          'Reservations' => 'Reservations',
+          'Fees' => 'Fees',
+          'Settings' => 'Settings',
+          'My_Profile' => 'My Profile',
+          'Edit_Profile' => 'Edit Profile',
+          'Logout' => 'Logout',
+          'Fast_Processes' => 'Fast Processes',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+          '' => '',
+      ];

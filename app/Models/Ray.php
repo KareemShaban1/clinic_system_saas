@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Ray extends Model
+class Ray extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory;
-    protected $fillable=[
+    
+    protected $fillable = [
         'image',
         'patient_id',
         'reservation_id',
@@ -41,7 +45,7 @@ class Ray extends Model
         );
     }
 
-    
 
-    
+
+
 }

@@ -43,7 +43,8 @@
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#patients-menu">
                                 <div class="pull-left"><i class="fa-solid fa-hospital-user"></i><span
-                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Patients') }}</span></div>
+                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Patients') }}</span>
+                                </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -72,7 +73,8 @@
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#reservations-menu">
                                 <div class="pull-left"><i class="fa fa-stethoscope"></i><span
-                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Reservations') }}</span></div>
+                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Reservations') }}</span>
+                                </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -91,8 +93,7 @@
                     @if ($setting['show_online_reservations'] == 1)
                         <!-- menu Online Reservations-->
                         <li>
-                            <a  data-toggle="collapse"
-                                data-target="#online_reservations-menu">
+                            <a data-toggle="collapse" data-target="#online_reservations-menu">
                                 <div class="pull-left"><i class="fa fa-stethoscope"></i><span
                                         class="right-nav-text">{{ trans('backend/sidebar_trans.Online_Reservations') }}</span>
                                 </div>
@@ -100,10 +101,11 @@
                                 <div class="clearfix"></div>
                             </a>
                             <ul id="online_reservations-menu" class="collapse" data-parent="#sidebarnav">
-                                <li> 
+                                <li>
                                     <a href="{{ Route('backend.online_reservations.index') }}">
-                                        {{ trans('backend/sidebar_trans.All_Online_Reservations') }}</a> </li>
-                                        
+                                        {{ trans('backend/sidebar_trans.All_Online_Reservations') }}</a>
+                                </li>
+
                             </ul>
                         </li>
                     @endif
@@ -135,7 +137,8 @@
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#reservation_slots-menu">
                             <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
-                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Reservation_Slots') }}</span></div>
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Reservation_Slots') }}</span>
+                            </div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
@@ -156,7 +159,8 @@
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#medicine-menu">
                                 <div class="pull-left"><i class="fa-solid fa-pills"></i><span
-                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Medicine') }}</span></div>
+                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Medicine') }}</span>
+                                </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -226,7 +230,8 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="roles-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{ Route('backend.roles.add') }}">{{ trans('backend/sidebar_trans.Add_Role') }}</a>
+                            <li> <a
+                                    href="{{ Route('backend.roles.add') }}">{{ trans('backend/sidebar_trans.Add_Role') }}</a>
                             </li>
                             <li> <a
                                     href="{{ Route('backend.roles.index') }}">{{ trans('backend/sidebar_trans.All_Roles') }}</a>
@@ -235,21 +240,21 @@
                         </ul>
                     </li>
 
-
+                    {{-- 
                     <li>
                         <a href="{{ Route('backend.system_control.index') }}"><i
                                 class="fa-sharp fa-solid fa-gear"></i><span class="right-nav-text">
                                 {{ trans('backend/sidebar_trans.System_Control') }}</span> </a>
-                    </li>
+                    </li> --}}
 
                     {{-- Settings --}}
-                    {{-- @if ($setting['show_settings'] == 1)
+                    @if ($setting['show_settings'] == 1)
                         <li>
                             <a href="{{ Route('backend.settings.index') }}"><i class="fa-solid fa-cogs"></i><span
                                     class="right-nav-text">
                                     {{ trans('backend/sidebar_trans.Settings') }}</span> </a>
                         </li>
-                    @endif --}}
+                    @endif
 
 
 

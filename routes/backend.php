@@ -5,10 +5,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
     [
-          'prefix'=>LaravelLocalization::setLocale() . '/backend',
-          'as'=>'backend.',
-          'namespace'=>'App\Http\Controllers\Backend',
-          'middleware'=>[
+          'prefix' => LaravelLocalization::setLocale() . '/backend',
+          'as' => 'backend.',
+          'namespace' => 'App\Http\Controllers\Backend',
+          'middleware' => [
             'auth:web',
             'verified',
             'localeCookieRedirect',
@@ -23,9 +23,9 @@ Route::group(
         // Patients Part
         Route::group(
             [
-            'prefix'=>'/patients',
-            'as'=>'patients.',
-            'controller'=>'PatientController',],
+            'prefix' => '/patients',
+            'as' => 'patients.',
+            'controller' => 'PatientController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/show/{patient_id}', 'show')->name('show');
@@ -45,9 +45,9 @@ Route::group(
         // Reservations Part
         Route::group(
             [
-            'prefix'=>'/reservations',
-            'as'=>'reservations.',
-            'controller'=>'ReservationsControllers\ReservationController',],
+            'prefix' => '/reservations',
+            'as' => 'reservations.',
+            'controller' => 'ReservationsControllers\ReservationController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/report', 'todayReservationReport')->name('today_reservation_report');
@@ -72,24 +72,24 @@ Route::group(
 
         Route::group(
             [
-            'prefix'=>'/reservations_options',
-            'as'=>'reservations_options.',
-            'controller'=>'ReservationsControllers\ReservationOptionsController',],
+            'prefix' => '/reservations_options',
+            'as' => 'reservations_options.',
+            'controller' => 'ReservationsControllers\ReservationOptionsController',],
             function () {
                 Route::get('/status/{reservation_id}/{res_status}', 'reservationStatus')->name('reservation_status');
                 Route::get('/payment/{reservation_id}/{payment}', 'paymentStatus')->name('payment_status');
                 Route::get('/acceptance/{reservation_id}/{status}', 'ReservationAcceptance')->name('reservation_acceptance');
 
-                
+
             }
         );
 
         // Online Reservations Part
         Route::group(
             [
-            'prefix'=>'/online_reservations',
-            'as'=>'online_reservations.',
-            'controller'=>'ReservationsControllers\OnlineReservationController',],
+            'prefix' => '/online_reservations',
+            'as' => 'online_reservations.',
+            'controller' => 'ReservationsControllers\OnlineReservationController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
@@ -110,9 +110,9 @@ Route::group(
         // Number Of Reservations Part
         Route::group(
             [
-            'prefix'=>'/num_of_reservations',
-            'as'=>'num_of_reservations.',
-            'controller'=>'ReservationsControllers\NumberOfReservationsController',],
+            'prefix' => '/num_of_reservations',
+            'as' => 'num_of_reservations.',
+            'controller' => 'ReservationsControllers\NumberOfReservationsController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add', 'add')->name('add');
@@ -124,13 +124,12 @@ Route::group(
             }
         );
 
-
         //  Reservations Slots Part
         Route::group(
             [
-                'prefix'=>'/reservation_slots',
-                'as'=>'reservation_slots.',
-                'controller'=>'ReservationsControllers\ReservationSlotsController',],
+                'prefix' => '/reservation_slots',
+                'as' => 'reservation_slots.',
+                'controller' => 'ReservationsControllers\ReservationSlotsController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add', 'add')->name('add');
@@ -144,9 +143,9 @@ Route::group(
         // Drugs / Prescription Part
         Route::group(
             [
-            'prefix'=>'/prescription',
-            'as'=>'prescription.',
-            'controller'=>'ReservationsControllers\PrescriptionController',],
+            'prefix' => '/prescription',
+            'as' => 'prescription.',
+            'controller' => 'ReservationsControllers\PrescriptionController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
@@ -163,9 +162,9 @@ Route::group(
         // Medicines Part
         Route::group(
             [
-            'prefix'=>'/medicines',
-            'as'=>'medicines.',
-            'controller'=>'ReservationsControllers\MedicineController',],
+            'prefix' => '/medicines',
+            'as' => 'medicines.',
+            'controller' => 'ReservationsControllers\MedicineController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add', 'add')->name('add');
@@ -185,9 +184,9 @@ Route::group(
         // Chronic Diseases Part
         Route::group(
             [
-            'prefix'=>'/chronic_diseases',
-            'as'=>'chronic_diseases.',
-            'controller'=>'ReservationsControllers\ChronicDiseasesController',],
+            'prefix' => '/chronic_diseases',
+            'as' => 'chronic_diseases.',
+            'controller' => 'ReservationsControllers\ChronicDiseasesController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
@@ -203,9 +202,9 @@ Route::group(
         // Glasses Distance Part
         Route::group(
             [
-            'prefix'=>'/glasses_distance',
-            'as'=>'glasses_distance.',
-            'controller'=>'ReservationsControllers\GlassesDistanceController',],
+            'prefix' => '/glasses_distance',
+            'as' => 'glasses_distance.',
+            'controller' => 'ReservationsControllers\GlassesDistanceController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
@@ -221,9 +220,9 @@ Route::group(
         // Rays Part
         Route::group(
             [
-            'prefix'=>'/rays',
-            'as'=>'rays.',
-            'controller'=>'ReservationsControllers\RaysController',],
+            'prefix' => '/rays',
+            'as' => 'rays.',
+            'controller' => 'ReservationsControllers\RaysController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
@@ -238,9 +237,9 @@ Route::group(
         // Fees Part
         Route::group(
             [
-            'prefix'=>'/fees',
-            'as'=>'fees.',
-            'controller'=>'ReservationsControllers\FeeController'],
+            'prefix' => '/fees',
+            'as' => 'fees.',
+            'controller' => 'ReservationsControllers\FeeController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/today', 'today')->name('today');
@@ -252,9 +251,9 @@ Route::group(
         // User Part
         Route::group(
             [
-            'prefix'=>'/users',
-            'as'=>'users.',
-            'controller'=>'UserController'],
+            'prefix' => '/users',
+            'as' => 'users.',
+            'controller' => 'UserController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add', 'add')->name('add');
@@ -268,9 +267,9 @@ Route::group(
         // Events Part
         Route::group(
             [
-            'prefix'=>'/events',
-            'as'=>'events.',
-            'controller'=>'EventController'],
+            'prefix' => '/events',
+            'as' => 'events.',
+            'controller' => 'EventController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/show', 'show')->name('show');
@@ -287,12 +286,22 @@ Route::group(
         // Settings Part
         Route::group(
             [
-            'prefix'=>'/settings',
-            'as'=>'settings.',
-            'controller'=>'SettingsController'],
+            'prefix' => '/settings',
+            'as' => 'settings.'
+            ],
             function () {
-                Route::get('/', 'index')->name('index');
-                Route::post('/update', 'update')->name('update');
+                // settings
+                Route::get('/', 'SettingsController@index')->name('index');
+
+                Route::get('/clinic_settings', 'SettingsController@clinicSettings')->name('clinicSettings.index');
+                Route::post('/clinic_settings', 'SettingsController@updateClinicSettings')->name('clinicSettings.update');
+
+                Route::get('/zoom_settings', 'SettingsController@zoomSettings')->name('zoomSettings.index');
+                Route::post('/zoom_settings', 'SettingsController@updateZoomSettings')->name('zoomSettings.update');
+
+
+                Route::get('/reservation_settings', 'SettingsController@reservationSettings')->name('reservationSettings.index');
+                Route::post('/reservation_settings', 'SettingsController@updateReservationSettings')->name('reservationSettings.update');
             }
         );
 
@@ -300,9 +309,9 @@ Route::group(
         // Reservation Control Part
         Route::group(
             [
-            'prefix'=>'/system_control',
-            'as'=>'system_control.',
-            'controller'=>'ReservationsControllers\SystemControlController'],
+            'prefix' => '/system_control',
+            'as' => 'system_control.',
+            'controller' => 'ReservationsControllers\SystemControlController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/update', 'update')->name('update');
@@ -314,9 +323,9 @@ Route::group(
         // Roles Part
         Route::group(
             [
-            'prefix'=>'/roles',
-            'as'=>'roles.',
-            'controller'=>'RolesPermissionsController'],
+            'prefix' => '/roles',
+            'as' => 'roles.',
+            'controller' => 'RolesPermissionsController'],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add', 'add')->name('add');

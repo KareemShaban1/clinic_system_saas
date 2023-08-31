@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-{{ trans('backend/users_trans.Edit_User') }}
+    {{ trans('backend/users_trans.Edit_User') }}
 @stop
 @endsection
 @section('page-header')
@@ -18,17 +18,20 @@
 @endsection
 
 @section('content')
+
 <!-- row -->
+
 <div class="row">
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
 
 
-                <form method="post" enctype="multipart/form-data"
-                    action="{{ Route('backend.users.update', $user->id) }}" autocomplete="off">
+                <form method="post" enctype="multipart/form-data" action="{{ Route('backend.users.update', $user->id) }}"
+                    autocomplete="off">
 
                     @csrf
+
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="form-group">
@@ -51,7 +54,7 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6 col-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/users_trans.Password') }} <span
@@ -69,7 +72,9 @@
                                 <strong>Role:</strong>
                                 <select name="roles[]" class="form-control" multiple>
                                     @foreach ($roles as $roleId => $roleName)
-                                        <option value="{{ $roleId }}" @if(in_array($roleId, $userRole)) selected @endif>{{ $roleName }}</option>
+                                        <option value="{{ $roleId }}"
+                                            @if (in_array($roleId, $userRole)) selected @endif>{{ $roleName }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

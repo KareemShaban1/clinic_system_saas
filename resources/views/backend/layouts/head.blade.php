@@ -1,11 +1,11 @@
 <!-- Title -->
-<title>@yield("title")</title>
+<title>@yield('title')</title>
 
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}" type="image/x-icon" />
 
 <!-- PWA  -->
-<meta name="theme-color" content="#6777ef"/>
+<meta name="theme-color" content="#6777ef" />
 <link rel="apple-touch-icon" href="{{ asset('logo.PNG') }}">
 <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
@@ -34,3 +34,4 @@
 @endif
 
 <link href="{{ asset('backend/assets/css/responsive.css') }}" rel="stylesheet">
+<link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet">

@@ -1,18 +1,30 @@
-<?php 
+<?php
+
 
 return [
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
-          ''=>'',
+          'Today_Fees'=>'Today Fees',
+          'Month_Fees'=>'Month Fees',
+          'All_Fees'=>'All Fees',
+          'Id'=>'Id',
+          'Patient_Name'=>'Patient Name',
+          'Reservation_Number'=>'Reservation Number',
+          'Reservation_Type'=>'Reservation Type',
+          'Payment'=>'Payment Status',
+          'Cost'=>'Cost',
+          'Total'=>'Total',
+          'Today_Date'=>'Today Date',
+          'Date'=>'Date',
+          'Paid'=>'Paid',
+          'Not_Paid'=>'Not Paid',
+          'Done'=>'Done',
+          'Not_Done'=>'Not Done',
+          'Waiting'=>'Waiting',
+          'Entered'=>'Entered',
+          'Finished'=>'Finished',
+          'Cancelled'=>'Cancelled',
+          'Check'=>'Check',
+          'Recheck'=>'Recheck',
+          'Consultation'=>'Consultation',
           ''=>'',
           ''=>'',
           ''=>'',
@@ -21,5 +33,3 @@ return [
           ''=>'',
 
 ];
-
-?>

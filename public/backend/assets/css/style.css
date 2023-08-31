@@ -1,0 +1,8 @@
+.settings-container {
+          height: 100px;
+          width: 300px;
+          text-align: center;
+          background-color: rgb(228, 206, 166);
+          padding: 20px;
+          margin: 20px;
+}

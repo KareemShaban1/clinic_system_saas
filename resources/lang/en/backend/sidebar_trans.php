@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 return [
   'Dashboard'=>'Dashboard',
@@ -31,6 +32,7 @@ return [
 
   'Fees'=>'Fees',
   'Today_Fees'=>'Today Fees',
+  'Month_Fees'=>'Month Fees',
   'All_Fees'=>'All Fees',
 
   'Users'=>'Users',
@@ -64,6 +66,3 @@ return [
   ''=>'',
   ''=>'',
 ];
-
- 
-?>

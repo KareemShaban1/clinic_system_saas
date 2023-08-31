@@ -186,10 +186,10 @@
 
                                 <select class="custom-select mr-sm-2" name="acceptance">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
-                                    <option value="approved" @if (old('acceptance', $reservation->acceptance) == 'active') selected @endif>
+                                    <option value="approved" @if (old('acceptance', $reservation->acceptance) == 'approved') selected @endif>
                                         {{ trans('backend/reservations_trans.Approved') }}
                                     </option>
-                                    <option value="not_approved" @if (old('acceptance', $reservation->acceptance) == 'inactive') selected @endif>
+                                    <option value="not_approved" @if (old('acceptance', $reservation->acceptance) == 'not_approved') selected @endif>
                                         {{ trans('backend/reservations_trans.Not_Approved') }}
                                     </option>
 
@@ -204,7 +204,7 @@
                             <div class="form-group">
                                 <label> {{ trans('backend/reservations_trans.First_Diagnosis') }} </label>
                                 <textarea class="summernote" name="first_diagnosis"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 {{ old('first_diagnosis', $reservation->first_diagnosis) }}   
                                 </textarea>
                             </div>
@@ -268,8 +268,8 @@
                                 '</option>';
                             if (response.reservation.res_num == i) {
                                 var option = '<option value="' + i +
-                                '" style="background:red">' + i +
-                                '</option>';
+                                    '" style="background:red">' + i +
+                                    '</option>';
                             }
                         } else {
                             var option = '<option value="' + i + '">' + i + '</option>';

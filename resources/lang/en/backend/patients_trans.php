@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 return [
 
@@ -17,6 +18,40 @@ return [
           'Age'=>'Age',
           'Add_Reservation'=>'Add Reservation',
           'Control'=>'Control',
+          'Show_Patient_Card'=>'Show Patient Card',
+
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+          ''=>'',
+
+
 
           // add patient
           'Add_Patient'=>'Add Patient',
@@ -24,6 +59,7 @@ return [
           'Age'=>'Age',
           'Address'=>'Address',
           'Email'=>'Email',
+          'Password'=>'Password',
           'Phone'=>'Phone',
           'Patient_Gender'=>'Patient Gender',
           'Choose'=>'Choose From List',
@@ -31,7 +67,6 @@ return [
           'Female'=>'Female',
           'Blood_Group'=>'Blood Group',
           'Add'=>'Add',
-
 
           // edit patient
           'Edit_Patient'=>'Edit Patient',
@@ -41,6 +76,7 @@ return [
           'Patient_Profile'=>'Patient Profile',
           'Patient_Information'=>'Patient Information',
           'Reservations'=>'Reservations',
+          'Add_Online_Reservation'=>'Add Online Reservation',
           'Reservation_Count'=>'Reservation Count',
           'Reservation_Number'=>'Reservation Number',
           'Number_of_Reservation'=>'Number of Reservation',
@@ -64,4 +100,3 @@ return [
           ''=>'',
 
 ];
-?>

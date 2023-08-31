@@ -37,7 +37,7 @@
                 <div class="table-responsive">
                     <table id="table_id" class="table nowrap table-hover table-sm p-0">
                         <thead>
-                            <tr>
+                            <tr> 
                                 <th>{{ trans('backend/reservations_trans.Id') }}</th>
                                 <th>{{ trans('backend/reservations_trans.Patient_Name') }}</th>
                                 <th>{{ trans('backend/reservations_trans.Reservation_Type') }}</th>

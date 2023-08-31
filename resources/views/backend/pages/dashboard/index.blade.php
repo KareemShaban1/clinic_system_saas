@@ -21,11 +21,11 @@
             </div>
 
             @if (config('app.env') !== 'production')
-            <div class="col-sm-6 col-12">
-                <a href="{{ URL(env('APP_URL') . '/log-viewer') }}" target="blank">
-                    Log Viewer
-                </a>
-            </div>
+                <div class="col-sm-6 col-12">
+                    <a href="{{ URL(env('APP_URL') . '/log-viewer') }}" target="blank">
+                        Log Viewer
+                    </a>
+                </div>
             @endif
         </div>
     </div>
@@ -35,8 +35,6 @@
 
 
 @section('content')
-
-
     <!-- row -->
     <div class="row">
         <div class="col-md-12 col-sm-12 mb-30">
@@ -255,7 +253,8 @@
                                         <div class="d-block d-md-flex justify-content-between">
 
                                             <div class="d-block w-100">
-                                                <h5 class="card-title">اخرالعمليات علي النظام</h5>
+                                                <h5 class="card-title">
+                                                    {{ trans('backend/dashboard_trans.Last_Processes') }}</h5>
                                             </div>
 
                                             <div class="d-block d-md-flex nav-tabs-custom p-0">
@@ -600,7 +599,7 @@
                                 <div class="card-body">
                                     <div class="col-12 px-0">
                                         <div class="col-12 px-3 py-3">
-                                            إجرائات سريعة
+                                            {{ trans('Backend/dashboard_trans.Fast_Processes') }}
                                         </div>
                                         <div class="col-12 " style="min-height: 1px;background: #f1f1f1;"></div>
                                     </div>
@@ -609,9 +608,9 @@
                                             <a href="{{ Route('backend.patients.index') }}" style="color:inherit;">
                                                 <div class="col-12 p-0 text-center">
                                                     <img src="/images/icons/patient.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-home font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        المرضى
+                                                        {{ trans('backend/dashboard_trans.Patients') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -623,9 +622,9 @@
 
                                                     <img src="/images/icons/reservations.png"
                                                         style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-bells font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        الحجوزات
+                                                        {{ trans('backend/dashboard_trans.Reservations') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -636,9 +635,9 @@
                                                 <div class="col-12 p-0 text-center">
 
                                                     <img src="/images/icons/fees.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-bullhorn font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        الحسابات
+                                                        {{ trans('backend/dashboard_trans.Fees') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -648,9 +647,9 @@
                                             <a href="{{ Route('backend.settings.index') }}" style="color:inherit;">
                                                 <div class="col-12 p-0 text-center">
                                                     <img src="/images/icons/settings.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-wrench font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        الإعدادات
+                                                        {{ trans('backend/dashboard_trans.Settings') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -660,9 +659,9 @@
                                             <a href="" style="color:inherit;">
                                                 <div class="col-12 p-0 text-center">
                                                     <img src="/images/icons/man.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-user font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        ملفي
+                                                        {{ trans('backend/dashboard_trans.My_Profile') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -671,9 +670,9 @@
                                             <a href="" style="color:inherit;">
                                                 <div class="col-12 p-0 text-center">
                                                     <img src="/images/icons/edit.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-user-edit font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        تعديل ملفي
+                                                        {{ trans('backend/dashboard_trans.Edit_Profile') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -689,9 +688,9 @@
                                                 <div class="col-12 p-0 text-center">
 
                                                     <img src="/images/icons/logout.png" style="width:30px;height: 30px">
-                                                    {{-- <span class="fal fa-sign-out-alt font-5" ></span> --}}
+
                                                     <div class="col-12 p-0 text-center">
-                                                        خروج
+                                                        {{ trans('backend/dashboard_trans.Logout') }}
                                                     </div>
                                                 </div>
                                             </a>
@@ -706,76 +705,75 @@
                     </div>
 
                     @include('backend.pages.dashboard.charts')
-                    
 
+
+                </div>
             </div>
         </div>
-    </div>
 
 
-    
-    
-    <!-- row closed -->
-@endsection
 
-@section('js')
-    <script>
 
-        $(document).ready(function() {
-            
+        <!-- row closed -->
+    @endsection
 
-            $('#datepicker-action').change(function() {
-                var selectedDate = $(this).val();
-                // Perform an AJAX request to fetch the updated number of reservations
-                $.ajax({
-                    url: "{{ URL::to('/backend/reservations/get_res_slot_number_add') }}", // Replace with the actual URL to handle the AJAX request
-                    method: 'GET',
-                    data: {
-                        res_date: selectedDate,
-                    },
-                    success: function(response) {
+    @section('js')
+        <script>
+            $(document).ready(function() {
 
-                        // Clear the existing options
-                        $('select[name="res_num"]').empty();
-                        // Add the updated options
-                        for (var i = 1; i <= response.reservationsCount; i++) {
-                            console.log(response.todayReservationResNum.includes(i));
-                            if (response.todayReservationResNum.includes(i)) {
-                                var option = '<option value="' + i +
-                                    '" disabled style="background:gainsboro">' + i +
-                                    '</option>';
-                            } else {
-                                var option = '<option value="' + i + '">' + i + '</option>';
+
+                $('#datepicker-action').change(function() {
+                    var selectedDate = $(this).val();
+                    // Perform an AJAX request to fetch the updated number of reservations
+                    $.ajax({
+                        url: "{{ URL::to('/backend/reservations/get_res_slot_number_add') }}", // Replace with the actual URL to handle the AJAX request
+                        method: 'GET',
+                        data: {
+                            res_date: selectedDate,
+                        },
+                        success: function(response) {
+
+                            // Clear the existing options
+                            $('select[name="res_num"]').empty();
+                            // Add the updated options
+                            for (var i = 1; i <= response.reservationsCount; i++) {
+                                console.log(response.todayReservationResNum.includes(i));
+                                if (response.todayReservationResNum.includes(i)) {
+                                    var option = '<option value="' + i +
+                                        '" disabled style="background:gainsboro">' + i +
+                                        '</option>';
+                                } else {
+                                    var option = '<option value="' + i + '">' + i + '</option>';
+                                }
+                                $('select[name="res_num"]').append(option);
                             }
-                            $('select[name="res_num"]').append(option);
+
+
+
+                            // Clear the current options
+                            $('#slot-select').empty();
+                            // Add the new options based on the response
+                            $.each(response.slots, function(index, slot) {
+                                var option = $('<option>').val(slot.slot_start_time).text(
+                                    slot.slot_start_time + ' - ' + slot.slot_end_time);
+
+                                if (response.today_reservation_slots.includes(slot
+                                        .slot_start_time)) {
+                                    option.attr('disabled',
+                                        true); // Disable the option if reserved
+                                    option.css('background', 'gainsboro');
+                                }
+                                $('#slot-select').append(option);
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle the error response
+                            console.log(error);
                         }
-
-
-
-                        // Clear the current options
-                        $('#slot-select').empty();
-                        // Add the new options based on the response
-                        $.each(response.slots, function(index, slot) {
-                            var option = $('<option>').val(slot.slot_start_time).text(
-                                slot.slot_start_time + ' - ' + slot.slot_end_time);
-
-                            if (response.today_reservation_slots.includes(slot
-                                    .slot_start_time)) {
-                                option.attr('disabled',
-                                    true); // Disable the option if reserved
-                                option.css('background', 'gainsboro');
-                            }
-                            $('#slot-select').append(option);
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle the error response
-                        console.log(error);
-                    }
+                    });
                 });
+
+
             });
-
-
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
