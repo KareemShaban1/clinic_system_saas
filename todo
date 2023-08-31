@@ -5,4 +5,6 @@
 - make backup for data . (not done)
 - make zoom settings . (not done)
 - Make Api controllers and but logic on it . (not done)
-- add blogs (migartions , models , controllers , views ) part in project. (not done)
+- add blogs part (migartions , models , controllers , views )  in project. (not done)
+- add doctors part (migrations , models , controllers , views ) in project . (not done)
+- add doctor_id to reservations (migration , model , controller , view)
