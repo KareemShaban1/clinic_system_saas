@@ -27,7 +27,6 @@ class UpdateRayRequest extends FormRequest
             //
             
             'ray_name' => 'required',
-            // 'images' => 'required',
             'ray_date'=>'required',
             'ray_type'=>'required',
             'notes'=>'nullable',

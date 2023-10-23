@@ -54,7 +54,7 @@ class RaysController extends Controller
 
             $data = $request->except('images');
             $image_path = $this->handleImageUpload($request, $this->ray);
-            $data['image'] =  $image_path;
+            $data['images'] =  $image_path;
             $this->ray->create($data);
             return redirect()->route('backend.reservations.index')->with('success', 'Reservation added successfully');
 
@@ -102,7 +102,7 @@ class RaysController extends Controller
 
             $data = $request->except('images');
 
-            $data['image'] = $this->handleImageUpload($request, $ray);
+            $data['images'] = $this->handleImageUpload($request, $ray);
 
             $ray->update($data);
 
@@ -119,12 +119,14 @@ class RaysController extends Controller
     // function to handel upload rays
     private function handleImageUpload($request, $ray)
     {
-        $old_image = explode('|', $ray->image);
+        $old_image = explode('|', $ray->images);
         $image_path = [];
 
         if ($files = $request->file('images')) {
             foreach ($files as $file) {
                 $image_name = strtolower($file->getClientOriginalName());
+                $image_name = str_replace(' ', '_', $image_name); // Replace spaces with underscores
+            
                 $file->storeAs(
                     'rays',
                     $image_name,
@@ -140,6 +142,6 @@ class RaysController extends Controller
             }
         }
 
-        return $image_path ? implode('|', $image_path) : $ray->image;
+        return $image_path ? implode('|', $image_path) : $ray->images;
     }
 }

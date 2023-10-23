@@ -19,10 +19,10 @@ class CheckApiToken
     {
         // i will request from developer to send token in header of request
         $token = $request->header('x-api-key');
-        if($token !== config('app.api_token')){
+        if($token !== config('app.api_token')) {
             return Response::json([
-                'message'=>'Invalid Api Token',
-            ],400);
+                'message' => 'Invalid Api Token',
+            ], 400);
         }
         return $next($request);
     }

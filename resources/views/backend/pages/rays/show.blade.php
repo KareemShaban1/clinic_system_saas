@@ -11,6 +11,7 @@
             border-radius: 10px;
             margin: 10px 20px;
             padding: 10px;
+            width: 320px;
         }
 
         .img-magnifier-glass {
@@ -188,22 +189,22 @@
                             </div>
 
                             <div class="row mb-4">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
                                     <h5 class="f-w-500"> {{ trans('backend/rays_trans.Rays_Image') }} <span
                                             class="{{ trans('backend/rays_trans.pull') }}">:</span></h5>
                                 </div>
 
-                                <?php $images = explode('|', $ray->image); ?>
+                                <?php $images = explode('|', $ray->images); ?>
                                 @foreach ($images as $key => $value)
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                                    <div class="img-magnifier-container">
-                                        <img src="{{ URL::asset('storage/rays/' . $value) }}" id="{{ $value }}"
-                                            width="350" height="350">
-                                        <script>
-                                            magnify("{{ $value }}", 2);
-                                        </script>
+                                    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                        <div class="img-magnifier-container">
+                                            <img src="{{ URL::asset('storage/rays/' . $value) }}"
+                                                id="{{ $value }}" width="300" height="300">
+                                            <script>
+                                                magnify("{{ $value }}", 2);
+                                            </script>
+                                        </div>
                                     </div>
-                                </div>    
                                 @endforeach
 
                                 {{-- </div> --}}

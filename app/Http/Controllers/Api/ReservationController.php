@@ -8,6 +8,7 @@ use App\Http\Requests\Api\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Http\Traits\ApiResponseTrait;
 use App\Models\Reservation;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -43,6 +44,9 @@ class ReservationController extends Controller
 
         $data = $request->all();
         $data['month'] = substr($request->res_date, 5, 7 - 5);
+        $data['acceptance']="not_approved";
+        
+
         $reservation = new ReservationResource(Reservation::create($data));
 
         return $this->apiResponse($reservation, 'Reservation Created Successfully', 200);
@@ -104,4 +108,13 @@ class ReservationController extends Controller
         return response()->json(['status' => 'deleted forever'], 200);
 
     }
+
+    public function todayReservations()
+    {
+        $today_reservations = ReservationResource::collection(Reservation::whereDate('res_date', Carbon::now())->get());
+
+        return $this->apiResponse($today_reservations, 'Today Reservations', 200);
+
+    }
+
 }

@@ -25,24 +25,25 @@ class StoreChronicDiseaseRequest extends FormRequest
     {
         return [
             //
-            
+
                 'title' => 'required',
                 'measure' => 'required',
-                'notes'=>'nullable',
-                'date'=>'required',
-                'patient_id'=>'required',
-                'reservation_id'=>'required',
-                
+                'notes' => 'nullable',
+                'date' => 'required',
+                'patient_id' => 'required',
+                'reservation_id' => 'required',
+
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return[
-            'title.required'=>'برجاء أدخال أسم المرض',
-            'measure.required'=>'برجاء أدخال قياس المرض',
-            'date.required'=>'برجاء أدخال تاريخ المرض',
-            'reservation_id.required'=>'reservation id برجاء أدخال ',
-            'patient_id.required'=>'patient id برجاء أدخال  ',
+            'title.required' => 'برجاء أدخال أسم المرض',
+            'measure.required' => 'برجاء أدخال قياس المرض',
+            'date.required' => 'برجاء أدخال تاريخ المرض',
+            'reservation_id.required' => 'reservation id برجاء أدخال ',
+            'patient_id.required' => 'patient id برجاء أدخال  ',
         ];
     }
 }

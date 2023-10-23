@@ -39,7 +39,7 @@ class MedicineController extends Controller
 
         $request->validated();
 
-        try {
+        try { 
 
             $data = $request->all();
             $this->medicine->create($data);

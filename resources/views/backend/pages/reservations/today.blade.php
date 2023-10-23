@@ -26,7 +26,8 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                <div style="display: flex;
+                <div
+                    style="display: flex;
                 align-items: center; 
                 justify-content:center; margin-bottom:20px">
                     <a href="{{ Route('backend.reservations.today_reservation_report') }}" class="btn btn-info ">
@@ -37,7 +38,7 @@
                 <div class="table-responsive">
                     <table id="table_id" class="table nowrap table-hover table-sm p-0">
                         <thead>
-                            <tr> 
+                            <tr>
                                 <th>{{ trans('backend/reservations_trans.Id') }}</th>
                                 <th>{{ trans('backend/reservations_trans.Patient_Name') }}</th>
                                 <th>{{ trans('backend/reservations_trans.Reservation_Type') }}</th>
@@ -45,8 +46,9 @@
                                 <th>{{ trans('backend/reservations_trans.Reservation_Status') }}</th>
                                 <th>{{ trans('backend/reservations_trans.Acceptance') }}</th>
                                 @if ($reservation_settings['show_ray'] == 1)
-                                    <th>{{ trans('backend/reservations_trans.Rays_Analysis') }}</th>
+                                    <th>{{ trans('backend/reservations_trans.Rays') }}</th>
                                 @endif
+                                <th>{{ trans('backend/reservations_trans.Analysis') }}</th>
                                 @if ($reservation_settings['show_chronic_diseases'] == 1)
                                     <th>{{ trans('backend/reservations_trans.Chronic_Diseases') }}</th>
                                 @endif
@@ -153,7 +155,7 @@
                                             <span class="badge badge-rounded badge-danger text-white p-2 mb-2">
                                                 {{ trans('backend/reservations_trans.Not_Approved') }}
                                             </span>
-                                        
+
                                             <div class="res_control">
                                                 <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'approved']) }}"
                                                     class="btn btn-success btn-sm text-white">
@@ -196,6 +198,30 @@
                                             @endif
                                         </td>
                                     @endif
+
+                                    {{-- Analysis --}}
+                                    <td>
+                                        @if (App\Models\MedicalAnalysis::where('reservation_id', $reservation->reservation_id)->first())
+                                            <div class="res_control">
+                                                <a href="{{ Route('backend.analysis.add', $reservation->reservation_id) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    {{ trans('backend/reservations_trans.Add') }}
+                                                </a>
+                                                <a href="{{ Route('backend.analysis.show', $reservation->reservation_id) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    {{ trans('backend/reservations_trans.Show') }}
+                                                </a>
+                                            </div>
+                                        @else
+                                            <div class="res_control">
+                                                <a href="{{ Route('backend.analysis.add', $reservation->reservation_id) }}"
+                                                    class="btn btn-dark btn-sm">
+                                                    {{ trans('backend/reservations_trans.Add') }}
+                                                </a>
+
+                                            </div>
+                                        @endif
+                                    </td>
 
                                     @if ($reservation_settings['show_chronic_diseases'] == 1)
                                         <td>
@@ -325,12 +351,41 @@
     $(document).ready(function() {
         var lang = "{{ App::getLocale() }}";
         var dataTableOptions = {
+            stateSave: true,
+            sortable: true,
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+
+                'colvis'
+            ],
             responsive: true,
-            columnDefs: [
-                { responsivePriority: 1, targets: 1 },
-                { responsivePriority: 2, targets: 3 },
-                { responsivePriority: 3, targets: 5 },
-                { responsivePriority: 4, targets: 9 },
+            columnDefs: [{
+                    responsivePriority: 1,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 3
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 5
+                },
+                {
+                    responsivePriority: 4,
+                    targets: 9
+                },
                 // Add more columnDefs for other columns, if needed
             ],
             oLanguage: {

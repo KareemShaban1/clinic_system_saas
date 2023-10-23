@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,10 +15,10 @@ return new class extends Migration
         Schema::create('rays', function (Blueprint $table) {
             $table->id();
             $table->string('ray_name');
-            $table->string('image');
+            $table->string('images');
             $table->date('ray_date');
             $table->string('ray_type');
-            $table->longtext('notes')->nullable();
+            $table->longText('report')->nullable();
             $table->foreignId('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
             $table->foreignId('reservation_id')->references('reservation_id')->on('reservations')->onDelete('cascade');
             $table->softDeletes();

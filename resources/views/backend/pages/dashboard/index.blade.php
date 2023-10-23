@@ -16,17 +16,23 @@
     <!-- breadcrumb -->
     <div class="page-title">
         <div class="row">
-            <div class="col-sm-6 col-12">
+            <div class="col-md-4 col-sm-4 col-12">
                 <h4 class="mb-0"> {{ trans('backend/dashboard_trans.Dashboard') }} </h4>
             </div>
 
             @if (config('app.env') !== 'production')
-                <div class="col-sm-6 col-12">
+                <div class="col-md-4 col-sm-4 col-12">
                     <a href="{{ URL(env('APP_URL') . '/log-viewer') }}" target="blank">
                         Log Viewer
                     </a>
                 </div>
             @endif
+            {{-- <div class="col-md-4 col-sm-4 col-12">
+                <form method="POST" action="{{ route('backup.create') }}">
+                    @csrf
+                    <button type="submit">Create Backup</button>
+                </form>
+            </div> --}}
         </div>
     </div>
     <!-- breadcrumb -->

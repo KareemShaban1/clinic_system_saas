@@ -7,12 +7,17 @@ use App\Http\Requests\Api\UpdateChronicDiseaseRequest;
 use App\Http\Requests\Backend\StoreChronicDiseaseRequest;
 use App\Http\Requests\ChronicDiseasesRequest;
 use App\Http\Resources\ChronicDiseasesResource;
+use App\Http\Traits\ApiResponseTrait;
 use App\Models\ChronicDisease;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChronicDiseasesController extends Controller
 {
     //
+
+    use ApiResponseTrait;
 
     public function index()
     {
@@ -21,13 +26,13 @@ class ChronicDiseasesController extends Controller
 
     }
 
-    public function show($id)
+    public function show($reservation_id)
     {
-        $chronic_disease = ChronicDisease::find($id);
+        $reservation = Reservation::findOrFail($reservation_id);
+        $chronic_disease = ChronicDisease::where($reservation->id)->get();
         if($chronic_disease) {
-
             return $this->apiResponse(
-                new ChronicDiseasesResource($chronic_disease),
+                ChronicDiseasesResource::collection($chronic_disease),
                 'Show Chronic Disease',
                 200
             );
@@ -37,18 +42,41 @@ class ChronicDiseasesController extends Controller
 
     }
 
-    public function store(StoreChronicDiseaseRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
+        // $request->validated();
 
-        $data = $request->all();
-        $chronic_disease = new ChronicDiseasesResource(ChronicDisease::create($data));
+        try {
+            $insertedRecords = [];
 
-        return $this->apiResponse(
-            $chronic_disease,
-            'Chronic Disease Created Successfully',
-            200
-        );
+            foreach ($request->title as $index => $title) {
+                $data = [
+                    'title' => $title,
+                    'measure' => $request->measure[$index],
+                    'date' => $request->date[$index],
+                    'notes' => $request->notes[$index],
+                    'patient_id' => $request->patient_id[$index],
+                    'reservation_id' => $request->reservation_id[$index],
+                ];
+
+                // Insert the record and store the result in an array
+                $insertedRecords[] = DB::table('chronic_diseases')->insertGetId($data);
+
+            }
+
+            return $this->apiResponse(
+                $insertedRecords,
+                'Chronic Diseases Created Successfully',
+                200
+            );
+        } catch (\Exception $e) {
+            // Handle the exception, log it, or return an error response
+            return $this->apiResponse(
+                null,
+                'Something went wrong: ' . $e->getMessage(),
+                500
+            );
+        }
 
     }
 

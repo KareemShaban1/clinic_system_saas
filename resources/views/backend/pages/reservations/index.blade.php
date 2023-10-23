@@ -41,8 +41,11 @@
                                 <th>{{ trans('backend/reservations_trans.Reservation_Date') }}</th>
 
                                 @if ($reservation_settings['show_ray'] == 1)
-                                    <th>{{ trans('backend/reservations_trans.Rays_Analysis') }}</th>
+                                    <th>{{ trans('backend/reservations_trans.Rays') }}</th>
                                 @endif
+
+                                <th>{{ trans('backend/reservations_trans.Analysis') }}</th>
+
                                 @if ($reservation_settings['show_chronic_diseases'] == 1)
                                     <th>{{ trans('backend/reservations_trans.Chronic_Diseases') }}</th>
                                 @endif
@@ -102,42 +105,42 @@
                                     <td>
                                         <div class="col-12 p-0 datatable-td">
                                             @if ($reservation->res_status == 'waiting')
-                                            <span class="badge badge-rounded badge-dark text-white p-2 ">
-                                                {{ trans('backend/reservations_trans.Waiting') }}
-                                            </span>
-                                        @elseif ($reservation->res_status == 'entered')
-                                            <span class="badge badge-rounded badge-dark p-2 ">
-                                                {{ trans('backend/reservations_trans.Entered') }}
-                                            </span>
-                                        @elseif ($reservation->res_status == 'finished')
-                                            <span class="badge badge-rounded badge-dark p-2 ">
-                                                {{ trans('backend/reservations_trans.Finished') }}
-                                            </span>
-                                        @elseif ($reservation->res_status == 'cancelled')
-                                            <span class="badge badge-rounded badge-dark p-2 ">
-                                                {{ trans('backend/reservations_trans.Cancelled') }}
-                                            </span>
-                                        @endif
+                                                <span class="badge badge-rounded badge-dark text-white p-2 ">
+                                                    {{ trans('backend/reservations_trans.Waiting') }}
+                                                </span>
+                                            @elseif ($reservation->res_status == 'entered')
+                                                <span class="badge badge-rounded badge-dark p-2 ">
+                                                    {{ trans('backend/reservations_trans.Entered') }}
+                                                </span>
+                                            @elseif ($reservation->res_status == 'finished')
+                                                <span class="badge badge-rounded badge-dark p-2 ">
+                                                    {{ trans('backend/reservations_trans.Finished') }}
+                                                </span>
+                                            @elseif ($reservation->res_status == 'cancelled')
+                                                <span class="badge badge-rounded badge-dark p-2 ">
+                                                    {{ trans('backend/reservations_trans.Cancelled') }}
+                                                </span>
+                                            @endif
 
-                                        <div class="res_control">
+                                            <div class="res_control">
 
-                                            <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'waiting']) }}"
-                                                class="btn btn-warning btn-sm text-white">
-                                                {{ trans('backend/reservations_trans.Waiting') }}
-                                            </a>
-                                            <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'entered']) }}"
-                                                class="btn btn-success btn-sm">
-                                                {{ trans('backend/reservations_trans.Entered') }}
-                                            </a>
-                                            <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'finished']) }}"
-                                                class="btn btn-info btn-sm">
-                                                {{ trans('backend/reservations_trans.Finished') }}
-                                            </a>
-                                            <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'cancelled']) }}"
-                                                class="btn btn-danger btn-sm">
-                                                {{ trans('backend/reservations_trans.Cancelled') }}
-                                            </a>
-                                        </div>
+                                                <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'waiting']) }}"
+                                                    class="btn btn-warning btn-sm text-white">
+                                                    {{ trans('backend/reservations_trans.Waiting') }}
+                                                </a>
+                                                <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'entered']) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    {{ trans('backend/reservations_trans.Entered') }}
+                                                </a>
+                                                <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'finished']) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    {{ trans('backend/reservations_trans.Finished') }}
+                                                </a>
+                                                <a href="{{ Route('backend.reservations_options.reservation_status', [$reservation->reservation_id, 'cancelled']) }}"
+                                                    class="btn btn-danger btn-sm">
+                                                    {{ trans('backend/reservations_trans.Cancelled') }}
+                                                </a>
+                                            </div>
                                         </div>
                                     </td>
 
@@ -151,7 +154,7 @@
                                             <span class="badge badge-rounded badge-danger text-white p-2 m-2">
                                                 {{ trans('backend/reservations_trans.Not_Approved') }}
                                             </span>
-                                        
+
                                             <div class="res_control">
                                                 <a href="{{ Route('backend.reservations_options.reservation_acceptance', [$reservation->reservation_id, 'approved']) }}"
                                                     class="btn btn-success btn-sm text-white">
@@ -195,6 +198,30 @@
                                             @endif
                                         </td>
                                     @endif
+
+                                    {{-- Analysis --}}
+                                    <td>
+                                        @if (App\Models\MedicalAnalysis::where('reservation_id', $reservation->reservation_id)->first())
+                                            <div class="res_control">
+                                                <a href="{{ Route('backend.analysis.add', $reservation->reservation_id) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    {{ trans('backend/reservations_trans.Add') }}
+                                                </a>
+                                                <a href="{{ Route('backend.analysis.show', $reservation->reservation_id) }}"
+                                                    class="btn btn-info btn-sm">
+                                                    {{ trans('backend/reservations_trans.Show') }}
+                                                </a>
+                                            </div>
+                                        @else
+                                            <div class="res_control">
+                                                <a href="{{ Route('backend.analysis.add', $reservation->reservation_id) }}"
+                                                    class="btn btn-dark btn-sm">
+                                                    {{ trans('backend/reservations_trans.Add') }}
+                                                </a>
+
+                                            </div>
+                                        @endif
+                                    </td>
 
                                     @if ($reservation_settings['show_chronic_diseases'] == 1)
                                         <td>
@@ -269,7 +296,6 @@
                                                         class="btn btn-dark btn-sm">
                                                         {{ trans('backend/reservations_trans.Add') }}
                                                     </a>
-                                                    
                                                 @endif
 
 
@@ -309,6 +335,8 @@
                         </tbody>
                     </table>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -321,14 +349,44 @@
     $(document).ready(function() {
         var lang = "{{ App::getLocale() }}";
         var dataTableOptions = {
+            stateSave: true,
+            sortable: true,
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+
+                'colvis'
+            ],
             responsive: true,
             columnDefs: [
-                
-                { responsivePriority: 1, targets: 1 },
-                { responsivePriority: 2, targets: 5 },
-                { responsivePriority: 3, targets: 6},
-                { responsivePriority: 4, targets: 10 },
-                
+
+                {
+                    responsivePriority: 1,
+                    targets: 1
+                },
+                {
+                    responsivePriority: 2,
+                    targets: 5
+                },
+                {
+                    responsivePriority: 3,
+                    targets: 6
+                },
+                {
+                    responsivePriority: 4,
+                    targets: 10
+                },
+
                 // Add more columnDefs for other columns, if needed
             ],
             oLanguage: {

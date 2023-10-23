@@ -17,7 +17,8 @@ return [
           'Reservation_Type'=>'نوع الكشف',
           'Reservation_Status'=>'وضع الكشف',
           'Payment'=>'حالة الدفع',
-          'Rays_Analysis'=>'الأشعة / التحاليل',
+          'Rays'=>'الأشعة',
+          'Analysis'=>'التحاليل',
           'Chronic_Diseases'=>'الأمراض المزمنة',
           'Glasses_Distance'=>'مقاسات النظارة',
           'Prescription'=>'الروشتة',
@@ -35,7 +36,6 @@ return [
           'Finished'=>'أنتهاء',
           'Cancelled'=>'تم الألغاء',
           'Add_Rays'=>'أضافة أشاعة',
-          'Rays' =>'الأشعة / التحاليل',
           'Show'=>'عرض',
 
           // add reservation

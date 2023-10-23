@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class OnlineReservationsController extends Controller
 {
     //
-
+    
     public function index()
     {
 

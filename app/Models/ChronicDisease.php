@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reservation;
+
 class ChronicDisease extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reservation_id'];
+    protected $fillable = ['title','measure','date','notes','patient_id','reservation_id'];
 
     public function reservation()
     {

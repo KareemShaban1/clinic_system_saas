@@ -1,8 +1,15 @@
 .settings-container {
+          display: flex;
           height: 100px;
-          width: 300px;
+          width: 260px;
           text-align: center;
           background-color: rgb(228, 206, 166);
           padding: 20px;
           margin: 20px;
+          justify-content: center;
+          align-items: center
+}
+
+.dt-buttons.btn-group {
+          float: left;
 }

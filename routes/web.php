@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +22,3 @@ Route::get('/', function () {
 require __DIR__.'/backend.php';
 
 require __DIR__.'/frontend.php';
-
-

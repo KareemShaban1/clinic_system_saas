@@ -20,22 +20,37 @@
 @section('content')
 
 <div class="row">
-    <div class="settings-container">
-        <a href="{{ Route('backend.settings.clinicSettings.index') }}">
-            Clinic Settings
-        </a>
+    <div class="col-md-3">
+        <div class="settings-container">
+            <a href="{{ Route('backend.settings.clinicSettings.index') }}">
+                Clinic Settings
+            </a>
+        </div>
     </div>
 
-    <div class="settings-container">
-        <a href="{{ Route('backend.settings.reservationSettings.index') }}">
-            Reservation Settings
-        </a>
+    <div class="col-md-3">
+        <div class="settings-container">
+            <a href="{{ Route('backend.settings.reservationSettings.index') }}">
+                Reservation Settings
+            </a>
+        </div>
     </div>
 
-    <div class="settings-container">
-        <a href="{{ Route('backend.settings.zoomSettings.index') }}">
-            Zoom Settings
-        </a>
+    <div class="col-md-3">
+        <div class="settings-container">
+            <a href="{{ Route('backend.settings.zoomSettings.index') }}">
+                Zoom Settings
+            </a>
+        </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="settings-container">
+            <a href="{{ Route('backend.backups.index') }}">
+                Backups
+            </a>
+        </div>
+    </div>
+
 </div>
 @endsection

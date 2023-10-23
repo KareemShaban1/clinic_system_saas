@@ -37,10 +37,18 @@ return [
             'url'    => env('APP_URL').'/media',
         ],
 
+        'backup' => [
+            'driver' => 'local',
+            'root' => storage_path('app/storage/backup'),
+            'url' => env('APP_URL').'/backup',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'uploads' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL').'/storage/public',
             'visibility' => 'public',
             'throw' => false,
         ],

@@ -90,7 +90,8 @@
                                         </a>
 
                                         @if (count($patient->reservations) == 0)
-                                            <form action="{{ Route('backend.patients.destroy', $patient->patient_id) }}"
+                                            <form
+                                                action="{{ Route('backend.patients.destroy', $patient->patient_id) }}"
                                                 method="post" style="display:inline">
                                                 @csrf
                                                 @method('delete')
@@ -111,7 +112,9 @@
 
                     </table>
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
@@ -122,6 +125,24 @@
     $(document).ready(function() {
         var lang = "{{ App::getLocale() }}";
         var dataTableOptions = {
+            stateSave: true,
+            sortable: true,
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: [0, ':visible']
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    }
+                },
+
+                'colvis'
+            ],
             responsive: true,
             columnDefs: [{
                     responsivePriority: 1,

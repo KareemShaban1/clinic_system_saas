@@ -32,7 +32,7 @@ class StoreRayRequest extends FormRequest
                 'ray_type'=>'required',
                 'notes'=>'nullable',
                 'patient_id'=>'required'
-              
+            
         ];
     }
 

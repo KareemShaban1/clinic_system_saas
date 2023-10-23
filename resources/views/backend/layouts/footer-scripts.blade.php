@@ -30,6 +30,19 @@
 
 <script src="{{ asset('backend/assets/datatables/dataTables.responsive.min.js') }}"></script>
 
+
+
+<script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('backend/assets/jquery-ui/jquery-ui.min.js') }}"></script>
+
+<script src="{{ asset('backend/assets/datatables/export-tables/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/export-tables/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/export-tables/jszip.min.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/export-tables/pdfmake.min.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/export-tables/vfs_fonts.js') }}"></script>
+<script src="{{ asset('backend/assets/datatables/export-tables/buttons.print.min.js') }}"></script>
+
 {{-- @if (App::getLocale() == 'ar')
     <script>
         $(document).ready(function() {

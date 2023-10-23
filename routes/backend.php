@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+// Route::post('/backup', 'App\Http\Controllers\Backend\BackupController@create')->name('backup.create');
+
+
 Route::group(
     [
           'prefix' => LaravelLocalization::setLocale() . '/backend',
@@ -17,9 +20,23 @@ Route::group(
     ],
     function () {
 
+        Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+        
         // Dashboard Part
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
+        Route::group(
+            [
+            'prefix' => '/backups',
+            'as' => 'backups.',
+            'controller' => 'BackupController',],
+            function () {
+                Route::get('/backup', 'index')->name('index');
+                Route::get('/backup/create', 'create');
+                Route::get('/backup/download/{file_name}', 'download');
+                Route::get('/backup/delete/{file_name}', 'delete');
+            }
+        );
         // Patients Part
         Route::group(
             [
@@ -223,6 +240,23 @@ Route::group(
             'prefix' => '/rays',
             'as' => 'rays.',
             'controller' => 'ReservationsControllers\RaysController',],
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/add/{reservation_id}', 'add')->name('add');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/edit/{ray_id}', 'edit')->name('edit');
+                Route::post('/update/{ray_id}', 'update')->name('update');
+                Route::get('/show/{reservation_id}', 'show')->name('show');
+
+            }
+        );
+
+         // Analysis Part
+        Route::group(
+            [
+            'prefix' => '/analysis',
+            'as' => 'analysis.',
+            'controller' => 'ReservationsControllers\MedicalAnalysisController',],
             function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{reservation_id}', 'add')->name('add');

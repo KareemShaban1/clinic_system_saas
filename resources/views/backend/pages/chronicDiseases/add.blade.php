@@ -39,7 +39,7 @@
                                         <th></th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Disease_Name') }}</th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Disease_Measure') }}</th>
-                                        <th>{{ trans('backend/chronic_diseases_trans.Disease_Date') }}</th>
+                                        <th>{{ trans('backend/chronic_diseases_trans.Disease_Measure_Date') }}</th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Notes') }}</th>
                                         <th>
                                             <a href="javascript:void(0)" class="btn btn-success addRow">
@@ -58,25 +58,29 @@
                                                 value="{{ $reservation->patient->patient_id }}" type="text">
 
                                         </td>
-                                        <td >
-                                            <input type="text" name="title[]" class="form-control" style="width: 100px;"
+                                        <td>
+                                            <input type="text" name="title[]" class="form-control"
+                                                style="width: 150px;"
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Name') }}">
-                                            
+
                                         </td>
                                         <td>
-                                            <input type="text" name="measure[]" class="form-control" style="width: 100px;"
+                                            <input type="text" name="measure[]" class="form-control"
+                                                style="width: 150px;"
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Measure') }}">
-                                            
+
                                         </td>
                                         <td>
-                                            <input type="date" name="date[]" class="form-control" style="width: 150px;"
+                                            <input type="date" name="date[]" class="form-control"
+                                                style="width: 150px;"
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Date') }}">
-                                            
+
                                         </td>
                                         <td>
-                                            <input type="text" name="notes[]" class="form-control" style="width: 200px;"
+                                            <input type="text" name="notes[]" class="form-control"
+                                                style="width: 200px;"
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Notes') }}">
-                                            
+
                                         </td>
                                         <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">
                                                 {{ trans('backend/chronic_diseases_trans.Delete') }} </a></th>

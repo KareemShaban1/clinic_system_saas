@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Backend\ReservationsControllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreChronicDiseaseRequest;
 use App\Http\Requests\Backend\UpdateChronicDiseaseRequest;
+use App\Http\Traits\AuthorizeCheck;
 use App\Models\Reservation;
 use App\Models\ChronicDisease;
 use Illuminate\Support\Facades\DB;
 
 class ChronicDiseasesController extends Controller
 {
+    use AuthorizeCheck;
     protected $reservation;
     protected $chronicDisease;
 

@@ -40,7 +40,7 @@
                                     class="text-danger">*</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-8 col-sm-6 col-7"><input type="text" name="zoom_api_key"
-                                value="{{ $zoomSettings['zoom_api_key'] }}" class="form-control"></div>
+                                value="{{ env('ZOOM_CLIENT_KEY') }}" class="form-control"></div>
                     </div>
 
 
@@ -51,7 +51,7 @@
                                     class="text-danger">*</span></h5>
                         </div>
                         <div class="col-lg-6 col-md-8 col-sm-6 col-7"><input type="text" name="zoom_api_secret"
-                                value="{{ $zoomSettings['zoom_api_secret'] }}" class="form-control"></div>
+                                value="{{ env('ZOOM_CLIENT_SECRET') }}" class="form-control"></div>
                     </div>
 
 

@@ -25,6 +25,14 @@ return new class extends Migration
             $table->char('phone', 20);
             $table->enum('blood_group', ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();
             $table->enum('gender', ['male', 'female']);
+            
+              // new updates 24/9/2023
+                $table->string('height')->nullable();
+                $table->string('weight')->nullable();
+                $table->enum('marital_status',['single','married','widowed','divorced','separated'])->nullable();
+                $table->string('nationality')->nullable();
+            // end new updates
+            
             $table->softDeletes();
             $table->timestamps();
         });
