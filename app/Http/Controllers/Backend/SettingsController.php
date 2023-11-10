@@ -65,7 +65,6 @@ class SettingsController extends Controller
     public function zoomSettings()
     {
 
-
         $collection = Settings::all();
         $zoomSettings = $collection->pluck('value', 'key');
 
@@ -74,8 +73,6 @@ class SettingsController extends Controller
 
     public function updateZoomSettings(Request $request)
     {
-
-
 
 
         //  Validate the form data
