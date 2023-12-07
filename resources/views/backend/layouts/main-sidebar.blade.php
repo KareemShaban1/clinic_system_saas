@@ -37,6 +37,32 @@
                         </li>
                     @endif
 
+                    @if ($setting['show_num_of_res'] == 1)
+                        <!-- menu number of Reservations-->
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse"
+                                data-target="#num_of_reservations-menu">
+                                <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
+                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Controll_Number_of_Reservations') }}</span>
+                                </div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="num_of_reservations-menu" class="collapse" data-parent="#sidebarnav">
+                                <li> <a href="{{ Route('backend.num_of_reservations.add') }}">
+                                        {{ trans('backend/sidebar_trans.Add_Number_of_Reservations') }} </a> </li>
+                                <li> <a href="{{ Route('backend.num_of_reservations.index') }}">
+                                        {{ trans('backend/sidebar_trans.Number_of_Reservations') }}</a> </li>
+
+                                <li> <a href="{{ Route('backend.reservation_slots.add') }}">
+                                        {{ trans('backend/sidebar_trans.Add_Reservation_Slots') }} </a> </li>
+                                <li> <a href="{{ Route('backend.reservation_slots.index') }}">
+                                        {{ trans('backend/sidebar_trans.Reservation_Slots') }}</a> </li>
+
+                            </ul>
+                        </li>
+                    @endif
+
                     @if ($setting['show_patients'] == 1)
                         <!-- menu Patients-->
                         {{-- @can('المرضى') --}}
@@ -110,31 +136,49 @@
                         </li>
                     @endif
 
-                    @if ($setting['show_num_of_res'] == 1)
-                        <!-- menu number of Reservations-->
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse"
-                                data-target="#num_of_reservations-menu">
-                                <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
-                                        class="right-nav-text">{{ trans('backend/sidebar_trans.Number_of_Reservations') }}</span>
-                                </div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="num_of_reservations-menu" class="collapse" data-parent="#sidebarnav">
-                                <li> <a href="{{ Route('backend.num_of_reservations.add') }}">
-                                        {{ trans('backend/sidebar_trans.Add_Number_of_Reservations') }} </a> </li>
-                                <li> <a href="{{ Route('backend.num_of_reservations.index') }}">
-                                        {{ trans('backend/sidebar_trans.Number_of_Reservations') }}</a> </li>
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#rays-menu">
+                            <div class="pull-left"><i class="fa fa-stethoscope"></i><span
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Rays') }}</span>
+                            </div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="rays-menu" class="collapse" data-parent="#sidebarnav">
 
+                            <li> <a href="{{ route('backend.rays.index') }}">
+                                    {{ trans('backend/sidebar_trans.All_Rays') }}</a> </li>
+                            <li> <a href="">
+                                    {{ trans('backend/sidebar_trans.Deleted_Rays') }} </a> </li>
 
-
-                            </ul>
-                        </li>
-                    @endif
+                        </ul>
+                    </li>
 
 
                     <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#analysis-menu">
+                            <div class="pull-left"><i class="fa fa-stethoscope"></i><span
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Analysis') }}</span>
+                            </div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="analysis-menu" class="collapse" data-parent="#sidebarnav">
+
+                            <li> <a href="">
+                                    {{ trans('backend/sidebar_trans.All_Analysis') }}</a> </li>
+                            <li> <a href="">
+                                    {{ trans('backend/sidebar_trans.Deleted_Analysis') }} </a> </li>
+
+                        </ul>
+                    </li>
+
+
+
+
+
+
+                    {{-- <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#reservation_slots-menu">
                             <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
                                     class="right-nav-text">{{ trans('backend/sidebar_trans.Reservation_Slots') }}</span>
@@ -151,7 +195,7 @@
 
 
                         </ul>
-                    </li>
+                    </li> --}}
 
 
                     @if ($setting['show_medicines'] == 1)

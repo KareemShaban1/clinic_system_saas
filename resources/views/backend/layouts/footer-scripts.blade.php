@@ -26,7 +26,7 @@
 <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
 
 {{-- Data table --}}
-<script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script>
+{{-- <script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script> --}}
 
 <script src="{{ asset('backend/assets/datatables/dataTables.responsive.min.js') }}"></script>
 

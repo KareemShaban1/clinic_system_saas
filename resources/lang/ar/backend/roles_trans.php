@@ -2,12 +2,12 @@
 
 
 return [
-          'Roles'=>'Roles',
-          'All_Roles'=>'All Roles',
-          'Add_Role'=>'Add Role',
-          'Edit_Role'=>'Edit Role',
+          'Roles'=>'الصلاحيات',
+          'All_Roles'=>' كل الصلاحيات',
+          'Add_Role'=>'أضافة صلاحية ',
+          'Edit_Role'=>'تعديل صلاحية',
           'Id'=>'Id',
-          'Role_Name'=>'Role Name',
+          'Role_Name'=>'أسم الصلاحية',
           'Guard_Name'=>'Guard Name',
           'Control'=>'التحكم',
           'Add'=>'أضافة',

@@ -57,6 +57,8 @@ Route::group(
         Route::delete('/delete_reservation/{id}', 'delete');
         Route::put('/restore_reservation/{id}', 'restore');
         Route::delete('/force_delete_reservation/{id}', 'forceDelete');
+        Route::get('/reservationNumSlots', 'getResNumberOrSlotAdd');
+        
     }
 );
 

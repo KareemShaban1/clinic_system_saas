@@ -39,7 +39,15 @@
                                 <td>{{ $role->id }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->guard_name }}</td>
-                                <td></td>
+                                <td>
+                                    @php
+                                        $permissions_count = Spatie\Permission\Models\Permission::join('role_has_permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+                                            ->where('role_has_permissions.role_id', $role->id)
+                                            ->count();
+
+                                    @endphp
+                                    {{ $permissions_count }}
+                                </td>
 
                                 <td>
 

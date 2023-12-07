@@ -60,7 +60,6 @@ class ReservationController extends Controller
         $this->$reservationSlots = $reservationSlots;
     }
 
-    // ...
 
     public function index()
     {
@@ -260,6 +259,7 @@ class ReservationController extends Controller
 
     public function getResNumberOrSlotAdd(Request $request)
     {
+        
 
         $res_date =  $request->res_date;
 
@@ -285,6 +285,8 @@ class ReservationController extends Controller
             'number_of_slot' => $number_of_slot,
             'today_reservation_slots' =>  $reservation_slots
         ];
+
+        
 
         // Return the data as JSON response
         return response()->json($data);

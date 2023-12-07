@@ -42,10 +42,9 @@ class PatientController extends Controller
         $patient = Patient::find($id);
 
         if($patient) {
-
-            return $this->apiResponse(new PatientResource($patient), 'ok', 200);
+            return $this->apiResponse(new PatientResource($patient), 'ok', 200,true);
         }
-        return $this->apiResponse('null', 'Patient Not Fount', 401);
+        return $this->apiResponse('null', 'Patient Not Fount', 401,false);
 
     }
 

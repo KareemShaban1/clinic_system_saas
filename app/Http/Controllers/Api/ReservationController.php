@@ -7,13 +7,17 @@ use App\Http\Requests\Api\StoreReservationRequest;
 use App\Http\Requests\Api\UpdateReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Http\Traits\ApiResponseTrait;
+use App\Http\Traits\TimeSlotsTrait;
+use App\Models\NumberOfReservations;
 use App\Models\Reservation;
+use App\Models\ReservationSlots;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
     //
-    use ApiResponseTrait;
+    use ApiResponseTrait , TimeSlotsTrait;
     public function index()
     {
 
@@ -114,6 +118,39 @@ class ReservationController extends Controller
         $today_reservations = ReservationResource::collection(Reservation::whereDate('res_date', Carbon::now())->get());
 
         return $this->apiResponse($today_reservations, 'Today Reservations', 200);
+
+    }
+
+    public function getResNumberOrSlotAdd(Request $request)
+    {
+
+        $res_date =  $request->res_date;
+
+        // if system use reservation numbers not slots
+        $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
+            return intval($item);
+        })->toArray();
+        $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+
+
+        // if system use reservation slots not numbers
+        $reservation_slots = Reservation::where('res_date', $res_date)
+        ->where('slot', '<>', 'null')->pluck('slot')->toArray();
+        $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+        $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
+
+        $reservations  = Reservation::where('res_date',$res_date)->get();
+
+        // Create an associative array or Laravel collection with the values
+        $data = [
+            'ReservationsNumbers' => $number_of_res,
+            'ReservationsSlots' => $slots,
+            'Reservations'=>$reservations 
+        ];
+
+        return $this->apiResponse($data, 'Data', 200,true);
+        // Return the data as JSON response
+        // return response()->json($data);
 
     }
 

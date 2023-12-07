@@ -25,6 +25,7 @@ return [
   'Deleted_Reservations'=>'الحجوزات المحذوفة',
   'Number_of_Reservations'=>'عدد الحجوزات اليومية',
   'Add_Number_of_Reservations'=>'أضافة عدد الحجوزات',
+  'Controll_Number_of_Reservations'=>'التحكم قى عدد الحجوزات',
 
   'Medicine'=>'الدواء',
   'Add_Medicine'=>'أضافة دواء',
@@ -50,9 +51,15 @@ return [
 
   'Reservation_Slots'=>'Reservation Slots',
   'Add_Reservation_Slots'=>'Add Reservation Slots',
-  ''=>'',
-  ''=>'',
-  ''=>'',
+  
+  'Rays'=>'الأشعة',
+  'All_Rays'=>'كل الأشعة',
+  'Deleted_Rays'=>'الأشعة المحذوفة',
+
+  'Analysis'=>'التحاليل',
+  'All_Analysis'=>'كل التحاليل',
+  'Deleted_Analysis'=>'التحاليل المحذوفة',
+  
   ''=>'',
   ''=>'',
   ''=>'',
