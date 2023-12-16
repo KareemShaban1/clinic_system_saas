@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AccessTokenController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,9 @@ Route::post('auth/access-tokens', [AccessTokenController::class,'store'])
 Route::delete('auth/access-tokens/{token?}', [AccessTokenController::class,'destroy'])
 ->middleware('auth:sanctum');
 
+Route::post('patient/login', [AuthController::class,'patientLogin'])
+->middleware('guest:sanctum');
+
 Route::group(
     [
         'controller' => 'App\Http\Controllers\Api\PatientController',
@@ -42,10 +46,10 @@ Route::group(
         Route::delete('/force_delete_patient/{id}', 'forceDelete');
     }
 );
-// Route::apiResource('reservations',ReservationController::class);
 
 Route::group(
     [
+        // 'middleware' => 'auth:sanctum',
         'controller' => 'App\Http\Controllers\Api\ReservationController',
     ],
     function () {
@@ -58,7 +62,7 @@ Route::group(
         Route::put('/restore_reservation/{id}', 'restore');
         Route::delete('/force_delete_reservation/{id}', 'forceDelete');
         Route::get('/reservationNumSlots', 'getResNumberOrSlotAdd');
-        
+
     }
 );
 

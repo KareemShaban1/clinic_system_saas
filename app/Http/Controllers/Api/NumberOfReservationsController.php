@@ -22,8 +22,13 @@ class NumberOfReservationsController extends Controller
 
     public function show($id)
     {
-        $number_of_reservation = new NumberOfReservationsResource(NumberOfReservations::findOrFail($id));
-        return $this->apiResponse($number_of_reservation, 'Number Of Reservations', 200);
+        if(NumberOfReservations::findOrFail($id)) {
+            $number_of_reservation = new NumberOfReservationsResource(NumberOfReservations::findOrFail($id));
+            return $this->apiResponse($number_of_reservation, 'Number Of Reservations', 200);
+        } else {
+            return $this->apiResponse(null, 'There is no number of reservation', 404, false);
+        }
+
 
     }
 
@@ -32,10 +37,9 @@ class NumberOfReservationsController extends Controller
         $request->validate([
             'reservation_date' => 'required',
             'num_of_reservations' => 'required|integer',
-            ], [
-                'num_of_reservations.unique' => 'عدد الحجوزات موجود بالنسبة لليوم'
             ]);
 
+        
 
         $number_of_reservation = new NumberOfReservationsResource(NumberOfReservations::create($request->all()));
 

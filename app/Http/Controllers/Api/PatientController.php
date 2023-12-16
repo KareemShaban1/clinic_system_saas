@@ -42,9 +42,9 @@ class PatientController extends Controller
         $patient = Patient::find($id);
 
         if($patient) {
-            return $this->apiResponse(new PatientResource($patient), 'ok', 200,true);
+            return $this->apiResponse(new PatientResource($patient), 'ok', 200, true);
         }
-        return $this->apiResponse('null', 'Patient Not Fount', 401,false);
+        return $this->apiResponse('null', 'Patient Not Fount', 401, false);
 
     }
 
@@ -55,11 +55,11 @@ class PatientController extends Controller
         $request->validated();
 
         $user = $request->user();
-        if (!$user->tokenCan('أضافة مريض')) {
-            return response([
-                'message' => 'Not Allowed'
-            ], 403);
-        }
+        // if (!$user->tokenCan('أضافة مريض')) {
+        //     return response([
+        //         'message' => 'Not Allowed'
+        //     ], 403);
+        // }
         $patient = new PatientResource(Patient::create($request->all()));
 
         return $this->apiResponse($patient, 'Patient Created Successfully', 200);
@@ -94,11 +94,11 @@ class PatientController extends Controller
         $patient = Patient::find($id);
 
         $user = Auth::guard('sanctum')->user();
-        if (!$user->tokenCan('حذف مريض')) {
-            return response([
-                'message' => 'Not Allowed'
-            ], 403);
-        }
+        // if (!$user->tokenCan('حذف مريض')) {
+        //     return response([
+        //         'message' => 'Not Allowed'
+        //     ], 403);
+        // }
         if(!$patient) {
             return $this->apiResponse(null, 'Patient Not Found', 401);
         }

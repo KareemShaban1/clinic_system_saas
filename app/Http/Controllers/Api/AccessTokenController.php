@@ -25,7 +25,7 @@ class AccessTokenController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if($user && Hash::check($request->password, $user->password)) {
-            $device_name = $request->post('device_name', $request->userAgent());
+            // $device_name = $request->post('device_name', $request->userAgent());
             // $token = $user->createToken($device_name, $request->post('abilities'));
             $token = $user->createToken('x-api-key', ['read']); // Modify the abilities as needed
             return Response::json([

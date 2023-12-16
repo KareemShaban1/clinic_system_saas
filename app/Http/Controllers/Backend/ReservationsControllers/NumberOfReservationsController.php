@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\ReservationsControllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\SlotsNumbersCheck;
 use Illuminate\Http\Request;
 use App\Models\NumberOfReservations;
 use Illuminate\Validation\Rule;
@@ -11,6 +12,7 @@ class NumberOfReservationsController extends Controller
 {
     //
 
+    use SlotsNumbersCheck;
     public function index()
     {
 
@@ -33,14 +35,20 @@ class NumberOfReservationsController extends Controller
         $request->validate([
         'reservation_date' => 'required',
         'num_of_reservations' => 'required|integer',
-        ], [
-            'num_of_reservations.unique' => 'عدد الحجوزات موجود بالنسبة لليوم'
         ]);
 
-        $data = $request->all();
-        NumberOfReservations::create($data);
+        $slots_check = $this->slotsCheck($request->reservation_date);
 
-        return redirect()->route('backend.patients.index');
+
+        if($slots_check) {
+            return redirect()->back()->with('toast_error', 'تم أضافة slots لهذا اليوم');
+        } else {
+            $data = $request->all();
+            NumberOfReservations::create($data);
+            return redirect()->route('backend.patients.index')->with('toast_success', 'تم أضافة عدد الحجوزات لهذا اليوم بنجاح');
+        }
+
+
     }
 
     public function edit($id)
@@ -74,8 +82,5 @@ class NumberOfReservationsController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
-
-    }
+    public function destroy($id) {}
 }

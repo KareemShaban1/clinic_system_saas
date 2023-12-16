@@ -19,12 +19,11 @@
 @section('content')
 <!-- row -->
 
-<h3>Database Backups</h3>
 
 <div class="row">
     <div class="col-xs-12 col-md-12 clearfix">
-        <form action="{{ url('backup/create') }}" method="GET" class="add-new-backup" enctype="multipart/form-data"
-            id="CreateBackupForm">
+        <form action="{{ route('backend.backups.create') }}" method="GET" class="add-new-backup"
+            enctype="multipart/form-data" id="CreateBackupForm">
             {{ csrf_field() }}
             <input type="submit" name="submit" class="theme-button btn btn-primary pull-right"
                 style="margin-bottom:2em;" value="{{ trans('backend/backups_trans.Create_Backup') }}">
@@ -77,7 +76,7 @@
                             </td>
                             <td class="text-right">
                                 <a class="btn btn-success"
-                                    href="{{ url('backup/download/' . $backup['file_name']) }}"><i
+                                    href="{{ route('backend.backups.download', $backup['file_name']) }}"><i
                                         class="fa fa-cloud-download"></i>
                                     {{ trans('backend/backups_trans.Download') }}</a>
                                 <a class="btn btn-danger"

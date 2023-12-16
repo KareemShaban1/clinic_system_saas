@@ -1,11 +1,13 @@
 1- complete prescription code [controller , view] (done)
-2- do reservations [number , slots] modal in dashboard  (done)
+2- do reservations [number , slots] modal in dashboard (done)
 
 25/8/2023
-- make backup for data . (not done)
-- make zoom settings . (not done)
-- Make Api controllers and but logic on it . (not done)
-- add blogs part (migrations , models , controllers , views )  in project. (not done)
+
+-   make backup for data . (done)
+-   make zoom settings . (done)
+-   Make Api controllers and but logic on it . (done)
+-   add blogs part (migrations , models , controllers , views ) in project. (not done)
 
 2/9/2023
-- data backup (done)
+
+-   data backup (done)

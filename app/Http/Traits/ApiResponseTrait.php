@@ -4,15 +4,15 @@ namespace App\Http\Traits;
 
 trait ApiResponseTrait
 {
-    public function apiResponse($data = null, $message = null, $status = null,$success = true)
+    public function apiResponse($data = null, $message = null, $status_code = null, $success = true)
     {
         $array = [
                   'data' => $data,
                   'message' => $message,
-                  'success'=>$success,
-                  'status' => $status
+                  'success' => $success,
+                  'status_code' => $status_code
         ];
 
-        return response($array, $status);
+        return response($array, $status_code);
     }
 }

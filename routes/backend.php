@@ -21,7 +21,7 @@ Route::group(
     function () {
 
         Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
-        
+
         // Dashboard Part
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
@@ -31,10 +31,10 @@ Route::group(
             'as' => 'backups.',
             'controller' => 'BackupController',],
             function () {
-                Route::get('/backup', 'index')->name('index');
-                Route::get('/backup/create', 'create');
-                Route::get('/backup/download/{file_name}', 'download');
-                Route::get('/backup/delete/{file_name}', 'delete');
+                Route::get('/', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+                Route::get('/download/{file_name}', 'download')->name('download');
+                Route::get('delete/{file_name}', 'delete')->name('delete');
             }
         );
         // Patients Part
@@ -251,7 +251,7 @@ Route::group(
             }
         );
 
-         // Analysis Part
+        // Analysis Part
         Route::group(
             [
             'prefix' => '/analysis',
