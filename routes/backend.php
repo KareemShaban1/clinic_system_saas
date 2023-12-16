@@ -20,7 +20,7 @@ Route::group(
     ],
     function () {
 
-        Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+        Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('logs');
 
         // Dashboard Part
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');

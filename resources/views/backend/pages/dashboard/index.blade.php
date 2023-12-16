@@ -22,8 +22,8 @@
 
             @if (config('app.env') !== 'production')
                 <div class="col-md-4 col-sm-4 col-12">
-                    <a href="{{ URL(env('APP_URL') . '/log-viewer') }}" target="blank">
-                        Log Viewer
+                    <a href="{{ route('backend.logs') }}" target="blank">
+                        Logs
                     </a>
                 </div>
             @endif
