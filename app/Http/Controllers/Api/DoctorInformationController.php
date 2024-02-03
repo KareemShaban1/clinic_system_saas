@@ -17,19 +17,15 @@ class DoctorInformationController extends Controller
     $doctorInfo = Settings::take(9)->get();
 
     // Create a new response array
-    $formattedResponse = [
-        'data' => [],
-        'message' => 'success',
-        'success' => true,
-        'status_code' => 200,
+    $data = [
     ];
 
     // Format the data as 'key': 'value'
     foreach ($doctorInfo as $setting) {
-        $formattedResponse['data'][$setting['key']] = $setting['value'];
+        $data[$setting['key']] = $setting['value'];
     }
 
-    return $this->apiResponse($formattedResponse['data'], $formattedResponse['message'], $formattedResponse['status_code'], $formattedResponse['success']);
+    return $this->apiResponse($data, 'success', 200,true);
 }
 
 }
