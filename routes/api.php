@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AccessTokenController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DoctorInformationController;
 use App\Http\Controllers\Api\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,8 @@ Route::delete('auth/access-tokens/{token?}', [AccessTokenController::class,'dest
 
 Route::post('patient/login', [AuthController::class,'patientLogin'])
 ->middleware('guest:sanctum');
+
+Route::get('doctor_info', [DoctorInformationController::class,'index']);
 
 Route::group(
     [

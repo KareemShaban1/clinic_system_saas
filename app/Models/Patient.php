@@ -12,7 +12,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Patient extends User
 {
-    use HasApiTokens , HasFactory ,Notifiable , HasRoles ,SoftDeletes;
+    use HasApiTokens ;
+    use HasFactory ;
+    use Notifiable ;
+    use HasRoles ;
+    use SoftDeletes;
 
     protected $table = 'patients';
 
@@ -73,10 +77,42 @@ class Patient extends User
         );
     }
 
-    public function ray()
+    public function rays()
     {
-        return $this->belongsTo(
+        return $this->hasMany(
             Ray::class,
+            'patient_id',
+        );
+    }
+
+    public function glassesDistance()
+    {
+        return $this->hasMany(
+            GlassesDistance::class,
+            'patient_id',
+        );
+    }
+
+    public function medicalAnalysis()
+    {
+        return $this->hasMany(
+            MedicalAnalysis::class,
+            'patient_id',
+        );
+    }
+
+    public function chronicDisease()
+    {
+        return $this->hasMany(
+            ChronicDisease::class,
+            'patient_id',
+        );
+    }
+
+    public function prescription()
+    {
+        return $this->hasMany(
+            Prescription::class,
             'patient_id',
         );
     }

@@ -27,12 +27,7 @@
                     </a>
                 </div>
             @endif
-            {{-- <div class="col-md-4 col-sm-4 col-12">
-                <form method="POST" action="{{ route('backup.create') }}">
-                    @csrf
-                    <button type="submit">Create Backup</button>
-                </form>
-            </div> --}}
+
         </div>
     </div>
     <!-- breadcrumb -->

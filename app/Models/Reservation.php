@@ -47,6 +47,47 @@ class Reservation extends Model
         );
     }
 
+    public function rays()
+    {
+        return $this->hasMany(
+            Ray::class,
+            'reservation_id',
+        );
+    }
+
+    public function medicalAnalysis()
+    {
+        return $this->hasMany(
+            MedicalAnalysis::class,
+            'reservation_id',
+        );
+    }
+
+    public function chronicDisease()
+    {
+        return $this->hasMany(
+            ChronicDisease::class,
+            'reservation_id',
+        );
+    }
+
+    public function glassesDistance()
+    {
+        return $this->hasMany(
+            GlassesDistance::class,
+            'reservation_id',
+        );
+    }
+
+    public function prescription()
+    {
+        return $this->hasMany(
+            Prescription::class,
+            'reservation_id',
+        );
+    }
+
+
 
 
 
