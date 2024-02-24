@@ -35,7 +35,6 @@ class DashboardController extends Controller
         $endDate = Carbon::now();
 
         $reservations_res_date = Reservation::whereBetween('res_date', [$startDate, $endDate])->pluck('res_date');
-        // dd($startDate,$reservations_res_date);
 
         // get all reservations
         $online_reservations_count = OnlineReservation::count();

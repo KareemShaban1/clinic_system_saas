@@ -126,6 +126,36 @@ Route::group(
     }
 );
 
+Route::group(
+    [
+        'controller' => 'App\Http\Controllers\Api\PatientController',
+    ],
+    function () {
+        Route::get('/patients', 'index');
+        Route::get('/show_patient/{patient}', 'show');
+        Route::post('/store_patient', 'store');
+        Route::put('/update_patient/{id}', 'update');
+        Route::delete('/delete_patient/{id}', 'delete');
+        Route::put('/restore_patient/{id}', 'restore');
+        Route::delete('/force_delete_patient/{id}', 'forceDelete');
+    }
+);
+
+Route::group(
+    [
+        'controller' => 'App\Http\Controllers\Api\PatientInformationController',
+    ],
+    function () {
+        Route::get('/patient_chronicDisease/{patient_id}', 'patientChronicDiseases');
+        Route::get('/patient_rays/{patient_id}', 'patientRays');
+        Route::get('/patient_medicalAnalysis/{patient_id}', 'patientMedicalAnalysis');
+        Route::get('/patient_glassesDistance/{patient_id}', 'patientGlassesDistance');
+        Route::get('/patient_prescription/{patient_id}', 'patientPrescription');
+
+    }
+);
+
+
 
 // patients , show_patient , store_patient , update_patient , delete_patient
 // reservations , show_reservation , store_reservation , update_reservation , delete_reservation
