@@ -22,12 +22,12 @@
 <div style="padding: 20px; background-color:#e7e7e7;">
     <div class="row">
         <div class="col-sm-6 col-12">
-            <h5 class="mb-0" style="color: rgb(152, 107, 107)"> 
+            <h5 class="mb-0" style="color: rgb(152, 107, 107)">
                 {{ trans('backend/reservations_trans.You Are Using') }}
                 @if ($settings['reservation_slots'] == 1)
-                {{ trans('backend/reservations_trans.Reservation_Slots') }}
-                @else 
-                {{ trans('backend/reservations_trans.Reservation_Numbers') }}
+                    {{ trans('backend/reservations_trans.Reservation_Slots') }}
+                @else
+                    {{ trans('backend/reservations_trans.Reservation_Numbers') }}
                 @endif
                 {{ trans('backend/reservations_trans.You Can change it from') }}
                 <a href="{{ Route('backend.system_control.index') }}" class="text-dark">
@@ -39,13 +39,13 @@
         <div class="col-sm-6 col-12">
             <div>
                 <a href="{{ Route('backend.num_of_reservations.add') }}" class="text-success">
-                {{ trans('backend/reservations_trans.Add Reservation Numbers') }}
+                    {{ trans('backend/reservations_trans.Add Reservation Numbers') }}
                 </a>
             </div>
 
             <div>
                 <a href="{{ Route('backend.reservation_slots.add') }}" class="text-success">
-                {{ trans('backend/reservations_trans.Add Reservation Slots') }}
+                    {{ trans('backend/reservations_trans.Add Reservation Slots') }}
                 </a>
             </div>
         </div>
@@ -67,7 +67,8 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label for="patient_id" class="form-control-label">{{ trans('backend/reservations_trans.Patient_Name') }}
+                                <label for="patient_id"
+                                    class="form-control-label">{{ trans('backend/reservations_trans.Patient_Name') }}
                                 </label>
                                 <select name="patient_id" id="patient_id" class="custom-select mr-sm-2">
                                     <option value="{{ $patient->patient_id }}" selected>{{ $patient->name }}</option>
@@ -81,9 +82,10 @@
 
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="datepicker-action"> {{ trans('backend/reservations_trans.Reservation_Date') }} <span
+                                <label for="datepicker-action">
+                                    {{ trans('backend/reservations_trans.Reservation_Date') }} <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control"  name="res_date" id="datepicker-action"
+                                <input class="form-control" name="res_date" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
 
                             </div>
@@ -92,9 +94,10 @@
                         @if ($settings['reservation_slots'] == 1)
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="slot"> {{ trans('backend/reservations_trans.Reservation_Slots') }} <span
-                                            class="text-danger">*</span></label>
-                                    <select name="slot" id="slot" id="slot-select" class="custom-select mr-sm-2">
+                                    <label for="slot"> {{ trans('backend/reservations_trans.Reservation_Slots') }}
+                                        <span class="text-danger">*</span></label>
+                                    <select name="slot" id="slot" id="slot-select"
+                                        class="custom-select mr-sm-2">
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}
                                         </option>
                                     </select>
@@ -104,7 +107,8 @@
                         @else
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="res_num"> {{ trans('backend/reservations_trans.Number_of_Reservation') }} <span
+                                    <label for="res_num">
+                                        {{ trans('backend/reservations_trans.Number_of_Reservation') }} <span
                                             class="text-danger">*</span></label>
                                     <select name="res_num" id="res_num" class="custom-select mr-sm-2">
                                         <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}
@@ -150,7 +154,8 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-12">
                             <div class="form-group">
-                                <label for="payment" class="form-label">{{ trans('backend/reservations_trans.Payment') }}</label>
+                                <label for="payment"
+                                    class="form-label">{{ trans('backend/reservations_trans.Payment') }}</label>
                                 <select name="payment" id="payment" class="custom-select mr-sm-2">
                                     <option selected disabled>{{ trans('backend/reservations_trans.Choose') }}</option>
                                     <option value="paid">{{ trans('backend/reservations_trans.Paid') }} </option>
@@ -204,7 +209,7 @@
                             <div class="form-group">
                                 <label>{{ trans('backend/reservations_trans.First_Diagnosis') }} </label>
                                 <textarea class="summernote" name="first_diagnosis"
-                                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 </textarea>
                             </div>
                         </div>
@@ -225,8 +230,7 @@
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
-
+@push('scripts')
 <script>
     $(document).ready(function() {
 
@@ -261,7 +265,7 @@
 
 
                     // Clear the current options
-                    $('#slot-select').empty();
+                    $('select[name="slot"]').empty();
                     // Add the new options based on the response
                     $.each(response.slots, function(index, slot) {
                         var option = $('<option>').val(slot.slot_start_time).text(
@@ -273,7 +277,8 @@
                                 true); // Disable the option if reserved
                             option.css('background', 'gainsboro');
                         }
-                        $('#slot-select').append(option);
+                        console.log(option)
+                        $('select[name="slot"]').append(option);
                     });
                 },
                 error: function(xhr, status, error) {
@@ -286,5 +291,4 @@
 
     });
 </script>
-
-@endsection
+@endpush

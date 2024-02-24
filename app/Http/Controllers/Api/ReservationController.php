@@ -17,7 +17,8 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     //
-    use ApiResponseTrait , TimeSlotsTrait;
+    use ApiResponseTrait ;
+    use TimeSlotsTrait;
     public function index()
     {
 
@@ -48,8 +49,8 @@ class ReservationController extends Controller
 
         $data = $request->all();
         $data['month'] = substr($request->res_date, 5, 7 - 5);
-        $data['acceptance']="not_approved";
-        
+        $data['acceptance'] = "not_approved";
+
 
         $reservation = new ReservationResource(Reservation::create($data));
 
@@ -121,37 +122,80 @@ class ReservationController extends Controller
 
     }
 
+    // public function getResNumberOrSlotAdd(Request $request)
+    // {
+
+    //     $res_date =  $request->res_date;
+
+    //     // if system use reservation numbers not slots
+    //     $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
+    //         return intval($item);
+    //     })->toArray();
+    //     $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+
+
+    //     // if system use reservation slots not numbers
+    //     $reservation_slots = Reservation::where('res_date', $res_date)
+    //     ->where('slot', '<>', 'null')->pluck('slot')->toArray();
+    //     $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+    //     $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
+
+    //     $reservations  = Reservation::where('res_date',$res_date)->get();
+
+    //     // Create an associative array or Laravel collection with the values
+    //     $data = [
+    //         'ReservationsNumbers' => $number_of_res,
+    //         'ReservationsSlots' => $slots,
+    //         'Reservations'=>$reservations
+    //     ];
+
+    //     return $this->apiResponse($data, 'Data', 200,true);
+    //     // Return the data as JSON response
+    //     // return response()->json($data);
+
+    // }
+
     public function getResNumberOrSlotAdd(Request $request)
     {
+        $res_date = $request->res_date;
 
-        $res_date =  $request->res_date;
+        // Fetch reservation numbers for the given date
+        $reservedReservationNumbers = Reservation::where('res_date', $res_date)
+            ->pluck('res_num')
+            ->map(function ($item) {
+                return (int) $item;
+            })
+            ->toArray();
 
-        // if system use reservation numbers not slots
-        $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
-            return intval($item);
-        })->toArray();
-        $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+        // Fetch the number of reservations for the given date
+        $numberOfReservations = NumberOfReservations::where('reservation_date', $res_date)
+            ->value('num_of_reservations');
 
+        // Fetch reservation slots for the given date
+        $reservationSlots = Reservation::where('res_date', $res_date)
+            ->whereNotNull('slot')
+            ->pluck('slot')
+            ->toArray();
 
-        // if system use reservation slots not numbers
-        $reservation_slots = Reservation::where('res_date', $res_date)
-        ->where('slot', '<>', 'null')->pluck('slot')->toArray();
+        // Fetch the number of slots and time slots if available
         $number_of_slot = ReservationSlots::where('date', $res_date)->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
-        $reservations  = Reservation::where('res_date',$res_date)->get();
+        // Fetch all reservations for the given date
+        $reservations = Reservation::where('res_date', $res_date)->get();
 
-        // Create an associative array or Laravel collection with the values
+        // Organize the data into an associative array
         $data = [
-            'ReservationsNumbers' => $number_of_res,
-            'ReservationsSlots' => $slots,
-            'Reservations'=>$reservations 
+            'reserved_res_number' => $reservedReservationNumbers,
+            'day_number_of_reservations' => $numberOfReservations,
+            'reserved_slots'=>$reservationSlots,
+            'day_reservation_slots' => $slots,
+            'reservations' => $reservations,
         ];
 
-        return $this->apiResponse($data, 'Data', 200,true);
-        // Return the data as JSON response
-        // return response()->json($data);
-
+        // Return the data as a JSON response
+        return $this->apiResponse($data, 'Data fetched successfully', 200, true);
     }
+
 
 }
