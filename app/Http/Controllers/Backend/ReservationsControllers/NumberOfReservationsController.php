@@ -18,7 +18,7 @@ class NumberOfReservationsController extends Controller
 
         $num_of_reservations = NumberOfReservations::all();
 
-        return view('backend.pages.num_of_reservations.index', compact('num_of_reservations'));
+        return view('backend.dashboards.user.pages.num_of_reservations.index', compact('num_of_reservations'));
     }
 
     public function add()
@@ -26,7 +26,7 @@ class NumberOfReservationsController extends Controller
 
         $num_of_reservations = new NumberOfReservations();
 
-        return view('backend.pages.num_of_reservations.add', compact('num_of_reservations'));
+        return view('backend.dashboards.user.pages.num_of_reservations.add', compact('num_of_reservations'));
     }
 
     public function store(Request $request)
@@ -56,7 +56,7 @@ class NumberOfReservationsController extends Controller
 
         $num_of_res =  NumberOfReservations::findOrFail($id);
 
-        return view('backend.pages.num_of_reservations.edit', compact('num_of_res'));
+        return view('backend.dashboards.user.pages.num_of_reservations.edit', compact('num_of_res'));
     }
 
     public function update(Request $request, $id)

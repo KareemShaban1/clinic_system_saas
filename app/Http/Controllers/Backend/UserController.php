@@ -19,7 +19,7 @@ class UserController extends Controller
         // get all users
         $users = User::with('roles')->get();
 
-        return view('backend.pages.users.index', compact('users'));
+        return view('backend.dashboards.user.pages.users.index', compact('users'));
 
     }
 
@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name', 'name')->all();
         // return add user view
-        return view('backend.pages.users.add', compact('roles'));
+        return view('backend.dashboards.user.pages.users.add', compact('roles'));
 
     }
 
@@ -38,7 +38,7 @@ class UserController extends Controller
         $request->validated();
 
         try {
-          
+
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
@@ -64,7 +64,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('backend.pages.users.edit', compact('user', 'roles', 'userRole'));
+        return view('backend.dashboards.user.pages.users.edit', compact('user', 'roles', 'userRole'));
 
 
     }

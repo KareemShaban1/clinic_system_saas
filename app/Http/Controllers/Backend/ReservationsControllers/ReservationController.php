@@ -69,7 +69,7 @@ class ReservationController extends Controller
         $reservation_settings = $this->systemControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 
-        return view('backend.pages.reservations.index', 
+        return view('backend.dashboards.user.pages.reservations.index', 
         compact('reservations', 'reservation_settings', 'clinic_type'));
     }
 
@@ -84,7 +84,7 @@ class ReservationController extends Controller
 
 
         return view(
-            'backend.pages.reservations.today',
+            'backend.dashboards.user.pages.reservations.today',
             compact('reservations', 'reservation_settings', 'currentDate','clinic_type')
         );
     }
@@ -100,7 +100,7 @@ class ReservationController extends Controller
             'cost_sum' => $costSum,
         ];
 
-        $pdf = PDF::loadView('backend.pages.reservations.today_reservation_report', $data);
+        $pdf = PDF::loadView('backend.dashboards.user.pages.reservations.today_reservation_report', $data);
         return $pdf->stream('Report.pdf');
     }
 
@@ -119,7 +119,7 @@ class ReservationController extends Controller
 
 
         return view(
-            'backend.pages.reservations.add',
+            'backend.dashboards.user.pages.reservations.add',
             compact(
                 'patient',
                 'settings'
@@ -158,7 +158,7 @@ class ReservationController extends Controller
         // get all rays of reservation
         $rays = $this->ray->where('reservation_id', $id)->get();
 
-        return view('backend.pages.reservations.show', compact('reservation', 'chronic_diseases', 'drugs', 'rays'));
+        return view('backend.dashboards.user.pages.reservations.show', compact('reservation', 'chronic_diseases', 'drugs', 'rays'));
     }
 
 
@@ -191,7 +191,7 @@ class ReservationController extends Controller
             $reservationType = 'slot';
         }
         return view(
-            'backend.pages.reservations.edit',
+            'backend.dashboards.user.pages.reservations.edit',
             compact(
                 'reservation',
                 'numberOfRes',
@@ -234,7 +234,7 @@ class ReservationController extends Controller
         $this->authorizeCheck('حذف كشف'); 
         $reservations = $this->reservation->onlyTrashed()->get();
 
-        return view('backend.pages.reservations.trash', compact('reservations'));
+        return view('backend.dashboards.user.pages.reservations.trash', compact('reservations'));
     }
 
     public function restore($id)

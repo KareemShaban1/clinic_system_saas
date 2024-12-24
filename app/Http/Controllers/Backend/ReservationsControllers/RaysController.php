@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\StoreRayRequest;
 use App\Http\Requests\Backend\UpdateRayRequest;
 use App\Http\Traits\AuthorizeCheck;
 use App\Models\Reservation;
+use App\Models\Settings;
+use App\Models\SystemControl;
 use App\Models\Ray;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -18,35 +20,41 @@ class RaysController extends Controller
     private $reservation;
     private $ray;
     private $storage;
-
+    protected $systemControl;
+    protected $settings;
     public function __construct(
         Reservation $reservation,
         Ray $ray,
+        SystemControl $systemControl,
+        Settings $settings,
         Storage $storage
     ) {
 
         $this->reservation = $reservation;
         $this->ray = $ray;
+        $this->settings = $settings;
         $this->storage = $storage;
+        $this->systemControl = $systemControl;
     }
 
     public function index()
     {
-        $this->authorizeCheck('عرض الأشعة و التحاليل');
-        $reservations = $this->reservation->all();
-        return view('backend.pages.reservations.index', compact('reservations'));
+        
+        $rays = $this->ray->all();
+        
+        return view('backend.dashboards.user.pages.rays.index', compact('rays'));
     }
 
     public function add($id)
     {
-        $this->authorizeCheck('أضافة أشعة و تحليل');
+        
         $reservation = $this->reservation->findOrFail($id);
-        return view('backend.pages.rays.add', compact('reservation'));
+        return view('backend.dashboards.user.pages.rays.add', compact('reservation'));
     }
 
     public function store(StoreRayRequest $request)
     {
-        $this->authorizeCheck('أضافة أشعة و تحليل');
+        
 
         $request->validated();
 
@@ -71,28 +79,28 @@ class RaysController extends Controller
     public function show($id)
     {
 
-        $this->authorizeCheck('عرض أشعة و تحليل');
+       
 
         // get reservation based on reservation_id
         $rays = $this->ray->where('reservation_id', $id)->get();
 
-        return view('backend.pages.rays.show', compact('rays'));
+        return view('backend.dashboards.user.pages.rays.show', compact('rays'));
     }
 
 
     public function edit($id)
     {
-        $this->authorizeCheck('تعديل أشعة و تحليل');
+        
 
         // get reservation based on reservation_id
         $ray = $this->ray->findOrFail($id);
 
-        return view('backend.pages.rays.edit', compact('ray'));
+        return view('backend.dashboards.user.pages.rays.edit', compact('ray'));
     }
 
     public function update(UpdateRayRequest $request, $id)
     {
-        $this->authorizeCheck('تعديل أشعة و تحليل');
+        
 
         $request->validated();
 

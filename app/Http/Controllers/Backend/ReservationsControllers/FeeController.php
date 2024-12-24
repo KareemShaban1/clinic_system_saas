@@ -32,7 +32,7 @@ class FeeController extends Controller
 
         $online_reservation = OnlineReservation::where('start_at', $current_date)->get();
 
-        return view('backend.pages.fees.today', compact('current_date', 'reservations', 'cost_sum'));
+        return view('backend.dashboards.user.pages.fees.today', compact('current_date', 'reservations', 'cost_sum'));
 
     }
 
@@ -48,7 +48,7 @@ class FeeController extends Controller
 
         $cost_sum = $reservations->where('payment', 'paid')->sum('cost');
 
-        return view('backend.pages.fees.month', compact('reservations', 'current_date', 'current_month', 'cost_sum'));
+        return view('backend.dashboards.user.pages.fees.month', compact('reservations', 'current_date', 'current_month', 'cost_sum'));
 
     }
 
@@ -60,7 +60,7 @@ class FeeController extends Controller
         // get all reservations
         $reservations = Reservation::all();
 
-        return view('backend.pages.fees.index', compact('current_date', 'reservations'));
+        return view('backend.dashboards.user.pages.fees.index', compact('current_date', 'reservations'));
 
     }
 }

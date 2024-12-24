@@ -19,7 +19,7 @@ class OnlineReservationController extends Controller
     {
 
         $online_reservations = OnlineReservation::all();
-        return view('backend.pages.online_reservations.index', compact('online_reservations'));
+        return view('backend.dashboards.user.pages.online_reservations.index', compact('online_reservations'));
 
     }
     public function add($id)
@@ -31,12 +31,10 @@ class OnlineReservationController extends Controller
 
         $current_date = Carbon::now('Egypt')->format('Y-m-d');
 
-        return view('backend.pages.online_reservations.add', compact('patient', 'online_reservation'));
+        return view('backend.dashboards.user.pages.online_reservations.add', compact('patient', 'online_reservation'));
     }
     public function store(Request $request)
     {
-
-        // dd($request->all());
 
         $meeting = $this->createMeeting($request);
 

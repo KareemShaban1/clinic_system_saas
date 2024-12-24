@@ -17,7 +17,7 @@ class GlassesDistanceController extends Controller
     {
         $this->authorizeCheck('عرض مقاسات النظارة');
         $glasses_distances = $glassesDistance->all();
-        return view('backend.pages.glasses_distance.index', compact('glasses_distances'));
+        return view('backend.dashboards.user.pages.glasses_distance.index', compact('glasses_distances'));
     }
 
     public function add(Request $request, Reservation $reservation, $id)
@@ -27,7 +27,7 @@ class GlassesDistanceController extends Controller
         // get reservation based on reservation_id
         $reservation = $reservation->findOrFail($id);
 
-        return view('backend.pages.glasses_distance.add', compact('reservation'));
+        return view('backend.dashboards.user.pages.glasses_distance.add', compact('reservation'));
     }
 
     public function store(StoreGlassesDistanceRequest $request, GlassesDistance $glassesDistance)
@@ -37,7 +37,6 @@ class GlassesDistanceController extends Controller
         $request->validated();
 
         try {
-
 
             $data = $request->all();
 
@@ -56,7 +55,7 @@ class GlassesDistanceController extends Controller
         $this->authorizeCheck('تعديل مقاس نظارة');
 
         $glasses_distance = $glassesDistance->findOrFail($id);
-        return view('backend.pages.glasses_distance.edit', compact('glasses_distance'));
+        return view('backend.dashboards.user.pages.glasses_distance.edit', compact('glasses_distance'));
     }
 
     public function update($id, Request $request, GlassesDistance $glassesDistance)
@@ -98,7 +97,7 @@ class GlassesDistanceController extends Controller
         $data['reservation'] = $reservation;
 
 
-        $pdf = PDF::loadView('backend.pages.glasses_distance.glasses_distance_pdf', $data);
+        $pdf = PDF::loadView('backend.dashboards.user.pages.glasses_distance.glasses_distance_pdf', $data);
 
         return $pdf->stream('Glasses' . '.pdf');
     }

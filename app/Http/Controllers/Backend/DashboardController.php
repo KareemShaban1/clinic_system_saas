@@ -91,7 +91,7 @@ class DashboardController extends Controller
         ];
         $reservation_chart = new LaravelChart($reservation_chart_options);
 
-        return view('backend.pages.dashboard.index', compact(
+        return view('backend.dashboards.user.pages.dashboard.index', compact(
             'user_chart',
             'reservation_chart',
             'patients_count',

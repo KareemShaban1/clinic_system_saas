@@ -13,7 +13,7 @@ class SettingsController extends Controller
     {
 
 
-        return view('backend.pages.settings.index');
+        return view('backend.dashboards.user.pages.settings.index');
 
     }
 
@@ -23,7 +23,7 @@ class SettingsController extends Controller
         $collection = Settings::all();
         $settings = $collection->pluck('value', 'key');
 
-        return view('backend.pages.settings.clinicSettings', compact('settings'));
+        return view('backend.dashboards.user.pages.settings.clinicSettings', compact('settings'));
     }
 
     public function updateClinicSettings(Request $request)
@@ -48,7 +48,7 @@ class SettingsController extends Controller
         });
 
 
-        return view('backend.pages.settings.reservationSettings', $settings);
+        return view('backend.dashboards.user.pages.settings.reservationSettings', $settings);
     }
 
     public function updateReservationSettings(Request $request)
@@ -68,7 +68,7 @@ class SettingsController extends Controller
         $collection = Settings::all();
         $zoomSettings = $collection->pluck('value', 'key');
 
-        return view('backend.pages.settings.zoomSettings', compact('zoomSettings'));
+        return view('backend.dashboards.user.pages.settings.zoomSettings', compact('zoomSettings'));
     }
 
     public function updateZoomSettings(Request $request)
@@ -94,10 +94,10 @@ class SettingsController extends Controller
         // Use the `env` helper to update .env values
         $updatedEnvContent = preg_replace('/ZOOM_CLIENT_KEY=.*/', "ZOOM_CLIENT_KEY=$newZoomApiKey", $oldEnvContent);
         $updatedEnvContent = preg_replace('/ZOOM_CLIENT_SECRET=.*/', "ZOOM_CLIENT_SECRET=$newZoomApiSecret", $updatedEnvContent);
-        
+
          // Write the updated content back to the .env file
         file_put_contents($envFilePath, $updatedEnvContent);
-    
+
         return back();
 
     }

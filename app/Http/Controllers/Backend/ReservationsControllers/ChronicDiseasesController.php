@@ -34,7 +34,7 @@ class ChronicDiseasesController extends Controller
 
         $reservation = $this->reservation->findOrFail($id);
 
-        return view('backend.pages.chronicDiseases.add', compact('reservation'));
+        return view('backend.dashboards.user.pages.chronicDiseases.add', compact('reservation'));
     }
 
     public function store(StoreChronicDiseaseRequest $request)
@@ -69,7 +69,7 @@ class ChronicDiseasesController extends Controller
         $reservations = $this->reservation->findOrFail($id);
         $chronic_diseases = $this->chronicDisease->where('reservation_id', $id)->get();
 
-        return view('backend.pages.chronicDiseases.show', compact('chronic_diseases', 'reservations'));
+        return view('backend.dashboards.user.pages.chronicDiseases.show', compact('chronic_diseases', 'reservations'));
     }
 
     public function edit($id)
@@ -78,7 +78,7 @@ class ChronicDiseasesController extends Controller
 
         $chronic_disease = $this->chronicDisease->findOrFail($id);
 
-        return view('backend.pages.chronicDiseases.edit', compact('chronic_disease'));
+        return view('backend.dashboards.user.pages.chronicDiseases.edit', compact('chronic_disease'));
     }
 
     public function update(UpdateChronicDiseaseRequest $request, $id)

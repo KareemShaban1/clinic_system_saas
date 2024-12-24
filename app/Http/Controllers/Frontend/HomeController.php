@@ -38,7 +38,7 @@ class HomeController extends Controller
         ->where('acceptance', 'not_approved')
         ->count();
         return view(
-            'frontend.Patient_Dashboard.dashboard.index',
+            'backend.dashboards.patient.pages.dashboard.index',
             compact(
                 'all_reservations_count',
                 'approved_reservations_count',

@@ -7,9 +7,11 @@ use App\Http\Requests\Backend\StoreMedicineRequest;
 use Illuminate\Http\Request;
 use App\Models\Medicine;
 use Illuminate\Validation\ValidationException;
-
+use App\Http\Traits\AuthorizeCheck;
 class MedicineController extends Controller
 {
+    use AuthorizeCheck;
+
     public $medicine;
 
     public function __construct(Medicine $medicine)
@@ -23,14 +25,14 @@ class MedicineController extends Controller
 
         $medicines = $this->medicine->all();
 
-        return view('backend.pages.medicine.index', compact('medicines'));
+        return view('backend.dashboards.user.pages.medicine.index', compact('medicines'));
     }
 
     public function add()
     {
         $this->authorizeCheck('أضافة دواء');
 
-        return view('backend.pages.medicine.add');
+        return view('backend.dashboards.user.pages.medicine.add');
     }
 
     public function store(StoreMedicineRequest $request)
@@ -58,7 +60,7 @@ class MedicineController extends Controller
 
         $medicine = $this->medicine->findOrFail($id);
 
-        return view('backend.pages.medicine.edit', compact('medicine'));
+        return view('backend.dashboards.user.pages.medicine.edit', compact('medicine'));
     }
 
     public function update(Request $request, $id)
@@ -86,7 +88,7 @@ class MedicineController extends Controller
         
         $medicine = $this->medicine->findOrFail($id);
 
-        return view('backend.pages.medicine.show', compact('medicine'));
+        return view('backend.dashboards.user.pages.medicine.show', compact('medicine'));
     }
 
     public function destroy($id)
@@ -103,7 +105,7 @@ class MedicineController extends Controller
         $this->authorizeCheck('حذف دواء');
         
         $medicines = $this->medicine->onlyTrashed()->get();
-        return view('backend.pages.medicine.trash', compact('medicines'));
+        return view('backend.dashboards.user.pages.medicine.trash', compact('medicines'));
     }
 
     public function restore($id)

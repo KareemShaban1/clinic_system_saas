@@ -18,7 +18,7 @@ class ReservationSlotsController extends Controller
 
         $reservation_slots = ReservationSlots::all();
 
-        return view('backend.pages.reservation_slots.index', compact('reservation_slots'));
+        return view('backend.dashboards.user.pages.reservation_slots.index', compact('reservation_slots'));
     }
 
     public function add()
@@ -26,7 +26,7 @@ class ReservationSlotsController extends Controller
 
         $reservation_slots = new ReservationSlots();
 
-        return view('backend.pages.reservation_slots.add', compact('reservation_slots'));
+        return view('backend.dashboards.user.pages.reservation_slots.add', compact('reservation_slots'));
     }
 
     public function store(Request $request)
@@ -56,7 +56,7 @@ class ReservationSlotsController extends Controller
 
         $reservation_slot =  ReservationSlots::findOrFail($id);
 
-        return view('backend.pages.reservation_slots.edit', compact('reservation_slot'));
+        return view('backend.dashboards.user.pages.reservation_slots.edit', compact('reservation_slot'));
     }
 
     public function update(Request $request, $id)

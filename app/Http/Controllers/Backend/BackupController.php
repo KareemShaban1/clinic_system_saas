@@ -30,7 +30,7 @@ class BackupController extends Controller
             }
         }
         $backups = array_reverse($backups);
-        return view("backend.pages.backup.index")->with(compact('backups'));
+        return view("backend.dashboards.user.pages.backup.index")->with(compact('backups'));
     }
 
     public static function humanFileSize($size, $unit = "")

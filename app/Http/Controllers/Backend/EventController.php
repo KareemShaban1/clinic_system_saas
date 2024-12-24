@@ -17,13 +17,13 @@ class EventController extends Controller
         // get all events
         $events = Event::all();
 
-        return view('backend.pages.events.index', compact('events'));
+        return view('backend.dashboards.user.pages.events.index', compact('events'));
 
     }
 
     public function show()
     {
-        return view('backend.pages.events.show');
+        return view('backend.dashboards.user.pages.events.show');
     }
 
 
@@ -43,7 +43,7 @@ class EventController extends Controller
 
         // get deleted events
         $events = Event::onlyTrashed()->get();
-        return view('backend.pages.events.trash', compact('events'));
+        return view('backend.dashboards.user.pages.events.trash', compact('events'));
     }
 
 

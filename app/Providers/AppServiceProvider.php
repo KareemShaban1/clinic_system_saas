@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
         // remove "data" wrapper from json resource response
         JsonResource::withoutWrapping();
 
-        view()->composer('backend.layouts.main-sidebar', function ($view) {
+        view()->composer('backend.dashboards.user.layouts.main-sidebar', function ($view) {
             $collection = SystemControl::all();
             $setting = $collection->flatMap(function ($collection) {
                 return [$collection->key => $collection->value];

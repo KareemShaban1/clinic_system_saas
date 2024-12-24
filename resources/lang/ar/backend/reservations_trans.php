@@ -77,7 +77,7 @@ return [
           'Arabic'=>'عربى',
 
 
-          'Reservation_Slots'=>'Reservation slot',
+          'Reservation_Slots'=>'فتحات الحجز',
           'Start_Time'=>'وقت البداية',
           'End_Time'=>'وقت الأنتهاء',
           'Duration'=>'مدة كل كشف',
@@ -91,12 +91,12 @@ return [
           'Close'=>'الغاء',
 
           'You Are Using'=>'أنت تستخدم',
-          'Reservation_Numbers'=>'Reservation Numbers',
-          'Reservation_Slots'=>'Reservation Slots',
+          'Reservation_Numbers'=>'عدد الحجوزات',
+          'Reservation_Slots'=>'فتحات الحجز',
           'You Can change it from'=>'يمكنك تغيرها من',
           'here'=>'هنا',
-          'Add Reservation Numbers'=>'أضافة Reservations Numbers',
-          'Add Reservation Slots'=>'أضافة Reservations Slots',
+          'Add Reservation Numbers'=>'أضافة عدد الحجوزات',
+          'Add Reservation Slots'=>'إضافة فتحات الحجز',
           ''=>'',
           ''=>'',
           ''=>'',

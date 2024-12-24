@@ -6,7 +6,7 @@ return [
   'Welcome'=>'مرحباً',
 
   'Events' =>'الأحداث',
-  'Calendar'=>'Calendar',
+  'Calendar'=>'التقويم',
   'All_Events'=>'جميع الأحداث',
   'Deleted_Events'=>'الأحداث المحذوفة',
 
@@ -49,8 +49,8 @@ return [
   'All_Roles'=>'كل الصلاحيات ',
   'Add_Role'=>'أضافة صلاحية',
 
-  'Reservation_Slots'=>'Reservation Slots',
-  'Add_Reservation_Slots'=>'Add Reservation Slots',
+  'Reservation_Slots'=>'فتحات الحجز',
+  'Add_Reservation_Slots'=>'إضافة فتحات الحجز',
   
   'Rays'=>'الأشعة',
   'All_Rays'=>'كل الأشعة',

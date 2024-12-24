@@ -34,7 +34,7 @@ class PatientController extends Controller
 
         $patients = $this->patient->with('reservations')->get();
 
-        return view('backend.pages.patients.index', compact('patients'));
+        return view('backend.dashboards.user.pages.patients.index', compact('patients'));
     }
 
     // show user data based on patient_id
@@ -46,7 +46,7 @@ class PatientController extends Controller
         $patient = $this->patient->withCount('reservations')->findOrFail($id);
 
 
-        return view('backend.pages.patients.show', compact('patient'));
+        return view('backend.dashboards.user.pages.patients.show', compact('patient'));
     }
 
     public function patientPdf($id)
@@ -63,7 +63,7 @@ class PatientController extends Controller
         ];
 
         $pdf = PDF::loadView(
-            'backend.pages.patients.patient_card',
+            'backend.dashboards.user.pages.patients.patient_card',
             $data,
             [],
             [
@@ -78,7 +78,7 @@ class PatientController extends Controller
     {
         $this->authorizeCheck('أضافة مريض');
 
-        return view('backend.pages.patients.add');
+        return view('backend.dashboards.user.pages.patients.add');
     }
 
 
@@ -89,13 +89,13 @@ class PatientController extends Controller
             $request->validated();
 
             $data = $request->all();
-            
+
             $data['password'] = Hash::make($request->password);
-            
+
             $this->patient->create($data);
-            
+
             return redirect()->route('backend.patients.index')->with('success', 'Patient added successfully');
-        
+
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Something went wrong');
@@ -109,7 +109,7 @@ class PatientController extends Controller
 
         $patient = $this->patient->findOrFail($id);
 
-        return view('backend.pages.patients.edit', compact('patient'));
+        return view('backend.dashboards.user.pages.patients.edit', compact('patient'));
     }
 
 
@@ -136,7 +136,7 @@ class PatientController extends Controller
     public function destroy($id)
     {
         $this->authorizeCheck('حذف مريض');
-        
+
         $patient =$this->patient->findOrFail($id);
 
         $patient->delete();
@@ -149,7 +149,7 @@ class PatientController extends Controller
     public function trash()
     {
         $patients = $this->patient->onlyTrashed()->get();
-        return view('backend.pages.patients.trash', compact('patients'));
+        return view('backend.dashboards.user.pages.patients.trash', compact('patients'));
     }
 
 

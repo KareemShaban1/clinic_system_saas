@@ -31,7 +31,7 @@ class PrescriptionController extends Controller
 
         $prescriptions = Prescription::where('reservation_id',$reservation->reservation_id)->get();
 
-        return view('backend.pages.prescription.add', compact('reservation','prescriptions'));
+        return view('backend.dashboards.user.pages.prescription.add', compact('reservation','prescriptions'));
 
     }
 
@@ -114,7 +114,7 @@ class PrescriptionController extends Controller
         $drugs = Drug::where('reservation_id', $id)->get();
 
 
-        return view('backend.pages.prescription.show', compact('drugs', 'reservation'));
+        return view('backend.dashboards.user.pages.prescription.show', compact('drugs', 'reservation'));
 
     }
 
@@ -141,7 +141,7 @@ class PrescriptionController extends Controller
         $data['drugs']= $drugs;
         $data['settings']=$setting['setting'];
 
-        $pdf = PDF::loadView('backend.pages.prescription.arabic_prescription_pdf', $data);
+        $pdf = PDF::loadView('backend.dashboards.user.pages.prescription.arabic_prescription_pdf', $data);
         return $pdf->stream($reservation->patient->name .'.pdf');
 
 
@@ -172,7 +172,7 @@ class PrescriptionController extends Controller
         $data['settings']=$setting['setting'];
 
 
-        $pdf = PDF::loadView('backend.pages.prescription.english_prescription_pdf', $data);
+        $pdf = PDF::loadView('backend.dashboards.user.pages.prescription.english_prescription_pdf', $data);
         return $pdf->stream($reservation->patient->name .'.pdf');
 
 

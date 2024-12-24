@@ -15,9 +15,9 @@ class MedicalAnalysisController extends Controller
     //
     public function index()
     {
-        $medical_analysis = MedicalAnalysis::all();
+        $medicalAnalysis = MedicalAnalysis::all();
 
-        return view('backend.pages.medicalAnalysis.index', compact('medical_analysis'));
+        return view('backend.dashboards.user.pages.medicalAnalysis.index', compact('medicalAnalysis'));
 
     }
 
@@ -28,7 +28,7 @@ class MedicalAnalysisController extends Controller
         // get reservation based on reservation_id
         $medical_analysis = MedicalAnalysis::where('reservation_id', $id)->get();
 
-        return view('backend.pages.medicalAnalysis.show', compact('medical_analysis'));
+        return view('backend.dashboards.user.pages.medicalAnalysis.show', compact('medical_analysis'));
     }
 
     public function add($reservation_id)
@@ -36,7 +36,7 @@ class MedicalAnalysisController extends Controller
         
         $reservation = Reservation::findOrFail($reservation_id);
         
-        return view('backend.pages.medicalAnalysis.add', compact('reservation'));
+        return view('backend.dashboards.user.pages.medicalAnalysis.add', compact('reservation'));
 
 
     }
@@ -66,7 +66,7 @@ class MedicalAnalysisController extends Controller
 
         $analysis = MedicalAnalysis::findOrFail($id);
         
-        return view('backend.pages.medicalAnalysis.edit', compact('analysis'));
+        return view('backend.dashboards.user.pages.medicalAnalysis.edit', compact('analysis'));
 
 
     }

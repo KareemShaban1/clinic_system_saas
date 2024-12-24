@@ -48,7 +48,7 @@ class AppointmentsController extends Controller
         });
 
 
-        return view('frontend.Patient_Dashboard.appointment.index', compact('reservations', 'setting'));
+        return view('backend.dashboards.patient.appointment.index', compact('reservations', 'setting'));
     }
 
     public function add()
@@ -69,27 +69,27 @@ class AppointmentsController extends Controller
 
         $current_date = Carbon::now('Egypt')->format('Y-m-d');
 
-        
+
 
         /// get today reservations get there numbers from Reservation table
         $today_reservation_res_num = Reservation::where('res_date', $current_date)->value('res_num');
-        
+
         /// get today reservations get there numbers from NumberOfReservations table
         $number_of_res = NumberOfReservations::where('reservation_date', $current_date)->value('num_of_reservations');
 
         $today_reservation_slots = Reservation::where('slot', $current_date)->value('slot');
-        
+
         $reservation_slots = ReservationSlots::where('date', $current_date)->first();
 
         if ($reservation_slots) {
-            $slots = $reservation_slots ? 
+            $slots = $reservation_slots ?
             $this->getTimeSlot($reservation_slots->duration, $reservation_slots->start_time, $reservation_slots->end_time)
             : [];
         }
 
 
         return view(
-            'frontend.Patient_Dashboard.appointment.add',
+            'backend.dashboards.patient.appointment.add',
             compact('patient',  'number_of_res', 'today_reservation_res_num', 'slots', 'settings')
         );
     }
@@ -105,7 +105,7 @@ class AppointmentsController extends Controller
         $data["res_status"] = 'waiting';
         $data['month'] = substr($request->res_date, 5, 7 - 5);
         $reservation = Reservation::create($data);
-        
+
         event(new PatientMakeAppointment($reservation));
 
         return redirect()->route('frontend.appointment.index')->with('success', 'Reservation added successfully');
@@ -117,7 +117,7 @@ class AppointmentsController extends Controller
         // get reservation based on reservation_id
         $rays = Ray::where('reservation_id', $reservation_id)->get();
 
-        return view('frontend.Patient_Dashboard.appointment.show_ray', compact('rays'));
+        return view('backend.dashboards.patient.appointment.show_ray', compact('rays'));
     }
 
 
@@ -127,7 +127,7 @@ class AppointmentsController extends Controller
         // get drugs based on reservation_id
         $chronic_diseases = ChronicDisease::where('reservation_id', $reservation_id)->get();
 
-        return view('frontend.Patient_Dashboard.appointment.show_chronic_disease', compact('chronic_diseases'));
+        return view('backend.dashboards.patient.appointment.show_chronic_disease', compact('chronic_diseases'));
     }
 
     public function show_glasses_distance($reservation_id)
@@ -147,12 +147,12 @@ class AppointmentsController extends Controller
         $data['reservation'] = $reservation;
 
 
-        $pdf = PDF::loadView('frontend.Patient_Dashboard.appointment.show_glasses_distance', $data);
+        $pdf = PDF::loadView('backend.dashboards.patient.appointment.show_glasses_distance', $data);
 
         return $pdf->stream('Glasses' . '.pdf');
     }
 
-    
+
 
     public function getResNumberOrSlot(Request $request)
     {
@@ -215,7 +215,7 @@ class AppointmentsController extends Controller
         $data['doctor_name'] = $doctor_name;
         $data['current_time'] = $current_time;
 
-        $pdf = PDF::loadView('frontend.Patient_Dashboard.appointment.show_prescription_arabic', $data);
+        $pdf = PDF::loadView('backend.dashboards.patient.appointment.show_prescription_arabic', $data);
         return $pdf->stream($reservation->patient->name . '.pdf');
 
 
@@ -248,7 +248,7 @@ class AppointmentsController extends Controller
         $data['doctor_name'] = $doctor_name;
 
         $pdf = PDF::loadView(
-            'frontend.Patient_Dashboard.appointment.show_prescription_english',
+            'backend.dashboards.patient.appointment.show_prescription_english',
             $data,
             [],
             [
@@ -269,7 +269,7 @@ class AppointmentsController extends Controller
         $rays = Ray::whereIn('reservation_id', $reservations_ids)->get();
 
         return view(
-            'frontend.Patient_Dashboard.rays.show',
+            'backend.dashboards.patient.rays.show',
             compact('rays')
         );
     }
@@ -283,7 +283,7 @@ class AppointmentsController extends Controller
         // get drugs based on reservation_id
         $chronic_diseases = ChronicDisease::whereIn('reservation_id', $reservations_ids)->get();
 
-        return view('frontend.Patient_Dashboard.chronic_diseases.show', compact('chronic_diseases'));
+        return view('backend.dashboards.patient.chronic_diseases.show', compact('chronic_diseases'));
 
     }
 }
