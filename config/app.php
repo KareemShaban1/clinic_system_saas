@@ -182,15 +182,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        // Barryvdh\DomPDF\ServiceProvider::class,
-        // niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
-        // Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
         \Chatify\ChatifyServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        // Barryvdh\Debugbar\ServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
 
 
         /*

@@ -25,13 +25,14 @@ class UpdateReservationRequest extends FormRequest
     {
         return [
             
-                'patient_id' => 'required',
+                'patient_id' => 'required|exists:patients,patient_id',
                 // 'res_num'=>'required',          
-                'res_type'=>'required',
-                'payment'=>'required',
+                'res_type'=>'required|in:check,recheck,consultation,other',
+                'payment'=>'required|in:paid,not paid',
                 'cost'=>'required|max:4|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'res_date' => 'required',
-                'status'=>'required',
+                'res_status'=>'required|in:waiting,entered,finished,cancelled',
+                'acceptance'=>'required|in:approved,not_approved',
     
         ];
     }
@@ -45,7 +46,7 @@ class UpdateReservationRequest extends FormRequest
                 'cost.max'=>'يجب أن لا يزيد المبلغ عن أريع خانات',
                 'cost.regex'=>'يجب أن يكون المبلغ أرقام',
                 'res_date.required'=>'برجاء أدخال تاريخ الكشف',
-                'status.required'=>'برجاء أدخال حالة الكشف',
+                'res_status.required'=>'برجاء أدخال حالة الكشف',
         ];
     }
 }

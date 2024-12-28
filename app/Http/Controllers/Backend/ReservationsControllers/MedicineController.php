@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Medicine;
 use Illuminate\Validation\ValidationException;
 use App\Http\Traits\AuthorizeCheck;
+use Yajra\DataTables\Facades\DataTables;
+
 class MedicineController extends Controller
 {
     use AuthorizeCheck;
@@ -27,6 +29,36 @@ class MedicineController extends Controller
 
         return view('backend.dashboards.user.pages.medicine.index', compact('medicines'));
     }
+
+    public function data(){
+        $query = $this->medicine->all();
+        return DataTables::of($query)
+        ->addColumn('action', function ($number) {
+            $showUrl = route('backend.medicines.show', $number->id);
+            $editUrl = route('backend.medicines.edit', $number->id);
+            $deleteUrl = route('backend.medicines.destroy', $number->id);
+
+            return '
+                <a href="' . $showUrl . '" class="btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            ';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+
+    }
+
 
     public function add()
     {

@@ -36,60 +36,49 @@
 <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
 
 
-<script src="{{ asset('backend/assets/datatables/dataTables.responsive.min.js') }}"></script>
-
-
-<script src="{{ asset('backend/assets/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('backend/assets/jquery-ui/jquery-ui.min.js') }}"></script>
 
-<script src="{{ asset('backend/assets/datatables/export-tables/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/export-tables/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/export-tables/jszip.min.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/export-tables/pdfmake.min.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/export-tables/vfs_fonts.js') }}"></script>
-<script src="{{ asset('backend/assets/datatables/export-tables/buttons.print.min.js') }}"></script>
 
-{{-- @if (App::getLocale() == 'ar')
-    <script>
-        $(document).ready(function() {
-            
-            var datatable = $('#table_id').DataTable({
-                responsive: true,
-                oLanguage: {
-                    sZeroRecords: 'لا يوجد سجل متتطابق',
-                    sEmptyTable: 'لا يوجد بيانات في الجدول',
-                    oPaginate: {
-                        sFirst: "First",
-                        sLast: "الأخير",
-                        sNext: "التالى",
-                        sPrevious: "السابق"
-                    },
+<script src="{{asset('backend/assets/datatable/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('backend/assets/datatable/dataTables.bootstrap5.js')}}"></script>
+<script src="{{asset('backend/assets/datatable/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('backend/assets/datatable/responsive.bootstrap5.min.js')}}"></script>
+
+<script>
+     const languages = {
+            @if(App::getLocale() == 'en')
+            en: {
+                paginate: {
+                    previous: "<i class='mdi mdi-chevron-left'></i> Previous",
+                    next: "Next <i class='mdi mdi-chevron-right'></i>"
                 },
-
-            });
-        });
-    </script>
-@else
-    <script>
-        $(document).ready(function() {
-            $('#table_id').DataTable({
-                responsive: true,
-                oLanguage: {
-                    sZeroRecords: 'No matching records found',
-                    sEmptyTable: 'No data available in table',
-                    oPaginate: {
-                        sFirst: "First",
-                        sLast: "Last",
-                        sNext: "Next",
-                        sPrevious: "Previous"
-                    },
+                info: "Showing records _START_ to _END_ of _TOTAL_",
+                lengthMenu: "Display _MENU_ records",
+                search: "_INPUT_",
+                searchPlaceholder: "Search...",
+                zeroRecords: "No matching records found",
+                infoEmpty: "No records to display",
+                infoFiltered: "(filtered from _MAX_ total records)"
+            },
+            @else
+            ar: {
+                paginate: {
+                    previous: "<i class='mdi mdi-chevron-right'></i> السابق",
+                    next: "التالي <i class='mdi mdi-chevron-left'></i>"
                 },
+                info: "عرض السجلات من _START_ إلى _END_ من إجمالي _TOTAL_ سجلات",
+                lengthMenu: "عرض _MENU_ سجلات",
+                search: "_INPUT_",
+                searchPlaceholder: "بحث...",
+                zeroRecords: "لا توجد سجلات مطابقة",
+                infoEmpty: "لا توجد سجلات للعرض",
+                infoFiltered: "(تمت التصفية من إجمالي _MAX_ سجلات)"
+            }
+            @endif
+        };
 
-            });
-        });
-    </script>
-@endif --}}
+        const language = '{{ App::getLocale() }}';
+</script>
 
 @livewireScripts
 @stack('scripts')

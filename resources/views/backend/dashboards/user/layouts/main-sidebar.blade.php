@@ -105,8 +105,8 @@
                                 <div class="clearfix"></div>
                             </a>
                             <ul id="reservations-menu" class="collapse" data-parent="#sidebarnav">
-                                <li> <a href="{{ Route('backend.reservations.today_reservations') }}">
-                                        {{ trans('backend/sidebar_trans.Today_Reservations') }} </a> </li>
+                                <!-- <li> <a href="{{ Route('backend.reservations.today_reservations') }}">
+                                        {{ trans('backend/sidebar_trans.Today_Reservations') }} </a> </li> -->
                                 <li> <a href="{{ Route('backend.reservations.index') }}">
                                         {{ trans('backend/sidebar_trans.All_Reservations') }}</a> </li>
                                 <li> <a href="{{ Route('backend.reservations.trash') }}">
@@ -148,8 +148,8 @@
 
                             <li> <a href="{{ route('backend.rays.index') }}">
                                     {{ trans('backend/sidebar_trans.All_Rays') }}</a> </li>
-                            <li> <a href="">
-                                    {{ trans('backend/sidebar_trans.Deleted_Rays') }} </a> </li>
+                            <!-- <li> <a href="">
+                                    {{ trans('backend/sidebar_trans.Deleted_Rays') }} </a> </li> -->
 
                         </ul>
                     </li>
@@ -167,8 +167,8 @@
 
                             <li> <a href="{{ route('backend.analysis.index') }}">
                                     {{ trans('backend/sidebar_trans.All_Analysis') }}</a> </li>
-                            <li> <a href="">
-                                    {{ trans('backend/sidebar_trans.Deleted_Analysis') }} </a> </li>
+                            <!-- <li> <a href="">
+                                    {{ trans('backend/sidebar_trans.Deleted_Analysis') }} </a> </li> -->
 
                         </ul>
                     </li>

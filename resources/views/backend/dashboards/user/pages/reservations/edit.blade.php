@@ -41,17 +41,21 @@
                         <input type="hidden" id="reservation_id" value="{{ $reservation->reservation_id }}"
                             name="reservation_id">
 
+                        <input type="hidden" id="patient_id" value="{{ $reservation->patient->patient_id }}"
+                            name="patient_id">
+
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label
                                     class="form-control-label">{{ trans('backend/reservations_trans.Patient_Name') }}</label>
-                                <select name="patient_id" class="custom-select mr-sm-2">
-                                    <option value="" selected>{{ trans('backend/reservations_trans.Choose') }}
-                                    </option>
+                                <!-- <select name="patient_id" class="custom-select mr-sm-2">
+                                   
                                     <option value="{{ $reservation->patient->patient_id }}"
+                                    disabled
                                         @if ($reservation->patient->patient_id == old('patient_id', $reservation->patient_id)) selected @endif>
                                         {{ $reservation->patient->name }}</option>
-                                </select>
+                                </select> -->
+                                <input type="text" disabled value="{{ $reservation->patient->name }}" class="form-control">
                             </div>
                         </div>
 

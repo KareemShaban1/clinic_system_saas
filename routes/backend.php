@@ -45,6 +45,8 @@ Route::group(
             'controller' => 'PatientController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('data', 'data')->name('data');
+                Route::get('/trash-data', 'trashData')->name('trash-data');
                 Route::get('/show/{patient_id}', 'show')->name('show');
                 Route::get('/patient_card/{patient_id}', 'patient_card')->name('patient_card');
                 Route::get('/patient_pdf/{patient_id}', 'patientPdf')->name('patient_pdf');
@@ -67,6 +69,7 @@ Route::group(
             'controller' => 'ReservationsControllers\ReservationController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('data', 'data')->name('data');
                 Route::get('/report', 'todayReservationReport')->name('today_reservation_report');
                 Route::get('/today_reservations', 'todayReservations')->name('today_reservations');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
@@ -78,6 +81,7 @@ Route::group(
                 Route::post('/update/{reservation_id}', 'update')->name('update');
                 Route::delete('/delete/{reservation_id}', 'destroy')->name('destroy');
                 Route::get('/trash', 'trash')->name('trash');
+                Route::get('/trash-data', 'trashData')->name('trash-data');
                 Route::put('/restore/{reservation_id}', 'restore')->name('restore');
                 Route::delete('/force_delete/{reservation_id}', 'forceDelete')->name('forceDelete');
                 Route::get('/get_res_slot_number_add', 'getResNumberOrSlotAdd');
@@ -109,6 +113,7 @@ Route::group(
             'controller' => 'ReservationsControllers\OnlineReservationController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
                 Route::get('/status/{reservation_id}/{status}', 'reservation_status')->name('reservation_status');
                 Route::get('/payment/{reservation_id}/{payment}', 'payment_status')->name('payment_status');
@@ -132,12 +137,15 @@ Route::group(
             'controller' => 'ReservationsControllers\NumberOfReservationsController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{num_of_res}', 'edit')->name('edit');
                 Route::post('/update/{num_of_res}', 'update')->name('update');
-
-
+                Route::delete('/delete/{num_of_res}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{num_of_res}', 'restore')->name('restore');
+                Route::delete('/force_delete/{num_of_res}', 'forceDelete')->name('forceDelete');
             }
         );
 
@@ -149,11 +157,15 @@ Route::group(
                 'controller' => 'ReservationsControllers\ReservationSlotsController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{num_of_res}', 'edit')->name('edit');
                 Route::post('/update/{num_of_res}', 'update')->name('update');
-
+                Route::delete('/delete/{num_of_res}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{num_of_res}', 'restore')->name('restore');
+                Route::delete('/force_delete/{num_of_res}', 'forceDelete')->name('forceDelete');
             }
         );
 
@@ -184,6 +196,7 @@ Route::group(
             'controller' => 'ReservationsControllers\MedicineController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{medicine_id}', 'edit')->name('edit');
@@ -242,12 +255,16 @@ Route::group(
             'controller' => 'ReservationsControllers\RaysController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{ray_id}', 'edit')->name('edit');
                 Route::post('/update/{ray_id}', 'update')->name('update');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
-
+                Route::delete('/delete/{ray_id}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{ray_id}', 'restore')->name('restore');
+                Route::delete('/force_delete/{ray_id}', 'forceDelete')->name('forceDelete');
             }
         );
 
@@ -259,12 +276,16 @@ Route::group(
             'controller' => 'ReservationsControllers\MedicalAnalysisController',],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add/{reservation_id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
-                Route::get('/edit/{ray_id}', 'edit')->name('edit');
-                Route::post('/update/{ray_id}', 'update')->name('update');
+                Route::get('/edit/{medical_analysis_id}', 'edit')->name('edit');
+                Route::post('/update/{medical_analysis_id}', 'update')->name('update');
                 Route::get('/show/{reservation_id}', 'show')->name('show');
-
+                Route::delete('/delete/{medical_analysis_id}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{medical_analysis_id}', 'restore')->name('restore');
+                Route::delete('/force_delete/{medical_analysis_id}', 'forceDelete')->name('forceDelete');
             }
         );
 

@@ -20,6 +20,7 @@ class SystemControlSeeder extends Seeder
 
         $data = [
             ['key' => 'show_ray', 'value' => 1],
+            ['key'=> 'show_analysis', 'value'=> 1],
             ['key' => 'show_chronic_diseases', 'value' =>  1],
             ['key' => 'show_glasses_distance', 'value' => 1],
             ['key' => 'show_prescription', 'value' => 1],

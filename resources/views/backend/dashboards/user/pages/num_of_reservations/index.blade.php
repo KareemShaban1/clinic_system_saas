@@ -23,9 +23,10 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                <table id="table_id" class="table table-hover table-sm p-0">
+                <table id="num_of_reservations_table" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                        <th>{{ trans('backend/reservations_trans.Id') }}</th>
                             <th>{{ trans('backend/reservations_trans.Reservation_Date') }}</th>
                             <th>{{ trans('backend/reservations_trans.Number_of_Reservations') }}</th>
                             <th>{{ trans('backend/reservations_trans.Control') }}</th>
@@ -33,37 +34,6 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-
-                        @foreach ($num_of_reservations as $number)
-                            <tr>
-                                <td>{{ $number->reservation_date }}</td>
-                                <td>{{ $number->num_of_reservations }}</td>
-
-
-                                <td>
-
-                                    <a href="{{ Route('backend.num_of_reservations.edit', $number->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    {{-- <form action="{{Route('backend.reservations.destroy',$reservation->reservation_id)}}" method="post" style="display:inline">
-                                @csrf
-                                @method('delete')
-                                
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> 
-                                </button>   
-                            </form>    --}}
-
-                                </td>
-
-
-
-                            </tr>
-                        @endforeach
-
-                    </tbody>
                 </table>
 
             </div>
@@ -74,55 +44,44 @@
 @endsection
 @push('scripts')
 <script>
+    
     $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            stateSave: true,
-            sortable: true,
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'copyHtml5',
-                    exportOptions: {
-                        columns: [0, ':visible']
-                    }
+    
+        var table = $('#num_of_reservations_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('backend.num_of_reservations.data') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
                 },
                 {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: [0, 1]
-                    }
+                    data: 'reservation_date',
+                    name: 'reservation_date'
                 },
-
-                'colvis'
+                {
+                    data: 'num_of_reservations',
+                    name: 'num_of_reservations'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
             ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
+
+            pageLength: 10,
             responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 0
-                },
-                {
-                    responsivePriority: 2,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 3,
-                    targets: 2
-                },
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
-                },
-            },
-        };
-
-        $('#table_id').DataTable(dataTableOptions);
+            "drawCallback": function() {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+            }
+        });
+       
     });
 </script>
 @endpush

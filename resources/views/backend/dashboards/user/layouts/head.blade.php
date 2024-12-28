@@ -18,7 +18,12 @@
 <!--- Style css -->
 
 
-<link href="{{ asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+<!-- <link href="{{ asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
+
+<!-- DataTables CSS -->
+<link href="{{asset('backend/assets/datatable/css/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/datatable/css/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/datatable/css/buttons.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ asset('backend/assets/css/summernote.min.css') }}">

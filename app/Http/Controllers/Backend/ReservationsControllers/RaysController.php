@@ -12,6 +12,8 @@ use App\Models\SystemControl;
 use App\Models\Ray;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\Facades\DataTables;
 
 class RaysController extends Controller
 {
@@ -40,9 +42,34 @@ class RaysController extends Controller
     public function index()
     {
         
-        $rays = $this->ray->all();
+        $rays = Ray::all();
         
         return view('backend.dashboards.user.pages.rays.index', compact('rays'));
+    }
+
+    public function data(){
+        $query = $this->ray->all();
+        return DataTables::of($query)
+        ->addColumn('action', function ($number) {
+            $editUrl = route('backend.rays.edit', $number->id);
+            $deleteUrl = route('backend.rays.destroy', $number->id);
+
+            return '
+                <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            ';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+
     }
 
     public function add($id)

@@ -102,7 +102,7 @@ class FortifyServiceProvider extends ServiceProvider
             //// this method will be used in "web" guard only
             Fortify::authenticateUsing([new CustomAuthentication,'authenticateUser']);
             //// point to backend auth folder [views/backend/auth]
-            Fortify::viewPrefix('backend.auth.');
+            Fortify::viewPrefix('backend.dashboards.user.auth.');
 
         } 
         elseif (Config::get('fortify.guard') == 'patient') {
@@ -114,7 +114,7 @@ class FortifyServiceProvider extends ServiceProvider
             Fortify::createUsersUsing(CreateNewPatient::class,'create');
 
            //// point to frontend auth folder [views/fronted/auth]
-            Fortify::viewPrefix('frontend.auth.');
+            Fortify::viewPrefix('backend.dashboards.patient.auth.');
         } 
         
         

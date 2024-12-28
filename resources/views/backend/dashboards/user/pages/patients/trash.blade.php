@@ -22,7 +22,7 @@
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-                <table id="table_id" class="display">
+                <table id="trash_patients_table" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
                             <th>{{trans('backend/patients_trans.Id')}}</th>
@@ -33,42 +33,7 @@
                             <th>{{trans('backend/patients_trans.Control')}}</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($patients as $patient)
-                        <tr>
-                            <td>{{ $patient->patient_id }}</td>
-                            <td>{{ $patient->name }}</td>
-                            <td>{{ $patient->phone }}</td>
-                            <td>{{ $patient->address }}</td>
-                            <td>{{ $patient->age }}</td>
-                            <td>
-                            
-
-                                <form action="{{Route('backend.patients.restore',$patient->patient_id)}}" method="post" style="display:inline">
-                                    @csrf
-                                    @method('put')
-                                    
-                                    <button type="submit" class="btn btn-success btn-sm" >
-                                        <i class="fa fa-edit"></i>
-                                        {{trans('backend/patients_trans.Restore')}}
-                                    </button>   
-                                </form>
-                            
-                                <form action="{{Route('backend.patients.forceDelete',$patient->patient_id)}}" method="post" style="display:inline">
-                                    @csrf
-                                    @method('delete')
-                                    
-                                    <button type="submit" class="btn btn-danger btn-sm" >
-                                        <i class="fa fa-trash"></i> 
-                                        {{trans('backend/patients_trans.Delete_Forever')}}
-                                    </button>   
-                                </form>
-
-                            </td>
-                            
-                        </tr>
-                        @endforeach
-                    </tbody>
+                  
                 </table>
             </div>
         </div>
@@ -79,29 +44,49 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            responsive: true,
-            columnDefs: [
-                { responsivePriority: 1, targets: 1 },
-                { responsivePriority: 2, targets: 2 },
-                { responsivePriority: 3, targets: 5 },
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
-                },
-            },
-        };
 
-        $('#table_id').DataTable(dataTableOptions);
-    });
+var table = $('#trash_patients_table').DataTable({
+    ajax: "{{ route('backend.patients.trash-data') }}",
+    columns: [{
+            data: 'patient_id',
+            name: 'patient_id'
+        },
+        {
+            data: 'name',
+            name: 'name'
+        },
+        {
+            data: 'phone',
+            name: 'phone'
+        },
+        {
+            data: 'address',
+            name: 'address'
+        },
+        {
+            data: 'age',
+            name: 'age'
+        },
+
+
+        {
+            data: 'action',
+            name: 'action',
+            orderable: false,
+            searchable: false
+        }
+    ],
+    order: [
+        [0, 'desc']
+    ],
+    language: languages[language],
+    pageLength: 10,
+    responsive: true,
+    "drawCallback": function() {
+        $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+    }
+});
+});
 </script>
 @endpush
 

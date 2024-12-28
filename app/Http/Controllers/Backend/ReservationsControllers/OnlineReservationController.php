@@ -9,6 +9,7 @@ use App\Http\Traits\ZoomMeetingTrait;
 use App\Models\Patient;
 use MacsiDigital\Zoom\Facades\Zoom;
 use Carbon\carbon;
+use Yajra\DataTables\Facades\DataTables;
 
 class OnlineReservationController extends Controller
 {
@@ -17,11 +18,33 @@ class OnlineReservationController extends Controller
 
     public function index()
     {
-
         $online_reservations = OnlineReservation::all();
         return view('backend.dashboards.user.pages.online_reservations.index', compact('online_reservations'));
-
     }
+
+    public function data()
+{
+    $online_reservations = OnlineReservation::with('patient')->get();
+
+    return DataTables::of($online_reservations)
+        ->addColumn('patient_name', function ($row) {
+            return $row->patient->name ?? '-';
+        })
+        ->addColumn('join_url', function ($row) {
+            return '<a href="' . $row->join_url . '" target="_blank" class="text-danger">انضم الان</a>';
+        })
+        ->addColumn('action', function ($row) {
+            return '
+                <button type="button" class="btn btn-sm btn-danger delete" 
+                        data-toggle="modal" 
+                        data-target="#Delete_receipt' . $row->meeting_id . '">
+                    <i class="fa fa-trash"></i>
+                </button>';
+        })
+        ->rawColumns(['join_url', 'action'])
+        ->make(true);
+}
+
     public function add($id)
     {
         // get all patients on patient table

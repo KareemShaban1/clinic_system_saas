@@ -9,6 +9,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Yajra\DataTables\Facades\DataTables;
 
 class MedicalAnalysisController extends Controller
 {
@@ -18,6 +19,32 @@ class MedicalAnalysisController extends Controller
         $medicalAnalysis = MedicalAnalysis::all();
 
         return view('backend.dashboards.user.pages.medicalAnalysis.index', compact('medicalAnalysis'));
+
+    }
+
+    public function data(){
+        $medicalAnalysis = MedicalAnalysis::all();
+
+        return DataTables::of($medicalAnalysis)
+        ->addColumn('action', function ($number) {
+            $editUrl = route('backend.medical_analysis.edit', $number->id);
+            $deleteUrl = route('backend.medical_analysis.destroy', $number->id);
+
+            return '
+                <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+            ';
+        })
+        ->rawColumns(['action']) // Ensure the HTML in the action column is not escaped
+        ->make(true);
 
     }
 

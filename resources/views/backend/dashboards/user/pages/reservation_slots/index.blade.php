@@ -23,9 +23,10 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                <table id="table_id" class="display">
+                <table id="reservation_slots_table" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
+                            <th>{{trans('backend/reservations_trans.Id')}}</th>
                             <th>{{trans('backend/reservations_trans.Reservation_Date')}}</th>
                             <th>{{trans('backend/reservations_trans.Start_Time')}}</th>
                             <th>{{trans('backend/reservations_trans.End_Time')}}</th>
@@ -35,37 +36,7 @@
                             
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                        @foreach ($reservation_slots as $slot)
-                        <tr>
-                        <td>{{$slot->date}}</td>
-                        <td>{{$slot->start_time}}</td>
-                        <td>{{$slot->end_time}}</td>
-                        <td>{{$slot->duration}}</td>
-
-                        <td>
-                            
-                            <a href="{{Route('backend.reservation_slots.edit',$slot->id)}}" class="btn btn-warning btn-sm">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            {{-- <form action="{{Route('backend.reservations.destroy',$reservation->reservation_id)}}" method="post" style="display:inline">
-                                @csrf
-                                @method('delete')
-                                
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i> 
-                                </button>   
-                            </form>    --}}
-                            
-                        </td>
-
-
-                        
-                    </tr>
-                        @endforeach
-                        
-                    </tbody>
+                    
                 </table>
                 
             </div>
@@ -77,29 +48,50 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            responsive: true,
-            columnDefs: [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: 1 },
-                { responsivePriority: 3, targets: 2 },
-                { responsivePriority: 4, targets: 4 },
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
-                },
-            },
-        };
 
-        $('#table_id').DataTable(dataTableOptions);
+
+    
+        var table = $('#reservation_slots_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('backend.reservation_slots.data') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'reservation_date',
+                    name: 'reservation_date'
+                },
+                {
+                    data: 'start_time',
+                    name: 'start_time'
+                },
+                {
+                    data: 'end_time',
+                    name: 'end_time'
+                },
+                {
+                    data: 'duration',
+                    name: 'duration'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
+            pageLength: 10,
+            responsive: true,
+            "drawCallback": function() {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+            }
+        });
     });
 </script>
 @endpush

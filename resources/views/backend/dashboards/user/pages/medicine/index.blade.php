@@ -51,7 +51,7 @@
 
 
                 <div class="table-responsive">
-                    <table id="table_id" class="table table-hover table-sm p-0">
+                    <table id="medicine_table" class="table table-hover table-sm p-0">
                         <thead>
                             <tr>
                                 <th style="width: 100px">{{ trans('backend/medicines_trans.Id') }}</th>
@@ -63,42 +63,7 @@
                                 <th style="width: 150px">{{ trans('backend/medicines_trans.Control') }}</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($medicines as $medicine)
-                                <tr>
-                                    <td style="width: 100px">{{ $medicine->id }}</td>
-                                    <td style="width: 150px">{{ $medicine->drugbank_id }}</td>
-                                    <td style="width: 150px">{{ $medicine->name }}</td>
-                                    <td style="width: 150px">{{ $medicine->brand_name }}</td>
-                                    <td style="width: 150px">{{ $medicine->drug_dose }}</td>
-                                    <td style="width: 250px">{{ $medicine->categories }}</td>
-    
-                                    <td style="width: 150px">
-                                        <a href="{{ Route('backend.medicines.show', $medicine->id) }}"
-                                            class="btn btn-primary btn-sm">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a href="{{ Route('backend.medicines.edit', $medicine->id) }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-    
-                                        <form action="{{ Route('backend.medicines.destroy', $medicine->id) }}"
-                                            method="post" style="display:inline">
-                                            @csrf
-                                            @method('delete')
-    
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-    
-    
-                                    </td>
-    
-                                </tr>
-                            @endforeach
-                        </tbody>
+                     
                     </table>
                 </div>
 
@@ -110,29 +75,53 @@
 @endsection
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            responsive: true,
-            columnDefs: [
-                { responsivePriority: 1, targets: 2 },
-                { responsivePriority: 2, targets: 3 },
-                { responsivePriority: 3, targets: 6 },
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
+ $(document).ready(function() {
+        var table = $('#medicine_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('backend.medicines.data') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
                 },
-            },
-        };
+                {
+                    data: 'drugbank_id',
+                    name: 'drugbank_id' 
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'brand_name',
+                    name: 'brand_name'
+                },
+                {
+                    data: 'drug_dose',
+                    name: 'drug_dose'
+                },
+                {
+                    data: 'categories',
+                    name: 'categories'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
 
-        $('#table_id').DataTable(dataTableOptions);
+            pageLength: 10,
+            responsive: true,
+            "drawCallback": function() {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+            }
+        });
     });
 </script>
 @endpush

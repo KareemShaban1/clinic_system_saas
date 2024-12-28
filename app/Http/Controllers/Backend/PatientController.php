@@ -11,6 +11,7 @@ use App\Models\Settings;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Traits\AuthorizeCheck;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class PatientController extends Controller
 {
@@ -37,6 +38,64 @@ class PatientController extends Controller
         return view('backend.dashboards.user.pages.patients.index', compact('patients'));
     }
 
+    public function data()
+    {
+        $patients = Patient::with('reservations')->get();
+
+        return DataTables::of($patients)
+            ->addColumn('number_of_reservations', function ($patient) {
+                return $patient->reservations->count();
+            })
+            ->addColumn('add_reservation', function ($patient) {
+                return '<a href="' . route('backend.reservations.add', $patient->patient_id) . '" 
+                            class="btn btn-info btn-sm">
+                            ' . trans('backend/patients_trans.Add_Reservation') . '
+                        </a>';
+            })
+            ->addColumn('add_online_reservation', function ($patient) {
+                return '<a href="' . route('backend.online_reservations.add', $patient->patient_id) . '" 
+                            class="btn btn-info btn-sm">
+                            ' . trans('backend/patients_trans.Add_Online_Reservation') . '
+                        </a>';
+            })
+            ->addColumn('patient_card', function ($patient) {
+                return '<a href="' . route('backend.patients.patient_pdf', $patient->patient_id) . '" 
+                            class="btn btn-primary btn-sm">
+                            ' . trans('backend/patients_trans.Show_Patient_Card') . '
+                        </a>';
+            })
+            ->addColumn('action', function ($patient) {
+                $editUrl = route('backend.patients.edit', $patient->patient_id);
+                $deleteUrl = route('backend.patients.destroy', $patient->patient_id);
+                $viewUrl = route('backend.patients.show', $patient->patient_id);
+
+                $actions = '
+                    <a href="' . $viewUrl . '" class="btn btn-primary btn-sm">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
+                        <i class="fa fa-edit"></i>
+                    </a>';
+
+                if ($patient->reservations->count() == 0) {
+                    $actions .= '
+                        <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>';
+                }
+
+                return $actions;
+            })
+            ->rawColumns(['add_reservation', 'add_online_reservation', 'patient_card', 'action'])
+            ->make(true);
+    }
+
+
     // show user data based on patient_id
     public function show($id)
     {
@@ -58,8 +117,8 @@ class PatientController extends Controller
         $settings = $collection->pluck('value', 'key');
 
         $data = [
-            'patient'=>  $patient,
-            'settings'=> $settings
+            'patient' =>  $patient,
+            'settings' => $settings
         ];
 
         $pdf = PDF::loadView(
@@ -95,7 +154,6 @@ class PatientController extends Controller
             $this->patient->create($data);
 
             return redirect()->route('backend.patients.index')->with('success', 'Patient added successfully');
-
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'Something went wrong');
@@ -137,7 +195,7 @@ class PatientController extends Controller
     {
         $this->authorizeCheck('حذف مريض');
 
-        $patient =$this->patient->findOrFail($id);
+        $patient = $this->patient->findOrFail($id);
 
         $patient->delete();
 
@@ -150,6 +208,33 @@ class PatientController extends Controller
     {
         $patients = $this->patient->onlyTrashed()->get();
         return view('backend.dashboards.user.pages.patients.trash', compact('patients'));
+    }
+
+    public function trashData()
+    {
+        $patients = $this->patient->onlyTrashed()->get();
+        return DataTables::of($patients)
+        ->addColumn('action', function ($patient) {
+            $restoreUrl = route('backend.patients.restore', $patient->patient_id);
+            $forceDeleteUrl = route('backend.patients.forceDelete', $patient->patient_id);
+
+            $actions = '
+                <a href="' . $restoreUrl . '" class="btn btn-info btn-sm">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <form action="' . $forceDeleteUrl . '" method="POST" style="display:inline;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                    <button type="submit" class="btn btn-danger btn-sm" 
+                            onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>';
+            return $actions;
+        })
+
+            ->rawColumns(['restore', 'force_delete'])
+            ->make(true);
     }
 
 

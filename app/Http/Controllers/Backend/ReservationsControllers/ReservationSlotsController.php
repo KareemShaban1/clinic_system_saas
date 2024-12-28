@@ -7,6 +7,7 @@ use App\Http\Traits\SlotsNumbersCheck;
 use App\Models\ReservationSlots;
 use DateTime;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReservationSlotsController extends Controller
 {
@@ -19,6 +20,33 @@ class ReservationSlotsController extends Controller
         $reservation_slots = ReservationSlots::all();
 
         return view('backend.dashboards.user.pages.reservation_slots.index', compact('reservation_slots'));
+    }
+
+    public function data(){
+        $reservationSlots = ReservationSlots::all();
+
+        return DataTables::of($reservationSlots)
+            ->addColumn('action', function ($number) {
+                $editUrl = route('backend.reservation_slots.edit', $number->id);
+                $deleteUrl = route('backend.reservation_slots.destroy', $number->id);
+
+                return '
+                    <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this item?\')">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                ';
+            })
+            ->rawColumns(['action']) // Ensure the HTML in the action column is not escaped
+            ->make(true);
+
+
     }
 
     public function add()

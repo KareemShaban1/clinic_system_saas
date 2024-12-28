@@ -29,7 +29,7 @@
 
 
                 <div class="table-responsive">
-                    <table id="analysis_table" class="table table-hover table-sm p-0">
+                    <table id="analysis_table" class="table dt-responsive nowrap w-100">
                         <thead>
                             <tr>
                                 <th>{{ trans('backend/medicalAnalysis_trans.Id') }}</th>
@@ -37,47 +37,7 @@
                                 <th>{{ trans('backend/medicalAnalysis_trans.Control') }}</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                            @foreach ($medicalAnalysis as $analysis)
-                            <tr>
-                                <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $analysis->patient->name }}</td>
-
-
-
-
-
-
-                                <td>
-                                    <div class="res_control">
-                                        <a href="{{ Route('backend.analysis.show', $analysis->id) }}"
-                                            class="btn btn-primary btn-sm">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                        <a href="{{ Route('backend.analysis.edit', $analysis->id) }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <form
-                                            action="{{ Route('backend.analysis.destroy', $analysis->id) }}"
-                                            method="post" style="display:inline">
-                                            @csrf
-                                            @method('delete')
-
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-
-
-
-                            </tr>
-                            @endforeach
-
-                        </tbody>
+                      
                     </table>
                 </div>
 
@@ -92,61 +52,38 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            stateSave: true,
-            sortable: true,
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'copyHtml5',
-                    exportOptions: {
-                        columns: [0, ':visible']
-                    }
+        var table = $('#analysis_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('backend.analysis.data') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
                 },
                 {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
-                    }
+                    data: 'patient.name',
+                    name: 'patient.name'
                 },
-
-                'colvis'
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
             ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
+
+            pageLength: 10,
             responsive: true,
-            columnDefs: [
+            "drawCallback": function() {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+            }
+        });
 
-                {
-                    responsivePriority: 1,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 2,
-                    targets: 5
-                },
-                {
-                    responsivePriority: 3,
-                    targets: 6
-                },
-                {
-                    responsivePriority: 4,
-                    targets: 10
-                },
 
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
-                },
-            },
-        };
-
-        $('#analysis_table').DataTable(dataTableOptions);
     });
 </script>
 @endpush
