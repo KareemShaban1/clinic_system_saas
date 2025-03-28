@@ -35,7 +35,8 @@ class SpecialitySeeder extends Seeder
 
         foreach ($specialities as $speciality) {
             Speciality::create([
-                'name' => $speciality,
+                'name_ar' => $speciality,
+                'name_en' => $speciality,
             ]);
         }
        
