@@ -15,8 +15,8 @@ class RaysResource extends JsonResource
     public function toArray($request)
     {
         // return [
-        //     'Patient Id' => $this->patient_id,
-        //     'Reservation Id' => $this->reservation_id,
+        //     'Patient Id' => $this->id,
+        //     'Reservation Id' => $this->id,
         //     'Ray Name' => $this->ray_name,
         //     'Images' =>  $this->images,
         //     'Ray Date' => $this->ray_date,
@@ -36,8 +36,8 @@ class RaysResource extends JsonResource
         }
 
         $response = [
-            'Patient Id' => $this->patient_id,
-            'Reservation Id' => $this->reservation_id,
+            'Patient Id' => $this->id,
+            'Reservation Id' => $this->id,
             'Ray Name' => $this->ray_name,
             'Images' =>  $imageUrls,
             'Ray Date' => $this->ray_date,

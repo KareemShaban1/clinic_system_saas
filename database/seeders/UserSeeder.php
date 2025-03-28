@@ -19,20 +19,14 @@ class UserSeeder extends Seeder
         //
 
         DB::table('users')->insert([
-            'name' => 'super_admin',
-            'email' => 'super_admin@clinic.com',
-            'password' => Hash::make('password'),
-        ]);
-        $user = User::findOrFail(1);
-        $user->assignRole('super-admin');
-
-        DB::table('users')->insert([
-            'name' => 'doctor',
+            'name' => 'doctor 1',
             'email' => 'doctor@clinic.com',
             'password' => Hash::make('password'),
+            'clinic_id'=> 1
         ]);
+        $user = User::findOrFail(1);
+        $user->assignRole('clinic-admin');
 
-        
 
 
     }

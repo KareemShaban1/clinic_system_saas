@@ -31,7 +31,7 @@ class StoreRayRequest extends FormRequest
                 'ray_date'=>'required',
                 'ray_type'=>'required',
                 'notes'=>'nullable',
-                'patient_id'=>'required'
+                'id'=>'required'
             
         ];
     }
@@ -43,7 +43,7 @@ class StoreRayRequest extends FormRequest
             'images.required'=>'برجاء أدخال صور الأشعة / التحليل',
             'ray_date.required'=>'برجاء أدخال تاريخ الأشعة / التحليل',
             'ray_type.required'=>'برجاء أدخال نوع الأشعة / التحليل',
-            'patient_id.required'=>'patient id برجاء أدخال  ',
+            'id.required'=>'patient id برجاء أدخال  ',
         ];
 
     }

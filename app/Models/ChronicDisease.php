@@ -10,14 +10,19 @@ class ChronicDisease extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','measure','date','notes','patient_id','reservation_id'];
+    protected $fillable = ['name','measure','date','notes','patient_id','reservation_id','clinic_id'];
 
     public function reservation()
     {
         return $this->belongsTo(
             Reservation::class,
-            'reservation_id',
-            'reservation_id'
+            'id',
+            'id'
         );
+    }
+
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class);
     }
 }

@@ -31,44 +31,44 @@
 
 
                     <div class="row">
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label> {{ trans('frontend/reservations_trans.Reservation_Date') }} <span
-                                        class="text-danger">*</span></label>
-                                <input class="form-control" name="res_date" id="datepicker-action"
-                                    data-date-format="yyyy-mm-dd">
-                                @error('res_date')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-1 col-12">
+                    <div class="col-lg-4 col-md-4 col-sm-1 col-12">
                             <div class="form-group">
                                 <label class="form-control-label">{{ trans('frontend/reservations_trans.Patient_Name') }}
                                 </label>
                                 <select name="patient_id" class="custom-select mr-sm-2">
-                                    <option value="{{ $patient->patient_id }}" selected>{{ $patient->name }}</option>
+                                    <option value="{{ $patient->id }}" selected>{{ $patient->name }}</option>
                                 </select>
                                 @error('patient_id')
                                     <p class="invalid-feedback">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label> {{ trans('frontend/reservations_trans.Reservation_Date') }} <span
+                                        class="text-danger">*</span></label>
+                                <input class="form-control" name="date" id="datepicker-action"
+                                    data-date-format="yyyy-mm-dd">
+                                @error('date')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                    </div>
 
+                    <div class="row">
 
-                        @if ($settings['reservation_slots'] == 0)
+                        @if (isset($settings['reservation_slots']) && $settings['reservation_slots'] == 0)
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label> {{ trans('frontend/reservations_trans.Number_of_Reservation') }} <span
                                             class="text-danger">*</span></label>
-                                    <select name="res_num" class="custom-select mr-sm-2">
+                                    <select name="reservation_number" class="custom-select mr-sm-2">
                                         <option selected disabled>{{ trans('frontend/reservations_trans.Choose') }}</option>
 
                                     </select>
-                                    @error('res_num')
+                                    @error('reservation_number')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -77,7 +77,7 @@
 
 
 
-                        @if ($settings['reservation_slots'] == 1)
+                        @if (isset($settings['reservation_slots']) && $settings['reservation_slots'] == 1)
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label> {{ trans('frontend/reservations_trans.Reservation_Slots') }} <span
@@ -93,7 +93,7 @@
                                         @endfor --}}
 
                                     </select>
-                                    @error('res_num')
+                                    @error('reservation_number')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -164,12 +164,12 @@
                 url: "{{ URL::to('/appointment/get_res_slot_number') }}", // Replace with the actual URL to handle the AJAX request
                 method: 'GET',
                 data: {
-                    res_date: selectedDate,
+                    date: selectedDate,
                 },
                 success: function(response) {
 
                     // Clear the existing options
-                    $('select[name="res_num"]').empty();
+                    $('select[name="reservation_number"]').empty();
                     // Add the updated options
                     for (var i = 1; i <= response.reservationsCount; i++) {
                         console.log(response.todayReservationResNum.includes(i));
@@ -180,7 +180,7 @@
                         } else {
                             var option = '<option value="' + i + '">' + i + '</option>';
                         }
-                        $('select[name="res_num"]').append(option);
+                        $('select[name="reservation_number"]').append(option);
                     }
 
 

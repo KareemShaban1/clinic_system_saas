@@ -20,7 +20,7 @@ return [
           'Rays_Number'=>'أشعة / تحليل رقم',
           'Notes'=>'الملاحظات',
           'Id'=>'Id',
-          'Reservation_Id'=>' Id الكشف',
+          'id'=>' Id الكشف',
           'Reservations'=>'الكشوفات',
           ''=>'',
           ''=>'',

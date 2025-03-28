@@ -6,7 +6,7 @@ return [
           'Add_Prescription'=>'أضافة روشتة',
           'Drugs'=>'الأدوية',
           'Prescription_Image'=>'صورة الروشتة',
-          'Reservation_Id'=>'Reservation Id',
+          'id'=>'Reservation Id',
           'Prescriptions'=>'الروشتات',
           'Prescription_Number'=>'روشتة رقم',
           'Add'=>'أضافة',

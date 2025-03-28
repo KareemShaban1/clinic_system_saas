@@ -28,13 +28,13 @@ class HomeController extends Controller
     public function dashboard()
     {
         // get all reservations
-        $all_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)->count();
+        $all_reservations_count = Reservation::where('id', Auth::user('patient')->id)->count();
 
-        $approved_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)
+        $approved_reservations_count = Reservation::where('id', Auth::user('patient')->id)
         ->where('acceptance', 'approved')
         ->count();
 
-        $not_approved_reservations_count = Reservation::where('patient_id', Auth::user('patient')->patient_id)
+        $not_approved_reservations_count = Reservation::where('id', Auth::user('patient')->id)
         ->where('acceptance', 'not_approved')
         ->count();
         return view(

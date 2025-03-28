@@ -14,43 +14,77 @@ class CustomAuthentication
 {
 
 
-          public function authenticateUser($request)
-          {
-                    $email = $request->email;
-                    $password = $request->password;
-                    $user = User::where('email', '=', $email)->first();
-                    
-                    if ($user && Hash::check($password, $user->password)) {
-                              return $user;
-                    }
-                    return false;
-          }
+    public function authenticateUser($request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $user = User::where('email', '=', $email)
+        ->whereHas('clinic',function($query){
+            $query->where('status', 1);
+        })
+        ->first();
 
-          public function authenticatePatient($request)
-          {
-                    
-                    
-                    $request->validate(
-                              [
-                                        'email' => ['required'],
-                                        'password' => ['required'],
-                              ], [
-                                        'email.required'=>'برجاء أدخال البريد الألكترونى',
-                                        'password.required'=>'برجاء أدخال كلمة المرور',
-                                                  
-                              ]
-                    );
-                    
-                    
-                    $email = $request->email;
-                    $password = $request->password;
-                    $patient = Patient::where('email', '=', $email)->first();
-                    
-                    if ($patient && Hash::check($password, $patient->password)) {
-                              return $patient;
-                    }
-                    return false;
-          }
+        if ($user && Hash::check($password, $user->password)) {
+            return $user;
+        }
+        return false;
+    }
+
+    public function authenticatePatient($request)
+    {
 
 
+        $request->validate(
+            [
+                'email' => ['required'],
+                'password' => ['required'],
+            ],
+            [
+                'email.required' => 'برجاء أدخال البريد الألكترونى',
+                'password.required' => 'برجاء أدخال كلمة المرور',
+
+            ]
+        );
+
+
+        $email = $request->email;
+        $password = $request->password;
+        $patient = Patient::where('email', '=', $email)
+        ->whereHas('clinic',function($query){
+            $query->where('status', 1);
+        })
+        ->first();
+
+        if ($patient && Hash::check($password, $patient->password)) {
+            return $patient;
+        }
+        return false;
+    }
+
+    public function authenticateAdmin($request)
+    {
+
+
+        $request->validate(
+            [
+                'email' => ['required'],
+                'password' => ['required'],
+            ],
+            [
+                'email.required' => 'برجاء أدخال البريد الألكترونى',
+                'password.required' => 'برجاء أدخال كلمة المرور',
+
+            ]
+        );
+
+
+        $email = $request->email;
+        $password = $request->password;
+        $admin = Admin::where('email', '=', $email)->first();
+
+        if ($admin && Hash::check($password, $admin->password)) {
+            return $admin;
+        }
+        return false;
+    }
 }

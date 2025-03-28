@@ -21,7 +21,7 @@ return [
           'Rays_Number'=>'Rays Number',
           'Notes'=>'Notes',
           'Id'=>'Id',
-          'Reservation_Id'=>'Reservation Id',
+          'id'=>'Reservation Id',
           ''=>'',
           ''=>'',
           ''=>'',

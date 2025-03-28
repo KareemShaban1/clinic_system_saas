@@ -28,7 +28,7 @@ class StoreDrugRequest extends FormRequest
             'drug_dose' => 'required',
             'period' => 'required',
             'notes' => 'nullable',
-            'reservation_id' => 'required',
+            'id' => 'required',
         ];
     }
 
@@ -38,7 +38,7 @@ class StoreDrugRequest extends FormRequest
             'drug_name.required' => 'يجب أدخال أسم الدواء',
             'drug_dose.required' => 'يجب أدخال جرعة الدواء',
             'period.required' => 'يجب أدخال كمية الدواء',
-            'reservation_id.required' => ' reservation id يجب أدخال ',
+            'id.required' => ' reservation id يجب أدخال ',
 
         ];
     }

@@ -13,10 +13,10 @@ use App\Models\Reservation;
 class PatientInformationController extends Controller
 {
     //
-    public function patientChronicDiseases($patient_id)
+    public function patientChronicDiseases($id)
     {
 
-        $chronicDiseases = ChronicDisease::where('patient_id', $patient_id)->paginate(10);
+        $chronicDiseases = ChronicDisease::where('id', $id)->paginate(10);
 
         if(!$chronicDiseases) {
             return $this->apiResponse(null, 'Chronic Disease Not Found', 404, false);
@@ -27,9 +27,9 @@ class PatientInformationController extends Controller
 
     }
 
-    public function patientRays($patient_id)
+    public function patientRays($id)
     {
-        $rays = Ray::where('patient_id', $patient_id)->paginate(10);
+        $rays = Ray::where('id', $id)->paginate(10);
 
         if(!$rays) {
             return $this->apiResponse(null, 'Rays Not Found', 404, false);
@@ -37,9 +37,9 @@ class PatientInformationController extends Controller
 
         return $this->apiResponse($rays, 'Patient Rays');
     }
-    public function patientMedicalAnalysis($patient_id)
+    public function patientMedicalAnalysis($id)
     {
-        $medicalAnalysis = MedicalAnalysis::where('patient_id', $patient_id)->paginate(10);
+        $medicalAnalysis = MedicalAnalysis::where('id', $id)->paginate(10);
 
         if(!$medicalAnalysis) {
             return $this->apiResponse(null, 'Medical Analysis Not Found', 404, false);
@@ -48,13 +48,13 @@ class PatientInformationController extends Controller
         return $this->apiResponse($medicalAnalysis, 'Patient Medical Analysis');
     }
 
-    public function patientGlassesDistance($patient_id)
+    public function patientGlassesDistance($id)
     {
         // Retrieve reservations for the patient
-        $reservations = Reservation::where('patient_id', $patient_id)->pluck('reservation_id');
+        $reservations = Reservation::where('id', $id)->pluck('id');
 
         // Retrieve glasses distance records for the reservations
-        $glassesDistance = GlassesDistance::whereIn('reservation_id', $reservations)->paginate(10);
+        $glassesDistance = GlassesDistance::whereIn('id', $reservations)->paginate(10);
 
         // Check if glasses distance records were found
         if ($glassesDistance->isEmpty()) {
@@ -66,13 +66,13 @@ class PatientInformationController extends Controller
     }
 
 
-    public function patientPrescription($patient_id)
+    public function patientPrescription($id)
     {
 
         // Retrieve reservations for the patient
-        $reservations = Reservation::where('patient_id', $patient_id)->pluck('reservation_id');
+        $reservations = Reservation::where('id', $id)->pluck('id');
 
-        $prescriptions = Prescription::whereIn('reservation_id', $reservations)->paginate(10);
+        $prescriptions = Prescription::whereIn('id', $reservations)->paginate(10);
 
         if(!$prescriptions) {
             return $this->apiResponse(null, 'Prescriptions Not Found', 404, false);

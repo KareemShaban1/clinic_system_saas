@@ -146,11 +146,11 @@ Route::group(
         'controller' => 'App\Http\Controllers\Api\PatientInformationController',
     ],
     function () {
-        Route::get('/patient_chronicDisease/{patient_id}', 'patientChronicDiseases');
-        Route::get('/patient_rays/{patient_id}', 'patientRays');
-        Route::get('/patient_medicalAnalysis/{patient_id}', 'patientMedicalAnalysis');
-        Route::get('/patient_glassesDistance/{patient_id}', 'patientGlassesDistance');
-        Route::get('/patient_prescription/{patient_id}', 'patientPrescription');
+        Route::get('/patient_chronicDisease/{id}', 'patientChronicDiseases');
+        Route::get('/patient_rays/{id}', 'patientRays');
+        Route::get('/patient_medicalAnalysis/{id}', 'patientMedicalAnalysis');
+        Route::get('/patient_glassesDistance/{id}', 'patientGlassesDistance');
+        Route::get('/patient_prescription/{id}', 'patientPrescription');
 
     }
 );

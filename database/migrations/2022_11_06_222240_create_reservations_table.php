@@ -14,24 +14,26 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->id('reservation_id');
-            $table->foreignId('patient_id')->references('patient_id')->on('patients')->cascadeOnDelete();
-            $table->string('res_num')->nullable();
+            $table->id('id');
+            $table->foreignId('patient_id')->references('id')->on('patients')->cascadeOnDelete();
+            $table->foreignId('doctor_id')->nullable()->references('id')->on('users')->nullOnDelete();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->cascadeOnDelete();
+            $table->string('reservation_number')->nullable();
             $table->string('slot')->nullable();
             $table->longText('first_diagnosis')->nullable();
             $table->longText('final_diagnosis')->nullable();
-            $table->enum('res_type', ['check', 'recheck' ,'consultation','other'])->default('check');
+            $table->enum('type', ['check', 'recheck' ,'consultation','other'])->default('check');
             $table->string('cost')->nullable();
             $table->enum('payment', ['paid', 'not paid'])->default('not paid');
-            $table->date('res_date');
+            $table->date('date');
             $table->string('month');
-            $table->enum('res_status',['waiting','entered','finished','cancelled'])->default('waiting');
+            $table->enum('status',['waiting','entered','finished','cancelled'])->default('waiting');
             $table->enum('acceptance',['approved','not_approved'])->default('not_approved');
             $table->softDeletes();
             $table->timestamps();
             
-            // $table->unsignedBigInteger('patient_id');
-            // $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
+            // $table->unsignedBigInteger('id');
+            // $table->foreign('id')->references('id')->on('patients')->onDelete('cascade');
            
         });
     }

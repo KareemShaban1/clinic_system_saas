@@ -19,7 +19,7 @@ return [
           'AX_L_N'=>'AX',
           'Add'=>'أضافة',
           'Edit'=>'تعديل',
-          'Reservation_Id'=>'Reservation Id',
+          'id'=>'Reservation Id',
           'Id'=>'Id',
           'Control'=>'التحكم',
           'All_Glasses_Distance'=>'مقاسات النظارة',

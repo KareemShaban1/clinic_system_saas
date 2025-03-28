@@ -26,21 +26,21 @@
                 <x-frontend.alert/>
 
                 <form method="post" enctype="multipart/form-data"
-                    action="{{ Route('backend.reservations.update', $reservation->reservation_id) }}" autocomplete="off">
+                    action="{{ Route('backend.reservations.update', $reservation->id) }}" autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label
                                     class="form-control-label">{{ trans('frontend/reservations_trans.Patient_Name') }}</label>
-                                <select name="patient_id" class="custom-select mr-sm-2">
+                                <select name="id" class="custom-select mr-sm-2">
                                     <option value="" selected>{{ trans('frontend/reservations_trans.Choose') }}
                                     </option>
-                                    <option value="{{ $reservation->patient->patient_id }}"
-                                        @if ($reservation->patient->patient_id == old('patient_id', $reservation->patient_id)) selected @endif>
+                                    <option value="{{ $reservation->patient->id }}"
+                                        @if ($reservation->patient->id == old('id', $reservation->id)) selected @endif>
                                         {{ $reservation->patient->name }}</option>
                                 </select>
-                                @error('patient_id')
+                                @error('id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -50,10 +50,10 @@
                             <div class="form-group">
                                 <label> {{ trans('frontend/reservations_trans.Number_of_Reservation') }} <span
                                         class="text-danger">*</span></label>
-                                <select name="res_num" class="custom-select mr-sm-2"
-                                    value="{{ old('res_num', $reservation->res_num) }}">
+                                <select name="reservation_number" class="custom-select mr-sm-2"
+                                    value="{{ old('reservation_number', $reservation->reservation_number) }}">
                                     @for ($i = 1; $i <= $number_of_res; $i++)
-                                        @if ($today_reservation_res_num == $i)
+                                        @if ($today_reservation_reservation_number == $i)
                                             <option value="{{ $i }}" selected style="background:gainsboro">
                                                 {{ $i }}</option>
                                         @else
@@ -61,7 +61,7 @@
                                         @endif
                                     @endfor
                                 </select>
-                                @error('res_num')
+                                @error('reservation_number')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -152,10 +152,10 @@
                             <div class="form-group">
                                 <label> {{ trans('frontend/reservations_trans.Reservation_Date') }}<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="res_date"
-                                    value="{{ old('res_date', $reservation->res_date) }}" id="datepicker-action"
+                                <input class="form-control" name="date"
+                                    value="{{ old('date', $reservation->date) }}" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
-                                @error('res_date')
+                                @error('date')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

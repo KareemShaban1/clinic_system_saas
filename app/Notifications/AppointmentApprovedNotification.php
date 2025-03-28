@@ -54,7 +54,7 @@ class AppointmentApprovedNotification extends Notification
         $reservation = $this->reservation;
 
         return [
-            'body' => " تم قبول الحجز بنجاح بتاريخ {$reservation->res_date}",
+            'body' => " تم قبول الحجز بنجاح بتاريخ {$reservation->date}",
             'icon' => 'fas fa-file',
             'url' => url('/patient/dashboard'),
         ];

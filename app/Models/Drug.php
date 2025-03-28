@@ -10,23 +10,21 @@ class Drug extends Model
     use HasFactory;
 
     protected $fillable = [
-        'drug_name',
-        'drug_dose',
+        'name',
+        'description',
         'quantity',
         'notes',
-        'reservation_id'
+        'reservation_id',
+        'clinic_id'
     ];
-
-
+    protected $table = 'drugs';
     // every drug belong to one reservation
-    public function reservation ()
+    public function reservation()
     {
-        return $this->belongsTo(
-            Reservation::class,
-            'reservation_id',
-            'reservation_id'
-        );
+        return $this->belongsTo(Reservation::class);
     }
-
-    
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class);
+    }
 }

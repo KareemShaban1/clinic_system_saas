@@ -12,7 +12,7 @@ class Medicine extends Model
 
     use SoftDeletes;
     
-    protected $table = 'medicine';
+    protected $table = 'medicines';
 
     protected $fillable = [
         'drugbank_id',

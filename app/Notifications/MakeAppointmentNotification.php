@@ -55,9 +55,13 @@ class MakeAppointmentNotification extends Notification
         $reservation = $this->reservation;
 
         return [
+           'data'=>[
             'body' => " تم طلب حجز بواسطة المريض {$reservation->patient->name}",
             'icon' => 'fas fa-file',
             'url' => url('/backend/dashboard'),
+           ],
+           'clinic_id' => $reservation->clinic_id
+            
         ];
     }
 
@@ -69,8 +73,16 @@ class MakeAppointmentNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        $reservation = $this->reservation;
+
         return [
-            //
+           'data'=>[
+            'body' => " تم طلب حجز بواسطة المريض {$reservation->patient->name}",
+            'icon' => 'fas fa-file',
+            'url' => url('/backend/dashboard'),
+           ],
+           'clinic_id' => $reservation->clinic_id
+            
         ];
     }
 }

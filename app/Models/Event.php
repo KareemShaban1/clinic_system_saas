@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Event extends Model
+
+class Event extends BaseModel
 {
     use HasFactory;
 
@@ -14,8 +15,14 @@ class Event extends Model
     protected $table = 'events';
 
     protected $fillable = [
+        'clinic_id',
         'title',
-        'start',
+        'date',
     ];
 
+
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class);
+    }
 }

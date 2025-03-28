@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('type');
             $table->morphs('notifiable');
             $table->text('data');

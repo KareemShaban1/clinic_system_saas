@@ -44,9 +44,6 @@ return [
           'Cost'=>'المبلغ',
           'Reservation_Date'=>'تاريخ الكشف',
           'Add'=>'أضافة',
-
-
-          'Number_of_Reservations'=>'عدد الكشوفات',
           'Edit'=>'تعديل',
 
           // edit reservation
@@ -77,7 +74,7 @@ return [
           'Arabic'=>'عربى',
 
 
-          'Reservation_Slots'=>'فتحات الحجز',
+          'Reservation_Slots'=>'خانات الحجز',
           'Start_Time'=>'وقت البداية',
           'End_Time'=>'وقت الأنتهاء',
           'Duration'=>'مدة كل كشف',
@@ -92,12 +89,13 @@ return [
 
           'You Are Using'=>'أنت تستخدم',
           'Reservation_Numbers'=>'عدد الحجوزات',
-          'Reservation_Slots'=>'فتحات الحجز',
           'You Can change it from'=>'يمكنك تغيرها من',
           'here'=>'هنا',
           'Add Reservation Numbers'=>'أضافة عدد الحجوزات',
-          'Add Reservation Slots'=>'إضافة فتحات الحجز',
-          ''=>'',
+          'Add Reservation Slots'=>'إضافة خانات الحجز',
+          'Add_Number_of_Reservation'=>'أضافة عدد الحجوزات',
+          'Number_of_Reservations'=>'عدد الحجوزات',
+          'Reservation Slots'=>'خانات الحجز',
           ''=>'',
           ''=>'',
           ''=>'',

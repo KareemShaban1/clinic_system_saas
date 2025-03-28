@@ -9,27 +9,35 @@ class OnlineReservation extends Model
 {
     use HasFactory;
 
-    public $fillable= ['integration','user_id','patient_id','created_by','meeting_id','topic','start_at','duration','password','start_url','join_url'];
+    public $fillable= [
+        'clinic_id',
+        'integration',
+        'created_by',
+        'patient_id',
+        'meeting_id',
+        'topic',
+        'start_at',
+        'duration',
+        'password',
+        'start_url',
+        'join_url'];
 
 
-    public function user()
+    public function createdBy()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function patient()
     {
-        return $this->belongsTo(
-            Patient::class,
-            'patient_id',
-        );
+        return $this->belongsTo( Patient::class);
     }
 
     public function reservation()
     {
         return $this->belongsTo(
             Reservation::class,
-            'reservation_id',
+            'id',
         );
     }
 

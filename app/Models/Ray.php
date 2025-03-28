@@ -14,6 +14,7 @@ class Ray extends Model
         'images',
         'patient_id',
         'reservation_id',
+        'clinic_id',
         'ray_name',
         'ray_type',
         'ray_date',
@@ -38,11 +39,26 @@ class Ray extends Model
     {
         return $this->belongsTo(
             Patient::class,
-            'patient_id',
+            'id',
         );
     }
 
 
+    public function reservation()
+    {
+        return $this->belongsTo(
+            Reservation::class,
+            'id',
+        );
+    }
+
+    public function clinic()
+    {
+        return $this->belongsTo(
+            Clinic::class,
+            'id',
+        );
+    }
 
 
 }

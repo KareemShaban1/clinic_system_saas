@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\ClinicScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -13,7 +14,7 @@ class Reservation extends Model
 
     protected $table = 'reservations';
 
-    protected $primaryKey = 'reservation_id';
+    protected $primaryKey = 'id';
 
     protected $hidden = [
         'created_at','updated_at','deleted_at'
@@ -21,30 +22,34 @@ class Reservation extends Model
     ];
 
     protected $fillable = [
-
         'patient_id',
-        'res_num',
+        'clinic_id',
+        'reservation_number',
         'first_diagnosis',
-        'res_type',
+        'type',
         'cost',
         'payment',
-        'res_date',
-        'res_status',
+        'date',
+        'status',
         'acceptance',
         'month',
         'slot'
     ];
 
+    protected static function booted()
+    {
+
+
+        static::addGlobalScope(new ClinicScope);
+
+    }
 
     // Inverse of one-to-many (One Reservation belongs to one Patient)
     // belongTo() come with one to one relationship
     // every reservation belong to one patient
     public function patient()
     {
-        return $this->belongsTo(
-            Patient::class,
-            'patient_id',
-        );
+        return $this->belongsTo(Patient::class);
     }
 
     public function rays()
@@ -52,6 +57,7 @@ class Reservation extends Model
         return $this->hasMany(
             Ray::class,
             'reservation_id',
+            'id'
         );
     }
 
@@ -60,6 +66,7 @@ class Reservation extends Model
         return $this->hasMany(
             MedicalAnalysis::class,
             'reservation_id',
+            'id'
         );
     }
 
@@ -68,6 +75,7 @@ class Reservation extends Model
         return $this->hasMany(
             ChronicDisease::class,
             'reservation_id',
+            'id',
         );
     }
 
@@ -76,6 +84,7 @@ class Reservation extends Model
         return $this->hasMany(
             GlassesDistance::class,
             'reservation_id',
+            'id',
         );
     }
 
@@ -84,6 +93,16 @@ class Reservation extends Model
         return $this->hasMany(
             Prescription::class,
             'reservation_id',
+            'id',
+        );
+    }
+
+    public function clinic()
+    {
+        return $this->belongsTo(
+            Clinic::class,
+            'clinic_id',
+            'id',
         );
     }
 

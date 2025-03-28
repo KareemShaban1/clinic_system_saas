@@ -21,7 +21,7 @@ return [
           'Analysis_Number'=>' تحليل رقم',
           'Report'=>'التقارير',
           'Id'=>'Id',
-          'Reservation_Id'=>' Id الكشف',
+          'id'=>' Id الكشف',
           'medicalAnalysis'=>'التحاليل',
           'Control'=>'التحكم',
           ''=>'',

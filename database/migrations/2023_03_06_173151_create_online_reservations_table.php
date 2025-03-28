@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('online_reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->boolean('integration');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
-            $table->string('created_by');
+            $table->foreignId('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            // $table->foreignId('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->string('meeting_id');
             $table->string('topic');
             $table->dateTime('start_at');
@@ -31,7 +32,7 @@ return new class extends Migration
 
             $table->longText('final_diagnosis')->nullable();
 
-            $table->enum('res_type', ['check', 'recheck' ,'consultation'])->default('check');
+            $table->enum('type', ['check', 'recheck', 'consultation'])->default('check');
 
             $table->string('cost')->nullable();
 

@@ -43,6 +43,13 @@
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
     ),
   ),
+  'laravel/cashier' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Cashier\\CashierServiceProvider',
+    ),
+  ),
   'laravel/fortify' => 
   array (
     'providers' => 
@@ -62,6 +69,13 @@
     'providers' => 
     array (
       0 => 'Laravel\\Sanctum\\SanctumServiceProvider',
+    ),
+  ),
+  'laravel/telescope' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Telescope\\TelescopeServiceProvider',
     ),
   ),
   'laravel/tinker' => 
@@ -264,6 +278,18 @@
     'aliases' => 
     array (
       'Signal' => 'Spatie\\SignalAwareCommand\\Facades\\Signal',
+    ),
+  ),
+  'stancl/tenancy' => 
+  array (
+    'aliases' => 
+    array (
+      'Tenancy' => 'Stancl\\Tenancy\\Facades\\Tenancy',
+      'GlobalCache' => 'Stancl\\Tenancy\\Facades\\GlobalCache',
+    ),
+    'providers' => 
+    array (
+      0 => 'Stancl\\Tenancy\\TenancyServiceProvider',
     ),
   ),
   'yajra/laravel-datatables-buttons' => 

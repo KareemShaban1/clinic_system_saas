@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('number_of_reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->date('reservation_date');
             $table->integer('num_of_reservations');
-            
             $table->timestamps();
         });
     }

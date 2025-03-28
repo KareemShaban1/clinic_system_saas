@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class SystemControl extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'key',
+        'value',
+        'type'
+    ];
+
+
+    protected $table = 'settings';
+
+    
 }

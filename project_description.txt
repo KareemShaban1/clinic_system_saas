@@ -1,129 +1,52 @@
-Patient can register (create account) , login 
-patient has dashboard to 
-          add Appointments 
-          show his Appointments ,
-          show his Rays / Analysis
-          show his Chronic diseases
-          show his Glasses Distance
-          show his Prescription
+There are 3 type of guards in this project :
+1- admin guard
+2- clinic guard
+3- patient guard
+
+1- Admin:
+- admin can add / edit / delete / show specialities of clinics
+- admin can add / edit / delete / show governorates
+- admin can add / edit / delete / show cities
+- admin can add / edit / delete / show areas
+- admin can add / edit / delete / show users
+- admin can add / edit / delete / show roles
+- admin can add / edit / delete / show permissions
+- admin can add / edit / delete / show settings
+- admin can add / edit / delete / show subscriptions
+- admin can add / edit / delete / show clinics
+- admin can add / edit / delete / show events
+
+2- Clinic: [Doctor , Assistant , ....]
+- clinic can add / edit / delete / show patients
+- clinic can add / edit / delete / show reservations
+- clinic can add / edit / delete / show chronic diseases
+- clinic can add / edit / delete / show rays
+- clinic can add / edit / delete / show glasses distance
+- clinic can add / edit / delete / show number of reservations
+- clinic can add / edit / delete / show online reservations
+- clinic can add / edit / delete / show medicines
+- clinic can add / edit / delete / show fees
+- clinic can add / edit / delete / show users
+- clinic can add / edit / delete / show roles
+- clinic can add / edit / delete / show permissions
+- clinic can add / edit / delete / show settings
+- clinic can add / edit / delete / show subscriptions
+- clinic can add / edit / delete / show clinics
+- clinic can add / edit / delete / show events
+
+3- Patient:
+- patient can request appointments
+- patient can show his appointments
+- patient can show his rays / analysis
+- patient can show his chronic diseases
+- patient can show his glasses distance
+- patient can show his prescription
 
 
 
 
-Admin / Doctor can 
-      - Events 
-          Add Events
-          Delete Event
-          Restore Events
-          Delete Events Forever
-
-      - Patients
-          Add Patient
-          Delete Patient
-          Edit Patient
-          Restore Patients
-          Delete Patients Forever
-          show Patient Profile
-          Show Patient card
-          Print Patient Card
-
-      - Reservations
-          Add Reservation
-          Edit Reservation
-          Delete Reservation
-          Restore Reservations
-          Delete Reservations Forever
-          Show Reservations 
-          Add Drugs
-          Show Prescription
-          Print Prescription
-          Add Chronic diseases
-          Edit Chronic diseases
-          show Chronic diseases
-          Add Rays
-          Edit Rays
-          Show Rays
-          Add Glasses Distance
-          Edit Glasses Distance
-          Show Glasses Distance
-          Add Number of Reservations
-          Edit Number of Reservations
-          Edit Reservation Control
-          Show Daily Reservation Report
-          Print Daily Reservation Report
-
-      - Online Reservation 
-          Add Online Reservation
-          Delete Online Reservation
-
-      - Medicines
-          Add Medicine
-          Show Medicines
-          Edit Medicine
-          Delete Medicine
-          Show Deleted Medicines
-          Restore Medicine
-          Delete Medicine Forever
-          
-      - Fees
-          Show Daily Fees
-          show Monthly Fees
-          Show All Fees
-
-      - Users 
-          Add Users
-          Edit Users 
-          Assign Role to User 
-          Delete Users
-
-      - Roles 
-          Add Role
-          Edit Role 
-          Show Role
-            
-      - Settings 
-          Add Settings 
-          Update Settings   
-
-      - System Settings     
-          Update System Settings   
 
 
--------------------------------------------------------------
 
-EventController 
-    index       => get all events 
-    show        => show calendar page
-    destroy     => delete event 
-    trash       => get trash / temporary deleted events
-    restore     => restore deleted event
-    forceDelete => delete event permanently
 
-PatientController 
-    index       =>  get all patients
-    show        =>  show patient information 
-    patientPdf  =>  show patient card 
-    create      =>  show add patient view / page 
-    store       =>  store patient information 
-    edit        =>  show edit patient view / page
-    update      =>  update existing patient data
-    destroy     =>  delete patient 
-    trash       =>  get trash / temporary deleted patients
-    restore     =>  restore deleted patients
-    forceDelete =>  delete patient permanently
-    
 
-ReservationControl
-    index                  =>  get all reservations
-    todayReservationReport =>  show today reservations with report
-    show                   =>  show reservation information 
-    create                 =>  show add reservation view / page 
-    store                  =>  store reservation information 
-    edit                   =>  show edit reservation view / page
-    update                 =>  update existing reservation data
-    destroy                =>  delete reservation 
-    trash                  =>  get trash / temporary deleted reservations
-    restore                =>  restore deleted reservations
-    forceDelete            =>  delete reservation permanently
-
- 

@@ -18,8 +18,8 @@ class ChronicDiseasesResource extends JsonResource
             'title' => $this->title,
             'measure' => $this->measure,
             'date' => $this->date,
-            'patient_id' => $this->patient_id,
-            'reservation_id' => $this->reservation_id
+            'id' => $this->id,
+            'id' => $this->id
         ];
     }
 }

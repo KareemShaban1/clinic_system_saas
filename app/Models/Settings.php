@@ -7,9 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
+
     use HasFactory;
 
     public $table = 'settings';
-    public $connection = 'mysql'; // or the name of your database connection
+    protected $fillable = [
+        'clinic_id',
+        'key',
+        'value',
+        'type',
+    ];
+
+    public function clinic()
+    {
+        return $this->belongsTo(
+            Clinic::class,
+            'clinic_id',
+            'id',
+        );
+    }
 
 }

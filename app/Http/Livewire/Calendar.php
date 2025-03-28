@@ -12,7 +12,7 @@ class Calendar extends Component
  
     public function getevent()
     {       
-        $events = Event::select('id','title','start')->get();
+        $events = Event::select('id','title','date')->get();
  
         return  json_encode($events);
     }
@@ -25,7 +25,8 @@ class Calendar extends Component
     public function addevent($event)
     {
         $input['title'] = $event['title'];
-        $input['start'] = $event['start'];
+        $input['date'] = $event['date'];
+        $input['clinic_id'] = auth()->user()->clinic_id;
         Event::create($input);
     }
  
@@ -37,7 +38,7 @@ class Calendar extends Component
     public function eventDrop($event, $oldEvent)
     {
       $eventdata = Event::find($event['id']);
-      $eventdata->start = $event['start'];
+      $eventdata->date = $event['start'];
       $eventdata->save();
     }
  
@@ -48,10 +49,10 @@ class Calendar extends Component
     */
     public function render()
     {       
-        $events = Event::select('id','title','start')->get();
+        $events = Event::select('id','title','date')->get();
  
         $this->events = json_encode($events);
  
-        return view('backend.dashboards.user.livewire.calendar');
+        return view('backend.dashboards.clinic.livewire.calendar');
     }
 }

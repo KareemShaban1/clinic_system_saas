@@ -30,7 +30,7 @@ class SendNotificationToPatient
     {
         //
         $reservation = $event->reservation;
-        $patient = Patient::findOrFail($reservation->patient_id);
+        $patient = Patient::findOrFail($reservation->id);
         if($patient){
             $patient->notify(new AppointmentApprovedNotification($reservation));
         }

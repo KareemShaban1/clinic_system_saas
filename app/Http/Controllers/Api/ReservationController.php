@@ -48,7 +48,7 @@ class ReservationController extends Controller
         $request->validated();
 
         $data = $request->all();
-        $data['month'] = substr($request->res_date, 5, 7 - 5);
+        $data['month'] = substr($request->date, 5, 7 - 5);
         $data['acceptance'] = "not_approved";
 
 
@@ -65,7 +65,7 @@ class ReservationController extends Controller
 
         $request->validated();
         $data = $request->all();
-        $data['month'] = substr($request->res_date, 5, 7 - 5);
+        $data['month'] = substr($request->date, 5, 7 - 5);
         if(!$reservation) {
             return response()->json(['status' => 'Reservation Not Found'], 404);
         }
@@ -116,7 +116,7 @@ class ReservationController extends Controller
 
     public function todayReservations()
     {
-        $today_reservations = ReservationResource::collection(Reservation::whereDate('res_date', Carbon::now())->get());
+        $today_reservations = ReservationResource::collection(Reservation::whereDate('date', Carbon::now())->get());
 
         return $this->apiResponse($today_reservations, 'Today Reservations', 200);
 
@@ -125,22 +125,22 @@ class ReservationController extends Controller
     // public function getResNumberOrSlotAdd(Request $request)
     // {
 
-    //     $res_date =  $request->res_date;
+    //     $date =  $request->date;
 
     //     // if system use reservation numbers not slots
-    //     $reservation_res_num = Reservation::where('res_date', $res_date)->pluck('res_num')->map(function ($item) {
+    //     $reservation_reservation_number = Reservation::where('date', $date)->pluck('reservation_number')->map(function ($item) {
     //         return intval($item);
     //     })->toArray();
-    //     $number_of_res = NumberOfReservations::where('reservation_date', $res_date)->value('num_of_reservations');
+    //     $number_of_res = NumberOfReservations::where('reservation_date', $date)->value('num_of_reservations');
 
 
     //     // if system use reservation slots not numbers
-    //     $reservation_slots = Reservation::where('res_date', $res_date)
+    //     $reservation_slots = Reservation::where('date', $date)
     //     ->where('slot', '<>', 'null')->pluck('slot')->toArray();
-    //     $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+    //     $number_of_slot = ReservationSlots::where('date', $date)->first();
     //     $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
-    //     $reservations  = Reservation::where('res_date',$res_date)->get();
+    //     $reservations  = Reservation::where('date',$date)->get();
 
     //     // Create an associative array or Laravel collection with the values
     //     $data = [
@@ -157,36 +157,36 @@ class ReservationController extends Controller
 
     public function getResNumberOrSlotAdd(Request $request)
     {
-        $res_date = $request->res_date;
+        $date = $request->date;
 
         // Fetch reservation numbers for the given date
-        $reservedReservationNumbers = Reservation::where('res_date', $res_date)
-            ->pluck('res_num')
+        $reservedReservationNumbers = Reservation::where('date', $date)
+            ->pluck('reservation_number')
             ->map(function ($item) {
                 return (int) $item;
             })
             ->toArray();
 
         // Fetch the number of reservations for the given date
-        $numberOfReservations = NumberOfReservations::where('reservation_date', $res_date)
+        $numberOfReservations = NumberOfReservations::where('reservation_date', $date)
             ->value('num_of_reservations');
 
         // Fetch reservation slots for the given date
-        $reservationSlots = Reservation::where('res_date', $res_date)
+        $reservationSlots = Reservation::where('date', $date)
             ->whereNotNull('slot')
             ->pluck('slot')
             ->toArray();
 
         // Fetch the number of slots and time slots if available
-        $number_of_slot = ReservationSlots::where('date', $res_date)->first();
+        $number_of_slot = ReservationSlots::where('date', $date)->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
         // Fetch all reservations for the given date
-        $reservations = Reservation::where('res_date', $res_date)->get();
+        $reservations = Reservation::where('date', $date)->get();
 
         // Organize the data into an associative array
         $data = [
-            'reserved_res_number' => $reservedReservationNumbers,
+            'reserved_reservation_numberber' => $reservedReservationNumbers,
             'day_number_of_reservations' => $numberOfReservations,
             'reserved_slots'=>$reservationSlots,
             'day_reservation_slots' => $slots,

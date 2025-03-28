@@ -49,8 +49,8 @@ return [
   'All_Roles'=>'كل الصلاحيات ',
   'Add_Role'=>'أضافة صلاحية',
 
-  'Reservation_Slots'=>'فتحات الحجز',
-  'Add_Reservation_Slots'=>'إضافة فتحات الحجز',
+  'Reservation_Slots'=>'خانات الحجز',
+  'Add_Reservation_Slots'=>'إضافة خانات الحجز',
   
   'Rays'=>'الأشعة',
   'All_Rays'=>'كل الأشعة',
@@ -60,7 +60,7 @@ return [
   'All_Analysis'=>'كل التحاليل',
   'Deleted_Analysis'=>'التحاليل المحذوفة',
   
-  ''=>'',
+  'Specialities'=>'التخصصات',
   ''=>'',
   ''=>'',
   ''=>'',

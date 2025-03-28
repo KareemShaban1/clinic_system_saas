@@ -12,7 +12,7 @@ class MedicalAnalysis extends Model
     public $table = 'medical_analysis';
 
     protected $fillable = [
-        'analysis_name','images','analysis_date','analysis_type','report','patient_id','reservation_id'
+        'name','images','date','type','report','patient_id','reservation_id','clinic_id'
     ];
 
     
@@ -30,12 +30,13 @@ class MedicalAnalysis extends Model
 
     public function patient()
     {
-        return $this->belongsTo(
-            Patient::class,
-            'patient_id',
-        );
+        return $this->belongsTo( Patient::class);
     }
 
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
 
 
     

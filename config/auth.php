@@ -36,15 +36,23 @@ return [
     */
 
     'guards' => [
+        // for clinic
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
         
+        // for patients
         'patient' => [
             'driver' => 'session',
             'provider' => 'patients',
+        ],
+
+        // for admins
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -75,6 +83,11 @@ return [
         'patients' => [
             'driver' => 'eloquent',
             'model' => App\Models\Patient::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
 

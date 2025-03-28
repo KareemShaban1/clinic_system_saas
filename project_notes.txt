@@ -29,3 +29,10 @@
      Instead of using the GlassesDistance and Reservation models directly 
      in the controller methods, you can utilize model dependency injection 
      by type hinting the corresponding models in the method parameters.
+
+
+---------------------------------------------------------------------------------------
+
+- admin dashboard notes :
+  - add subscription with plans for clinic 
+  - list clinics with all information (users , doctors , patients , reservations)

@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('key');
             $table->string('value')->nullable();
+            $table->string('type')->default('setting');
             $table->timestamps();
         });
     }

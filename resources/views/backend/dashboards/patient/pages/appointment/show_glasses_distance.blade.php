@@ -121,7 +121,7 @@
             <div style="margin-bottom:30px"> العنوان : {{ $settings['clinic_address'] }}</div>
 
             <div>أسم المريض : {{ $reservation->patient->name }}</div>
-            <div>رقم الكشف / ميعاد الكشف : {{ $reservation->slot ? $reservation->slot : $reservation->res_num }} </div>
+            <div>رقم الكشف / ميعاد الكشف : {{ $reservation->slot ? $reservation->slot : $reservation->reservation_number }} </div>
         </div>
 
     </div>

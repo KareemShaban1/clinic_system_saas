@@ -15,8 +15,8 @@ class MedicalAnalysisResource extends JsonResource
     public function toArray($request)
     {
         // return [
-        //     'Patient Id' => $this->patient_id,
-        //     'Reservation Id' => $this->reservation_id,
+        //     'Patient Id' => $this->id,
+        //     'Reservation Id' => $this->id,
         //     'Analysis Name' => $this->analysis_name,
         //     'Images' =>  $this->image_url,
         //     'Analysis Date' => $this->analysis_date,
@@ -37,8 +37,8 @@ class MedicalAnalysisResource extends JsonResource
         }
 
         $response = [
-            'Patient Id' => $this->patient_id,
-            'Reservation Id' => $this->reservation_id,
+            'Patient Id' => $this->id,
+            'Reservation Id' => $this->id,
             'Analysis Name' => $this->analysis_name,
             'Images' => $imageUrls,
             'Analysis Date' => $this->analysis_date,

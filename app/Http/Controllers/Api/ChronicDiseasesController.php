@@ -26,9 +26,9 @@ class ChronicDiseasesController extends Controller
 
     }
 
-    public function show($reservation_id)
+    public function show($id)
     {
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::findOrFail($id);
         $chronic_disease = ChronicDisease::where($reservation->id)->get();
         if($chronic_disease) {
             return $this->apiResponse(
@@ -55,8 +55,8 @@ class ChronicDiseasesController extends Controller
                     'measure' => $request->measure[$index],
                     'date' => $request->date[$index],
                     'notes' => $request->notes[$index],
-                    'patient_id' => $request->patient_id[$index],
-                    'reservation_id' => $request->reservation_id[$index],
+                    'id' => $request->id[$index],
+                    'id' => $request->id[$index],
                 ];
 
                 // Insert the record and store the result in an array

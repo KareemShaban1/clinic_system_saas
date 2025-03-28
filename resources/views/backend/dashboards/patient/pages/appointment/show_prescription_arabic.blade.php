@@ -123,7 +123,7 @@
 
             }
 
-            .clinic-details {
+            .clinic.-details {
                 margin-top: 5px;
                 /* margin-right:15px; */
             }
@@ -293,7 +293,7 @@
 
             }
 
-            .clinic-details {
+            .clinic.-details {
                 margin-top: 5px;
                 /* margin-right:15px; */
             }

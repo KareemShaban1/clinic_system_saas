@@ -82,7 +82,7 @@ body{
 
 }
 
-.clinic-details{
+.clinic.-details{
   margin-top:5px;
   margin-left:15px;
 }

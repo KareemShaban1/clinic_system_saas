@@ -30,7 +30,9 @@ class UpdatePatientRequest extends FormRequest
                 'gender'=>'required',
                 'phone' => 'required|min:11|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'email'=>'nullable',
-                'blood_group'=>'required'
+                'blood_group'=>'required',
+                'height'=>'nullable',
+                'weight'=>'nullable',
         ];
     }
 

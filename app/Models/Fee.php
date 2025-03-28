@@ -11,6 +11,5 @@ class Fee extends Model
 
     protected $table = 'reservations';
 
-    protected $dates = ['res_date'];
 
 }

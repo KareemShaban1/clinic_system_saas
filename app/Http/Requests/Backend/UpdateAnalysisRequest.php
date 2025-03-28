@@ -31,7 +31,7 @@ class UpdateAnalysisRequest extends FormRequest
                 'analysis_date'=>'required',
                 'analysis_type'=>'required',
                 'report'=>'nullable',
-                'patient_id'=>'required'
+                'id'=>'required'
             
         ];
     }
@@ -43,7 +43,7 @@ class UpdateAnalysisRequest extends FormRequest
             'images.required'=>'برجاء أدخال صور الأشعة / التحليل',
             'analysis_date.required'=>'برجاء أدخال تاريخ الأشعة / التحليل',
             'analysis_type.required'=>'برجاء أدخال نوع الأشعة / التحليل',
-            'patient_id.required'=>'patient id برجاء أدخال  ',
+            'id.required'=>'patient id برجاء أدخال  ',
         ];
 
     }

@@ -10,7 +10,14 @@ class NumberOfReservations extends Model
     use HasFactory;
 
     protected $fillable = [
+        'clinic_id',
         'reservation_date',
         'num_of_reservations'
     ];
+
+
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class);
+    }
 }

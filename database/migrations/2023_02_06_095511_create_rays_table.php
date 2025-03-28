@@ -14,13 +14,14 @@ return new class () extends Migration {
     {
         Schema::create('rays', function (Blueprint $table) {
             $table->id();
-            $table->string('ray_name');
+            $table->foreignId('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->foreignId('reservation_id')->nullable()->constrained('reservations')->nullOnDelete();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+            $table->string('name');
             $table->string('images');
-            $table->date('ray_date');
-            $table->string('ray_type');
+            $table->date('date');
+            $table->string('type');
             $table->longText('report')->nullable();
-            $table->foreignId('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
-            $table->foreignId('reservation_id')->references('reservation_id')->on('reservations')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

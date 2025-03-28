@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservation_slots', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->date('date')->date('Y-m-d');
             $table->string('start_time');
             $table->string('end_time');

@@ -9,7 +9,10 @@ class GlassesDistance extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
+        'patient_id',
         'reservation_id',
+        'clinic_id',
         'SPH_R_D',
         'CYL_R_D',
         'AX_R_D',

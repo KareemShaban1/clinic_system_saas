@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\BaseModel;
+use App\Models\Patient;
+use App\Models\Scopes\ClinicScope;
 use App\Models\Settings;
 use App\Models\SystemControl;
+use App\Observers\BaseModelObserver;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades;
+use Illuminate\Support\Facades\Auth;
 use MacsiDigital\Zoom\Setting;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,8 +39,8 @@ class AppServiceProvider extends ServiceProvider
         // remove "data" wrapper from json resource response
         JsonResource::withoutWrapping();
 
-        view()->composer('backend.dashboards.user.layouts.main-sidebar', function ($view) {
-            $collection = SystemControl::all();
+        view()->composer('backend.dashboards.clinic.layouts.main-sidebar', function ($view) {
+            $collection = Settings::where('type', 'system_control')->get();
             $setting = $collection->flatMap(function ($collection) {
                 return [$collection->key => $collection->value];
             });
@@ -48,5 +54,11 @@ class AppServiceProvider extends ServiceProvider
 
         // Merge the retrieved data with the existing configuration
         config()->set('custom_config', $settings);
+
+        BaseModel::observe(BaseModelObserver::class);
+
+        if (Auth::check()) {
+            Patient::addGlobalScope(new ClinicScope);
+        }
     }
 }

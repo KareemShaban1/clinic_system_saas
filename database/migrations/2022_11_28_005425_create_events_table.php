@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('title');
-            $table->string('start');
+            $table->string('date');
             $table->softDeletes();
             $table->timestamps();
         });

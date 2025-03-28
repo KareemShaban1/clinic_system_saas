@@ -2,30 +2,40 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\ClinicScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
 
-class Patient extends User
+class Patient extends Authenticatable
 {
-    use HasApiTokens ;
-    use HasFactory ;
-    use Notifiable ;
-    use HasRoles ;
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+    use HasRoles;
     use SoftDeletes;
 
     protected $table = 'patients';
 
-    protected $primaryKey = 'patient_id';
+    protected $primaryKey = 'id';
 
     public $timestamps = true;
 
     protected $hidden = [
-        'created_at', 'updated_at', 'deleted_at'
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     protected $fillable = [
@@ -38,6 +48,9 @@ class Patient extends User
         'blood_group',
         'patient_code',
         'gender',
+        'clinic_id',
+        'height',
+        'weight',
         // 'image'
     ];
 
@@ -49,6 +62,9 @@ class Patient extends User
             //20230001 - 20230002
             $patient->patient_code = Patient::getNextPatientCodeNumber();
         });
+
+        static::addGlobalScope(new ClinicScope);
+
     }
 
     public static function getNextPatientCodeNumber()
@@ -66,15 +82,21 @@ class Patient extends User
         return $year . '0001';
     }
 
+    // Apply the clinic filter dynamically
+    public function scopeClinic($query)
+    {
+        if (Auth::check() && Auth::user()->clinic_id) {
+            return $query->where('clinic_id', Auth::user()->clinic_id);
+        }
+
+        return $query;
+    }
+
     public function reservations()
     {
         // $this refer to patient object
         // One-to-Many (One patient has many reservations)
-        return $this->hasMany(
-            Reservation::class, // Related model
-            'patient_id',           // FK in the related model
-            'patient_id'            // PK in the current model
-        );
+        return $this->hasMany(Reservation::class, 'patient_id', 'id');
     }
 
     public function rays()
@@ -82,6 +104,7 @@ class Patient extends User
         return $this->hasMany(
             Ray::class,
             'patient_id',
+            'id',
         );
     }
 
@@ -90,6 +113,7 @@ class Patient extends User
         return $this->hasMany(
             GlassesDistance::class,
             'patient_id',
+            'id',
         );
     }
 
@@ -98,6 +122,7 @@ class Patient extends User
         return $this->hasMany(
             MedicalAnalysis::class,
             'patient_id',
+            'id',
         );
     }
 
@@ -106,6 +131,7 @@ class Patient extends User
         return $this->hasMany(
             ChronicDisease::class,
             'patient_id',
+            'id',
         );
     }
 
@@ -114,7 +140,25 @@ class Patient extends User
         return $this->hasMany(
             Prescription::class,
             'patient_id',
+            'id',
         );
     }
 
+    public function onlineReservations()
+    {
+        return $this->hasMany(
+            OnlineReservation::class,
+            'patient_id',
+            'id',
+        );
+    }
+
+    public function clinic()
+    {
+        return $this->belongsTo(
+            Clinic::class,
+            'clinic_id',
+            'id',
+        );
+    }
 }
