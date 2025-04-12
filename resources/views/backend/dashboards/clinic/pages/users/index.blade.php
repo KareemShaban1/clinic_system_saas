@@ -1,220 +1,212 @@
 @extends('backend.dashboards.clinic.layouts.master')
-@section('css')
 
-@section('title')
-{{ trans('backend/users_trans.Users') }}
-@stop
-@endsection
-
+@section('content')
 @section('page-header')
 <h4 class="page-title">{{__('Users')}}</h4>
 
-                <div class="page-title-right">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                        <i class="mdi mdi-plus"></i> {{__('Add User')}}
-                    </button>
-                </div>
+<div class="page-title-right">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+        <i class="mdi mdi-plus"></i> {{__('Add User')}}
+    </button>
+</div>
 @endsection
+<div class="container-fluid">
 
-@section('content')
-<div class="row">
-    <div class="col-md-12 mb-30">
-        <div class="card card-statistics h-100">
-            <div class="card-body">
-                <table id="users_table" class="table dt-responsive nowrap w-100">
-                    <thead>
-                        <tr>
-                            <th>{{__('ID')}}</th>
-                            <th>{{__('Name')}}</th>
-                            <th>{{__('Email')}}</th>
-                            <th>{{__('Clinic')}}</th>
-                            <th>{{__('Roles')}}</th>
-                            <th>{{__('Actions')}}</th>
-                        </tr>
-                 </thead>
-                    <tbody></tbody>
-                </table>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <table id="users_table" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>{{__('ID')}}</th>
+                                <th>{{__('Name')}}</th>
+                                <th>{{__('Email')}}</th>
+                                <th>{{__('Clinic')}}</th>
+                                <th>{{__('Roles')}}</th>
+                                <th>{{__('Actions')}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Add User Modal -->
-<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- User Modal -->
+<x-modal id="userModal" title="{{ __('Add User') }}">
+    <form id="userForm" method="POST">
+        @csrf
+        <input type="hidden" id="userId">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="name" class="form-label">{{ __('Name') }}</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                <div class="invalid-feedback"></div>
             </div>
-            <form id="addUserForm">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Name:</label>
-                        <input type="text" name="name" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Email:</label>
-                        <input type="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Password:</label>
-                        <input type="password" name="password" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Roles:</label>
-                        <select name="roles[]" class="form-control" multiple required>
-                            @foreach($roles as $role)
-                            <option value="{{ $role }}">{{ $role }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Edit User Modal -->
-<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="mb-3">
+                <label for="email" class="form-label">{{ __('Email') }}</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback"></div>
             </div>
-            <form id="editUserForm">
-                <input type="hidden" name="user_id" id="editUserId">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Name:</label>
-                        <input type="text" name="name" id="editUserName" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>Email:</label>
-                        <input type="email" name="email" id="editUserEmail" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label>New Password (Optional):</label>
-                        <input type="password" name="password" id="editUserPassword" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label>Roles:</label>
-                        <select name="roles[]" id="editUserRoles" class="form-control" multiple required>
-                            @foreach($roles as $role)
-                            <option value="{{ $role }}">{{ $role }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+            <div class="mb-3">
+                <label for="password" class="form-label">{{ __('Password') }}</label>
+                <input type="password" class="form-control" id="password" name="password">
+                <div class="invalid-feedback"></div>
+            </div>
 
+            <div class="mb-3">
+                <label for="roles" class="form-label">{{ __('Roles') }}</label>
+                <div id="roles-container">
+                    @foreach($roles as $role)
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="role_{{ $role->name }}" name="roles[]" value="{{ $role->name }}">
+                        <label class="form-check-label" for="role_{{ $role->name }}">{{ $role->name }}</label>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="invalid-feedback"></div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">{{ __('Close') }}</button>
+            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+        </div>
+    </form>
+</x-modal>
 @endsection
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        // Load users into DataTable
-        loadUsers();
+   let usersTable = $('#users_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('clinic.users.data') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'clinic',
+                name: 'clinic'
+            },
+            {
+                data: 'roles',
+                name: 'roles',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'actions',
+                name: 'actions',
+                orderable: false,
+                searchable: false
+            }
+        ],
+        order: [
+            [0, 'desc']
+        ],
+    });
 
-        function loadUsers() {
-            $('#users_table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('clinic.users.data') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'clinic',
-                        name: 'clinic'
-                    },
-                    {
-                        data: 'roles',
-                        name: 'roles',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'actions',
-                        name: 'actions',
-                        orderable: false,
-                        searchable: false
-                    }
-                ],
-                order: [
-                    [0, 'desc']
-                ],
-            });
-        }
 
-        // Show Edit Modal and Load User Data
-        $(document).on('click', '.editUser', function() {
-            let userId = $(this).data('id');
+    // Reset form
+    function resetForm() {
+        $('#userForm')[0].reset();
+        $('#userForm').attr('action', '{{ route("clinic.users.store") }}');
+        $('#userId').val('');
+        $('#userModal .modal-title').text('{{ __("Add User") }}');
+    }
 
-            $.ajax({
-                url: `/clinic/users/edit/${userId}`,
-                method: "GET",
-                success: function(response) {
-                    $('#editUserId').val(response.id);
-                    $('#editUserName').val(response.name);
-                    $('#editUserEmail').val(response.email);
+    // Handle Add/Edit Form Submission
+    $('#userForm').on('submit', function(e) {
+        e.preventDefault();
+        let url = $('#userId').val() ? '{{ route("clinic.users.update", ":id") }}'.replace(':id', $('#userId').val()) : '{{ route("clinic.users.store") }}';
+        let method = $('#userId').val() ? 'POST' : 'POST';
 
-                    // Clear previous selections and select new roles
-                    $('#editUserRoles').val(response.roles).trigger('change');
+        $.ajax({
+            url: url,
+            method: method,
+            data: $(this).serialize(),
+            success: function(response) {
+                $('#userModal').modal('hide');
+                usersTable.ajax.reload();
+                Swal.fire('Success', response.message, 'success');
+            },
+            error: function(xhr) {
+                // handleValidationErrors(xhr);
+                if (xhr.status === 422) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessages = Object.values(errors).map(function(error) {
+                        return error[0];
+                    }).join('<br>');
 
-                    $('#editUserModal').modal('show');
-                },
-                error: function() {
-                    alert('Error loading user data.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Validation Errors',
+                        html: errorMessages
+                    });
                 }
-            });
-        });
-
-        // Submit Edit User Form
-        $('#editUserForm').submit(function(e) {
-            e.preventDefault();
-
-            let userId = $('#editUserId').val();
-            let formData = $(this).serialize();
-
-            $.ajax({
-                url: `/clinic/users/update/${userId}`,
-                method: "POST",
-                data: formData,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    $('#editUserModal').modal('hide');
-                    $('#users_table').DataTable().ajax.reload();
-                    alert('User updated successfully!');
-                },
-                error: function(xhr) {
-                    alert('Error updating user.');
-                }
-            });
+            },
         });
     });
+
+    // Edit user
+    function editUser(id) {
+        console.log(id);
+        $.get('{{ route("clinic.users.index") }}/edit/' + id, function(data) {
+            $('#userId').val(data.id);
+            $('#name').val(data.name);
+            $('#email').val(data.email);
+
+            // Reset all checkboxes
+            $('#roles-container input[type="checkbox"]').prop('checked', false);
+
+            // Check the user's roles
+            data.roles.forEach(role => {
+                $('#role_' + role).prop('checked', true);
+            });
+
+            $('#userModal .modal-title').text('{{ __("Edit User") }}');
+            $('#userModal').modal('show');
+        });
+    }
+
+    // Delete user
+    function deleteUser(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '{{ route("clinic.users.index") }}/delete/' + id,
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token for Laravel
+                    },
+                    success: function(response) {
+                        usersTable.ajax.reload();
+                        Swal.fire('Deleted!', response.message, 'success');
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endpush

@@ -23,13 +23,13 @@
   ),
   'intervention/image' => 
   array (
-    'providers' => 
-    array (
-      0 => 'Intervention\\Image\\ImageServiceProvider',
-    ),
     'aliases' => 
     array (
       'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
     ),
   ),
   'jenssegers/agent' => 
@@ -260,13 +260,6 @@
     'providers' => 
     array (
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
-    ),
-  ),
-  'spatie/laravel-ray' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Spatie\\LaravelRay\\RayServiceProvider',
     ),
   ),
   'spatie/laravel-signal-aware-command' => 

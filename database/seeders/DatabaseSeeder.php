@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         // $this->call(SettingsSeeder::class);
         $this->call(SpecialitySeeder::class);
+        $this->call(GovernorateSeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(AreaSeeder::class);
 
         // $this->call(PatientSeeder::class);
         // $this->call(SettingsSeeder::class);

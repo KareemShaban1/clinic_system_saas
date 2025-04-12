@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Ray extends Model
+class Ray extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'images',
         'patient_id',
         'reservation_id',
         'clinic_id',
-        'ray_name',
-        'ray_type',
-        'ray_date',
+        'name',
+        'type',
+        'date',
         'report'
     ];
 
@@ -39,7 +42,7 @@ class Ray extends Model
     {
         return $this->belongsTo(
             Patient::class,
-            'id',
+            'patient_id',
         );
     }
 
@@ -48,7 +51,7 @@ class Ray extends Model
     {
         return $this->belongsTo(
             Reservation::class,
-            'id',
+            'reservation_id',
         );
     }
 
@@ -56,7 +59,7 @@ class Ray extends Model
     {
         return $this->belongsTo(
             Clinic::class,
-            'id',
+            'clinic_id',
         );
     }
 

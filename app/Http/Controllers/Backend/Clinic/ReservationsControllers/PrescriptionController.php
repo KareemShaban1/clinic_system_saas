@@ -44,7 +44,7 @@ class PrescriptionController extends Controller
         $image_path = $this->handleImageUpload($request, $prescription);
         $data['images'] =  $image_path;
         $prescription->create($data);
-        return redirect()->route('backend.reservations.index')->with('success', 'Sales Added Successfully');
+        return redirect()->route('backend.reservations.index')->with('toast_success', 'Prescription Added Successfully');
 
 
     }
@@ -95,7 +95,7 @@ class PrescriptionController extends Controller
                 ];
                 DB::table('drugs')->insert($data);
             }
-            return redirect()->route('backend.reservations.index')->with('success', 'Sales Added Successfully');
+            return redirect()->route('backend.reservations.index')->with('toast_success', 'Sales Added Successfully');
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');

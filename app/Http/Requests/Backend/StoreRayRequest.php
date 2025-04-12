@@ -26,12 +26,12 @@ class StoreRayRequest extends FormRequest
         return [
             //
             
-                'ray_name' => 'required',
+                'name' => 'required',
                 'images' => 'required',
-                'ray_date'=>'required',
-                'ray_type'=>'required',
-                'notes'=>'nullable',
-                'id'=>'required'
+                'date'=>'required',
+                'type'=>'required',
+                'report'=>'nullable',
+                'patient_id'=>'required'
             
         ];
     }
@@ -39,11 +39,11 @@ class StoreRayRequest extends FormRequest
     public function messages(){
 
         return [
-            'ray_name.required'=>'برجاء أدخال أسم الأشعة / التحليل',
+            'name.required'=>'برجاء أدخال أسم الأشعة / التحليل',
             'images.required'=>'برجاء أدخال صور الأشعة / التحليل',
-            'ray_date.required'=>'برجاء أدخال تاريخ الأشعة / التحليل',
-            'ray_type.required'=>'برجاء أدخال نوع الأشعة / التحليل',
-            'id.required'=>'patient id برجاء أدخال  ',
+            'date.required'=>'برجاء أدخال تاريخ الأشعة / التحليل',
+            'type.required'=>'برجاء أدخال نوع الأشعة / التحليل',
+            'patient_id.required'=>'patient id برجاء أدخال  ',
         ];
 
     }

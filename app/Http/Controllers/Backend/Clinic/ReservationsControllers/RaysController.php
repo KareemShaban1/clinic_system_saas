@@ -51,9 +51,9 @@ class RaysController extends Controller
     {
         $query = $this->ray->all();
         return DataTables::of($query)
-            ->addColumn('action', function ($number) {
-                $editUrl = route('backend.rays.edit', $number->id);
-                $deleteUrl = route('backend.rays.destroy', $number->id);
+            ->addColumn('action', function ($ray) {
+                $editUrl = route('clinic.rays.edit', $ray->id);
+                $deleteUrl = route('clinic.rays.destroy', $ray->id);
 
                 return '
                 <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
@@ -68,6 +68,10 @@ class RaysController extends Controller
                 </form>
             ';
             })
+            ->addColumn('patient', function ($ray) {
+                return $ray->patient->name;
+            })
+
             ->rawColumns(['action'])
             ->make(true);
     }
@@ -81,21 +85,27 @@ class RaysController extends Controller
 
     public function store(StoreRayRequest $request)
     {
-
-
         $request->validated();
 
         try {
-
             $data = $request->except('images');
-            $image_path = $this->handleImageUpload($request, $this->ray);
-            $data['images'] =  $image_path;
-            $this->ray->create($data);
-            return redirect()->route('backend.reservations.index')->with('success', 'Reservation added successfully');
+            $data['clinic_id'] = auth()->user()->clinic_id;
+
+            // Create a new ray record
+            $ray = $this->ray->create($data);
+
+            // Check if images are uploaded
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $ray->addMedia($image)->toMediaCollection('ray_images');
+                }
+            }
+
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation added successfully');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            return redirect()->back()->with('toast_error', 'Something went wrong');
         }
     }
 
@@ -105,10 +115,9 @@ class RaysController extends Controller
     public function show($id)
     {
 
-
-
         // get reservation based on id
-        $rays = $this->ray->where('id', $id)->get();
+        $rays = $this->ray->where('reservation_id', $id)->get();
+        
 
         return view('backend.dashboards.clinic.pages.rays.show', compact('rays'));
     }
@@ -117,36 +126,41 @@ class RaysController extends Controller
     public function edit($id)
     {
 
-
         // get reservation based on id
         $ray = $this->ray->findOrFail($id);
+        // Fetch all images from Spatie Media Library collection
+        $images = $ray->getMedia('ray_images');
 
-        return view('backend.dashboards.clinic.pages.rays.edit', compact('ray'));
+        return view('backend.dashboards.clinic.pages.rays.edit', compact('ray', 'images'));
     }
 
     public function update(UpdateRayRequest $request, $id)
     {
-
-
         $request->validated();
 
         try {
-
             $ray = $this->ray->findOrFail($id);
-
             $data = $request->except('images');
-
-            $data['images'] = $this->handleImageUpload($request, $ray);
 
             $ray->update($data);
 
-            return redirect()->route('backend.reservations.index')->with('success', 'Reservation updated successfully');
+            // Check if new images are uploaded
+            if ($request->hasFile('images')) {
+                $ray->clearMediaCollection('ray_images'); // Remove old images (if required)
+
+                foreach ($request->file('images') as $image) {
+                    $ray->addMedia($image)->toMediaCollection('ray_images');
+                }
+            }
+
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation updated successfully');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
+
 
 
 

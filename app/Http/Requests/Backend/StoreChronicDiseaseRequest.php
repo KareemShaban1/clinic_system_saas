@@ -26,12 +26,12 @@ class StoreChronicDiseaseRequest extends FormRequest
         return [
             //
 
-                'title' => 'required',
+                'name' => 'required',
                 'measure' => 'required',
                 'notes' => 'nullable',
                 'date' => 'required',
-                'id' => 'required',
-                'id' => 'required',
+                'reservation_id' => 'required',
+                'patient_id' => 'required',
 
         ];
     }
@@ -39,11 +39,11 @@ class StoreChronicDiseaseRequest extends FormRequest
     public function messages()
     {
         return[
-            'title.required' => 'برجاء أدخال أسم المرض',
+            'name.required' => 'برجاء أدخال أسم المرض',
             'measure.required' => 'برجاء أدخال قياس المرض',
             'date.required' => 'برجاء أدخال تاريخ المرض',
-            'id.required' => 'reservation id برجاء أدخال ',
-            'id.required' => 'patient id برجاء أدخال  ',
+            'reservation_id.required' => 'reservation id برجاء أدخال ',
+            'patient_id.required' => 'patient id برجاء أدخال  ',
         ];
     }
 }

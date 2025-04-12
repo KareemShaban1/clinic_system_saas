@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\UpdateChronicDiseaseRequest;
 use App\Http\Traits\AuthorizeCheck;
 use App\Models\Reservation;
 use App\Models\ChronicDisease;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ChronicDiseasesController extends Controller
@@ -41,24 +42,27 @@ class ChronicDiseasesController extends Controller
     {
         $this->authorizeCheck('add-chronic-disease');
 
+        // dd($request->all());
         $request->validated();
 
         try {
-            foreach ($request->title as $index => $title) {
+            foreach ($request->name as $index => $name) {
                 $data = [
-                    'title' => $title,
+                    'name' => $name,
                     'measure' => $request->measure[$index],
                     'date' => $request->date[$index],
                     'notes' => $request->notes[$index],
                     'patient_id' => $request->patient_id[$index],
                     'reservation_id' => $request->reservation_id[$index],
+                    'clinic_id' => Auth::user()->clinic_id,
                 ];
                 DB::table('chronic_diseases')->insert($data);
             }
 
-            return redirect()->route('backend.reservations.index')->with('success', 'Chronic diseases added successfully');
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Chronic diseases added successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            dd($e->getMessage());
+            return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
 
@@ -102,7 +106,7 @@ class ChronicDiseasesController extends Controller
                 $this->chronicDisease->where('id', $chronicDisease->id)->update($data);
             }
 
-            return redirect()->route('backend.reservations.index')->with('success', 'Chronic diseases updated successfully');
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Chronic diseases updated successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }

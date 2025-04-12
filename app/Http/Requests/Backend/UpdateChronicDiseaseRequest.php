@@ -30,8 +30,8 @@ class UpdateChronicDiseaseRequest extends FormRequest
                 'measure' => 'required',
                 'notes'=>'nullable',
                 'date'=>'required',
-                'id'=>'required',
-                'id'=>'required',
+                'reservation_id'=>'required',
+                'patient_id'=>'required',
                 
         ];
     }

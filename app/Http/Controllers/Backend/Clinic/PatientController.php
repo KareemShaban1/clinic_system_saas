@@ -158,7 +158,7 @@ class PatientController extends Controller
 
             $this->patient->create($data);
 
-            return redirect()->route('clinic.patients.index')->with('success', 'Patient added successfully');
+            return redirect()->route('clinic.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
 
             // dd($e);
@@ -191,7 +191,7 @@ class PatientController extends Controller
 
             $patient->update($data);
 
-            return redirect()->route('clinic.patients.index')->with('success', 'Patient added successfully');
+            return redirect()->route('clinic.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }

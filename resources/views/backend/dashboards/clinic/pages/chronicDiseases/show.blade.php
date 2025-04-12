@@ -35,7 +35,7 @@
                         </span>
 
                    <div style="float: left">
-                    <a href="{{Route('backend.chronic_diseases.edit',$chronic_disease->id)}}" class="btn btn-warning btn-sm">
+                    <a href="{{Route('clinic.chronic_diseases.edit',$chronic_disease->id)}}" class="btn btn-warning btn-sm">
                         
                         <span> {{trans('backend/chronic_diseases_trans.Edit')}} <i class="fa fa-edit"></i></span>
                     </a>

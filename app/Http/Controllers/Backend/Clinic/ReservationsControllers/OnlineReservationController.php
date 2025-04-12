@@ -81,7 +81,7 @@ class OnlineReservationController extends Controller
 
         ]);
 
-        return redirect()->route('backend.online_reservations.index')->with('success', 'Reservation added successfully');
+        return redirect()->route('backend.online_reservations.index')->with('toast_success', 'Reservation added successfully');
 
 
     }

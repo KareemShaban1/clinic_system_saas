@@ -107,7 +107,23 @@ class Reservation extends Model
     }
 
 
+    
+    // public function serviceFees()
+    // {
+    //     return $this->hasMany(
+    //         ReservationServiceFee::class,
+    //         'reservation_id',
+    //         'id',
+    //     );
+    // }
 
+    public function serviceFees()
+    {
+        return $this->belongsToMany(ServiceFee::class, 'reservation_service_fee')
+                    ->withPivot('notes')
+                    ->withTimestamps();
+    }
+    
 
 
 }

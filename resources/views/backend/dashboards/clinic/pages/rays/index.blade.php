@@ -54,8 +54,8 @@
                     name: 'id'
                 },
                 {
-                    data: 'patient.name',
-                    name: 'patient.name'
+                    data: 'patient',
+                    name: 'patient'
                 },
                 {
                     data: 'action',

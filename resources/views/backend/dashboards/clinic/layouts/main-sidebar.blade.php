@@ -31,6 +31,7 @@
 
                         </ul>
                     </li>
+                    
 
 
                     <li>
@@ -48,6 +49,22 @@
 
                         </ul>
                     </li>
+
+                    <!-- menu Service Fees-->
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#serviceFees-menu">
+                            <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Service_Fees') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="serviceFees-menu" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ Route('clinic.serviceFees.index') }}">
+                                    {{ trans('backend/sidebar_trans.All_Service_Fees') }} </a> </li>
+                          
+                        </ul>
+                    </li>
+
 
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu">

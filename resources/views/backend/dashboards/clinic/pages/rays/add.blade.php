@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{ trans('backend/rays_trans.Add_Rays') }}
+{{ trans('backend/rays_trans.Add_Rays') }}
 @stop
 @endsection
 @section('page-header')
@@ -23,83 +23,69 @@
                     autocomplete="off">
 
                     @csrf
+                    <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label for="id"
-                                    class="form-control-label">{{ trans('backend/rays_trans.id') }}</label>
-                                <select name="id" id="id" class="custom-select mr-sm-2">
-
-                                    <option value="{{ $reservation->id }}" selected>
-                                        {{ $reservation->id }}</option>
-
-                                </select>
-
-                            </div>
-                        </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="id"
                                     class="form-control-label">{{ trans('backend/rays_trans.Patient_Name') }}</label>
-                                <select name="id" id="id" class="custom-select mr-sm-2">
+                                <select name="patient_id" id="patient_id" class="custom-select mr-sm-2">
 
                                     <option value="{{ $reservation->patient->id }}" selected>
-                                        {{ $reservation->patient->name }}</option>
+                                        {{ $reservation->patient->name }}
+                                    </option>
 
                                 </select>
 
                             </div>
                         </div>
-                    </div>
-
-
-
-                    <div class="row">
-
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label for="ray_name">{{ trans('backend/rays_trans.Rays_Name') }}</label>
-                                <input type="text" id="ray_name" name="ray_name" class="form-control">
-
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label for="ray_type">{{ trans('backend/rays_trans.Rays_Type') }} </label>
-                                <input type="text" name="ray_type" id="ray_type" class="form-control">
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="row">
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label> {{ trans('backend/rays_trans.Rays_Date') }}<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="ray_date" id="datepicker-action"
+                                <input class="form-control" name="date" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="name">{{ trans('backend/rays_trans.Rays_Name') }}</label>
+                                <input type="text" id="name" name="name" class="form-control">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="type">{{ trans('backend/rays_trans.Rays_Type') }} </label>
+                                <input type="text" name="type" id="type" class="form-control">
 
                             </div>
                         </div>
 
 
                     </div>
+
+
+
 
 
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="form-outline mb-4">
                                 <label class="form-label"
-                                    for="notes">{{ trans('backend/rays_trans.Notes') }}</label>
-                                <textarea name="notes" class="form-control" id="notes" rows="3"></textarea>
+                                    for="report">{{ trans('backend/rays_trans.Report') }}</label>
+                                <textarea name="report" class="form-control" id="report" rows="3"></textarea>
 
                             </div>
                         </div>

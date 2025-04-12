@@ -28,7 +28,7 @@ class StoreReservationRequest extends FormRequest
                 'patient_id' => 'required|exists:patients,id',     
                 'type'=>'required',
                 'payment'=>'required',
-                'cost'=>'required|max:4|regex:/^([0-9\s\-\+\(\)]*)$/',
+                // 'cost'=>'required|max:4|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'date' => 'required',
                 // 'acceptance'=>'required',
     

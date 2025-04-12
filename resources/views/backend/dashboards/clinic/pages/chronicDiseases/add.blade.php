@@ -25,7 +25,7 @@
 
                 <x-backend.alert />
 
-                <form action="{{ Route('backend.chronic_diseases.store') }}" method="post" enctype="multipart/form-data"
+                <form action="{{ Route('clinic.chronic_diseases.store') }}" method="post" enctype="multipart/form-data"
                     autocomplete="off">
                     @csrf
 
@@ -52,14 +52,14 @@
                                     <tr>
 
                                         <td>
-                                            <input class="form-control" name="id[]" hidden
+                                            <input class="form-control" name="reservation_id[]" hidden
                                                 value="{{ $reservation->id }}" type="text">
-                                            <input class="form-control" name="id[]" hidden
+                                            <input class="form-control" name="patient_id[]" hidden
                                                 value="{{ $reservation->patient->id }}" type="text">
 
                                         </td>
                                         <td>
-                                            <input type="text" name="title[]" class="form-control"
+                                            <input type="text" name="name[]" class="form-control"
                                                 style="width: 150px;"
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Name') }}">
 

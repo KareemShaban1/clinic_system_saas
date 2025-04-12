@@ -78,7 +78,7 @@ class MedicalAnalysisController extends Controller
             $data['images'] =  $image_path;
             // dd($data);
             $medical_analysis->create($data);
-            return redirect()->route('backend.reservations.index')->with('success', 'Medical Analysis added successfully');
+            return redirect()->route('backend.reservations.index')->with('toast_success', 'Medical Analysis added successfully');
 
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
@@ -111,7 +111,7 @@ class MedicalAnalysisController extends Controller
 
             $medical_analysis->update($data);
 
-            return redirect()->route('backend.reservations.index')->with('success', 'Reservation updated successfully');
+            return redirect()->route('backend.reservations.index')->with('toast_success', 'Reservation updated successfully');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {

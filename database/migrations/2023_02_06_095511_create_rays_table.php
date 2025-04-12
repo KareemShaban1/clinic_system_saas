@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->foreignId('reservation_id')->nullable()->constrained('reservations')->nullOnDelete();
             $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('name');
-            $table->string('images');
+            // $table->string('images');
             $table->date('date');
             $table->string('type');
             $table->longText('report')->nullable();

@@ -2,7 +2,7 @@
 
 @section('css')
 @section('title')
-    {{ trans('backend/rays_trans.Add_Rays') }}
+{{ trans('backend/rays_trans.Add_Rays') }}
 @stop
 @endsection
 
@@ -25,30 +25,21 @@
                     autocomplete="off">
 
                     @csrf
+
+                    <input type="hidden" name="reservation_id" value="{{ $ray->reservation_id }}">
+
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label
-                                    class="form-control-label">{{ trans('backend/rays_trans.id') }}</label>
-                                <select name="id" class="custom-select mr-sm-2">
 
-                                    <option value="{{ $ray->id }}" selected>{{ $ray->id }}
-                                    </option>
-
-                                </select>
-                                
-                            </div>
-                        </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label class="form-control-label">{{ trans('backend/rays_trans.Patient_Name') }}</label>
-                                <select name="id" class="custom-select mr-sm-2">
+                                <select name="patient_id" class="custom-select mr-sm-2">
 
-                                    <option value="{{ $ray->id }}" selected>{{ $ray->patient->name }}</option>
+                                    <option value="{{ $ray->patient_id }}" selected>{{ $ray->patient->name }}</option>
 
                                 </select>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -60,18 +51,18 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/rays_trans.Rays_Name') }}</label>
-                                <input type="text" value="{{ old('ray_name', $ray->ray_name) }}" name="ray_name"
+                                <input type="text" value="{{ old('name', $ray->name) }}" name="name"
                                     class="form-control">
-                                
+
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label>{{ trans('backend/rays_trans.Rays_Type') }} </label>
-                                <input type="text" name="ray_type" value="{{ old('ray_type', $ray->ray_type) }}"
+                                <input type="text" name="type" value="{{ old('type', $ray->type) }}"
                                     class="form-control">
-                                
+
                             </div>
                         </div>
 
@@ -86,8 +77,8 @@
                             <div class="form-group">
                                 <label> {{ trans('backend/rays_trans.Rays_Date') }}<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="ray_date"
-                                    value="{{ old('ray_date', $ray->ray_date) }}" id="datepicker-action"
+                                <input class="form-control" name="date"
+                                    value="{{ old('date', $ray->date) }}" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
                             </div>
                         </div>
@@ -100,35 +91,30 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-outline mb-4">
                                 <label class="form-label"
-                                    for="textAreaExample6">{{ trans('backend/rays_trans.Notes') }}</label>
-                                <textarea name="notes" class="form-control" id="textAreaExample6" rows="3">
-                            {{ old('notes', $ray->notes) }}
-                            </textarea>
-                            
+                                    for="report">{{ trans('backend/rays_trans.Report') }}</label>
+                                <textarea name="report" class="form-control" id="report" rows="3">
+                                {{ old('report', $ray->report) }}
+                                </textarea>
+
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-
                         <div class="col-lg-9 col-md-3 col-sm-12 col-12">
                             <div class="form-group">
-                                <label> {{ trans('backend/rays_trans.Rays_Image') }}<span
-                                        class="text-danger">*</span></label>
-                                <?php $images = explode('|', $ray->image); ?>
-                                <input class="form-control" value="{{ $ray->image }}" name="images[]" type="file"
-                                    accept="image/*" multiple="multiple">
-                                
+                                <label> {{ trans('backend/rays_trans.Rays_Image') }}<span class="text-danger">*</span></label>
+                                <input class="form-control" name="images[]" type="file" accept="image/*" multiple>
                             </div>
                         </div>
+
                         <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                            <?php $images = explode('|', $ray->image); ?>
-                            @foreach ($images as $key => $value)
-                                <img src="{{ URL::asset('storage/rays/' . $value) }}" width="200" height="200">
+                            @foreach ($images as $image)
+                            <img src="{{ $image->getUrl() }}" width="200" height="200">
                             @endforeach
                         </div>
-                        
                     </div>
+
 
 
 

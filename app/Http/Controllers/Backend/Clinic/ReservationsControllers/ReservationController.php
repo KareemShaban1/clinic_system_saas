@@ -17,6 +17,7 @@ use App\Models\{
     MedicalAnalysis,
     Prescription,
     Ray,
+    ReservationServiceFee,
     ReservationSlots,
     Settings,
 };
@@ -26,6 +27,7 @@ use App\Http\Traits\TimeSlotsTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -156,7 +158,7 @@ class ReservationController extends Controller
                 // Check if reservation settings allow showing ray
                 if (isset($reservation_settings['show_ray']) && $reservation_settings['show_ray'] == 1) {
                     // Check if Ray exists for this reservation
-                    $rayExists = Ray::where('id', $reservation->id)->first();
+                    $rayExists = Ray::where('reservation_id', $reservation->id)->first();
 
                     // Return the appropriate buttons based on Ray existence
                     if ($rayExists) {
@@ -218,7 +220,7 @@ class ReservationController extends Controller
                 // Check if reservation settings allow showing ray
                 if (isset($reservation_settings['show_chronic_diseases']) && $reservation_settings['show_chronic_diseases'] == 1) {
                     // Check if Ray exists for this reservation
-                    $chronicDiseaseExists = ChronicDisease::where('id', $reservation->id)->first();
+                    $chronicDiseaseExists = ChronicDisease::where('reservation_id', $reservation->id)->first();
 
                     // Return the appropriate buttons based on Ray existence
                     if ($chronicDiseaseExists) {
@@ -418,17 +420,44 @@ class ReservationController extends Controller
         $this->authorizeCheck('add-reservation');
 
         try {
+            // dd($request->all());
             $request->validated();
             $data = $request->all();
             $data['month'] = substr($request->date, 5, 7 - 5);
             $data['acceptance'] = 'approved';
             $data['clinic_id'] = Auth::user()->clinic_id;
 
-            $this->reservation->create($data);
+          
+            $data['cost'] = $data['cost'] ?? 0;
 
-            return redirect()->route('clinic.reservations.index')->with('success', 'Reservation added successfully');
+            if ($request->has('service_fee')) {
+                $data['cost'] += array_sum($request->service_fee); // Sum all service fees
+            }
+                
+            $reservation = $this->reservation->create($data);
+
+            // Store service fees
+            if ($request->has('service_fee_id')) {
+                foreach ($request->service_fee_id as $index => $serviceFeeId) {
+                    $fee = $request->service_fee[$index] ?? 0; // Get corresponding fee
+                    $notes = $request->service_fee_notes[$index] ?? null; // Get corresponding notes
+
+                    ReservationServiceFee::create([
+                        'reservation_id' => $reservation->id,
+                        'service_fee_id' => $serviceFeeId,
+                        'fee' => $fee,
+                        'notes' => $notes
+                    ]);
+            
+                    // DB::insert('insert into reservation_service_fee (reservation_id, service_fee_id, fee, notes) values (?, ?, ?, ?)', 
+                    //     [$reservation->id, $serviceFeeId, $fee, $notes]);
+                }
+            }
+            
+
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation added successfully');
         } catch (\Exception $e) {
-            // dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
@@ -456,7 +485,7 @@ class ReservationController extends Controller
 
         $settings = $this->systemControl->pluck('value', 'key');
 
-        $reservation = $this->reservation->findOrFail($id);
+        $reservation = $this->reservation->with('serviceFees')->findOrFail($id);
 
         // get reservation_number based on date
         $reservationResNum = $this->reservation->where('date', $reservation->date)->value('reservation_number');
@@ -498,13 +527,22 @@ class ReservationController extends Controller
         $this->authorizeCheck('edit-reservation');
 
         try {
+            $data = $request->validated();
             $reservation = $this->reservation->findOrFail($id);
-            $reservation->fill($request->validated());
+
+            $data['cost'] = $data['cost'] ?? 0;
+            if ($request->has('service_fee')) {
+                $data['cost'] += array_sum($request->service_fee); // Sum all service fees
+            }
+            $reservation->fill($data);
             $reservation->save();
 
-            return redirect()->route('clinic.reservations.index')->with('success', 'Reservation updated successfully');
+            $reservation->serviceFees()->sync($request->service_fee_id);
+
+
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation updated successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
 

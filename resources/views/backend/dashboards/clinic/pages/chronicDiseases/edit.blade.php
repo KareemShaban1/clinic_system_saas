@@ -26,7 +26,7 @@
                 
                 <x-backend.alert/>
 
-                <form action="{{Route('backend.chronic_diseases.update',$chronic_disease->id)}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{Route('clinic.chronic_diseases.update',$chronic_disease->id)}}" method="post" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     
             
@@ -52,13 +52,13 @@
                                 <tr>
 
                                     <td>
-                                        <input class="form-control" name="id[]" hidden value="{{$chronic_disease->id}}"  type="text">
-                                        <input class="form-control" name="id[]" hidden value="{{$chronic_disease->id}}"  type="text">
+                                        <input class="form-control" name="patient_id[]" hidden value="{{$chronic_disease->patient_id}}"  type="text">
+                                        <input class="form-control" name="reservation_id[]" hidden value="{{$chronic_disease->reservation_id}}"  type="text">
 
                                     </td>
                                     <td>
-                                        <input type="text" name="title[]" value="{{old('title',$chronic_disease->title)}}" class="form-control" placeholder="{{trans('backend/chronic_diseases_trans.Disease_Name')}}">
-                                        @error('title')
+                                        <input type="text" name="name[]" value="{{old('name',$chronic_disease->name)}}" class="form-control" placeholder="{{trans('backend/chronic_diseases_trans.Disease_Name')}}">
+                                        @error('name')
                                         <p class="alert alert-danger">{{ $message }}</p>
                                         @enderror 
                                     </td>

@@ -26,7 +26,7 @@ class ReservationOptionsController extends Controller
             $reservation->status = $request->status;
             $reservation->save();
             return response()->json([
-                "status" => "success",
+                "status" => "toast_success",
                 "message" => __("backend/reservations_trans.reservation_status_updated")
             ]);
         }

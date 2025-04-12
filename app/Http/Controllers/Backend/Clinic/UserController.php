@@ -101,7 +101,7 @@ class UserController extends Controller
     {
 
         $users = User::with('roles')->get();
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::all();
 
         return view('backend.dashboards.clinic.pages.users.index', compact('users', 'roles'));
     }
@@ -117,17 +117,25 @@ class UserController extends Controller
                 })->implode(' ');
             })
             ->addColumn('actions', function ($user) {
-                return '<button class="btn btn-warning btn-sm editUser" data-id="' . $user->id . '">
+                return '<button class="btn btn-warning btn-sm" onclick="editUser(' . $user->id . ')">
                         <i class="fa fa-edit"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm deleteUser" data-id="' . $user->id . '">
+                    <button class="btn btn-danger btn-sm" onclick="deleteUser(' . $user->id . ')">
                         <i class="fa fa-trash"></i>
                     </button>';
             })
             ->addColumn('clinic', function ($user) {
                 return $user->clinic->name ?? 'N/A';
             })
-            ->rawColumns(['roles', 'actions'])
+            ->addColumn('roles', function ($user) {
+                $roles = $user->roles->pluck('name'); // Get roles as an array
+                $rolesWithBadges = $roles->map(function ($role) {
+                    return '<span class="badge bg-primary" style="font-size: 14px;">' . $role . '</span>';
+                })->implode(' '); // Implode the badges with a space between them
+
+                return $rolesWithBadges;
+            })
+            ->rawColumns(['roles', 'actions', 'clinic', 'roles'])
             ->make(true);
     }
 
@@ -144,6 +152,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'clinic_id' => auth()->user()->clinic_id
         ]);
 
         $user->assignRole($request->roles);
@@ -154,11 +163,13 @@ class UserController extends Controller
     public function edit($id)
 {
     $user = User::with('roles')->findOrFail($id);
+    $userRole = $user->roles->pluck('name', 'name')->all();
     return response()->json([
         'id' => $user->id,
         'name' => $user->name,
         'email' => $user->email,
-        'roles' => $user->roles->pluck('name')
+        'roles' => $user->roles->pluck('name'),
+        'userRole' => $userRole
     ]);
 }
 

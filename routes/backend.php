@@ -325,6 +325,7 @@ Route::group(
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{user_id}', 'edit')->name('edit');
                 Route::post('/update/{user_id}', 'update')->name('update');
+                Route::delete('/delete/{user_id}', 'destroy')->name('destroy');
             }
         );
 
@@ -402,6 +403,24 @@ Route::group(
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{role_id}', 'edit')->name('edit');
                 Route::post('/update/{role_id}', 'update')->name('update');
+            }
+        );
+
+        // Service Fee Part
+        Route::group(
+            [
+                'prefix' => '/service_fee',
+                'as' => 'serviceFees.',
+                'controller' => 'ServiceFeeController'
+            ],
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
+                Route::get('/add', 'add')->name('add');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/edit/{service_fee_id}', 'edit')->name('edit');
+                Route::post('/update/{service_fee_id}', 'update')->name('update');
+                Route::delete('/delete/{service_fee_id}', 'destroy')->name('destroy');
             }
         );
     }

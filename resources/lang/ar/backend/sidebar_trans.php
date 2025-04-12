@@ -61,7 +61,8 @@ return [
   'Deleted_Analysis'=>'التحاليل المحذوفة',
   
   'Specialities'=>'التخصصات',
-  ''=>'',
+  'Service_Fees'=>'الخدمات',
+  'All_Service_Fees'=>'كل الخدمات',
   ''=>'',
   ''=>'',
   ''=>'',
