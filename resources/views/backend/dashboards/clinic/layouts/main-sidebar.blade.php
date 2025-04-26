@@ -138,7 +138,7 @@
 
                         <li>
                             <a href="{{ Route('clinic.patients.add_patient_code') }}">
-                                {{ trans('backend/sidebar_trans.Add_Patient_Code') }}
+                                {{ trans('backend/sidebar_trans.Add_Patient_Using_Code') }}
                             </a>
                         </li>
 

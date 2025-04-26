@@ -94,6 +94,11 @@ return [
           'Delete_Forever'=>'حذف نهائى',
 
           'Patient_Card'=>'كارت المريض',
+          'Search'=>'بحث',
+          'Scan_QR_Code'=>'Scan QR Code',
+          'Assign_to_Clinic'=>'أضافة للعيادة',
+          'Enter_Patient_Code'=>'أدخل كود المريض',
+          'Add_Patient_Using_Code'=>'أضافة مريض باستخدام كود',
           ''=>'',
           ''=>'',
 

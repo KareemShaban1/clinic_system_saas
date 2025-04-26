@@ -1,33 +1,33 @@
 @extends('backend.dashboards.clinic.layouts.master')
 
 @section('title')
-    {{ trans('backend/patients_trans.Add_Patient') }}
+    {{ trans('backend/patients_trans.Add_Patient_Using_Code') }}
 @stop
 
 @section('page-header')
-    <h4 class="page-title">{{ trans('backend/patients_trans.Add_Patient') }}</h4>
+    <h4 class="page-title">{{ trans('backend/patients_trans.Add_Patient_Using_Code') }}</h4>
 @endsection
 
 @section('content')
 
 <div class="row mb-4">
     <div class="col-md-6">
-        <input type="text" id="patient_code" class="form-control" placeholder="Enter Patient Code">
+        <input type="text" id="patient_code" class="form-control" style="background-color: white;" placeholder="{{ trans('backend/patients_trans.Enter_Patient_Code') }}">
     </div>
     <div class="col-md-2">
-        <button class="btn btn-primary" onclick="searchPatient()">Search</button>
+        <button class="btn btn-primary" onclick="searchPatient()">{{ trans('backend/patients_trans.Search') }}</button>
     </div>
     <div class="col-md-4 text-end">
-        <button class="btn btn-success" onclick="startScan()">Scan QR Code</button>
+        <button class="btn btn-success" onclick="startScan()">{{ trans('backend/patients_trans.Scan_QR_Code') }}</button>
     </div>
 </div>
 
 <div id="patient_result" style="display:none;">
     <div class="card">
         <div class="card-body">
-            <p><strong>Name:</strong> <span id="patient_name"></span></p>
-            <p><strong>Email:</strong> <span id="patient_email"></span></p>
-            <button class="btn btn-info" onclick="assignPatient()">Assign to Clinic</button>
+            <p><strong>{{ trans('backend/patients_trans.Name') }}</strong> <span id="patient_name"></span></p>
+            <p><strong>{{ trans('backend/patients_trans.Email') }}</strong> <span id="patient_email"></span></p>
+            <button class="btn btn-info" onclick="assignPatient()">{{ trans('backend/patients_trans.Assign_to_Clinic') }}</button>
         </div>
     </div>
 </div>
