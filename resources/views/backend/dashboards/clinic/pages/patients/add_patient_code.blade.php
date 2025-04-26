@@ -33,18 +33,8 @@
 </div>
 
 <!-- QR Code Scanner Modal -->
-<div class="modal fade" id="scannerModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Scan QR Code</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <video id="preview" style="width: 100%; height: auto;"></video>
-      </div>
-    </div>
-  </div>
+<div id="scannerModal" style="display: none;">
+    <video id="preview" style="width: 100%; height: auto;"></video>
 </div>
 
 
