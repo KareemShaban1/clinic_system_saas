@@ -78,27 +78,36 @@
     }
 
     function startScan() {
-        document.getElementById('scannerModal').style.display = 'block';
-        let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-        console.log(scanner);
-        scanner.addListener('scan', function (content) {
-            console.log(content)
-            document.getElementById('patient_code').value = content;
-            scanner.stop();
-            document.getElementById('scannerModal').style.display = 'none';
-            searchPatient();
-        });
+    document.getElementById('scannerModal').style.display = 'block';
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
-        Instascan.Camera.getCameras().then(function (cameras) {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]);
-            } else {
-                alert('No cameras found');
-            }
-        }).catch(function (e) {
-            console.error(e);
-            alert('Error accessing camera');
-        });
-    }
+    scanner.addListener('scan', function (content) {
+        document.getElementById('patient_code').value = content;
+        scanner.stop();
+        document.getElementById('scannerModal').style.display = 'none';
+        searchPatient();
+    });
+
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            let selectedCamera = cameras[0]; // default
+
+            // Try to find a camera with 'back' or 'environment' in the name
+            cameras.forEach(camera => {
+                if (camera.name.toLowerCase().includes('back') || camera.name.toLowerCase().includes('environment')) {
+                    selectedCamera = camera;
+                }
+            });
+
+            scanner.start(selectedCamera);
+        } else {
+            alert('No cameras found');
+        }
+    }).catch(function (e) {
+        console.error(e);
+        alert('Error accessing camera');
+    });
+}
+
 </script>
 @endpush
