@@ -3,10 +3,12 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                <form action="{{ Route('backend.prescription.store') }}" method="post" enctype="multipart/form-data"
+                <form action="{{ Route('clinic.prescription.store') }}" method="post" enctype="multipart/form-data"
                     autocomplete="off">
                     @csrf
 
+                    <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                    <input type="hidden" name="patient_id" value="{{ $reservation->patient->id }}">
 
                     <br>
 
@@ -16,7 +18,6 @@
 
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>{{ trans('backend/drugs_trans.Drug_Name') }}</th>
                                         <th>{{ trans('backend/drugs_trans.Drug_Dose') }}</th>
                                         <th>{{ trans('backend/drugs_trans.Drug_Type') }}</th>
@@ -31,47 +32,44 @@
                                 <tbody id="tbody">
                                     <tr>
 
+                                      
                                         <td>
-                                            <input class="form-control" name="id[]" hidden
-                                                value="{{ $reservation->id }}" type="text">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="drug_name[]" class="form-control" style="width:120px"
+                                            <input type="text" name="name[]" class="form-control" style="width:120px"
                                                 placeholder="{{ trans('backend/drugs_trans.Drug_Name') }}">
-                                            @error('drug_name')
+                                            @error('name')
                                                 <p class="alert alert-danger">{{ $message }}</p>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="drug_dose[]" class="form-control" style="width:120px"
+                                            <input type="text" name="dose[]" class="form-control m-0" style="width:120px"
                                                 placeholder="{{ trans('backend/drugs_trans.Drug_Dose') }}">
-                                            @error('drug_dose')
+                                            @error('dose')
                                                 <p class="alert alert-danger">{{ $message }}</p>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="drug_type[]" class="form-control" style="width:120px"
+                                            <input type="text" name="type[]" class="form-control m-0" style="width:120px"
                                                 placeholder="{{ trans('backend/drugs_trans.Drug_Type') }}">
-                                            @error('drug_type')
+                                            @error('type')
                                                 <p class="alert alert-danger">{{ $message }}</p>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="frequency[]" class="form-control" style="width:120px"
+                                            <input type="text" name="frequency[]" class="form-control m-0" style="width:120px"
                                                 placeholder="{{ trans('backend/drugs_trans.Frequency') }}">
                                             @error('frequency')
                                                 <p class="alert alert-danger">{{ $message }}</p>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="period[]" class="form-control" style="width:120px"
+                                            <input type="text" name="period[]" class="form-control m-0" style="width:120px"
                                                 placeholder="{{ trans('backend/drugs_trans.Period') }}">
                                             @error('period')
                                                 <p class="alert alert-danger">{{ $message }}</p>
                                             @enderror
                                         </td>
                                         <td>
-                                            <input type="text" name="notes[]" class="form-control" style="width:200px"
+                                            <input type="text" name="notes[]" class="form-control m-0" style="width:200px"
                                                 placeholder="{{ trans('backend/drugs_trans.Notes') }}">
                                             @error('notes')
                                                 <p class="alert alert-danger">{{ $message }}</p>

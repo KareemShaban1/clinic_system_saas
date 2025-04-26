@@ -39,21 +39,21 @@ class AppServiceProvider extends ServiceProvider
         // remove "data" wrapper from json resource response
         JsonResource::withoutWrapping();
 
-        view()->composer('backend.dashboards.clinic.layouts.main-sidebar', function ($view) {
-            $collection = Settings::where('type', 'system_control')->get();
-            $setting = $collection->flatMap(function ($collection) {
-                return [$collection->key => $collection->value];
-            });
+        // view()->composer('backend.dashboards.clinic.layouts.main-sidebar', function ($view) {
+        //     $collection = Settings::where('type', 'system_control')->get();
+        //     $setting = $collection->flatMap(function ($collection) {
+        //         return [$collection->key => $collection->value];
+        //     });
 
-            $view->with('setting', $setting);
-        });
+        //     $view->with('setting', $setting);
+        // });
 
 
-        $collection = Settings::all();
-        $settings = $collection->pluck('value', 'key')->toArray();
+        // $collection = Settings::all();
+        // $settings = $collection->pluck('value', 'key')->toArray();
 
-        // Merge the retrieved data with the existing configuration
-        config()->set('custom_config', $settings);
+        // // Merge the retrieved data with the existing configuration
+        // config()->set('custom_config', $settings);
 
         BaseModel::observe(BaseModelObserver::class);
 

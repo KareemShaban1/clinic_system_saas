@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('parent_id')->nullable()->references('id')->on('clinics')->nullOnDelete();
             $table->string('name');
             $table->date('start_date');
             $table->string('address');

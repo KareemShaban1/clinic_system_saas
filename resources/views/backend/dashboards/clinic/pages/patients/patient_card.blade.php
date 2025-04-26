@@ -366,16 +366,15 @@
             <div class="column">
                 <div class="qr_code" style="direction:ltr">
                     <?php
-                    $qrcode = QrCode::size(150)->generate($patient->id);
+                    $qrcode = QrCode::format('svg')->size(150)->generate($patient->patient_code);
                     $code = (string) $qrcode;
                     echo substr($code, 38);
                     ?>
+
                 </div>
             </div>
 
             <div class="column">
-                <div> دكتور : {{ $settings['doctor_name'] }} </div>
-                <div style="margin-bottom:30px"> العنوان : {{ $settings['clinic_address'] }}</div>
 
                 <div>أسم المريض : {{ $patient->name }}</div>
             </div>

@@ -10,6 +10,8 @@ use App\Models\Reservation;
 use App\Models\Settings;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Traits\AuthorizeCheck;
+use App\Models\Scopes\ClinicScope;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
@@ -149,7 +151,7 @@ class PatientController extends Controller
         $this->authorizeCheck('add-patient');
 
         try {
-            
+
 
             $data = $request->validated();
 
@@ -223,11 +225,11 @@ class PatientController extends Controller
     {
         $patients = $this->patient->onlyTrashed()->get();
         return DataTables::of($patients)
-        ->addColumn('action', function ($patient) {
-            $restoreUrl = route('backend.patients.restore', $patient->id);
-            $forceDeleteUrl = route('backend.patients.forceDelete', $patient->id);
+            ->addColumn('action', function ($patient) {
+                $restoreUrl = route('backend.patients.restore', $patient->id);
+                $forceDeleteUrl = route('backend.patients.forceDelete', $patient->id);
 
-            $actions = '
+                $actions = '
                 <a href="' . $restoreUrl . '" class="btn btn-info btn-sm">
                     <i class="fa fa-edit"></i>
                 </a>
@@ -239,8 +241,8 @@ class PatientController extends Controller
                         <i class="fa fa-trash"></i>
                     </button>
                 </form>';
-            return $actions;
-        })
+                return $actions;
+            })
 
             ->rawColumns(['restore', 'force_delete'])
             ->make(true);
@@ -270,5 +272,55 @@ class PatientController extends Controller
         $patients->forceDelete();
 
         return redirect()->route('clinic.patients.index');
+    }
+
+    public function add_patient_code()
+    {
+        return view('backend.dashboards.clinic.pages.patients.add_patient_code');
+    }
+
+
+    public function search(Request $request)
+    {
+        // Get the patient without the ClinicScope
+        $patient = Patient::withoutGlobalScope(ClinicScope::class)
+            // ->with('clinic')
+            ->where('patient_code', $request->code)
+            ->first();
+
+        if (!$patient) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Patient not found.'
+            ]);
+        }
+
+        foreach ($patient->clinic as $clinic) {
+
+            // Check if the patient is already assigned to this clinic
+            if ($clinic->id == auth()->user()->clinic->id) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Patient already assigned to your clinic.'
+                ]);
+            }
+        }
+
+
+        // Patient found and not assigned to this clinic
+        return response()->json([
+            'success' => true,
+            'patient' => $patient
+        ]);
+    }
+
+
+    public function assign(Request $request)
+    {
+        // Example: attach patient to authenticated clinic
+        $clinic = auth()->user()->clinic;
+        $clinic->patients()->attach($request->patient_id);
+
+        return response()->json(['message' => 'Patient assigned successfully']);
     }
 }

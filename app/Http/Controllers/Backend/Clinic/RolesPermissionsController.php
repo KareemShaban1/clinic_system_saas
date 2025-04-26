@@ -27,7 +27,8 @@ class RolesPermissionsController extends Controller
 
     public function data()
     {
-        $roles = Role::where('guard_name', 'web');
+        $roles = Role::where('guard_name', 'web')
+        ->withCount('permissions');
 
         return DataTables::of($roles)
 

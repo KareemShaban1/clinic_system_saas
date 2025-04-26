@@ -189,7 +189,7 @@ class ReservationController extends Controller
                 // Check if reservation settings allow showing ray
                 if (isset($reservation_settings['show_analysis']) && $reservation_settings['show_analysis'] == 1) {
                     // Check if Ray exists for this reservation
-                    $analysisExists = MedicalAnalysis::where('id', $reservation->id)->first();
+                    $analysisExists = MedicalAnalysis::where('reservation_id', $reservation->id)->first();
 
                     // Return the appropriate buttons based on Ray existence
                     if ($analysisExists) {

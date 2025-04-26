@@ -24,19 +24,19 @@ class StoreDrugRequest extends FormRequest
     public function rules()
     {
         return [
-            'drug_name' => 'required',
-            'drug_dose' => 'required',
+            'name' => 'required',
+            'dose' => 'required',
             'period' => 'required',
             'notes' => 'nullable',
-            'id' => 'required',
+            'reservation_id' => 'required|exists:reservations,id',
         ];
     }
 
     public function messages()
     {
         return [
-            'drug_name.required' => 'يجب أدخال أسم الدواء',
-            'drug_dose.required' => 'يجب أدخال جرعة الدواء',
+            'name.required' => 'يجب أدخال أسم الدواء',
+            'dose.required' => 'يجب أدخال جرعة الدواء',
             'period.required' => 'يجب أدخال كمية الدواء',
             'id.required' => ' reservation id يجب أدخال ',
 

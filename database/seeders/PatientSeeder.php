@@ -16,18 +16,29 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+
         DB::table('patients')->insert([
             'name' => 'كريم شعبان',
-            'age'=>'23',
-            'address'=>'بنها',
-            'phone'=>'01090537394',
-            'blood_group'=>'O+',
-            'gender'=>'male',
-            'patient_code'=>'20230001',
-            'email' => 'shabankareem919@gmail.com',
+            'age'=> '26',
+            'address'=> 'بنها',
+            'email'=>'kareem@patient.com',
             'password'=>Hash::make('password'),
-            'created_at'=>now()
+            'patient_code'=> '123456789',
+            'phone'=> '0123456789',
+            'whatsapp_number'=> '0123456789',
+            'blood_group'=> 'A+',
+            'gender'=> 'male',
+            'height'=> '180',
+            'weight'=> '80',
+            'marital_status'=> 'single',
+            'nationality'=> 'Egyptian',
+            // 'clinic_id'=> 1,
+        ]);
+
+        DB::table('patient_clinic')->insert([
+            'patient_id'=> 1,
+            'clinic_id'=> 1,
         ]);
 
     }

@@ -50,7 +50,8 @@
             <a href="#about">{{ trans('frontend/home.About Us') }}</a>
             {{-- <a href="#doctors">{{ trans('frontend/home.Doctors') }}</a> --}}
             <a href="#blogs">{{ trans('frontend/home.Our_Blogs') }}</a>
-            <a href="{{ route('register-clinic') }}">{{ trans('frontend/home.Register') }}</a>
+            <a href="{{ route('register-clinic') }}">{{ trans('frontend/home.Register Clinic') }}</a>
+            <a href="{{ route('register-patient') }}">{{ trans('frontend/home.Register Patient') }}</a>
             <a href="{{ URL::to('/patient/login') }}">{{ trans('frontend/home.Patient Login') }}</a>
             <a href="{{ URL::to('/clinic/login') }}">{{ trans('frontend/home.Clinic Login') }}</a>
             <!-- <a href="{{ URL::to('/admin/login') }}">{{ trans('frontend/home.Admin Login') }}</a> -->

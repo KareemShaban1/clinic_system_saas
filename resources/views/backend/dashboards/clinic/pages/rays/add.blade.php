@@ -67,8 +67,14 @@
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
-                                <label for="type">{{ trans('backend/rays_trans.Rays_Type') }} </label>
-                                <input type="text" name="type" id="type" class="form-control">
+                                <label for="ray_type_id">{{ trans('backend/rays_trans.Rays_Type') }} </label>
+                                <!-- <input type="text" name="type" id="type" class="form-control"> -->
+                                <select name="ray_type_id" id="ray_type_id" class="custom-select mr-sm-2">
+                                    <option value="">{{ trans('backend/rays_trans.Select_Type') }}</option>
+                                    @foreach (App\Models\Type::where('type', 'ray')->get() as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
 
                             </div>
                         </div>

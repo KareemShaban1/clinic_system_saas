@@ -29,7 +29,7 @@ class StoreRayRequest extends FormRequest
                 'name' => 'required',
                 'images' => 'required',
                 'date'=>'required',
-                'type'=>'required',
+                'ray_type_id'=>'required|exists:types,id',
                 'report'=>'nullable',
                 'patient_id'=>'required'
             
@@ -39,10 +39,10 @@ class StoreRayRequest extends FormRequest
     public function messages(){
 
         return [
-            'name.required'=>'برجاء أدخال أسم الأشعة / التحليل',
-            'images.required'=>'برجاء أدخال صور الأشعة / التحليل',
-            'date.required'=>'برجاء أدخال تاريخ الأشعة / التحليل',
-            'type.required'=>'برجاء أدخال نوع الأشعة / التحليل',
+            'name.required'=>'برجاء أدخال أسم الأشعة',
+            'images.required'=>'برجاء أدخال صور الأشعة ',
+            'date.required'=>'برجاء أدخال تاريخ الأشعة',
+            'ray_type_id.required'=>'برجاء أدخال نوع الأشعة',
             'patient_id.required'=>'patient id برجاء أدخال  ',
         ];
 

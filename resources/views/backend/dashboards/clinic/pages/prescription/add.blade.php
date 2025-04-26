@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.dashboards.clinic.layouts.master')
 @section('css')
 
 @section('title')
@@ -47,19 +47,19 @@
 
         <div id="drugs" class="tab-pane fade active show">
 
-            @include('backend.pages.prescription.add_drugs')
+            @include('backend.dashboards.clinic.pages.prescription.add_drugs')
 
         </div>
 
         <div id="add_prescription" class="tab-pane fade">
 
-            @include('backend.pages.prescription.add_prescription_image')
+            @include('backend.dashboards.clinic.pages.prescription.add_prescription_image')
 
         </div>
 
         <div id="prescriptions" class="tab-pane fade">
 
-            @include('backend.pages.prescription.show_prescription')
+            @include('backend.dashboards.clinic.pages.prescription.show_prescription')
 
         </div>
 
@@ -70,11 +70,10 @@
 
 <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
 <script>
     $('thead').on('click', '.addRow', function() {
         var tr = '<tr>' +
-            '<td><input class="form-control" hidden value="{{ $reservation->id }}"  name="id[]" type="text" ></td>' +
             '<td><input type="text" name="drug_name[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Name') }}"></td>' +
             '<td><input type="text" name="drug_dose[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Dose') }}"></td>' +
             '<td><input type="text" name="drug_type[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Type') }}"></td>' +
@@ -82,7 +81,6 @@
             '<td><input type="text" name="period[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Period') }}"></td>' +
             '<td><input type="text" name="notes[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Notes') }}"></td>' +
             '<th><a href="javascript:void(0)" class="btn btn-danger deleteRow"> {{ trans('backend/drugs_trans.Delete') }} </a></th>' +
-            '<input class="form-control" hidden name="id[]" type="text" value="{{ $reservation->id }}">' +
             '</tr>'
         $('#tbody').append(tr);
     });
@@ -91,4 +89,4 @@
         $(this).parent().parent().remove();
     });
 </script>
-@endsection
+@endpush

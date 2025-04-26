@@ -29,6 +29,9 @@
                     autocomplete="off">
                     @csrf
 
+                    <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                    <input type="hidden" name="patient_id" value="{{ $reservation->patient->id }}">
+
                     <br>
 
                     <div class="row">
@@ -36,7 +39,6 @@
                             <table class="table table-bordered table-responsive" id="table">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Disease_Name') }}</th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Disease_Measure') }}</th>
                                         <th>{{ trans('backend/chronic_diseases_trans.Disease_Measure_Date') }}</th>
@@ -51,34 +53,28 @@
                                 <tbody id="tbody">
                                     <tr>
 
-                                        <td>
-                                            <input class="form-control" name="reservation_id[]" hidden
-                                                value="{{ $reservation->id }}" type="text">
-                                            <input class="form-control" name="patient_id[]" hidden
-                                                value="{{ $reservation->patient->id }}" type="text">
-
-                                        </td>
+                                        
                                         <td>
                                             <input type="text" name="name[]" class="form-control"
-                                                style="width: 150px;"
+                                                
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Name') }}">
 
                                         </td>
                                         <td>
                                             <input type="text" name="measure[]" class="form-control"
-                                                style="width: 150px;"
+                                                
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Measure') }}">
 
                                         </td>
                                         <td>
                                             <input type="date" name="date[]" class="form-control"
-                                                style="width: 150px;"
+                                                
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Date') }}">
 
                                         </td>
                                         <td>
                                             <input type="text" name="notes[]" class="form-control"
-                                                style="width: 200px;"
+                                                
                                                 placeholder="{{ trans('backend/chronic_diseases_trans.Notes') }}">
 
                                         </td>
@@ -107,13 +103,12 @@
 
 
 
-@section('js')
+@push('scripts')
 
 <script>
     $('thead').on('click', '.addRow', function() {
         var tr = '<tr>' +
-            '<td><input class="form-control" hidden name="id[]" type="text" value="{{ $reservation->id }}"> <input class="form-control" hidden name="id[]" type="text" value="{{ $reservation->patient->id }}"></td>' +
-            '<td><input type="text" name="title[]" class="form-control" placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Name') }}"></td>' +
+            '<td><input type="text" name="name[]" class="form-control" placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Name') }}"></td>' +
             '<td><input type="text" name="measure[]" class="form-control" placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Measure') }}"></td>' +
             '<td><input type="date" id="datepicker-action" data-date-format="yyyy-mm-dd" name="date[]" class="form-control" placeholder="{{ trans('backend/chronic_diseases_trans.Disease_Date') }}"></td>' +
             '<td><input type="text" name="notes[]" class="form-control" placeholder="{{ trans('backend/chronic_diseases_trans.Notes') }}"></td>' +
@@ -128,4 +123,4 @@
 </script>
 
 
-@endsection
+@endpush

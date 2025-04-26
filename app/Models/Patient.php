@@ -48,7 +48,7 @@ class Patient extends Authenticatable
         'blood_group',
         'patient_code',
         'gender',
-        'clinic_id',
+        // 'clinic_id',
         'height',
         'weight',
         // 'image'
@@ -64,7 +64,6 @@ class Patient extends Authenticatable
         });
 
         static::addGlobalScope(new ClinicScope);
-
     }
 
     public static function getNextPatientCodeNumber()
@@ -155,10 +154,11 @@ class Patient extends Authenticatable
 
     public function clinic()
     {
-        return $this->belongsTo(
+        return $this->belongsToMany(
             Clinic::class,
+            'patient_clinic',
+            'patient_id',
             'clinic_id',
-            'id',
         );
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Frontend\AppointmentsController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -13,10 +14,6 @@ Route::group([
         'auth:patient'
     ]
 ], function () {
-
-
-    Route::get('/', [HomeController::class, 'index'])
-    ->withoutMiddleware(['auth:patient']);
 
     // Reservations Part
     Route::group(
@@ -51,3 +48,9 @@ Route::group([
 
     // Route::get('/get_reservation_slots', [AppointmentsController::class, 'getResNumberOrSlot']);
 });
+
+
+Route::get('/register-patient', function () {
+    return view('backend.dashboards.patient.auth.register');
+})->name('register-patient');
+Route::post('/register-patient', [AuthController::class, 'registerPatient'])->name('register-patient');

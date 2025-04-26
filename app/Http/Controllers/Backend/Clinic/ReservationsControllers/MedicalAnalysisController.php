@@ -19,18 +19,18 @@ class MedicalAnalysisController extends Controller
         $medicalAnalysis = MedicalAnalysis::all();
 
         return view('backend.dashboards.clinic.pages.medicalAnalysis.index', compact('medicalAnalysis'));
-
     }
 
-    public function data(){
+    public function data()
+    {
         $medicalAnalysis = MedicalAnalysis::all();
 
         return DataTables::of($medicalAnalysis)
-        ->addColumn('action', function ($number) {
-            $editUrl = route('backend.medical_analysis.edit', $number->id);
-            $deleteUrl = route('backend.medical_analysis.destroy', $number->id);
+            ->addColumn('action', function ($analysis) {
+                $editUrl = route('clinic.analysis.edit', $analysis->id);
+                $deleteUrl = route('clinic.analysis.destroy', $analysis->id);
 
-            return '
+                return '
                 <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
                     <i class="fa fa-edit"></i>
                 </a>
@@ -42,10 +42,12 @@ class MedicalAnalysisController extends Controller
                     </button>
                 </form>
             ';
-        })
-        ->rawColumns(['action']) // Ensure the HTML in the action column is not escaped
-        ->make(true);
-
+            })
+            ->editColumn('patient', function ($analysis) {
+                return $analysis->patient->name ?? 'N/A';
+            })
+            ->rawColumns(['action']) // Ensure the HTML in the action column is not escaped
+            ->make(true);
     }
 
     public function show($id)
@@ -60,12 +62,10 @@ class MedicalAnalysisController extends Controller
 
     public function add($id)
     {
-        
+
         $reservation = Reservation::findOrFail($id);
-        
+
         return view('backend.dashboards.clinic.pages.medicalAnalysis.add', compact('reservation'));
-
-
     }
     public function store(Request $request)
     {
@@ -74,28 +74,34 @@ class MedicalAnalysisController extends Controller
 
             $medical_analysis = new MedicalAnalysis;
             $data = $request->except('images');
-            $image_path = $this->handleImageUpload($request, $medical_analysis);
-            $data['images'] =  $image_path;
-            // dd($data);
+            // $image_path = $this->handleImageUpload($request, $medical_analysis);
+            // $data['images'] =  $image_path;
+            $data['clinic_id'] = auth()->user()->clinic_id;            
             $medical_analysis->create($data);
-            return redirect()->route('backend.reservations.index')->with('toast_success', 'Medical Analysis added successfully');
 
+            // Check if images are uploaded
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $medical_analysis->addMedia($image)->toMediaCollection('analysis_images');
+                }
+            }
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Medical Analysis added successfully');
         } catch (ValidationException $e) {
+            dd($e->getMessage());
+
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
-
     }
 
     public function edit($id)
     {
 
         $analysis = MedicalAnalysis::findOrFail($id);
-        
+
         return view('backend.dashboards.clinic.pages.medicalAnalysis.edit', compact('analysis'));
-
-
     }
 
     public function update(UpdateAnalysisRequest $request, $id)
@@ -111,7 +117,7 @@ class MedicalAnalysisController extends Controller
 
             $medical_analysis->update($data);
 
-            return redirect()->route('backend.reservations.index')->with('toast_success', 'Reservation updated successfully');
+            return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation updated successfully');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
@@ -119,48 +125,39 @@ class MedicalAnalysisController extends Controller
         }
     }
 
-    public function delete()
-    {
+    public function delete() {}
 
-    }
+    public function restore() {}
 
-    public function restore()
-    {
-
-    }
-
-    public function forceDelete()
-    {
-
-    }
+    public function forceDelete() {}
 
     // 
-     // function to handel upload rays
-     private function handleImageUpload($request, $medical_analysis)
-     {
-        
-         $old_image = explode('|', $medical_analysis->images);
-         $image_path = [];
- 
-         if ($files = $request->file('images')) {
-             foreach ($files as $file) {
+    // function to handel upload rays
+    private function handleImageUpload($request, $medical_analysis)
+    {
+
+        $old_image = explode('|', $medical_analysis->images);
+        $image_path = [];
+
+        if ($files = $request->file('images')) {
+            foreach ($files as $file) {
                 $image_name = strtolower($file->getClientOriginalName());
                 $image_name = str_replace(' ', '_', $image_name); // Replace spaces with underscores
-                 $file->storeAs(
-                     'medical_analysis',
-                     $image_name,
-                     ['disk' => 'uploads']
-                 );
-                 $image_path[] = $image_name;
-             }
- 
-             foreach ($old_image as $key => $value) {
-                 if ($image_path && !empty($value)) {
-                     Storage::disk('uploads')->delete('medical_analysis/' . $value);
-                 }
-             }
-         }
- 
-         return $image_path ? implode('|', $image_path) : $medical_analysis->images;
-     }
+                $file->storeAs(
+                    'medical_analysis',
+                    $image_name,
+                    ['disk' => 'uploads']
+                );
+                $image_path[] = $image_name;
+            }
+
+            foreach ($old_image as $key => $value) {
+                if ($image_path && !empty($value)) {
+                    Storage::disk('uploads')->delete('medical_analysis/' . $value);
+                }
+            }
+        }
+
+        return $image_path ? implode('|', $image_path) : $medical_analysis->images;
+    }
 }

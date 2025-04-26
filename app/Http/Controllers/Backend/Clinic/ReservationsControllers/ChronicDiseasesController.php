@@ -48,12 +48,12 @@ class ChronicDiseasesController extends Controller
         try {
             foreach ($request->name as $index => $name) {
                 $data = [
-                    'name' => $name,
+                    'name' => $request->name[$index],
                     'measure' => $request->measure[$index],
                     'date' => $request->date[$index],
                     'notes' => $request->notes[$index],
-                    'patient_id' => $request->patient_id[$index],
-                    'reservation_id' => $request->reservation_id[$index],
+                    'patient_id' => $request->patient_id,
+                    'reservation_id' => $request->reservation_id,
                     'clinic_id' => Auth::user()->clinic_id,
                 ];
                 DB::table('chronic_diseases')->insert($data);
@@ -89,22 +89,27 @@ class ChronicDiseasesController extends Controller
     {
         $this->authorizeCheck('edit-chronic-disease');
 
+        // dd($request->all());
+
         $request->validated();
+
 
         try {
             $chronicDisease = $this->chronicDisease->findOrFail($id);
+            $chronicDisease->update($request->all());
 
-            foreach ($request->title as $index => $title) {
-                $data = [
-                    'title' => $title,
-                    'measure' => $request->measure[$index],
-                    'date' => $request->date[$index],
-                    'notes' => $request->notes[$index],
-                    'patient_id' => $request->patient_id[$index],
-                    'reservation_id' => $request->reservation_id[$index],
-                ];
-                $this->chronicDisease->where('id', $chronicDisease->id)->update($data);
-            }
+
+            // foreach ($request->title as $index => $title) {
+            //     $data = [
+            //         'name' => $title,
+            //         'measure' => $request->measure[$index],
+            //         'date' => $request->date[$index],
+            //         'notes' => $request->notes[$index],
+            //         'patient_id' => $request->patient_id[$index],
+            //         'reservation_id' => $request->reservation_id[$index],
+            //     ];
+            //     $this->chronicDisease->where('id', $chronicDisease->id)->update($data);
+            // }
 
             return redirect()->route('clinic.reservations.index')->with('toast_success', 'Chronic diseases updated successfully');
         } catch (\Exception $e) {

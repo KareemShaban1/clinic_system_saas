@@ -25,5 +25,15 @@ class ClinicSeeder extends Seeder
             'start_date'=> Carbon::now(),
             "status"=> 1,
         ]);
+
+        Clinic::create([
+            "name"=> "Clinic 2",
+            "address"=> "address 2",
+            "phone"=> "0123456789",
+            "email"=> "clinic2@clinic.com",
+            'start_date'=> Carbon::now(),
+            "status"=> 1,
+        ]);
+
     }
 }

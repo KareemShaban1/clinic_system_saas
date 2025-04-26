@@ -35,7 +35,7 @@
 				</div> --}}
 
                 {{-- <form > --}}
-                <form method="post" class="col-md-12" enctype="multipart/form-data" action="{{ Route('register') }}"
+                <form method="post" class="col-md-12" enctype="multipart/form-data" action="{{ Route('register-patient') }}"
                     autocomplete="off">
 
                     @csrf

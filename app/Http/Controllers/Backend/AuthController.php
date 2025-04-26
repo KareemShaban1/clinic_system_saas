@@ -7,6 +7,7 @@ use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Clinic;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,4 +78,38 @@ class AuthController extends Controller
 
         return redirect()->to('/clinic/login')->with('success', 'Clinic registered successfully');
     }
+
+    public function registerPatient(Request $request){
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:patients,email',
+            'password' => 'required|string|min:6',
+            'phone' => 'required|string|max:20',
+            'whatsapp_number' => 'nullable|string|max:20',
+            'address' => 'required|string',
+            'gender' => 'required|in:male,female',
+            'blood_group' => 'required|in:A+,A-,B+,B-,O+,O-,AB+,AB-',
+
+        ]);
+
+        
+
+        $patient = Patient::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'gender' => $request->gender,
+            'blood_group' => $request->blood_group,
+            'whatsapp_number' => $request->whatsapp_number,
+        ]);
+
+        return redirect()->to('/patient/login')->with('success', 'Patient registered successfully');
+
+
+    }
+
+
 }

@@ -28,27 +28,16 @@
                 <form method="post" enctype="multipart/form-data" action="{{ Route('clinic.analysis.store') }}"
                     autocomplete="off">
 
+                    <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
                     @csrf
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label for="id"
-                                    class="form-control-label">{{ trans('backend/medicalAnalysis_trans.id') }}</label>
-                                <select name="id" id="id" class="custom-select mr-sm-2">
-
-                                    <option value="{{ $reservation->id }}" selected>
-                                        {{ $reservation->id }}</option>
-
-                                </select>
-
-                            </div>
-                        </div>
+                      
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="id"
                                     class="form-control-label">{{ trans('backend/medicalAnalysis_trans.Patient_Name') }}</label>
-                                <select name="id" id="id" class="custom-select mr-sm-2">
+                                <select name="patient_id" id="patient_id" class="custom-select mr-sm-2">
 
                                     <option value="{{ $reservation->patient->id }}" selected>
                                         {{ $reservation->patient->name }}</option>
@@ -66,17 +55,17 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
                                 <label
-                                    for="analysis_name">{{ trans('backend/medicalAnalysis_trans.Analysis_Name') }}</label>
-                                <input type="text" id="analysis_name" name="analysis_name" class="form-control">
+                                    for="name">{{ trans('backend/medicalAnalysis_trans.Analysis_Name') }}</label>
+                                <input type="text" id="name" name="name" class="form-control">
 
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="form-group">
-                                <label for="analysis_type">{{ trans('backend/medicalAnalysis_trans.Analysis_Type') }}
+                                <label for="type">{{ trans('backend/medicalAnalysis_trans.Analysis_Type') }}
                                 </label>
-                                <input type="text" name="analysis_type" id="analysis_type" class="form-control">
+                                <input type="text" name="type" id="type" class="form-control">
 
                             </div>
                         </div>
@@ -92,7 +81,7 @@
                             <div class="form-group">
                                 <label> {{ trans('backend/medicalAnalysis_trans.Analysis_Date') }}<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" name="analysis_date" id="datepicker-action"
+                                <input class="form-control" name="date" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
 
                             </div>

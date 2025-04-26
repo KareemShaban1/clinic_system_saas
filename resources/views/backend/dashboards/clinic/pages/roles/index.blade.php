@@ -27,6 +27,7 @@
                             <th>{{ trans('backend/roles_trans.Id') }}</th>
                             <th>{{ trans('backend/roles_trans.Role_Name') }}</th>
                             <!-- <th>{{ trans('backend/roles_trans.Guard_Name') }}</th> -->
+                             <th>{{ trans('backend/roles_trans.Permissions_Count') }}</th>
                             <th>{{ trans('backend/roles_trans.Control') }}</th>
                         </tr>
                     </thead>
@@ -146,6 +147,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'permissions_count',
+                        name: 'permissions_count'
                     },
                     // {
                     //     data: 'guard_name',

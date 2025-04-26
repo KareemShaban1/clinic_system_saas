@@ -50,10 +50,12 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $patient = Patient::where('email', '=', $email)
-        ->whereHas('clinic',function($query){
-            $query->where('status', 1);
-        })
+        // ->whereHas('clinic',function($query){
+        //     $query->where('status', 1);
+        // })
         ->first();
+
+        // dd($patient);
 
         if ($patient && Hash::check($password, $patient->password)) {
             return $patient;

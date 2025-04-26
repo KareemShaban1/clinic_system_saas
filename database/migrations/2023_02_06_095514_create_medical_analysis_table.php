@@ -20,7 +20,9 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('images')->nullable();
             $table->date('date');
-            $table->string('type');
+            // $table->string('type');
+            $table->foreignId('type_id')->nullable()->references('id')->on('types')
+            ->nullOnDelete();
             $table->longText('report')->nullable();
          
             $table->softDeletes();

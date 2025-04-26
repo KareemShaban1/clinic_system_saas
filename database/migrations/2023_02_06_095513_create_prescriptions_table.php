@@ -18,7 +18,6 @@ return new class () extends Migration {
             $table->foreignId('reservation_id')->nullable()->constrained('reservations')->nullOnDelete();           
             $table->string('title')->nullable();
             $table->string('notes')->nullable();
-            $table->string('images');
             $table->timestamps();
         });
     }

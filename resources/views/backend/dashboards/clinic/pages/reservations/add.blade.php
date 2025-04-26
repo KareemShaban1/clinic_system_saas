@@ -174,7 +174,7 @@
                         </button>
 
                         <div class="service-fee-row">
-                            <div class="row mb-3">
+                            <div class="row mb-3" style="display: flex;align-items: center;">
                                 <div class="col-md-3">
                                     <label>{{ __('Service Name') }}</label>
                                     <select name="service_fee_id[]" class="service-fee-select form-control p-0">

@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.dashboards.clinic.layouts.master')
 @section('css')
 
 @section('title')
@@ -38,7 +38,7 @@
                         </div>
                 @endif --}}
 
-                <form action="{{Route('backend.glasses_distance.update',$glasses_distance->id)}}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{Route('clinic.glasses_distance.update',$glasses_distance->id)}}" method="post" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     
              

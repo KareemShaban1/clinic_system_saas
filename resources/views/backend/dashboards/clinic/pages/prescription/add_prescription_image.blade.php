@@ -4,29 +4,12 @@
                   <div class="card-body">
 
                       <form method="post" enctype="multipart/form-data"
-                          action="{{ Route('backend.prescription.UploadPrescription') }}" autocomplete="off">
+                          action="{{ Route('clinic.prescription.UploadPrescription') }}" autocomplete="off">
 
                           @csrf
-                          <div class="row">
-                              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                                  <div class="form-group">
-                                      <label
-                                          class="form-control-label">{{ trans('backend/drugs_trans.id') }}</label>
-                                      <select name="id" class="custom-select mr-sm-2">
+                          
 
-                                          <option value="{{ $reservation->id }}" selected>
-                                              {{ $reservation->id }}</option>
-
-                                      </select>
-                                      @error('id')
-                                          <p class="alert alert-danger">{{ $message }}</p>
-                                      @enderror
-                                  </div>
-                              </div>
-
-
-                          </div>
-
+                          <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
 
                           <div class="row">
                               <div class="col-lg-6 col-md-6 col-sm-12 col-12">

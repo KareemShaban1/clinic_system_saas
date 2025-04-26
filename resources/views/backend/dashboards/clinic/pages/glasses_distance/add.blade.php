@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.dashboards.clinic.layouts.master')
 @section('css')
 
 @section('title')
@@ -6,15 +6,9 @@
 @stop
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
-<div class="page-title">
-    <div class="row">
-        <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('backend/glasses_distance_trans.Glasses_Distance') }}</h4>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb -->
+
+<h4 class="page-title"> {{ trans('backend/glasses_distance_trans.Add_Glasses_Distance') }}</h4>
+
 @endsection
 @section('content')
 <!-- row -->
@@ -25,7 +19,7 @@
 
                 <x-backend.alert/>
 
-                <form action="{{ Route('backend.glasses_distance.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ Route('clinic.glasses_distance.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
 

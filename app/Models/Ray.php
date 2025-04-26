@@ -19,23 +19,30 @@ class Ray extends Model implements HasMedia
         'reservation_id',
         'clinic_id',
         'name',
-        'type',
+        'ray_type_id',
         'date',
         'report'
     ];
 
     // Accessories definition =>  public function get...Attribute(){}
 
-    public function getImageUrlAttribute()
+    // public function getImageUrlAttribute()
+    // {
+    //     if (!$this->images) {
+    //         return 'https://scotturb.com/wp-content/uploads/2016/11/product-placeholder-300x300.jpg';
+    //     }
+    //     if (Str::startsWith($this->images, ['http://', 'https://'])) {
+    //         return $this->images;
+    //     }
+    //     return asset('storage/rays/' . $this->images);
+    // } // $ray->image_url
+
+    public function getImagesAttribute()
     {
-        if (!$this->images) {
-            return 'https://scotturb.com/wp-content/uploads/2016/11/product-placeholder-300x300.jpg';
-        }
-        if (Str::startsWith($this->images, ['http://', 'https://'])) {
-            return $this->images;
-        }
-        return asset('storage/rays/' . $this->images);
-    } // $ray->image_url
+        return $this->getMedia('rays_images')->map(function ($media) {
+            return $media->getUrl();
+        })->toArray();
+    }
 
 
     public function patient()
@@ -60,6 +67,14 @@ class Ray extends Model implements HasMedia
         return $this->belongsTo(
             Clinic::class,
             'clinic_id',
+        );
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(
+            Type::class,
+            'ray_type_id',
         );
     }
 

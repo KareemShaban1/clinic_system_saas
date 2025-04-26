@@ -49,13 +49,17 @@ class RaysController extends Controller
 
     public function data()
     {
-        $query = $this->ray->all();
-        return DataTables::of($query)
+        $query = $this->ray->with('type');
+        return DataTables::of(source: $query)
             ->addColumn('action', function ($ray) {
                 $editUrl = route('clinic.rays.edit', $ray->id);
                 $deleteUrl = route('clinic.rays.destroy', $ray->id);
+                $showUrl = route('clinic.rays.show', $ray->id);
 
                 return '
+                <a href="' . $showUrl . '" class="btn btn-info btn-sm">
+                    <i class="fa fa-eye"></i>
+                </a>
                 <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
                     <i class="fa fa-edit"></i>
                 </a>
@@ -117,7 +121,9 @@ class RaysController extends Controller
 
         // get reservation based on id
         $rays = $this->ray->where('reservation_id', $id)->get();
-        
+
+        $rays->load('type');
+
 
         return view('backend.dashboards.clinic.pages.rays.show', compact('rays'));
     }

@@ -60,7 +60,7 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                                 <h5 class="f-w-500"> {{trans('backend/chronic_diseases_trans.Disease_Name')}}<span class="{{trans('backend/chronic_diseases_trans.pull')}}">:</span></h5>
                             </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->title}}</span>
+                            <div class="col-lg-9 col-md-8 col-sm-6 col-6"><span>{{$chronic_disease->name}}</span>
                             </div>
                         </div>
 

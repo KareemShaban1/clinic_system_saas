@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+@extends('backend.dashboards.clinic.layouts.master')
 @section('css')
 
 @section('title')
@@ -44,7 +44,7 @@
                                 <a href="" class="btn btn-primary btn-sm">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{Route('backend.glasses_distance.edit',$glasses_distance->id)}}" class="btn btn-warning btn-sm">
+                                <a href="{{Route('clinic.glasses_distance.edit',$glasses_distance->id)}}" class="btn btn-warning btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
                                

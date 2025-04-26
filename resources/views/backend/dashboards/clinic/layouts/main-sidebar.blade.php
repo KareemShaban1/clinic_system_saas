@@ -50,6 +50,21 @@
                         </ul>
                     </li>
 
+                    <!-- menu Types-->
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#types-menu">
+                            <div class="pull-left"><i class="fa-sharp fa-solid fa-list"></i><span
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Types') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="types-menu" class="collapse" data-parent="#sidebarnav">
+                            <li> <a
+                                    href="{{ Route('clinic.type.index') }}">{{ trans('backend/sidebar_trans.All_Types') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- menu Service Fees-->
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#serviceFees-menu">
@@ -120,6 +135,14 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="patients-menu" class="collapse" data-parent="#sidebarnav">
+
+                        <li>
+                            <a href="{{ Route('clinic.patients.add_patient_code') }}">
+                                {{ trans('backend/sidebar_trans.Add_Patient_Code') }}
+                            </a>
+                        </li>
+
+
                             @can('add-patient')
                             <li> <a href="{{ Route('clinic.patients.add') }}">
                                     {{ trans('backend/sidebar_trans.Add_Patient') }}</a> </li>

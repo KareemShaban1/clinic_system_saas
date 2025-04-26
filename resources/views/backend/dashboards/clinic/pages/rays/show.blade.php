@@ -160,7 +160,7 @@
                                 <h5 class="f-w-500"> {{ trans('backend/rays_trans.Rays_Type') }} <span
                                         class="{{ trans('backend/rays_trans.pull') }}">:</span></h5>
                             </div>
-                            <div class="col-lg-9 col-md-8 col-sm-6 col-4"><span>{{ $ray->type }}</span>
+                            <div class="col-lg-9 col-md-8 col-sm-6 col-4"><span>{{ $ray->type?->name }}</span>
                             </div>
                         </div>
 

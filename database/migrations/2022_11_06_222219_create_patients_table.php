@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
-            $table->string('patient_code')->nullable();
+            $table->string('patient_code')->unique();
             $table->char('phone', 20);
             $table->char('whatsapp_number', 20)->nullable();
             $table->enum('blood_group', 
@@ -34,7 +34,7 @@ return new class extends Migration
              ['single', 'married', 'widowed', 'divorced', 'separated'])->nullable();
             $table->string('nationality')->nullable();
             // end new updates
-            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+            // $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
 
             $table->softDeletes();
             $table->timestamps();

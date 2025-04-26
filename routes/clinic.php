@@ -64,6 +64,10 @@ Route::group(
                 Route::get('/trash', 'trash')->name('trash');
                 Route::put('/restore/{id}', 'restore')->name('restore');
                 Route::delete('/force_delete/{id}', 'forceDelete')->name('forceDelete');
+
+                Route::get('/add_patient_code', 'add_patient_code')->name('add_patient_code');
+                Route::get('/search', 'search');
+                Route::post('/assign', 'assign');
             }
         );
 
@@ -361,7 +365,7 @@ Route::group(
                 Route::get('/', 'SettingsController@index')->name('index');
 
                 Route::get('/clinic_settings', 'SettingsController@clinicSettings')
-                ->name('clinicSettings.index');
+                    ->name('clinicSettings.index');
                 Route::post('/clinic_settings', 'SettingsController@updateClinicSettings')->name('clinicSettings.update');
 
                 Route::get('/zoom_settings', 'SettingsController@zoomSettings')->name('zoomSettings.index');
@@ -421,6 +425,23 @@ Route::group(
                 Route::get('/edit/{service_fee_id}', 'edit')->name('edit');
                 Route::post('/update/{service_fee_id}', 'update')->name('update');
                 Route::delete('/delete/{service_fee_id}', 'destroy')->name('destroy');
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => '/type',
+                'as' => 'type.',
+                'controller' => 'TypeController'
+            ],
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
+                Route::get('/add', 'add')->name('add');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/edit/{type_id}', 'edit')->name('edit');
+                Route::post('/update/{type_id}', 'update')->name('update');
+                Route::delete('/delete/{type_id}', 'destroy')->name('destroy');
             }
         );
     }

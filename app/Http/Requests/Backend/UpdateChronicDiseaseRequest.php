@@ -26,7 +26,7 @@ class UpdateChronicDiseaseRequest extends FormRequest
         return [
             //
             
-                'title' => 'required',
+                'name' => 'required',
                 'measure' => 'required',
                 'notes'=>'nullable',
                 'date'=>'required',

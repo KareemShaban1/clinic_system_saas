@@ -19,7 +19,10 @@ class ClinicScope implements Scope
 
             // Only apply scope if the user has a clinic_id
             if ($clinicId) {
-                $builder->where('clinic_id', $clinicId);
+                
+                $builder->whereHas('clinic', function($query) use ($clinicId) {
+                    $query->where('clinic_id', $clinicId);
+                });
             }
         }
     }
