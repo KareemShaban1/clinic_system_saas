@@ -14,7 +14,7 @@ return [
           'Edit'=>'تعديل',
           'Permissions'=>'الأذونات',
           'Number_Of_Permissions'=>'عدد الأذونات',
-          ''=>'',
+          'Permissions_Count'=>'عدد الأذونات',
           ''=>'',
           ''=>'',
           ''=>'',

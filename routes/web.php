@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Backend\Admin\AreaController;
 use App\Http\Controllers\Backend\Admin\CityController;
-use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
@@ -31,9 +31,13 @@ Route::get('areas/by-city', [AreaController::class, 'getAreasByCity'])
 ->name('areas.by-city');
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/clinics', [HomeController::class, 'clinics'])
+->name('clinics');
 
 
 require __DIR__.'/clinic.php';
+
+require __DIR__.'/medicalLaboratory.php';
 
 require __DIR__.'/patient.php';
 

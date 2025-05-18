@@ -452,6 +452,5 @@ Route::get('/register-clinic', function () {
     return view('backend.dashboards.clinic.auth.register-clinic');
 })->name('register-clinic');
 Route::post('/register-clinic', [AuthController::class, 'registerClinic'])->name('register-clinic');
-
-Route::post('/store-clinic', [ClinicController::class, 'store'])->name('store-clinic');
+// Route::post('/store-clinic', [ClinicController::class, 'store'])->name('store-clinic');
 Route::post('/subscribe', [SubscribeController::class, 'store']);

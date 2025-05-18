@@ -42,6 +42,18 @@ return [
             'provider' => 'users',
         ],
 
+        // for clinic
+        'medical_laboratory' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        // for radiology center
+        'radiology_center' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
         
         // for patients
         'patient' => [
@@ -89,6 +101,8 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+
+        
 
 
     ],

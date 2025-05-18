@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('drugs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('patient_id')->references('id')->on('patients')->cascadeOnDelete();
             $table->foreignId('reservation_id')->references('id')->on('reservations')->cascadOnDelete();
             $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('name');

@@ -11,6 +11,7 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -49,6 +50,18 @@ class FortifyServiceProvider extends ServiceProvider
             Config::set('fortify.prefix', 'patient');
         }
 
+        if ($request->is('medical-laboratory/*')) {
+            Config::set('fortify.guard', 'medical_laboratory');
+            Config::set('fortify.password', 'users');
+            Config::set('fortify.prefix', 'medical-laboratory');
+        }
+
+        if ($request->is('radiology-center/*')) {
+            Config::set('fortify.guard', 'radiology_center');
+            Config::set('fortify.password', 'users');
+            Config::set('fortify.prefix', 'radiology-center');
+        }
+
 
 
         //// login response
@@ -62,10 +75,18 @@ class FortifyServiceProvider extends ServiceProvider
                     return redirect('/clinic/dashboard');
                 }
                 if ($request->user('patient')) {
-                    // dd("patient");
-
                     // redirect patient to /patient/dashboard
                     return redirect('/patient/dashboard');
+                }
+
+                if ($request->user('medical_laboratory')) {
+                    // redirect medical laboratory to /medical-laboratory/dashboard
+                    return redirect('/medical-laboratory/dashboard');
+                }
+
+                if ($request->user('radiology_center')) {
+                    // redirect radiology center to /radiology-center/dashboard
+                    return redirect('/radiology-center/dashboard');
                 }
 
                 if ($request->user('admin')) {
@@ -113,10 +134,23 @@ class FortifyServiceProvider extends ServiceProvider
 
         if (Config::get('fortify.guard') == 'web') {
             //// this method will be used in "web" guard only
-            Fortify::authenticateUsing([new CustomAuthentication, 'authenticateUser']);
+            Fortify::authenticateUsing([new CustomAuthentication, 'authenticateClinicUser']);
             //// point to clinic auth folder [views/clinic/auth]
             Fortify::viewPrefix('backend.dashboards.clinic.auth.');
-        } elseif (Config::get('fortify.guard') == 'patient') {
+        }
+        elseif(Config::get('fortify.guard') == 'medical_laboratory'){
+            //// this method will be used in "medical_laboratory" guard only
+            Fortify::authenticateUsing([new CustomAuthentication, 'authenticateMedicalLaboratoryUser']);
+            //// point to clinic auth folder [views/clinic/auth]
+            Fortify::viewPrefix('backend.dashboards.medicalLaboratory.auth.');
+        }  
+        elseif(Config::get('fortify.guard') == 'radiology_center'){
+            //// this method will be used in "medical_laboratory" guard only
+            Fortify::authenticateUsing([new CustomAuthentication, 'authenticateRadiologyCenterUser']);
+            //// point to clinic auth folder [views/clinic/auth]
+            Fortify::viewPrefix('backend.dashboards.radiologyCenter.auth.');
+        }   
+        elseif (Config::get('fortify.guard') == 'patient') {
             /// this method will be used in "patient" guard only
             Fortify::authenticateUsing([new CustomAuthentication, 'authenticatePatient']);
             // create new "patient" using custom class

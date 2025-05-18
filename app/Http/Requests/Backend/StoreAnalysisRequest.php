@@ -29,9 +29,9 @@ class StoreAnalysisRequest extends FormRequest
                 'analysis_name' => 'required',
                 'images' => 'required',
                 'analysis_date'=>'required',
-                'analysis_type'=>'required',
+                'type_id'=>'required',
                 'report'=>'nullable',
-                'id'=>'required'
+                'patient_id'=>'required'
             
         ];
     }

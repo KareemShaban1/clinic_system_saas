@@ -18,7 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('type')->nullable();
-            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+             // Make the user morphable to any 'organization' model
+             $table->nullableMorphs('organization'); 
+             // (clinics , medical_laboratories , radiology_centers)    
+            // Creates organization_id (unsignedBigInteger) and organization_type (string)
+
+            
+            // $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             // Polymorphic relationship columns
             // $table->morphs('typeable'); // creates typeable_id and typeable_type
             $table->timestamps();

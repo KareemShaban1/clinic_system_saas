@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Models\BaseModel;
+use App\Models\Clinic;
+use App\Models\MedicalLaboratory;
 use App\Models\Patient;
 use App\Models\Scopes\ClinicScope;
 use App\Models\Settings;
 use App\Models\SystemControl;
 use App\Observers\BaseModelObserver;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
@@ -57,8 +61,16 @@ class AppServiceProvider extends ServiceProvider
 
         BaseModel::observe(BaseModelObserver::class);
 
-        if (Auth::check()) {
-            Patient::addGlobalScope(new ClinicScope);
-        }
+        // if (Auth::check()) {
+        //     Patient::addGlobalScope(new ClinicScope);
+        // }
+
+        Relation::morphMap([
+            'clinic' => Clinic::class,
+            // 'medical_laboratory' => MedicalLaboratory::class,
+        ]);
+
+
+
     }
 }

@@ -15,8 +15,8 @@
 
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title"> </li>
 
-                      <!-- menu Users-->
-                      <li>
+                    <!-- menu Users-->
+                    <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#users-menu">
                             <div class="pull-left"><i class="fa fa-user"></i><span
                                     class="right-nav-text">{{ trans('backend/sidebar_trans.Users') }}</span></div>
@@ -24,14 +24,14 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="users-menu" class="collapse" data-parent="#sidebarnav">
-                           
+
                             <li> <a
                                     href="{{ Route('clinic.users.index') }}">{{ trans('backend/sidebar_trans.All_Users') }}</a>
                             </li>
 
                         </ul>
                     </li>
-                    
+
 
 
                     <li>
@@ -76,7 +76,7 @@
                         <ul id="serviceFees-menu" class="collapse" data-parent="#sidebarnav">
                             <li> <a href="{{ Route('clinic.serviceFees.index') }}">
                                     {{ trans('backend/sidebar_trans.All_Service_Fees') }} </a> </li>
-                          
+
                         </ul>
                     </li>
 
@@ -136,11 +136,11 @@
                         </a>
                         <ul id="patients-menu" class="collapse" data-parent="#sidebarnav">
 
-                        <li>
-                            <a href="{{ Route('clinic.patients.add_patient_code') }}">
-                                {{ trans('backend/sidebar_trans.Add_Patient_Using_Code') }}
-                            </a>
-                        </li>
+                            <li>
+                                <a href="{{ Route('clinic.patients.add_patient_code') }}">
+                                    {{ trans('backend/sidebar_trans.Add_Patient_Using_Code') }}
+                                </a>
+                            </li>
 
 
                             @can('add-patient')
@@ -217,7 +217,7 @@
                     </li>
 
 
-                    <li>
+                    <!-- <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#analysis-menu">
                             <div class="pull-left"><i class="fa fa-stethoscope"></i><span
                                     class="right-nav-text">{{ trans('backend/sidebar_trans.Analysis') }}</span>
@@ -229,11 +229,9 @@
 
                             <li> <a href="{{ route('clinic.analysis.index') }}">
                                     {{ trans('backend/sidebar_trans.All_Analysis') }}</a> </li>
-                            <!-- <li> <a href="">
-                                    {{ trans('backend/sidebar_trans.Deleted_Analysis') }} </a> </li> -->
 
                         </ul>
-                    </li>
+                    </li> -->
 
 
 
@@ -283,11 +281,11 @@
                         </ul>
                     </li>
 
-                  
 
-                   
 
-                  
+
+
+
                     <li>
                         <a href="{{ Route('clinic.settings.index') }}"><i class="fa-solid fa-cogs"></i><span
                                 class="right-nav-text">

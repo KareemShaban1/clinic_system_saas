@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -16,13 +16,17 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreignId('reservation_id')->nullable()->constrained('reservations')->nullOnDelete();
-            $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+ 
+            // Make the user morphable to any 'organization' model
+            $table->nullableMorphs('organization');
+            // (clinics , medical_laboratories , radiology_centers)    
+            // Creates organization_id (unsignedBigInteger) and organization_type (string)
+
+
             $table->string('name');
-            // $table->string('images');
             $table->date('date');
-            // $table->string('type');
             $table->foreignId('ray_type_id')->nullable()->references('id')->on('types')
-            ->nullOnDelete();
+                ->nullOnDelete();
             $table->longText('report')->nullable();
             $table->softDeletes();
             $table->timestamps();

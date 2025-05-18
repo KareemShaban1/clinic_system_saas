@@ -63,7 +63,7 @@ class Patient extends Authenticatable
             $patient->patient_code = Patient::getNextPatientCodeNumber();
         });
 
-        static::addGlobalScope(new ClinicScope);
+        // static::addGlobalScope(new ClinicScope);
     }
 
     public static function getNextPatientCodeNumber()
@@ -82,14 +82,14 @@ class Patient extends Authenticatable
     }
 
     // Apply the clinic filter dynamically
-    public function scopeClinic($query)
-    {
-        if (Auth::check() && Auth::user()->clinic_id) {
-            return $query->where('clinic_id', Auth::user()->clinic_id);
-        }
+    // public function scopeClinic($query)
+    // {
+    //     if (Auth::check() && Auth::user()->clinic_id) {
+    //         return $query->where('clinic_id', Auth::user()->clinic_id);
+    //     }
 
-        return $query;
-    }
+    //     return $query;
+    // }
 
     public function reservations()
     {
@@ -161,4 +161,73 @@ class Patient extends Authenticatable
             'clinic_id',
         );
     }
+
+    // public function medicalLaboratory()
+    // {
+    //     return $this->belongsToMany(
+    //         PatientOrganization::class,
+    //         'patient_organization',
+    //         'patient_id',
+    //         'organization_id',
+    //     );
+    // }
+
+    public function medicalLaboratories()
+{
+    return $this->morphedByMany(
+        MedicalLaboratory::class,
+        'organization',
+        'patient_organization',
+        'patient_id',
+        'organization_id'
+    );
+}
+
+
+    public function radiologyCenter()
+    {
+        return $this->belongsToMany(
+            RadiologyCenter::class,
+            'patient_radiology_center',
+            'patient_id',
+            'radiology_center_id',
+        );
+    }
+
+    public function scopeClinic($query)
+    {
+        return $query->whereHas('clinic', function ($query) {
+            $query->where('clinic_id', Auth::user()->clinic_id);
+        });
+    }
+
+    // public function scopeMedicalLaboratory($query)
+    // {
+    //     return $query->whereHas('medicalLaboratory', function ($query) {
+    //         $query->where('organization_id', Auth::user()->organization_id);
+    //     });
+    // }
+
+
+    public function scopeMedicalLaboratory($query)
+{
+    return $query->whereHas('medicalLaboratories', function ($q) {
+        $q->where('organization_id', Auth::user()->organization_id);
+    });
+}
+
+    public function scopeRadiologyCenter($query)
+    {
+        return $query->whereHas('radiologyCenter', function ($query) {
+            $query->where('radiology_center_id', Auth::user()->radiology_center_id);
+        });
+    }
+
+    public function organization()
+    {
+        return $this->morphTo();
+    }
+
+
+
 }

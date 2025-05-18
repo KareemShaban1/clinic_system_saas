@@ -20,15 +20,18 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\User::factory(10)->create();
         $this->call(RolePermissionSeeder::class);
-        $this->call(ClinicSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(DoctorSeeder::class);
-        $this->call(AdminSeeder::class);
-        // $this->call(SettingsSeeder::class);
         $this->call(SpecialitySeeder::class);
         $this->call(GovernorateSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(AreaSeeder::class);
+        $this->call(ClinicSeeder::class);
+        $this->call(MedicalLaboratorySeeder::class);
+        $this->call(RadiologyCenterSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(DoctorSeeder::class);
+        $this->call(AdminSeeder::class);
+        // $this->call(SettingsSeeder::class);
+       
 
         $this->call(PatientSeeder::class);
         $this->call(ServiceFeeSeeder::class);

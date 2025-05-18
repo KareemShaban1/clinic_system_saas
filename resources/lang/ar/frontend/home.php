@@ -30,7 +30,13 @@ return [
           'Doctor Login'=>'تسجيل دخول الدكتور',
           'Admin Login'=>'تسجيل دخول الأدمن',
           'Clinic Login'=>'تسجيل دخول العيادة',
-          ''=>'',
+          'Register Clinic'=>'أنشاء حساب عيادة',
+          'Register Patient'=>'أنشاء حساب مريض',
+          'Clinics'=>'العيادات',
+          'All Clinics'=>'كل العيادات',
+          'Medical Laboratory'=>' مختبر طبي',
+          'All Medical Laboratory'=>'كل مختبر طبي',
+          'Register Medical Laboratory'=>'أنشاء حساب مختبر طبي',
           ''=>'',
 
 

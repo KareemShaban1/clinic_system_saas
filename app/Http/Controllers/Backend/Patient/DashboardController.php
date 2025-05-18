@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend\Patient;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\TimeSlotsTrait;
@@ -11,35 +11,30 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     use TimeSlotsTrait;
 
-    //
-    public function index()
-    {
-
-        $patients = Patient::count();
-        $reservations = Reservation::count();
-
-        return view('frontend.home',compact('patients','reservations'));
-    }
-
     public function dashboard()
     {
-        // get all reservations
-        $all_reservations_count = Reservation::where('id', Auth::user('patient')->id)->count();
+        // patient clinics
+        $clinics = Auth::user()->clinic();
+        $clinics_count = $clinics->count();
 
-        $approved_reservations_count = Reservation::where('id', Auth::user('patient')->id)
+        // get all reservations
+        $all_reservations_count = Reservation::where('id', Auth::user()->id)->count();
+
+        $approved_reservations_count = Reservation::where('id', Auth::user()->id)
         ->where('acceptance', 'approved')
         ->count();
 
-        $not_approved_reservations_count = Reservation::where('id', Auth::user('patient')->id)
+        $not_approved_reservations_count = Reservation::where('id', Auth::user()->id)
         ->where('acceptance', 'not_approved')
         ->count();
         return view(
             'backend.dashboards.patient.pages.dashboard.index',
             compact(
+                'clinics_count',
                 'all_reservations_count',
                 'approved_reservations_count',
                 'not_approved_reservations_count'

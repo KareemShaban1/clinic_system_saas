@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Patient\DashboardController;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Frontend\AppointmentsController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -8,7 +9,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'as' => 'frontend.',
+    'as' => 'patient.',
     'middleware' => [
         'localeSessionRedirect', 'localizationRedirect', 'localeViewPath',
         'auth:patient'
@@ -20,10 +21,11 @@ Route::group([
         [
             'prefix' => '/appointment',
             'as' => 'appointment.',
-            'controller' => 'App\Http\Controllers\Frontend\AppointmentsController',
+            'controller' => 'App\Http\Controllers\Backend\Patient\ReservationController',
         ],
         function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/data', 'data')->name('data');
             Route::get('/get_res_slot_number', 'getResNumberOrSlot')->name('get_res_slot_number');
             Route::get('/show_ray/{id}', 'show_ray')->name('show_ray');
             Route::get('/show_chronic_disease/{id}', 'show_chronic_disease')->name('show_chronic_disease');
@@ -44,7 +46,7 @@ Route::group([
 
 
 
-    Route::get('/patient/dashboard', [HomeController::class, 'dashboard'])->name('patient.dashboard');
+    Route::get('/patient/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     // Route::get('/get_reservation_slots', [AppointmentsController::class, 'getResNumberOrSlot']);
 });

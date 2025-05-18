@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\ClinicScope;
+use App\Models\Scopes\OrganizationScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,7 +26,7 @@ class User extends Authenticatable
     use SoftDeletes;
     use Billable;
 
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -36,9 +37,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'clinic_id',
-        'password',
-        
+        'organization_id',
+        'organization_type',
+
     ];
 
     /**
@@ -71,19 +72,44 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    // protected static function booted()
+    // {
+    //     if (Auth::check() && Auth::user()->clinic_id) {
+    //         static::addGlobalScope(new ClinicScope);
+    //     }
+    // }
+
     protected static function booted()
     {
-        if (Auth::check() && Auth::user()->clinic_id) {
-            static::addGlobalScope(new ClinicScope);
-        }
+        static::addGlobalScope(new OrganizationScope);
+
     }
-    
-    public function clinic()
+
+    // public function clinic()
+    // {
+    //     return $this->belongsTo(
+    //         Clinic::class,
+    //         'clinic_id',
+    //         'id',
+    //     );
+    // }
+
+    public function organization()
     {
-        return $this->belongsTo(
-            Clinic::class,
-            'clinic_id',
-            'id',
-        );
+        return $this->morphTo();
+    }
+
+    public function medicalLaboratory()
+    {
+        return $this->belongsTo(MedicalLaboratory::class);
+    }
+
+    public static function getUsersFromSameOrganization()
+    {
+        $user = auth()->user();
+
+        return self::where('organization_type', $user->organization_type)
+            ->where('organization_id', $user->organization_id)
+            ->get();
     }
 }

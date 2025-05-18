@@ -18,7 +18,7 @@ class MedicalAnalysis extends Model implements HasMedia
     public $table = 'medical_analysis';
 
     protected $fillable = [
-        'name','date','type','report','patient_id','reservation_id','clinic_id'
+        'name','date','type_id','report','patient_id','reservation_id','clinic_id'
     ];
 
     

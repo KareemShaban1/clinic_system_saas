@@ -47,9 +47,9 @@ class Clinic extends Model
 
     }
 
-    public function users(){
-        return $this->hasMany(User::class);
-
+    public function users()
+    {
+        return $this->morphMany(User::class, 'organization');
     }
 
     public function governorate(){

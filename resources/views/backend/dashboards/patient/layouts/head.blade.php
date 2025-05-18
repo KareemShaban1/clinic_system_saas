@@ -11,7 +11,10 @@
 <!--- Style css -->
 
 
-<link href="{{ URL::asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+<!-- <link href="{{ URL::asset('backend/assets/datatables/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
+<link href="{{asset('backend/assets/datatable/css/dataTables.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/datatable/css/responsive.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('backend/assets/datatable/css/buttons.bootstrap5.css')}}" rel="stylesheet" type="text/css" />
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
@@ -30,3 +33,5 @@
 @else
     <link href="{{ URL::asset('backend/assets/css/rtl.css') }}" rel="stylesheet">
 @endif
+
+<link href="{{ asset('backend/assets/css/responsive.css') }}" rel="stylesheet">

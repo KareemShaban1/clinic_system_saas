@@ -44,7 +44,7 @@ class PatientController extends Controller
 
     public function data()
     {
-        $patients = Patient::with('reservations')->get();
+        $patients = Patient::with('reservations')->clinic()->get();
 
         return DataTables::of($patients)
             ->addColumn('number_of_reservations', function ($patient) {

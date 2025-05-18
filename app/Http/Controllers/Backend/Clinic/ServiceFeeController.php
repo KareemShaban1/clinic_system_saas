@@ -49,7 +49,8 @@ class ServiceFeeController extends Controller
             'service_name' => $request->service_name,
             'fee' => $request->fee,
             'notes' => $request->notes,
-            'clinic_id' => auth()->user()->clinic_id
+            'organization_id' => auth()->user()->organization_id,
+            'organization_type' => auth()->user()->organization_type,
         ]);
        
 
@@ -83,6 +84,7 @@ class ServiceFeeController extends Controller
             $serviceFee->service_name = $request->service_name;
             $serviceFee->fee = $request->fee;
             $serviceFee->notes = $request->notes;
+            
             $serviceFee->save();
 
             return response()->json(['success' => 'Service fee updated successfully!']);

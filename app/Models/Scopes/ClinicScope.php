@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -10,19 +11,18 @@ class ClinicScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        // Fetch authenticated user **before applying the scope**
+        // Fetch authenticated user before applying the scope
         $user = Auth::user();
 
-        // Prevent infinite loop by checking if user exists
-        if ($user && !app()->runningInConsole()) { 
-            $clinicId = $user->clinic_id;
+        if ($user && !app()->runningInConsole()) {
+            // Check if user is authenticated and belongs to a Clinic
+            if ($user->organization_type === \App\Models\Clinic::class) {
+                $clinicId = $user->organization_id;
 
-            // Only apply scope if the user has a clinic_id
-            if ($clinicId) {
-                
-                $builder->whereHas('clinic', function($query) use ($clinicId) {
-                    $query->where('clinic_id', $clinicId);
-                });
+                if ($clinicId) {
+                    // Apply the scope: filter by the user's clinic
+                    $builder->where('clinic_id', $clinicId);
+                }
             }
         }
     }

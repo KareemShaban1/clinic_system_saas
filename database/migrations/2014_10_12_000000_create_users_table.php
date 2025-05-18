@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clinic_id')
-            ->nullable()
-            ->references('id')->on('clinics')->nullOnDelete();
+               // Make the user morphable to any 'organization' model
+               $table->nullableMorphs('organization'); 
+                // (clinics , medical_laboratories , radiology_centers)    
+               // Creates organization_id (unsignedBigInteger) and organization_type (string)
+
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

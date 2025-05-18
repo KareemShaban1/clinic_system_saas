@@ -1,9 +1,16 @@
-There are 3 type of guards in this project :
-1- admin guard
-2- clinic guard
-3- patient guard
+There are 3 organization in this project:
+1- clinic
+2- medical laboratory
+3- radiology center
 
-1- Admin:
+There are 5 type of guards in this project :
+1- admin guard (admins table)
+2- clinic guard (users table) - (users , doctors)
+3- patient guard (patients table)
+4- medical laboratory guard (users table)
+5- radiology center guard (users table)
+
+1- Administration: [managemnt of project , can't access or see any organizations data]
 - admin can add / edit / delete / show specialities of clinics
 - admin can add / edit / delete / show governorates
 - admin can add / edit / delete / show cities
@@ -16,7 +23,7 @@ There are 3 type of guards in this project :
 - admin can add / edit / delete / show clinics
 - admin can add / edit / delete / show events
 
-2- Clinic: [Doctor , Assistant , ....]
+2- Clinic: [Doctor , Assistant , ....] each clinic has its specialities
 - clinic can add / edit / delete / show patients
 - clinic can add / edit / delete / show reservations
 - clinic can add / edit / delete / show chronic diseases
@@ -25,7 +32,7 @@ There are 3 type of guards in this project :
 - clinic can add / edit / delete / show number of reservations
 - clinic can add / edit / delete / show online reservations
 - clinic can add / edit / delete / show medicines
-- clinic can add / edit / delete / show fees
+- clinic can add / edit / delete / show services fee
 - clinic can add / edit / delete / show users
 - clinic can add / edit / delete / show roles
 - clinic can add / edit / delete / show permissions
@@ -35,14 +42,38 @@ There are 3 type of guards in this project :
 - clinic can add / edit / delete / show events
 
 3- Patient:
-- patient can request appointments
-- patient can show his appointments
-- patient can show his rays / analysis
-- patient can show his chronic diseases
-- patient can show his glasses distance
-- patient can show his prescription
+- patient can request reservation
+- patient can show his reservations [ from clinic ]
+- patient can show his chronic diseases [ from clinic ]
+- patient can show his glasses distance [from clinic]
+- patient can show his prescription [from clinic]
+- patient can show his rays [from radiology center]
+- patient can show his medical analysis [from medical laboratory]
+- patient can assigned to many clinics , medical labs , radiology centers
+- patient can let clinics show his profile
+- patient can show his medical profile (reservations , chronic diseases , rays , glasses distance , prescription)
+- patient can show his card
+- patient can print his card
 
 
+4- Medical Laboratory: [Technician , ....]
+- medical laboratory can add / edit / delete / show users
+- medical laboratory can add / edit / delete / show roles
+- medical laboratory can add / edit / delete / show permissions
+- medical laboratory can add / edit / delete / show settings
+- medical laboratory can add / edit / delete / show subscriptions
+- medical laboratory can add / edit / delete / show events
+- medical laboratory can add / edit / delete / show patients
+
+
+5- Radiology Center: [Technician , ....]
+- radiology center can add / edit / delete / show users
+- radiology center can add / edit / delete / show roles
+- radiology center can add / edit / delete / show permissions
+- radiology center can add / edit / delete / show settings
+- radiology center can add / edit / delete / show subscriptions
+- radiology center can add / edit / delete / show events
+- radiology center can add / edit / delete / show patients
 
 
 
