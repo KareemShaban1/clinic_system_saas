@@ -72,16 +72,10 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    // protected static function booted()
-    // {
-    //     if (Auth::check() && Auth::user()->clinic_id) {
-    //         static::addGlobalScope(new ClinicScope);
-    //     }
-    // }
 
     protected static function booted()
     {
-        static::addGlobalScope(new OrganizationScope);
+        // static::addGlobalScope(new OrganizationScope);
 
     }
 
@@ -99,17 +93,12 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
-    public function medicalLaboratory()
-    {
-        return $this->belongsTo(MedicalLaboratory::class);
-    }
-
-    public static function getUsersFromSameOrganization()
+    public function scopeFromSameOrganization($query)
     {
         $user = auth()->user();
-
-        return self::where('organization_type', $user->organization_type)
-            ->where('organization_id', $user->organization_id)
-            ->get();
+    
+        return $query->where('organization_type', $user->organization_type)
+                     ->where('organization_id', $user->organization_id);
     }
+    
 }

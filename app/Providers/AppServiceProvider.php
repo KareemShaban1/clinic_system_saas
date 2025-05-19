@@ -61,12 +61,9 @@ class AppServiceProvider extends ServiceProvider
 
         BaseModel::observe(BaseModelObserver::class);
 
-        // if (Auth::check()) {
-        //     Patient::addGlobalScope(new ClinicScope);
-        // }
 
         Relation::morphMap([
-            'clinic' => Clinic::class,
+            // 'clinic' => Clinic::class,
             // 'medical_laboratory' => MedicalLaboratory::class,
         ]);
 

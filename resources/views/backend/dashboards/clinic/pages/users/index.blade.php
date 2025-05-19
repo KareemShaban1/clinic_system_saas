@@ -98,8 +98,8 @@
                 name: 'email'
             },
             {
-                data: 'clinic',
-                name: 'clinic'
+                data: 'organization',
+                name: 'organization'
             },
             {
                 data: 'roles',

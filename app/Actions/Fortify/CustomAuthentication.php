@@ -19,9 +19,6 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', '=', $email)
-        ->whereHas('clinic',function($query){
-            $query->where('status', 1);
-        })
         ->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -35,9 +32,9 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', '=', $email)
-        ->whereHas('organization',function($query){
-            $query->where('status', 1);
-        })
+        // ->whereHas('organization',function($query){
+        //     $query->where('status', 1);
+        // })
         ->first();
 
         if ($user && Hash::check($password, $user->password)) {

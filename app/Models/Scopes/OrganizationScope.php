@@ -11,6 +11,7 @@ class OrganizationScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
+        
         if (Auth::check()) {
             $user = Auth::user();
 
