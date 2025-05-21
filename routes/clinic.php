@@ -29,19 +29,7 @@ Route::group(
         // Dashboard Part
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
-        Route::group(
-            [
-                'prefix' => '/backups',
-                'as' => 'backups.',
-                'controller' => 'BackupController',
-            ],
-            function () {
-                Route::get('/', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::get('/download/{file_name}', 'download')->name('download');
-                Route::get('delete/{file_name}', 'delete')->name('delete');
-            }
-        );
+       
         // Patients Part
         Route::group(
             [

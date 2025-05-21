@@ -34,6 +34,20 @@ Route::group(
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
+            Route::group(
+                [
+                    'prefix' => '/backups',
+                    'as' => 'backups.',
+                    'controller' => 'BackupController',
+                ],
+                function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::get('create', 'create')->name('create');
+                    Route::get('/download/{file_name}', 'download')->name('download');
+                    Route::get('delete/{file_name}', 'delete')->name('delete');
+                }
+            );
+
             Route::get('specialities/data',[SpecialityController::class , 'data'])
             ->name('specialities.data');
             Route::get('specialities',[SpecialityController::class , 'index'])
@@ -79,7 +93,7 @@ Route::group(
             ->name('areas.delete');
             Route::get('areas/by-city', [AreaController::class, 'getAreasByCity'])
             ->name('areas.by-city');
-    
+
 
             Route::get('clinics/data',action: [ClinicController::class , 'data'])
             ->name('clinics.data');
