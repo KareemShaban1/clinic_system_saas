@@ -425,7 +425,7 @@ class ReservationController extends Controller
             $data = $request->all();
             $data['month'] = substr($request->date, 5, 7 - 5);
             $data['acceptance'] = 'approved';
-            $data['clinic_id'] = Auth::user()->clinic_id;
+            $data['clinic_id'] = Auth::user()->organization->id;
 
           
             $data['cost'] = $data['cost'] ?? 0;
@@ -724,20 +724,20 @@ class ReservationController extends Controller
 
         // if system use reservation numbers not slots
         $reservation_reservation_number = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->pluck('reservation_number')->map(function ($item) {
             return intval($item);
         })->toArray();
         $number_of_res = NumberOfReservations::where('reservation_date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->value('num_of_reservations');
 
         // if system use reservation slots not numbers
         $reservation_slots = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
             ->where('slot', '<>', 'null')->pluck('slot')->toArray();
         $number_of_slot = ReservationSlots::where('date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
@@ -767,12 +767,12 @@ class ReservationController extends Controller
 
         // if system use reservation numbers not slots
         $reservation_reservation_number = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->pluck('reservation_number')->map(function ($item) {
             return intval($item);
         })->toArray();
         $number_of_res = NumberOfReservations::where('reservation_date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->value('num_of_reservations');
 
 
@@ -780,7 +780,7 @@ class ReservationController extends Controller
         $reservation_slots = Reservation::where('date', $date)
             ->where('slot', '<>', 'null')->pluck('slot')->toArray();
         $number_of_slot = ReservationSlots::where('date', $date)
-        ->where('clinic_id', Auth::user()->clinic_id)
+        ->where('clinic_id', Auth::user()->organization->id)
         ->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 

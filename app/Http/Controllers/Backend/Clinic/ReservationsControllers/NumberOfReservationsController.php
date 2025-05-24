@@ -71,7 +71,7 @@ class NumberOfReservationsController extends Controller
             return redirect()->back()->with('toast_error', 'تم أضافة slots لهذا اليوم');
         } else {
             $data = $request->all();
-            $data['clinic_id'] = Auth::user()->clinic_id;
+            $data['clinic_id'] = Auth::user()->organization->id;
             NumberOfReservations::create($data);
             return redirect()->route('clinic.patients.index')->with('toast_success', 'تم أضافة عدد الحجوزات لهذا اليوم بنجاح');
         }

@@ -81,15 +81,6 @@ class Patient extends Authenticatable
         return $year . '0001';
     }
 
-    // Apply the clinic filter dynamically
-    // public function scopeClinic($query)
-    // {
-    //     if (Auth::check() && Auth::user()->clinic_id) {
-    //         return $query->where('clinic_id', Auth::user()->clinic_id);
-    //     }
-
-    //     return $query;
-    // }
 
     public function reservations()
     {
@@ -152,74 +143,63 @@ class Patient extends Authenticatable
         );
     }
 
-    public function clinic()
+    public function clinics()    
     {
-        return $this->belongsToMany(
-            Clinic::class,
-            'patient_clinic',
-            'patient_id',
-            'clinic_id',
+        return $this->morphedByMany(
+            Clinic::class,         // model you want back
+            'organization',        // morph name → columns are organization_id / organization_type
+            'patient_organization', // pivot table
+            'patient_id',          // FK to patients
+            'organization_id'      // FK to clinics
         );
     }
 
-    // public function medicalLaboratory()
-    // {
-    //     return $this->belongsToMany(
-    //         PatientOrganization::class,
-    //         'patient_organization',
-    //         'patient_id',
-    //         'organization_id',
-    //     );
-    // }
-
     public function medicalLaboratories()
-{
-    return $this->morphedByMany(
-        MedicalLaboratory::class,
-        'organization',
-        'patient_organization',
-        'patient_id',
-        'organization_id'
-    );
-}
+    {
+        return $this->morphedByMany(
+            MedicalLaboratory::class,
+            'organization',
+            'patient_organization',
+            'patient_id',
+            'organization_id'
+        );
+    }
 
 
     public function radiologyCenter()
     {
-        return $this->belongsToMany(
+        return $this->morphedByMany(
             RadiologyCenter::class,
-            'patient_radiology_center',
+            'organization',
+            'patient_organization',
             'patient_id',
-            'radiology_center_id',
+            'organization_id',
         );
     }
 
     public function scopeClinic($query)
     {
-        return $query->whereHas('clinic', function ($query) {
-            $query->where('clinic_id', Auth::user()->clinic_id);
+    
+        return $query->whereHas('clinics', function ($q) {
+            $q->where('organization_id', Auth::user()->organization_id)
+            ->where('assigned', 1);
+        });
+    }
+    
+
+    public function scopeMedicalLaboratory($query)
+    {
+        return $query->whereHas('medicalLaboratories', function ($q) {
+            $q->where('organization_id', Auth::user()->organization_id)
+            ->where('assigned', 1);
         });
     }
 
-    // public function scopeMedicalLaboratory($query)
-    // {
-    //     return $query->whereHas('medicalLaboratory', function ($query) {
-    //         $query->where('organization_id', Auth::user()->organization_id);
-    //     });
-    // }
-
-
-    public function scopeMedicalLaboratory($query)
-{
-    return $query->whereHas('medicalLaboratories', function ($q) {
-        $q->where('organization_id', Auth::user()->organization_id);
-    });
-}
-
     public function scopeRadiologyCenter($query)
     {
-        return $query->whereHas('radiologyCenter', function ($query) {
-            $query->where('radiology_center_id', Auth::user()->radiology_center_id);
+        return $query->whereHas('radiologyCenter', function ($q) {
+            $q->where('organization_id', Auth::user()->organization_id)
+            ->where('assigned', 1);
         });
     }
 
@@ -227,7 +207,4 @@ class Patient extends Authenticatable
     {
         return $this->morphTo();
     }
-
-
-
 }

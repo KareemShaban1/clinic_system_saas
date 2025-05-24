@@ -10,9 +10,12 @@ use App\Models\Reservation;
 use App\Models\Settings;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Traits\AuthorizeCheck;
+use App\Models\Clinic;
+use App\Models\OrganizationAssignment;
 use App\Models\Scopes\ClinicScope;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -156,9 +159,16 @@ class PatientController extends Controller
             $data = $request->validated();
 
             $data['password'] = Hash::make($request->password);
-            $data['clinic_id'] = Auth::user()->clinic_id;
 
-            $this->patient->create($data);
+            $patient = Patient::create($data);
+
+            DB::table('patient_organization')->insert([
+                'patient_id' => $patient->id,
+                'organization_id' => auth()->user()->organization->id,
+                'organization_type' => Clinic::class,
+                'assigned' => true,
+            ]);
+    
 
             return redirect()->route('clinic.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
@@ -317,9 +327,14 @@ class PatientController extends Controller
 
     public function assign(Request $request)
     {
-        // Example: attach patient to authenticated clinic
-        $clinic = auth()->user()->clinic;
-        $clinic->patients()->attach($request->patient_id);
+
+        DB::table('patient_organization')->insert([
+            'patient_id' => $request->patient_id,
+            'organization_id' => auth()->user()->organization->id,
+            'organization_type' => Clinic::class,
+            'assigned' => true,
+        ]);
+
 
         return response()->json(['message' => 'Patient assigned successfully']);
     }

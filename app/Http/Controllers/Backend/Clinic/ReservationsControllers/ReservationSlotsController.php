@@ -88,10 +88,6 @@ class ReservationSlotsController extends Controller
     public function update(Request $request, $id)
     {
 
-        // $request->validate([
-        //     'reservation_date' => 'required',
-        //     'num_of_reservations' => 'required',
-        //     ]);
 
         try {
 

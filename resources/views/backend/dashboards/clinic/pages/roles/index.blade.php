@@ -27,7 +27,7 @@
                             <th>{{ trans('backend/roles_trans.Id') }}</th>
                             <th>{{ trans('backend/roles_trans.Role_Name') }}</th>
                             <!-- <th>{{ trans('backend/roles_trans.Guard_Name') }}</th> -->
-                             <th>{{ trans('backend/roles_trans.Permissions_Count') }}</th>
+                            <th>{{ trans('backend/roles_trans.Permissions_Count') }}</th>
                             <th>{{ trans('backend/roles_trans.Control') }}</th>
                         </tr>
                     </thead>
@@ -41,7 +41,7 @@
 
 <!-- Add Role Modal -->
 <div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="addRoleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{__('Add Role')}}</h5>
@@ -75,7 +75,7 @@
 
 <!-- Edit Role Modal -->
 <div class="modal fade" id="editRoleModal" tabindex="-1" aria-labelledby="editRoleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{__('Edit Role')}}</h5>
@@ -198,21 +198,44 @@
             });
         }
 
+        // Helper function to render permissions with 6 per row
+        function renderPermissions(containerId, permissions, selectedPermissions = []) {
+            const container = $(`#${containerId}`);
+            container.empty();
+
+            for (let i = 0; i < permissions.length; i += 6) {
+                const row = $('<div class="row mb-2"></div>');
+
+                for (let j = i; j < i + 6 && j < permissions.length; j++) {
+                    const permission = permissions[j];
+                    const isChecked = selectedPermissions.includes(permission.id) ? 'checked' : '';
+                    const col = $(`
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" 
+                               name="permissions[]" value="${permission.id}" 
+                               id="perm${containerId}${permission.id}" ${isChecked}>
+                        <label class="form-check-label" for="perm${containerId}${permission.id}">
+                            ${permission.name}
+                        </label>
+                    </div>
+                </div>
+            `);
+                    row.append(col);
+                }
+
+                container.append(row);
+            }
+        }
+
         // Load permissions dynamically when opening Add Role Modal
         $('#addRoleModal').on('show.bs.modal', function() {
             $.ajax({
                 url: '/clinic/roles/permissions',
                 type: 'GET',
                 success: function(response) {
-                    $('#addPermissions').empty();
-                    $.each(response, function(index, permission) {
-                        $('#addPermissions').append(
-                            `<div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="permissions[]" value="${permission.id}" id="perm${permission.id}">
-                                <label class="form-check-label" for="perm${permission.id}">${permission.name}</label>
-                            </div>`
-                        );
-                    });
+                    renderPermissions('addPermissions', response);
+
                 }
             });
         });
@@ -222,16 +245,16 @@
             e.preventDefault();
 
             var formData = {
-    _token: $('meta[name="csrf-token"]').attr('content'),
-    name: $('#addRoleName').val(),
-    permissions: $('input[name="permissions[]"]:checked').map(function() {
-        return $(this).val();
-    }).get()
-};
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                name: $('#addRoleName').val(),
+                permissions: $('input[name="permissions[]"]:checked').map(function() {
+                    return $(this).val();
+                }).get()
+            };
 
 
             $.ajax({
-                url: '/clinic/roles',
+                url: "{{ route('clinic.roles.store') }}",
                 type: 'POST',
                 data: formData,
                 success: function(response) {
@@ -255,16 +278,9 @@
                         $('#editRoleId').val(roleId);
                         $('#editRoleName').val(response.role.name);
 
-                        // Load permissions into the select dropdown
-                        $('#editPermissions').empty();
-                        $.each(response.permissions, function(index, permission) {
-                            $('#editPermissions').append(
-                                `<div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="permissions[]" value="${permission.id}" id="perm${permission.id}" ${response.rolePermissions.includes(permission.id) ? 'checked' : ''}>
-                                    <label class="form-check-label" for="perm${permission.id}">${permission.name}</label>
-                                </div>`
-                            );
-                        });
+                        // Load permissions with checked items
+                        renderPermissions('editPermissions', response.permissions, response.rolePermissions);
+
 
                         $('#editRoleModal').modal('show');
                     }
@@ -326,6 +342,9 @@
                 }
             });
         });
+
+      
+
 
     });
 </script>

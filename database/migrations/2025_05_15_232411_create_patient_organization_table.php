@@ -21,6 +21,8 @@ return new class extends Migration
             $table->nullableMorphs('organization');
             // (clinics , medical_laboratories , radiology_centers)    
             // Creates organization_id (unsignedBigInteger) and organization_type (string)
+            $table->boolean('assigned')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
