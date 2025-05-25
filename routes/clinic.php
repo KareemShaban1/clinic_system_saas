@@ -55,7 +55,8 @@ Route::group(
 
                 Route::get('/add_patient_code', 'add_patient_code')->name('add_patient_code');
                 Route::get('/search', 'search');
-                Route::post('/assign', 'assign');
+                Route::post('/assign', 'assignPatient')->name('assignPatient');
+                Route::post('/unassign/{patient_id}', 'unassignPatient')->name('unassignPatient');
             }
         );
 

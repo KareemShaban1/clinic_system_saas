@@ -75,6 +75,8 @@ class PatientController extends Controller
                 $editUrl = route('clinic.patients.edit', $patient->id);
                 $deleteUrl = route('clinic.patients.destroy', $patient->id);
                 $viewUrl = route('clinic.patients.show', $patient->id);
+                // $assignUrl = route('clinic.patients.assignPatient', $patient->id);
+                $unassignUrl = route('clinic.patients.unassignPatient', $patient->id);
 
                 $actions = '
                     <a href="' . $viewUrl . '" class="btn btn-primary btn-sm">
@@ -82,7 +84,8 @@ class PatientController extends Controller
                     </a>
                     <a href="' . $editUrl . '" class="btn btn-warning btn-sm">
                         <i class="fa fa-edit"></i>
-                    </a>';
+                    </a>
+                    ';
 
                 if ($patient->reservations->count() == 0) {
                     $actions .= '
@@ -92,6 +95,14 @@ class PatientController extends Controller
                             <button type="submit" class="btn btn-danger btn-sm" 
                                     onclick="return confirm(\'Are you sure you want to delete this item?\')">
                                 <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                        <form action="' . $unassignUrl . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            ' . method_field('POST') . '
+                            <button type="submit" class="btn btn-secondary btn-sm" 
+                                    onclick="return confirm(\'Are you sure you want to unassign this item?\')">
+                                <i class="fa fa-link-slash"></i>
                             </button>
                         </form>';
                 }
@@ -325,17 +336,31 @@ class PatientController extends Controller
     }
 
 
-    public function assign(Request $request)
+    public function assignPatient(Request $request)
     {
 
         DB::table('patient_organization')->insert([
             'patient_id' => $request->patient_id,
             'organization_id' => auth()->user()->organization->id,
             'organization_type' => Clinic::class,
-            'assigned' => true,
+            'assigned' => 1,
         ]);
 
 
         return response()->json(['message' => 'Patient assigned successfully']);
+    }
+
+    public function unassignPatient($patient_id)
+    {
+        DB::table('patient_organization')
+        ->where('patient_id', $patient_id)
+        ->update([
+            'assigned' => 0,
+        ]);
+
+        
+        return redirect()->back()->with('toast_success', 'Patient unassigned successfully');
+
+        // return response()->json(['message' => 'Patient unassigned successfully']);
     }
 }
