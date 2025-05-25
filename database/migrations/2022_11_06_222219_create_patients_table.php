@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('password')->nullable();
             $table->string('patient_code')->unique();
-            $table->char('phone', 20);
+            $table->char('phone', 20)->unique();
             $table->char('whatsapp_number', 20)->nullable();
             $table->enum('blood_group', 
             ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('weight')->nullable();
             $table->enum('marital_status',
              ['single', 'married', 'widowed', 'divorced', 'separated'])->nullable();
-            $table->string('nationality')->nullable();
+            // $table->string('nationality')->nullable();
             // end new updates
             // $table->foreignId('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
 

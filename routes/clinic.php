@@ -300,6 +300,7 @@ Route::group(
                 Route::get('/', 'index')->name('index');
                 Route::get('/today', 'today')->name('today');
                 Route::get('/month', 'month')->name('month');
+                Route::get('/data', 'data')->name('data');
             }
         );
 

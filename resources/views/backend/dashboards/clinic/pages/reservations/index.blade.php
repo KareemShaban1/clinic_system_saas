@@ -48,9 +48,9 @@
                                         <th>{{ trans('backend/reservations_trans.Acceptance') }}</th>
                                         <th>{{ trans('backend/reservations_trans.Reservation_Date') }}</th>
 
-                                        <th>{{ trans('backend/reservations_trans.Rays') }}</th>
+                                        <!-- <th>{{ trans('backend/reservations_trans.Rays') }}</th> -->
 
-                                        <th>{{ trans('backend/reservations_trans.Analysis') }}</th>
+                                        <!-- <th>{{ trans('backend/reservations_trans.Analysis') }}</th> -->
 
                                         <th>{{ trans('backend/reservations_trans.Chronic_Diseases') }}</th>
                                         <th>{{ trans('backend/reservations_trans.Glasses_Distance') }}</th>
@@ -75,9 +75,9 @@
                                         <th>{{ trans('backend/reservations_trans.Acceptance') }}</th>
                                         <th>{{ trans('backend/reservations_trans.Reservation_Date') }}</th>
 
-                                        <th>{{ trans('backend/reservations_trans.Rays') }}</th>
+                                        <!-- <th>{{ trans('backend/reservations_trans.Rays') }}</th> -->
 
-                                        <th>{{ trans('backend/reservations_trans.Analysis') }}</th>
+                                        <!-- <th>{{ trans('backend/reservations_trans.Analysis') }}</th> -->
 
                                         <th>{{ trans('backend/reservations_trans.Chronic_Diseases') }}</th>
                                         <th>{{ trans('backend/reservations_trans.Glasses_Distance') }}</th>
@@ -142,18 +142,18 @@
                     data: 'date',
                     name: 'date'
                 },
-                {
-                    data: 'ray_action',
-                    name: 'ray_action',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'analysis_action',
-                    name: 'analysis_action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'ray_action',
+                //     name: 'ray_action',
+                //     orderable: false,
+                //     searchable: false
+                // },
+                // {
+                //     data: 'analysis_action',
+                //     name: 'analysis_action',
+                //     orderable: false,
+                //     searchable: false
+                // },
                 {
                     data: 'chronic_disease_action',
                     name: 'chronic_disease_action',
@@ -233,18 +233,18 @@
                     data: 'date',
                     name: 'date'
                 },
-                {
-                    data: 'ray_action',
-                    name: 'ray_action',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'analysis_action',
-                    name: 'analysis_action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'ray_action',
+                //     name: 'ray_action',
+                //     orderable: false,
+                //     searchable: false
+                // },
+                // {
+                //     data: 'analysis_action',
+                //     name: 'analysis_action',
+                //     orderable: false,
+                //     searchable: false
+                // },
                 {
                     data: 'chronic_disease_action',
                     name: 'chronic_disease_action',
@@ -293,7 +293,7 @@
             type: 'POST',
             data: {
                 status: newStatus,
-                _token: '{{ csrf_token() }}' // Include CSRF token for Laravel
+                _token: '{{ csrf_token() }}'
             },
             success: function(response) {
                 Swal.fire({
@@ -301,7 +301,6 @@
                     title: response.message,
 
                 });
-                // alert(response.message); // Display success message
                 reservationsTable.ajax.reload();
                 todayReservationsTable.ajax.reload();
 

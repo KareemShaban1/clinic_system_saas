@@ -270,12 +270,6 @@
                         </a>
                         <ul id="fees-menu" class="collapse" data-parent="#sidebarnav">
                             <li> <a
-                                    href="{{ Route('clinic.fees.today') }}">{{ trans('backend/sidebar_trans.Today_Fees') }}</a>
-                            </li>
-                            <li> <a
-                                    href="{{ Route('clinic.fees.month') }}">{{ trans('backend/sidebar_trans.Month_Fees') }}</a>
-                            </li>
-                            <li> <a
                                     href="{{ Route('clinic.fees.index') }}">{{ trans('backend/sidebar_trans.All_Fees') }}</a>
                             </li>
                         </ul>

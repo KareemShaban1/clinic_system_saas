@@ -32,8 +32,8 @@
 
                     @php
                     $settingsFields = [
-                    'show_ray' => 'Show_Ray',
-                    'show_analysis' => 'Show_Analysis',
+                    //'show_ray' => 'Show_Ray',
+                    //'show_analysis' => 'Show_Analysis',
                     'show_chronic_diseases' => 'Show_Chronic_Diseases',
                     'show_glasses_distance' => 'Show_Glasses_Distance',
                     'show_prescription' => 'Show_Prescription',

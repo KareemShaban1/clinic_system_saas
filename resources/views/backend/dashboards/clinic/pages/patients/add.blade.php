@@ -62,11 +62,22 @@
 
                             </div>
                         </div>
-                        <div class="col-md-4 col-12">
+                       
+                    </div>
+
+                    <div class="row">
+                    <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label for="phone"> {{ trans('backend/patients_trans.Phone') }} <span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="phone" name="phone" type="phone">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label for="whatsapp_number"> {{ trans('backend/patients_trans.Whatsapp_Number') }} </label>
+                                <input class="form-control" id="whatsapp_number" name="whatsapp_number" type="phone">
 
                             </div>
                         </div>

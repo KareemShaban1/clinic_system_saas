@@ -73,7 +73,6 @@ class ReservationController extends Controller
         $this->authorizeCheck('view-reservations');
 
         $reservations = $this->reservation->with('patient:id,name')->get();
-        // $reservation_settings = $this->systemControl->pluck('value', 'key');
         $clinic_type = $this->settings->where('key', 'clinic_type')->value('value');
 
         return view(
@@ -121,7 +120,7 @@ class ReservationController extends Controller
             })
             ->addColumn('status', function ($reservation) {
                 $status = '';
-                
+
                 // Determine the current status badge
                 if ($reservation->status == 'waiting') {
                     $status = '<span class="badge badge-rounded badge-warning text-white p-2">' .
@@ -140,7 +139,7 @@ class ReservationController extends Controller
                         trans('backend/reservations_trans.Cancelled') .
                         '</span>';
                 }
-            
+
                 // Create a <select> dropdown for changing status
                 $dropdown = '<select class="form-control p-0 res-status-select" data-reservation-id="' . $reservation->id . '">
                                 <option value="waiting" ' . ($reservation->status == 'waiting' ? 'selected' : '') . '>' . trans('backend/reservations_trans.Waiting') . '</option>
@@ -148,71 +147,70 @@ class ReservationController extends Controller
                                 <option value="finished" ' . ($reservation->status == 'finished' ? 'selected' : '') . '>' . trans('backend/reservations_trans.Finished') . '</option>
                                 <option value="cancelled" ' . ($reservation->status == 'cancelled' ? 'selected' : '') . '>' . trans('backend/reservations_trans.Cancelled') . '</option>
                             </select>';
-            
+
                 return $status . $dropdown;
             })
-            
-            ->addColumn('ray_action', function ($reservation) {
-                $reservation_settings = $this->systemControl->pluck('value', 'key');
 
-                // Check if reservation settings allow showing ray
-                if (isset($reservation_settings['show_ray']) && $reservation_settings['show_ray'] == 1) {
-                    // Check if Ray exists for this reservation
-                    $rayExists = Ray::where('reservation_id', $reservation->id)->first();
+            // ->addColumn('ray_action', function ($reservation) {
+            //     $reservation_settings = $this->systemControl->pluck('value', 'key');
 
-                    // Return the appropriate buttons based on Ray existence
-                    if ($rayExists) {
-                        return '<div class="res_control">
-                                    <a href="' . route('clinic.rays.add', $reservation->id) . '" class="btn btn-success btn-sm">
-                                        ' . trans('backend/reservations_trans.Add') . '
-                                    </a>
-                                    <a href="' . route('clinic.rays.show', $reservation->id) . '" class="btn btn-info btn-sm">
-                                        ' . trans('backend/reservations_trans.Show') . '
-                                    </a>
-                                </div>';
-                    } else {
-                        return '<div class="res_control">
-                                    <a href="' . route('clinic.rays.add', $reservation->id) . '" class="btn btn-dark btn-sm">
-                                        ' . trans('backend/reservations_trans.Add') . '
-                                    </a>
-                                </div>';
-                    }
-                }
+            //     // Check if reservation settings allow showing ray
+            //     if (isset($reservation_settings['show_ray']) && $reservation_settings['show_ray'] == 1) {
+            //         // Check if Ray exists for this reservation
+            //         $rayExists = Ray::where('reservation_id', $reservation->id)->first();
 
-                // If show_ray is not set to 1, return an empty string or null
-                return '';
-            })
+            //         // Return the appropriate buttons based on Ray existence
+            //         if ($rayExists) {
+            //             return '<div class="res_control">
+            //                         <a href="' . route('clinic.rays.add', $reservation->id) . '" class="btn btn-success btn-sm">
+            //                             ' . trans('backend/reservations_trans.Add') . '
+            //                         </a>
+            //                         <a href="' . route('clinic.rays.show', $reservation->id) . '" class="btn btn-info btn-sm">
+            //                             ' . trans('backend/reservations_trans.Show') . '
+            //                         </a>
+            //                     </div>';
+            //         } else {
+            //             return '<div class="res_control">
+            //                         <a href="' . route('clinic.rays.add', $reservation->id) . '" class="btn btn-dark btn-sm">
+            //                             ' . trans('backend/reservations_trans.Add') . '
+            //                         </a>
+            //                     </div>';
+            //         }
+            //     }
 
-            ->addColumn('analysis_action', function ($reservation) {
-                $reservation_settings = $this->systemControl->pluck('value', 'key');
+            //     return '';
+            // })
 
-                // Check if reservation settings allow showing ray
-                if (isset($reservation_settings['show_analysis']) && $reservation_settings['show_analysis'] == 1) {
-                    // Check if Ray exists for this reservation
-                    $analysisExists = MedicalAnalysis::where('reservation_id', $reservation->id)->first();
+            // ->addColumn('analysis_action', function ($reservation) {
+            //     $reservation_settings = $this->systemControl->pluck('value', 'key');
 
-                    // Return the appropriate buttons based on Ray existence
-                    if ($analysisExists) {
-                        return '<div class="res_control">
-                                    <a href="' . route('clinic.analysis.add', $reservation->id) . '" class="btn btn-success btn-sm">
-                                        ' . trans('backend/reservations_trans.Add') . '
-                                    </a>
-                                    <a href="' . route('clinic.analysis.show', $reservation->id) . '" class="btn btn-info btn-sm">
-                                        ' . trans('backend/reservations_trans.Show') . '
-                                    </a>
-                                </div>';
-                    } else {
-                        return '<div class="res_control">
-                                    <a href="' . route('clinic.analysis.add', $reservation->id) . '" class="btn btn-dark btn-sm">
-                                        ' . trans('backend/reservations_trans.Add') . '
-                                    </a>
-                                </div>';
-                    }
-                }
+            //     // Check if reservation settings allow showing ray
+            //     if (isset($reservation_settings['show_analysis']) && $reservation_settings['show_analysis'] == 1) {
+            //         // Check if Ray exists for this reservation
+            //         $analysisExists = MedicalAnalysis::where('reservation_id', $reservation->id)->first();
 
-                // If show_ray is not set to 1, return an empty string or null
-                return '';
-            })
+            //         // Return the appropriate buttons based on Ray existence
+            //         if ($analysisExists) {
+            //             return '<div class="res_control">
+            //                         <a href="' . route('clinic.analysis.add', $reservation->id) . '" class="btn btn-success btn-sm">
+            //                             ' . trans('backend/reservations_trans.Add') . '
+            //                         </a>
+            //                         <a href="' . route('clinic.analysis.show', $reservation->id) . '" class="btn btn-info btn-sm">
+            //                             ' . trans('backend/reservations_trans.Show') . '
+            //                         </a>
+            //                     </div>';
+            //         } else {
+            //             return '<div class="res_control">
+            //                         <a href="' . route('clinic.analysis.add', $reservation->id) . '" class="btn btn-dark btn-sm">
+            //                             ' . trans('backend/reservations_trans.Add') . '
+            //                         </a>
+            //                     </div>';
+            //         }
+            //     }
+
+            //     // If show_ray is not set to 1, return an empty string or null
+            //     return '';
+            // })
 
             ->addColumn('chronic_disease_action', function ($reservation) {
                 $reservation_settings = $this->systemControl->pluck('value', 'key');
@@ -355,8 +353,17 @@ class ReservationController extends Controller
 
                 return $actions;
             })
-            ->rawColumns(['payment', 'status', 'acceptance', 'actions', 'ray_action',
-             'analysis_action', 'chronic_disease_action', 'prescription_action', 'glasses_distance_action'])
+            ->rawColumns([
+                'payment',
+                'status',
+                'acceptance',
+                'actions',
+                'ray_action',
+                'analysis_action',
+                'chronic_disease_action',
+                'prescription_action',
+                'glasses_distance_action'
+            ])
             ->make(true);
     }
 
@@ -427,13 +434,13 @@ class ReservationController extends Controller
             $data['acceptance'] = 'approved';
             $data['clinic_id'] = Auth::user()->organization->id;
 
-          
+
             $data['cost'] = $data['cost'] ?? 0;
 
             if ($request->has('service_fee')) {
                 $data['cost'] += array_sum($request->service_fee); // Sum all service fees
             }
-                
+
             $reservation = $this->reservation->create($data);
 
             // Store service fees
@@ -448,12 +455,12 @@ class ReservationController extends Controller
                         'fee' => $fee,
                         'notes' => $notes
                     ]);
-            
+
                     // DB::insert('insert into reservation_service_fee (reservation_id, service_fee_id, fee, notes) values (?, ?, ?, ?)', 
                     //     [$reservation->id, $serviceFeeId, $fee, $notes]);
                 }
             }
-            
+
 
             return redirect()->route('clinic.reservations.index')->with('toast_success', 'Reservation added successfully');
         } catch (\Exception $e) {
@@ -563,7 +570,8 @@ class ReservationController extends Controller
         return view('backend.dashboards.clinic.pages.reservations.trash', compact('reservations'));
     }
 
-    public function trashData(){
+    public function trashData()
+    {
 
         $query = $this->reservation->onlyTrashed()->with('patient:id,name');
 
@@ -676,7 +684,7 @@ class ReservationController extends Controller
                                         <i class="fa fa-edit"></i> إعادة
                                     </button>
                                 </form>';
-            
+
                 // Generate force delete action form
                 $forceDeleteForm = '<form action="' . route('clinic.reservations.forceDelete', $reservation->id) . '" method="post" style="display:inline">
                                         ' . csrf_field() . '
@@ -685,15 +693,12 @@ class ReservationController extends Controller
                                             <i class="fa fa-trash"></i> حذف نهائى
                                         </button>
                                     </form>';
-            
+
                 // Combine both actions into one string
                 return $restoreForm . $forceDeleteForm;
             })
             ->rawColumns(['payment', 'status', 'acceptance', 'actions'])
             ->make(true);
-
-
-
     }
 
     public function restore($id)
@@ -724,21 +729,21 @@ class ReservationController extends Controller
 
         // if system use reservation numbers not slots
         $reservation_reservation_number = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->pluck('reservation_number')->map(function ($item) {
-            return intval($item);
-        })->toArray();
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->pluck('reservation_number')->map(function ($item) {
+                return intval($item);
+            })->toArray();
         $number_of_res = NumberOfReservations::where('reservation_date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->value('num_of_reservations');
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->value('num_of_reservations');
 
         // if system use reservation slots not numbers
         $reservation_slots = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
+            ->where('clinic_id', Auth::user()->organization->id)
             ->where('slot', '<>', 'null')->pluck('slot')->toArray();
         $number_of_slot = ReservationSlots::where('date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->first();
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
 
@@ -767,21 +772,21 @@ class ReservationController extends Controller
 
         // if system use reservation numbers not slots
         $reservation_reservation_number = Reservation::where('date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->pluck('reservation_number')->map(function ($item) {
-            return intval($item);
-        })->toArray();
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->pluck('reservation_number')->map(function ($item) {
+                return intval($item);
+            })->toArray();
         $number_of_res = NumberOfReservations::where('reservation_date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->value('num_of_reservations');
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->value('num_of_reservations');
 
 
         // if system use reservation slots not numbers
         $reservation_slots = Reservation::where('date', $date)
             ->where('slot', '<>', 'null')->pluck('slot')->toArray();
         $number_of_slot = ReservationSlots::where('date', $date)
-        ->where('clinic_id', Auth::user()->organization->id)
-        ->first();
+            ->where('clinic_id', Auth::user()->organization->id)
+            ->first();
         $slots = $number_of_slot ? $this->getTimeSlot($number_of_slot->duration, $number_of_slot->start_time, $number_of_slot->end_time) : [];
 
 

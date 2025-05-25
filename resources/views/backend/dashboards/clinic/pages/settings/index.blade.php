@@ -38,13 +38,6 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="settings-container">
-            <a href="{{ Route('clinic.backups.index') }}">
-                {{ trans('backend/settings_trans.Backups') }}
-            </a>
-        </div>
-    </div>
 
 </div>
 @endsection

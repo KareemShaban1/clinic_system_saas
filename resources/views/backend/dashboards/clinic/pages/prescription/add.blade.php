@@ -5,16 +5,9 @@
     {{ trans('backend/drugs_trans.Prescription') }}
 @stop
 @endsection
+
 @section('page-header')
-<!-- breadcrumb -->
-<div class="page-title">
-    <div class="row">
-        <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('backend/drugs_trans.Prescription') }}</h4>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb -->
+<h4 class="page-title">{{ trans('backend/drugs_trans.Prescription') }}</h4>
 @endsection
 
 @section('content')

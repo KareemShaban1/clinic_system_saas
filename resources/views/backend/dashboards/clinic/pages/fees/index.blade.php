@@ -1,96 +1,69 @@
 @extends('backend.dashboards.clinic.layouts.master')
-@section('css')
 
 @section('title')
-{{ trans('backend/fees_trans.All_Fees') }}
-@stop
+{{ trans('backend/fees_trans.Fees') }}
 @endsection
+
+@section('css')
+<!-- Add any CSS if needed -->
+@endsection
+
 @section('page-header')
-
-<h4 class="page-title"> {{ trans('backend/fees_trans.All_Fees') }}</h4>
-
+<h4 class="page-title"> {{ trans('backend/fees_trans.Fees') }}</h4>
 @endsection
+
 @section('content')
 <!-- row -->
 <div class="row">
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
+                <div class="row mb-3">
+                        <div class="col-md-4">
+                            <div class="btn-group" role="group" aria-label="Filter">
+                                <button class="btn btn-primary filter-btn" data-filter="today">{{ trans('backend/fees_trans.Today') }}</button>
+                                <button class="btn btn-info filter-btn" data-filter="week">{{ trans('backend/fees_trans.This_Week') }}</button>
+                                <button class="btn btn-success filter-btn" data-filter="month">{{ trans('backend/fees_trans.This_Month') }}</button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <input type="date" id="start_date" class="form-control" placeholder="Start Date">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="date" id="end_date" class="form-control" placeholder="End Date">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-dark" id="custom_filter">{{ trans('backend/fees_trans.Apply_Filter') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
 
-                {{-- <div class="row">
-                <div class="col-6 cost-span text-white">  تاريخ اليوم : {{$current_date}} </div>
 
-                <div class="col-6 cost-span text-white">  الإجمالى : {{$cost_sum}} </div>
-                </div> --}}
 
-                <table id="table_id" class="display">
+
+
+                <table id="fees_table" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
-                            <th>id</th>
-                            <th>الاسم</th>
-                            <th>رقم الكشف</th>
-                            <th>نوع الكشف</th>
-                            <th>تاريخ الكشف</th>
-                            <th>حالة الدفع</th>
-                            <th>المبلغ</th>
-
-                            
-                           
-                            
+                            <th>{{ trans('backend/fees_trans.Id') }}</th>
+                            <th>{{ trans('backend/fees_trans.Patient_Name') }}</th>
+                            <th>{{ trans('backend/fees_trans.Reservation_Number') }}</th>
+                            <th>{{ trans('backend/fees_trans.Date') }}</th>
+                            <th>{{ trans('backend/fees_trans.Payment') }}</th>
+                            <th>{{ trans('backend/fees_trans.Cost') }}</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                        @foreach ($reservations as $reservation)
+                    <tfoot>
                         <tr>
-                        <td>{{$reservation->id}}</td>
-                        <td>{{$reservation->patient->name}}</td>
-                        <td>{{$reservation->reservation_number}}</td>
-
-                        <td>
-                           @if ( $reservation->res_type == "check" )
-                            كشف
-                            @elseif ( $reservation->res_type == "recheck")
-                            اعادة كشف
-                            @elseif ( $reservation->res_type == "consultation")
-                            استشارة
-                            @endif
-                        </td>
-
-                        <td>{{$reservation->date}}</td>
-
-                        <td>
-                            
-                            @if ( $reservation->payment == "paid" )
-                             <span class="badge badge-rounded badge-success">تم الدفع</span> 
-                             @elseif ( $reservation->payment == "not paid")
-                             <span class="badge badge-rounded badge-danger"> لم يتم الدفع </span>
-                             @endif
-                         </td>
-
-                        <td>
-                            <span class="badge badge-rounded badge-info">{{$reservation->cost}}</span>
-                        </td>
-
-                        
-                    </tr>
-
-                    @endforeach
-                    
-                    {{-- <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>{{$cost_sum}}</td>
-                    </tr> --}}
-
-                        
-                        
-                    </tbody>
+                            <th colspan="5" class="text-end">{{ trans('backend/fees_trans.Total') }}</th>
+                            <th id="totalCostCell">0</th>
+                        </tr>
+                    </tfoot>
                 </table>
-                
-                
+
             </div>
         </div>
     </div>
@@ -101,40 +74,84 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var lang = "{{ App::getLocale() }}";
-        var dataTableOptions = {
-            responsive: true,
-            columnDefs: [{
-                    responsivePriority: 1,
-                    targets: 1
-                },
-                {
-                    responsivePriority: 2,
-                    targets: 4
-                },
-                {
-                    responsivePriority: 3,
-                    targets: 5
-                },
-                {
-                    responsivePriority: 4,
-                    targets: 6
-                },
-                // Add more columnDefs for other columns, if needed
-            ],
-            oLanguage: {
-                sZeroRecords: lang === 'ar' ? 'لا يوجد سجل متطابق' : 'No matching records found',
-                sEmptyTable: lang === 'ar' ? 'لا يوجد بيانات في الجدول' : 'No data available in table',
-                oPaginate: {
-                    sFirst: lang === 'ar' ? "الأول" : "First",
-                    sLast: lang === 'ar' ? "الأخير" : "Last",
-                    sNext: lang === 'ar' ? "التالى" : "Next",
-                    sPrevious: lang === 'ar' ? "السابق" : "Previous",
-                },
-            },
-        };
+        const language = "{{ app()->getLocale() }}";
 
-        $('#table_id').DataTable(dataTableOptions);
+        const table = $('#fees_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('clinic.fees.data') }}",
+                data: function(d) {
+                    d.filter = $('#filter_type').val();
+                    d.start_date = $('#start_date').val();
+                    d.end_date = $('#end_date').val();
+                }
+            },
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'patient_name',
+                    name: 'patient_name'
+                },
+                {
+                    data: 'reservation_number',
+                    name: 'reservation_number'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'payment',
+                    name: 'payment',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'cost',
+                    name: 'cost'
+                }
+            ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
+            pageLength: 10,
+            responsive: true,
+            drawCallback: function(settings) {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+
+                // ✅ Update footer with total cost
+                let response = settings.json;
+                if (response && response.total_cost !== undefined) {
+                    $('#totalCostCell').text(response.total_cost + ' {{ trans("backend/fees_trans.Currency") }}');
+                }
+            }
+        });
+
+        // Store filter in hidden input
+        $('<input>').attr({
+            type: 'hidden',
+            id: 'filter_type',
+            value: 'today'
+        }).appendTo('body');
+
+        $('.filter-btn').on('click', function() {
+            $('#filter_type').val($(this).data('filter'));
+            $('#start_date').val('');
+            $('#end_date').val('');
+            table.ajax.reload();
+        });
+
+        $('#custom_filter').on('click', function() {
+            $('#filter_type').val('custom');
+            table.ajax.reload();
+        });
     });
 </script>
+
 @endpush
