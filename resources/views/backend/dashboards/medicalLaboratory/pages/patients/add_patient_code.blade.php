@@ -1,4 +1,4 @@
-@extends('backend.dashboards.clinic.layouts.master')
+@extends('backend.dashboards.medicalLaboratory.layouts.master')
 
 @section('title')
     {{ trans('backend/patients_trans.Add_Patient_Using_Code') }}
@@ -27,7 +27,7 @@
         <div class="card-body">
             <p><strong>{{ trans('backend/patients_trans.Name') }}</strong> <span id="patient_name"></span></p>
             <p><strong>{{ trans('backend/patients_trans.Email') }}</strong> <span id="patient_email"></span></p>
-            <button class="btn btn-info" onclick="assignPatient()">{{ trans('backend/patients_trans.Assign_to_Clinic') }}</button>
+            <button class="btn btn-info" onclick="assignPatient()">{{ trans('backend/patients_trans.Assign_to_Lab') }}</button>
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
         let code = document.getElementById('patient_code').value;
         if (!code) return alert('Enter a patient code');
 
-        fetch(`/clinic/patients/search?code=${code}`)
+        fetch(`/medical-laboratory/patients/search?code=${code}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -63,7 +63,7 @@
 
     function assignPatient() {
         let patientId = document.getElementById('patient_result').dataset.id;
-        fetch('/clinic/patients/assign', {
+        fetch('/medical-laboratory/patients/assign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

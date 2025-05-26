@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Clinic;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreUserRequest;
+use App\Models\Clinic;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +20,8 @@ class UserController extends Controller
     {
 
 
-
-
         $users = User::with('roles')->get();
-        $roles = Role::all();
+        $roles = Role::where('guard_name','=','web')->get();
 
 
         return view('backend.dashboards.clinic.pages.users.index', compact('users', 'roles'));
@@ -30,11 +29,10 @@ class UserController extends Controller
 
     public function data()
     {
-        $users = User::
-        fromSameOrganization()
-        ->with(['roles','organization'])
-        ->select('id', 'name', 'email', 'organization_id', 'organization_type')
-        ->get();
+        $users = User::fromSameOrganization()
+            ->with(['roles', 'organization'])
+            ->select('id', 'name', 'email', 'organization_id', 'organization_type')
+            ->get();
 
 
         return DataTables::of($users)
@@ -48,11 +46,11 @@ class UserController extends Controller
             })
             ->addColumn('organization', function ($user) {
                 if ($user->organization) {
-                    return class_basename($user->organization_type) . ': ' . $user->organization->name;
+                    return  $user->organization->name;
                 }
                 return 'N/A';
             })
-            
+
             ->addColumn('roles', function ($user) {
                 $roles = $user->roles->pluck('name');
                 $rolesWithBadges = $roles->map(function ($role) {
@@ -78,7 +76,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'clinic_id' => auth()->user()->clinic_id
+            'organization_id' => auth()->user()->organization_id,
+            'organization_type' => Clinic::class
         ]);
 
         $user->assignRole($request->roles);
@@ -87,17 +86,17 @@ class UserController extends Controller
     }
 
     public function edit($id)
-{
-    $user = User::with('roles')->findOrFail($id);
-    $userRole = $user->roles->pluck('name', 'name')->all();
-    return response()->json([
-        'id' => $user->id,
-        'name' => $user->name,
-        'email' => $user->email,
-        'roles' => $user->roles->pluck('name'),
-        'userRole' => $userRole
-    ]);
-}
+    {
+        $user = User::with('roles')->findOrFail($id);
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'roles' => $user->roles->pluck('name'),
+            'userRole' => $userRole
+        ]);
+    }
 
     public function update(Request $request, $id)
     {

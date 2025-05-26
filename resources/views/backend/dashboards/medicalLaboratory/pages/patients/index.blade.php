@@ -36,71 +36,14 @@
                                 <th>{{ trans('backend/patients_trans.Phone') }}</th>
                                 <th>{{ trans('backend/patients_trans.Address') }}</th>
                                 <th>{{ trans('backend/patients_trans.Age') }}</th>
-                                <!-- <th>{{ trans('backend/patients_trans.Add_Reservation') }}</th> -->
+                                <th>{{ trans('backend/patients_trans.Add_Analysis') }}</th>
                                 <!-- <th>{{ trans('backend/patients_trans.Add_Online_Reservation') }}</th> -->
                                 <th>{{ trans('backend/patients_trans.Patient_Card') }}</th>
                                 <th>{{ trans('backend/patients_trans.Control') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- @foreach ($patients as $patient)
-                            <tr>
-                                <td>{{ $patient->id }}</td>
-                                <td>{{ $patient->name }}</td>
-                                <th>
-                                    {{ count(App\Models\Reservation::where('id', $patient->id)->get()) }}
-                                </th>
-                                <td>{{ $patient->email }}</td>
-                                <td>{{ $patient->phone }}</td>
-                                <td>{{ $patient->address }}</td>
-                                <td>{{ $patient->age }}</td>
-                                <td>
-                                    <a href="{{ Route('medicalLaboratory.reservations.add', $patient->id) }}"
-                                        class="btn btn-info btn-sm">
-                                        {{ trans('backend/patients_trans.Add_Reservation') }}
-                                    </a>
-                                </td>
-
-                                <td>
-                                    <a href="{{ Route('medicalLaboratory.online_reservations.add', $patient->id) }}"
-                                        class="btn btn-info btn-sm">
-                                        {{ trans('backend/patients_trans.Add_Online_Reservation') }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{ Route('medicalLaboratory.patients.patient_pdf', $patient->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                        {{ trans('Backend/patients_trans.Show_Patient_Card') }}
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="{{ Route('medicalLaboratory.patients.show', $patient->id) }}"
-                                        class="btn btn-primary btn-sm">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a href="{{ Route('medicalLaboratory.patients.edit', $patient->id) }}"
-                                        class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-
-                                    @if (count($patient->reservations) == 0)
-                                    <form
-                                        action="{{ Route('medicalLaboratory.patients.destroy', $patient->id) }}"
-                                        method="post" style="display:inline">
-                                        @csrf
-                                        @method('delete')
-
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                    @endif
-
-
-                                </td>
-
-                            </tr>
-                            @endforeach -->
+                          
                         </tbody>
 
 
@@ -152,18 +95,11 @@
                     data: 'age',
                     name: 'age'
                 },
-                // {
-                //     data: 'add_reservation',
-                //     name: 'add_reservation',
-                //     orderable: false,
-                //     searchable: false
-                // },
-                // {
-                //     data: 'add_online_reservation',
-                //     name: 'add_online_reservation',
-                //     orderable: false,
-                //     searchable: false
-                // },
+                {
+                    data: 'add_analysis',
+                    name: 'add_analysis'
+                },
+              
                 {
                     data: 'patient_card',
                     name: 'patient_card',

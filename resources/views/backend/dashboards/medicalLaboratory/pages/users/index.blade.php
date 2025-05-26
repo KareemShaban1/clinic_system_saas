@@ -23,7 +23,7 @@
                                 <th>{{__('ID')}}</th>
                                 <th>{{__('Name')}}</th>
                                 <th>{{__('Email')}}</th>
-                                <th>{{__('Clinic')}}</th>
+                                <th>{{__('Medical Laboratory')}}</th>
                                 <th>{{__('Roles')}}</th>
                                 <th>{{__('Actions')}}</th>
                             </tr>
@@ -98,8 +98,8 @@
                 name: 'email'
             },
             {
-                data: 'clinic',
-                name: 'clinic'
+                data: 'organization',
+                name: 'organization'
             },
             {
                 data: 'roles',

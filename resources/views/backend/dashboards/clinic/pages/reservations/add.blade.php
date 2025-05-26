@@ -65,10 +65,6 @@
                                 <input type="hidden" value="{{ $patient->id }}" name="patient_id">
                                 <input type="text" readonly value="{{ $patient->name }}" name="name" class="form-control">
 
-                                <!-- <select name="id" id="id" class="custom-select mr-sm-2">
-                                    <option value="{{ $patient->id }}" selected>{{ $patient->name }}</option>
-                                </select> -->
-
                             </div>
                         </div>
 

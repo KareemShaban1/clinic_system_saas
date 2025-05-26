@@ -28,8 +28,11 @@ class UserController extends Controller
 
     public function data()
     {
-        $users = User::with(['roles', 'organization'])
-        ->select('id', 'name', 'email', 'organization_id')->get();
+        $users = User::
+        fromSameOrganization()
+        ->with(['roles','organization'])
+        ->select('id', 'name', 'email', 'organization_id', 'organization_type')
+        ->get();
 
 
         return DataTables::of($users)
@@ -41,18 +44,22 @@ class UserController extends Controller
                         <i class="fa fa-trash"></i>
                     </button>';
             })
-            ->addColumn('clinic', function ($user) {
-                return $user->medical_laboratory->name ?? 'N/A';
+            ->addColumn('organization', function ($user) {
+                if ($user->organization) {
+                    return $user->organization->name;
+                }
+                return 'N/A';
             })
+            
             ->addColumn('roles', function ($user) {
-                $roles = $user->roles->pluck('name'); // Get roles as an array
+                $roles = $user->roles->pluck('name');
                 $rolesWithBadges = $roles->map(function ($role) {
                     return '<span class="badge bg-primary text-white" style="font-size: 14px;">' . $role . '</span>';
-                })->implode(' '); // Implode the badges with a space between them
+                })->implode(' ');
 
                 return $rolesWithBadges;
             })
-            ->rawColumns(['roles', 'actions', 'clinic', 'roles'])
+            ->rawColumns(['roles', 'actions', 'organization', 'roles'])
             ->make(true);
     }
 

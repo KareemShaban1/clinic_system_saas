@@ -66,9 +66,10 @@ class MedicalAnalysisController extends Controller
     public function add($id)
     {
 
-        $reservation = Reservation::findOrFail($id);
+        
+        $patient = Patient::findOrFail($id);
 
-        return view('backend.dashboards.medicalLaboratory.pages.medicalAnalysis.add', compact('reservation'));
+        return view('backend.dashboards.medicalLaboratory.pages.medicalAnalysis.add',compact('patient'));
     }
 
     public function create()

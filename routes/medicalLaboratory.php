@@ -28,6 +28,48 @@ Route::group(
         // Dashboard Part
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
+        Route::group(
+            [
+                'prefix' => '/events',
+                'as' => 'events.',
+                'controller' => 'EventController'
+            ],
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
+                Route::get('/show', 'show')->name('show');
+                Route::get('/add', 'add')->name('add');
+                Route::delete('/delete/{event_id}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{event_id}', 'restore')->name('restore');
+                Route::delete('/force_delete/{event_id}', 'forceDelete')->name('forceDelete');
+            }
+        );
+
+          // Analysis Part
+          Route::group(
+            [
+                'prefix' => '/analysis',
+                'as' => 'analysis.',
+                'controller' => 'MedicalAnalysisController',
+            ],
+            function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/add/{patient_id}', 'add')->name('add');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/edit/{medical_analysis_id}', 'edit')->name('edit');
+                Route::post('/update/{medical_analysis_id}', 'update')->name('update');
+                Route::get('/show/{id}', 'show')->name('show');
+                Route::delete('/delete/{medical_analysis_id}', 'destroy')->name('destroy');
+                Route::get('/trash', 'trash')->name('trash');
+                Route::put('/restore/{medical_analysis_id}', 'restore')->name('restore');
+                Route::delete('/force_delete/{medical_analysis_id}', 'forceDelete')->name('forceDelete');
+            }
+        );
+
+
 
         // Patients Part
         Route::group(
@@ -54,7 +96,8 @@ Route::group(
 
                 Route::get('/add_patient_code', 'add_patient_code')->name('add_patient_code');
                 Route::get('/search', 'search');
-                Route::post('/assign', 'assign');
+                Route::post('/assign', 'assignPatient')->name('assignPatient');
+                Route::post('/unassign/{patient_id}', 'unassignPatient')->name('unassignPatient');
             }
         );
 

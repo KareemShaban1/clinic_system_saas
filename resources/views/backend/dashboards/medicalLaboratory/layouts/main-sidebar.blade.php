@@ -172,23 +172,6 @@
                         </ul>
                     </li> -->
 
-                    <!-- <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#rays-menu">
-                            <div class="pull-left"><i class="fa fa-stethoscope"></i><span
-                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Rays') }}</span>
-                            </div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="rays-menu" class="collapse" data-parent="#sidebarnav">
-
-                            <li> <a href="{{ route('medicalLaboratory.rays.index') }}">
-                                    {{ trans('backend/sidebar_trans.All_Rays') }}</a> </li>
-                        
-
-                        </ul>
-                    </li> -->
-
 
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#analysis-menu">

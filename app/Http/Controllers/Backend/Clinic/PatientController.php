@@ -179,7 +179,7 @@ class PatientController extends Controller
                 'organization_type' => Clinic::class,
                 'assigned' => true,
             ]);
-    
+
 
             return redirect()->route('clinic.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
@@ -303,11 +303,7 @@ class PatientController extends Controller
 
     public function search(Request $request)
     {
-        // Get the patient without the ClinicScope
-        $patient = Patient::withoutGlobalScope(ClinicScope::class)
-            // ->with('clinic')
-            ->where('patient_code', $request->code)
-            ->first();
+        $patient = Patient::where('patient_code', $request->code)->first();
 
         if (!$patient) {
             return response()->json([
@@ -316,10 +312,13 @@ class PatientController extends Controller
             ]);
         }
 
-        foreach ($patient->clinic as $clinic) {
+        // Load only assigned medical laboratories
+        $assignedLabs = $patient->clinics()
+            ->wherePivot('assigned', 1)
+            ->get();
 
-            // Check if the patient is already assigned to this clinic
-            if ($clinic->id == auth()->user()->clinic->id) {
+        foreach ($assignedLabs as $medicalLab) {
+            if ($medicalLab->id == auth()->user()->organization->id) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Patient already assigned to your clinic.'
@@ -327,13 +326,13 @@ class PatientController extends Controller
             }
         }
 
-
-        // Patient found and not assigned to this clinic
+        // Patient found and not assigned to this lab
         return response()->json([
             'success' => true,
             'patient' => $patient
         ]);
     }
+
 
 
     public function assignPatient(Request $request)
@@ -353,14 +352,13 @@ class PatientController extends Controller
     public function unassignPatient($patient_id)
     {
         DB::table('patient_organization')
-        ->where('patient_id', $patient_id)
-        ->update([
-            'assigned' => 0,
-        ]);
+            ->where('patient_id', $patient_id)
+            ->update([
+                'assigned' => 0,
+            ]);
 
-        
+
         return redirect()->back()->with('toast_success', 'Patient unassigned successfully');
 
-        // return response()->json(['message' => 'Patient unassigned successfully']);
     }
 }

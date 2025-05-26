@@ -52,18 +52,13 @@ class PatientController extends Controller
             ->addColumn('number_of_reservations', function ($patient) {
                 return $patient->reservations->count();
             })
-            ->addColumn('add_reservation', function ($patient) {
-                return '<a href="' . route('medicalLaboratory.reservations.add', $patient->id) . '" 
+            ->addColumn('add_analysis', function ($patient) {
+                return '<a href="' . route('medicalLaboratory.analysis.add', $patient->id) . '" 
                             class="btn btn-info btn-sm">
-                            ' . trans('backend/patients_trans.Add_Reservation') . '
+                            ' . trans('backend/patients_trans.Add_Analysis') . '
                         </a>';
             })
-            ->addColumn('add_online_reservation', function ($patient) {
-                return '<a href="' . route('medicalLaboratory.online_reservations.add', $patient->id) . '" 
-                            class="btn btn-info btn-sm">
-                            ' . trans('backend/patients_trans.Add_Online_Reservation') . '
-                        </a>';
-            })
+           
             ->addColumn('patient_card', function ($patient) {
                 return '<a href="' . route('medicalLaboratory.patients.patient_pdf', $patient->id) . '" 
                             class="btn btn-primary btn-sm">
@@ -97,7 +92,7 @@ class PatientController extends Controller
 
                 return $actions;
             })
-            ->rawColumns(['add_reservation', 'add_online_reservation', 'patient_card', 'action'])
+            ->rawColumns(['add_analysis', 'patient_card', 'action'])
             ->make(true);
     }
 
@@ -292,11 +287,7 @@ class PatientController extends Controller
 
     public function search(Request $request)
     {
-        // Get the patient without the medicalLaboratoryScope
-        $patient = Patient::withoutGlobalScope(ClinicScope::class)
-            // ->with('clinic')
-            ->where('patient_code', $request->code)
-            ->first();
+        $patient = Patient::where('patient_code', $request->code)->first();
 
         if (!$patient) {
             return response()->json([
@@ -305,19 +296,21 @@ class PatientController extends Controller
             ]);
         }
 
-        foreach ($patient->clinic as $clinic) {
+        // Load only assigned medical laboratories
+        $assignedLabs = $patient->medicalLaboratories()
+            ->wherePivot('assigned', 1)
+            ->get();
 
-            // Check if the patient is already assigned to this clinic
-            if ($clinic->id == auth()->user()->clinic->id) {
+        foreach ($assignedLabs as $medicalLab) {
+            if ($medicalLab->id == auth()->user()->organization->id) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Patient already assigned to your medicalLaboratory.'
+                    'message' => 'Patient already assigned to your medical laboratory.'
                 ]);
             }
         }
 
-
-        // Patient found and not assigned to this clinic
+        // Patient found and not assigned to this lab
         return response()->json([
             'success' => true,
             'patient' => $patient
@@ -325,12 +318,59 @@ class PatientController extends Controller
     }
 
 
-    public function assign(Request $request)
-    {
-        // Example: attach patient to authenticated clinic
-        $clinic = auth()->user()->clinic;
-        $clinic->patients()->attach($request->patient_id);
 
-        return response()->json(['message' => 'Patient assigned successfully']);
+    public function assignPatient(Request $request)
+    {
+        $organizationId = auth()->user()->organization->id;
+
+        // Check if a record already exists
+        $patientAssignment = DB::table('patient_organization')
+            ->where('patient_id', $request->patient_id)
+            ->where('organization_id', $organizationId)
+            ->where('organization_type', MedicalLaboratory::class)
+            ->first();
+
+        if ($patientAssignment) {
+            // If already assigned, return error
+            if ($patientAssignment->assigned == 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Patient already assigned to your medical laboratory.'
+                ]);
+            }
+
+            // If exists but not assigned, update it
+            DB::table('patient_organization')
+                ->where('patient_id', $request->patient_id)
+                ->where('organization_id', $organizationId)
+                ->where('organization_type', MedicalLaboratory::class)
+                ->update(['assigned' => 1]);
+        } else {
+            // Create new assignment
+            DB::table('patient_organization')->insert([
+                'patient_id' => $request->patient_id,
+                'organization_id' => $organizationId,
+                'organization_type' => MedicalLaboratory::class,
+                'assigned' => 1,
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Patient assigned successfully.'
+        ]);
+    }
+
+
+    public function unassignPatient($patient_id)
+    {
+        DB::table('patient_organization')
+            ->where('patient_id', $patient_id)
+            ->update([
+                'assigned' => 0,
+            ]);
+
+
+        return redirect()->back()->with('toast_success', 'Patient unassigned successfully');
     }
 }
