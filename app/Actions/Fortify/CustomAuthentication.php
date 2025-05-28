@@ -3,7 +3,10 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Admin;
+use App\Models\Clinic;
+use App\Models\MedicalLaboratory;
 use App\Models\Patient;
+use App\Models\RadiologyCenter;
 use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +22,10 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', '=', $email)
+        ->where('organization_type', '=', Clinic::class)
+        ->whereHas('organization',function($query){
+            $query->where('status', 1);
+        })
         ->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -32,9 +39,10 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', '=', $email)
-        // ->whereHas('organization',function($query){
-        //     $query->where('status', 1);
-        // })
+        ->where('organization_type', '=', MedicalLaboratory::class)
+        ->whereHas('organization',function($query){
+            $query->where('status', 1);
+        })
         ->first();
 
         if ($user && Hash::check($password, $user->password)) {
@@ -48,7 +56,8 @@ class CustomAuthentication
         $email = $request->email;
         $password = $request->password;
         $user = User::where('email', '=', $email)
-        ->whereHas('clinic',function($query){
+        ->where('organization_type', '=', RadiologyCenter::class)
+        ->whereHas('organization',function($query){
             $query->where('status', 1);
         })
         ->first();

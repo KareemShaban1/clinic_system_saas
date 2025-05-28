@@ -18,10 +18,16 @@ class MedicalAnalysis extends Model implements HasMedia
     public $table = 'medical_analysis';
 
     protected $fillable = [
-        'name','date','type_id','report','patient_id','reservation_id','clinic_id'
+        'name',
+        'date',
+        'type_id',
+        'report',
+        'patient_id',
+        'reservation_id',
+        'clinic_id'
     ];
 
-    
+
     // public function getImageUrlAttribute()
     // {
     //     if (!$this->images) {
@@ -42,7 +48,7 @@ class MedicalAnalysis extends Model implements HasMedia
     }
     public function patient()
     {
-        return $this->belongsTo( Patient::class);
+        return $this->belongsTo(Patient::class);
     }
 
     public function reservation()
@@ -50,6 +56,9 @@ class MedicalAnalysis extends Model implements HasMedia
         return $this->belongsTo(Reservation::class);
     }
 
-
+    public function serviceFees()
+    {
+        return $this->morphMany(ModuleServiceFee::class, 'module')->with('service');
+    }
     
 }

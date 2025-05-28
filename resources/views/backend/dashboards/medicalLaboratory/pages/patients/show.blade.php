@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-    {{ trans('backend/patients_trans.Patients') }}
+{{ trans('backend/patients_trans.Patients') }}
 @stop
 @endsection
 @section('page-header')
@@ -42,8 +42,8 @@
                                                     </li>
 
                                                     <li class="nav-item">
-                                                        <a href="#reservations" data-toggle="tab"
-                                                            class="nav-link">{{ trans('backend/patients_trans.Reservations') }}</a>
+                                                        <a href="#analysis" data-toggle="tab"
+                                                            class="nav-link">{{ trans('backend/patients_trans.Analysis') }}</a>
                                                     </li>
                                                 </ul>
 
@@ -126,7 +126,7 @@
                                                                     </h5>
                                                                 </div>
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                    <span>{{ $patient->reservations_count }}</span>
+                                                                    <span>{{ $patient->analysis_count }}</span>
                                                                 </div>
                                                             </div>
 
@@ -141,9 +141,9 @@
                                                                 <div class="col-lg-9 col-md-8 col-sm-6 col-6">
                                                                     <span>
                                                                         @if ($patient->gender == 'male')
-                                                                            {{ trans('backend/patients_trans.Male') }}
+                                                                        {{ trans('backend/patients_trans.Male') }}
                                                                         @elseif ($patient->gender == 'female')
-                                                                            {{ trans('backend/patients_trans.Female') }}
+                                                                        {{ trans('backend/patients_trans.Female') }}
                                                                         @endif
                                                                     </span>
                                                                 </div>
@@ -169,140 +169,112 @@
                                                     </div>
 
 
-                                                    <div id="reservations" class="tab-pane fade">
+                                                    <div id="analysis" class="tab-pane fade">
 
                                                         <div class="my-post-content pt-4">
 
 
-                                                            @forelse($patient->reservations as $reservation)
-                                                                <h5 class="card-header">
-                                                                    <span class="badge badge-rounded badge-warning ">
-                                                                        <h5> {{ trans('backend/patients_trans.Reservation_Number') }}
-                                                                            {{ $loop->index + 1 }} </h5>
-                                                                    </span>
-                                                                </h5>
-                                                                <div class="card-body">
+                                                            @forelse($patient->medicalAnalysis as $analysis)
+                                                            <h5 class="card-header">
+                                                                <span class="badge badge-rounded badge-warning ">
+                                                                    <h5> {{ trans('backend/patients_trans.Analysis_Number') }}
+                                                                        {{ $loop->index + 1 }}
+                                                                    </h5>
+                                                                </span>
+                                                            </h5>
+                                                            <div class="card-body">
 
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Id') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>{{ $reservation->id }}</span>
-                                                                        </div>
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                        <h5 class="f-w-500">
+                                                                            {{ trans('backend/patients_trans.Id') }}
+                                                                            <span
+                                                                                class="{{ trans('backend/patients_trans.pull') }}">:</span>
+                                                                        </h5>
                                                                     </div>
-
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Number_of_Reservation') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>{{ $reservation->reservation_number }}</span>
-                                                                        </div>
+                                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                                        <span>{{ $analysis->id }}</span>
                                                                     </div>
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.First_Diagnosis') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>{{ $reservation->first_diagnosis }}</span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Reservation_Type') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>
-                                                                                <p>
-                                                                                    @if ($reservation->res_type == 'check')
-                                                                                        {{ trans('backend/patients_trans.Check') }}
-                                                                                        @elseif ($reservation->res_type == 'recheck')
-                                                                                        {{ trans('backend/patients_trans.Recheck') }}
-                                                                                        @elseif ($reservation->res_type == 'consultation')
-                                                                                        {{ trans('backend/patients_trans.Consultation') }}
-                                                                                    @endif
-                                                                                </p>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Payment') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            @if ($reservation->payment == 'paid')
-                                                                                <span
-                                                                                    class="badge badge-rounded badge-success p-3">
-                                                                                    {{ trans('backend/patients_trans.Paid') }}
-                                                                                </span>
-                                                                            @elseif ($reservation->payment == 'not paid')
-                                                                                <span
-                                                                                    class="badge badge-rounded badge-danger p-3">
-                                                                                    {{ trans('backend/patients_trans.Not_Paid') }}
-                                                                                </span>
-                                                                            @endif
-                                                                        </div>
-                                                                    </div>
-
-
-
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Reservation_Date') }}<span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>{{ $reservation->date }}</span>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="row mb-4">
-                                                                        <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                                                                            <h5 class="f-w-500">
-                                                                                {{ trans('backend/patients_trans.Final_Diagnosis') }}
-                                                                                <span
-                                                                                    class="{{ trans('backend/patients_trans.pull') }}">:</span>
-                                                                            </h5>
-                                                                        </div>
-                                                                        <div class="col-lg-9 col-md-8 col-sm-6 col-6">
-                                                                            <span>{{ $reservation->final_diagnosis }}</span>
-                                                                        </div>
-                                                                    </div>
-
-
-
                                                                 </div>
+
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                        <h5 class="f-w-500">
+                                                                            {{ trans('backend/patients_trans.Date') }}
+                                                                            <span
+                                                                                class="{{ trans('backend/patients_trans.pull') }}">:</span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                                        <span>{{ $analysis->date }}</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                        <h5 class="f-w-500">
+                                                                            {{ trans('backend/patients_trans.Cost') }}
+                                                                            <span
+                                                                                class="{{ trans('backend/patients_trans.pull') }}">:</span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                                        <span>{{ $analysis->cost }}</span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                        <h5 class="f-w-500">
+                                                                            {{ trans('backend/patients_trans.Payment') }}
+                                                                            <span
+                                                                                class="{{ trans('backend/patients_trans.pull') }}:"></span>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                                        <span>{{ $analysis->payment }}</span>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                @foreach ($analysis->serviceFees as $serviceFee)
+
+                                                                <div class="row mb-4">
+                                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                        <h5 class="f-w-500">
+                                                                            {{ trans('backend/patients_trans.Service_Fee') }}
+                                                                            {{ $loop->index + 1 }}
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col-lg-9 col-md-8 col-sm-6 col-6">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                                <span>{{ $serviceFee->service->service_name }}</span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                                <span>{{ $serviceFee->fee }}</span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                                <span>{{ $serviceFee->notes }}</span>
+                                                                            </div>
+                                                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                                                                @foreach ($serviceFee->images as $image)
+                                                                                <img src="{{ $image}}" alt=""
+                                                                                    class="img-thumbnail mr-2 mb-2" width="100" height="100">
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                                @endforeach
+
+
+                                                            </div>
                                                             @empty
-                                                                <div> لا توجد حجوزات للمريض </div>
+                                                            <div> لا توجد حجوزات للمريض </div>
                                                             @endforelse
                                                         </div>
 

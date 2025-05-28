@@ -32,7 +32,7 @@
                     <div class="row">
 
 
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="form-group">
                                 <label for="id"
                                     class="form-control-label">{{ trans('backend/medicalAnalysis_trans.Patient_Name') }}</label>
@@ -46,12 +46,25 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="form-group">
                                 <label> {{ trans('backend/medicalAnalysis_trans.Analysis_Date') }}<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" name="date" id="datepicker-action"
                                     data-date-format="yyyy-mm-dd">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label for="payment">{{ trans('backend/medicalAnalysis_trans.Payment') }}<span
+                                        class="text-danger">*</span></label>
+                                <select name="payment" id="payment" class="custom-select mr-sm-2">
+                                    <option value="">{{ trans('backend/medicalAnalysis_trans.Select_Payment') }}</option>
+                                    <option value="paid">{{ trans('backend/medicalAnalysis_trans.Paid') }}</option>
+                                    <option value="not_paid">{{ trans('backend/medicalAnalysis_trans.Not_Paid') }}</option>
+                                </select>        
 
                             </div>
                         </div>
@@ -138,6 +151,13 @@
                                     <textarea name="service_fee_notes[]" class="form-control service-fee-notes"></textarea>
                                 </div>
                                 <div class="col-md-3">
+                                    <label>{{ __('Images') }}</label>
+                                    <input type="file" name="service_fee_images[][]" class="form-control service-fee-image-input" multiple accept="image/*">
+                                    <div class="preview-images mt-2 d-flex flex-wrap"></div>
+                                </div>
+
+
+                                <div class="col-md-3">
                                     <button type="button" class="btn btn-danger remove-service-fee mt-2">{{ __('Remove') }}</button>
                                 </div>
                             </div>
@@ -181,11 +201,34 @@
 
     // Add new service fee row
     $(document).on('click', '#add-service-fee', function() {
+        let totalRows = $('.service-fee-row').length;
+        let newRow = $('.service-fee-row:first').clone();
 
-        var newRow = $('.service-fee-row:first').clone();
-        newRow.find('select, input, textarea').val('');
-        newRow.find('.remove-service-fee').show(); 
+        newRow.find('select, input[type="number"], textarea').val('');
+        newRow.find('.preview-images').html('');
+        newRow.find('input[type="file"]').val('');
+
+        // Update name attributes for all inputs using the new index
+        newRow.find('select[name^="service_fee_id"]').attr('name', `service_fee_id[${totalRows}]`);
+        newRow.find('input[name^="service_fee"]').attr('name', `service_fee[${totalRows}]`);
+        newRow.find('textarea[name^="service_fee_notes"]').attr('name', `service_fee_notes[${totalRows}]`);
+        newRow.find('input[type="file"]').attr('name', `service_fee_images[${totalRows}][]`);
+
         $('#service-fee-container').append(newRow);
+    });
+
+
+    $(document).on('change', '.service-fee-image-input', function() {
+        let previewContainer = $(this).siblings('.preview-images');
+        previewContainer.html('');
+
+        Array.from(this.files).forEach(file => {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                previewContainer.append(`<img src="${e.target.result}" class="img-thumbnail mr-2 mb-2" width="100" height="100">`);
+            };
+            reader.readAsDataURL(file);
+        });
     });
 </script>
 

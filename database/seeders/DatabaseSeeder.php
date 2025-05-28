@@ -31,9 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DoctorSeeder::class);
         $this->call(AdminSeeder::class);
         // $this->call(SettingsSeeder::class);
-       
 
-        $this->call(PatientSeeder::class);
+
         $this->call(ServiceFeeSeeder::class);
         $this->call(SettingsSeeder::class);
         // $this->call(SystemControlSeeder::class);

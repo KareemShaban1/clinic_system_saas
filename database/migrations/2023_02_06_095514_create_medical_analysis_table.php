@@ -16,14 +16,14 @@ return new class() extends Migration {
             $table->id();
             $table->foreignId('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->foreignId('reservation_id')->nullable()->constrained('reservations')->nullOnDelete();
-            
-            
+
+
             // Make the user morphable to any 'organization' model
             $table->nullableMorphs('organization');
-            // (clinics , medical_laboratories , radiology_centers)    
+            // (clinics , medical_laboratories , radiology_centers)
             // Creates organization_id (unsignedBigInteger) and organization_type (string)
 
-            $table->string('name');
+            // $table->string('name');
             // $table->string('images')->nullable();
             $table->date('date');
             $table->string('cost')->nullable();

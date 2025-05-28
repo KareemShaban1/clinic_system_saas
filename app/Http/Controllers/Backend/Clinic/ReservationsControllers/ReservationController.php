@@ -15,6 +15,8 @@ use App\Models\{
     Drug,
     GlassesDistance,
     MedicalAnalysis,
+    ModuleServiceFee,
+    OrganizationServiceFee,
     Prescription,
     Ray,
     ReservationServiceFee,
@@ -449,15 +451,13 @@ class ReservationController extends Controller
                     $fee = $request->service_fee[$index] ?? 0; // Get corresponding fee
                     $notes = $request->service_fee_notes[$index] ?? null; // Get corresponding notes
 
-                    ReservationServiceFee::create([
-                        'reservation_id' => $reservation->id,
+                    ModuleServiceFee::create([
+                        'module_id' => $reservation->id,
+                        'module_type' => Reservation::class,
                         'service_fee_id' => $serviceFeeId,
                         'fee' => $fee,
                         'notes' => $notes
                     ]);
-
-                    // DB::insert('insert into reservation_service_fee (reservation_id, service_fee_id, fee, notes) values (?, ?, ?, ?)', 
-                    //     [$reservation->id, $serviceFeeId, $fee, $notes]);
                 }
             }
 

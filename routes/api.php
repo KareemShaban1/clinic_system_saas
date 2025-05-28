@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AccessTokenController;
+use App\Http\Controllers\Api\Auth\PatientAuthController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DoctorInformationController;
 use App\Http\Controllers\Api\ReservationController;
@@ -155,6 +156,17 @@ Route::group(
     }
 );
 
+
+Route::prefix('patient')->group(function () {
+    Route::post('register', [PatientAuthController::class, 'register']);
+    Route::post('login', [PatientAuthController::class, 'login']);
+    Route::post('forgot-password', [PatientAuthController::class, 'forgotPassword']);
+
+    Route::middleware('auth:patient')->group(function () {
+        Route::post('logout', [PatientAuthController::class, 'logout']);
+        Route::post('update-profile', [PatientAuthController::class, 'updateProfile']);
+    });
+});
 
 
 // patients , show_patient , store_patient , update_patient , delete_patient

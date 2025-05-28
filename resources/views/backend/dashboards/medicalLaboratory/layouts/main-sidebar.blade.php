@@ -190,26 +190,6 @@
                     </li>
 
 
-                    <!-- menu Medicines-->
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#medicine-menu">
-                            <div class="pull-left"><i class="fa-solid fa-pills"></i><span
-                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Medicine') }}</span>
-                            </div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="medicine-menu" class="collapse" data-parent="#sidebarnav">
-                            <li> <a href="{{ Route('clinic.medicines.add') }}" target="_blank">
-                                    {{ trans('backend/sidebar_trans.Add_Medicine') }} </a> </li>
-                            <li> <a href="{{ Route('clinic.medicines.index') }}" target="_blank">
-                                    {{ trans('backend/sidebar_trans.Medicine') }}</a> </li>
-                            <li> <a href="{{ Route('clinic.medicines.trash') }}" target="_blank">
-                                    {{ trans('backend/sidebar_trans.Deleted_Medicines') }}</a> </li>
-                        </ul>
-                    </li>
-
-
 
                     <!-- menu Fees-->
                     <li>

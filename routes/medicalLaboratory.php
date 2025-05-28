@@ -60,7 +60,7 @@ Route::group(
                 Route::get('/add/{patient_id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{medical_analysis_id}', 'edit')->name('edit');
-                Route::post('/update/{medical_analysis_id}', 'update')->name('update');
+                Route::put('/update/{medical_analysis_id}', 'update')->name('update');
                 Route::get('/show/{id}', 'show')->name('show');
                 Route::delete('/delete/{medical_analysis_id}', 'destroy')->name('destroy');
                 Route::get('/trash', 'trash')->name('trash');

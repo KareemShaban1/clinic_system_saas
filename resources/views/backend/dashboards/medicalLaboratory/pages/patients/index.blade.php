@@ -31,13 +31,12 @@
                             <tr>
                                 <th>{{ trans('backend/patients_trans.Id') }}</th>
                                 <th>{{ trans('backend/patients_trans.Patient_Name') }}</th>
-                                <th>{{ trans('backend/patients_trans.Number_of_Reservations') }}</th>
+                                <th>{{ trans('backend/patients_trans.Number_of_Analysis') }}</th>
                                 <th>{{ trans('backend/patients_trans.Email') }}</th>
                                 <th>{{ trans('backend/patients_trans.Phone') }}</th>
                                 <th>{{ trans('backend/patients_trans.Address') }}</th>
                                 <th>{{ trans('backend/patients_trans.Age') }}</th>
                                 <th>{{ trans('backend/patients_trans.Add_Analysis') }}</th>
-                                <!-- <th>{{ trans('backend/patients_trans.Add_Online_Reservation') }}</th> -->
                                 <th>{{ trans('backend/patients_trans.Patient_Card') }}</th>
                                 <th>{{ trans('backend/patients_trans.Control') }}</th>
                             </tr>
@@ -74,8 +73,8 @@
                     name: 'name'
                 },
                 {
-                    data: 'number_of_reservations',
-                    name: 'number_of_reservations',
+                    data: 'number_of_analysis',
+                    name: 'number_of_analysis',
                     orderable: false,
                     searchable: false
                 },

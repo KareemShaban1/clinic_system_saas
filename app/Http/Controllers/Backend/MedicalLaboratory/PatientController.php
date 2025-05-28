@@ -46,11 +46,11 @@ class PatientController extends Controller
 
     public function data()
     {
-        $patients = Patient::with('reservations')->medicalLaboratory()->get();
+        $patients = Patient::with('medicalAnalysis')->medicalLaboratory()->get();
 
         return DataTables::of($patients)
-            ->addColumn('number_of_reservations', function ($patient) {
-                return $patient->reservations->count();
+            ->addColumn('number_of_analysis', function ($patient) {
+                return $patient->medicalAnalysis()->count();
             })
             ->addColumn('add_analysis', function ($patient) {
                 return '<a href="' . route('medicalLaboratory.analysis.add', $patient->id) . '" 
@@ -102,9 +102,9 @@ class PatientController extends Controller
     {
         $this->authorizeCheck('view-patients');
 
-        // get patient with his reservations based on id
-        $patient = $this->patient->withCount('reservations')->findOrFail($id);
+        $patient = $this->patient->withCount('medicalAnalysis')->findOrFail($id);
 
+        $patient->load('medicalAnalysis');
 
         return view('backend.dashboards.medicalLaboratory.pages.patients.show', compact('patient'));
     }
@@ -168,7 +168,6 @@ class PatientController extends Controller
             return redirect()->route('medicalLaboratory.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
 
-            dd($e);
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }

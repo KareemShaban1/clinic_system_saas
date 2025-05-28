@@ -29,6 +29,9 @@
                             <tr>
                                 <th>{{ trans('backend/medicalAnalysis_trans.Id') }}</th>
                                 <th>{{ trans('backend/medicalAnalysis_trans.Patient_Name') }}</th>
+                                <th>{{ trans('backend/medicalAnalysis_trans.Service_Fee') }}</th>
+                                <th>{{ trans('backend/medicalAnalysis_trans.Payment') }}</th>
+                                <th>{{ trans('backend/medicalAnalysis_trans.Cost') }}</th>
                                 <th>{{ trans('backend/medicalAnalysis_trans.Control') }}</th>
                             </tr>
                         </thead>
@@ -58,6 +61,18 @@
                 {
                     data: 'patient',
                     name: 'patient'
+                },
+                {
+                    data: 'service_fee',
+                    name: 'service_fee'
+                },
+                {
+                    data: 'payment',
+                    name: 'payment'
+                },
+                {
+                    data: 'cost',
+                    name: 'cost'
                 },
                 {
                     data: 'action',
