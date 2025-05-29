@@ -12,8 +12,8 @@ class ServiceFee extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'service_name',
-        // 'clinic_id',
         'organization_id',
         'organization_type',
         'fee',
@@ -26,7 +26,6 @@ class ServiceFee extends Model
         static::addGlobalScope(new OrganizationScope);
 
     }
-
 
 
     public function clinic()

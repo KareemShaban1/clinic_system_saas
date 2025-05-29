@@ -31,7 +31,7 @@ class ModuleServiceFee extends Model implements HasMedia
 
     public function service()
     {
-        return $this->belongsTo(ServiceFee::class , 'service_fee_id');
+        return $this->belongsTo(ServiceFee::class , 'service_fee_id' , 'id');
     }
 
     public function module()
