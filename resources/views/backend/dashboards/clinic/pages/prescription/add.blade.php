@@ -67,9 +67,9 @@
 <script>
     $('thead').on('click', '.addRow', function() {
         var tr = '<tr>' +
-            '<td><input type="text" name="drug_name[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Name') }}"></td>' +
-            '<td><input type="text" name="drug_dose[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Dose') }}"></td>' +
-            '<td><input type="text" name="drug_type[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Type') }}"></td>' +
+            '<td><input type="text" name="name[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Name') }}"></td>' +
+            '<td><input type="text" name="dose[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Dose') }}"></td>' +
+            '<td><input type="text" name="type[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Drug_Type') }}"></td>' +
             '<td><input type="text" name="frequency[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Frequency') }}"></td>' +
             '<td><input type="text" name="period[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Period') }}"></td>' +
             '<td><input type="text" name="notes[]" class="form-control" placeholder="{{ trans('backend/drugs_trans.Notes') }}"></td>' +

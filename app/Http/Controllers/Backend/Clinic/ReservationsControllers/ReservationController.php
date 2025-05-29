@@ -250,10 +250,11 @@ class ReservationController extends Controller
                 // Check if reservation settings allow showing ray
                 if (isset($reservation_settings['show_prescription']) && $reservation_settings['show_prescription'] == 1) {
                     // Check if Ray exists for this reservation
-                    $prescriptionExists = Prescription::where('id', $reservation->id)->first();
+                    $prescriptionExists = Prescription::where('reservation_id', $reservation->id)->first();
+                    $drugs = Drug::where('reservation_id', $reservation->id)->get();
 
                     // Return the appropriate buttons based on Ray existence
-                    if ($prescriptionExists) {
+                    if ($prescriptionExists || $drugs->isNotEmpty()) {
                         return '<div class="res_control">
                                     <a href="' . route('clinic.prescription.add', $reservation->id) . '" class="btn btn-success btn-sm">
                                         ' . trans('backend/reservations_trans.Add') . '
