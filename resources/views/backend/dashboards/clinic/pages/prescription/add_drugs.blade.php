@@ -8,7 +8,7 @@
                     @csrf
 
                     <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
-                    <input type="hidden" name="patient_id" value="{{ $reservation->patient->id }}">
+                    <input type="hidden" name="patient_id" value="{{ $reservation->patient_id }}">
 
                     <br>
 

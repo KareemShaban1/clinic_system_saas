@@ -179,10 +179,14 @@ Route::group(
                 Route::get('/', 'index')->name('index');
                 Route::get('/add/{id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
-                Route::post('/upload_prescription', 'UploadPrescription')->name('UploadPrescription');
+                Route::get('/edit/{id}', 'edit')->name('edit');
+                Route::put('/update/{id}', 'update')->name('update');
+                Route::post('/store_prescription', 'storePrescription')->name('storePrescription');
+                Route::put('/update_prescription/{id}', 'updatePrescription')->name('updatePrescription');
                 Route::get('/show/{id}', 'show')->name('show');
                 Route::get('/arabic_prescription_pdf/{id}', 'arabic_prescription_pdf')->name('arabic_prescription_pdf');
                 Route::get('/english_prescription_pdf/{id}', 'english_prescription_pdf')->name('english_prescription_pdf');
+                Route::delete('/drugs/{id}', 'deleteDrug')->name('deleteDrug');
             }
         );
 

@@ -10,6 +10,7 @@
                           
 
                           <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+                          <input type="hidden" name="patient_id" value="{{ $reservation->patient_id }}">
 
                           <div class="row">
                               <div class="col-lg-6 col-md-6 col-sm-12 col-12">

@@ -25,6 +25,9 @@ return [
           'Patient_Name'=>'أسم المريض',
           'Date'=>'التاريخ',
           'Time'=>'الوقت',
+          'Update_Prescription'=>'تحديث الروشتة',
+          'Update'=>'تحديث',
+          'Current_Images'=>'الصور الحالية',
          
           ''=>'',
 
