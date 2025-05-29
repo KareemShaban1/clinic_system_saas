@@ -17,7 +17,9 @@ class Reservation extends Model
     protected $primaryKey = 'id';
 
     protected $hidden = [
-        'created_at','updated_at','deleted_at'
+        'created_at',
+        'updated_at',
+        'deleted_at'
 
     ];
 
@@ -40,7 +42,6 @@ class Reservation extends Model
     {
 
         static::addGlobalScope(new ClinicScope);
-
     }
 
     // Inverse of one-to-many (One Reservation belongs to one Patient)
@@ -105,24 +106,16 @@ class Reservation extends Model
         );
     }
 
-
-    
-    // public function serviceFees()
-    // {
-    //     return $this->hasMany(
-    //         ReservationServiceFee::class,
-    //         'reservation_id',
-    //         'id',
-    //     );
-    // }
+    public function scopePatient($query)
+    {
+        return $query->where('patient_id', auth()->id());
+    }
 
     public function serviceFees()
     {
-        return $this->belongsToMany(ServiceFee::class, 'reservation_service_fee')
-                    ->withPivot('notes')
-                    ->withTimestamps();
+        return $this->morphMany(ModuleServiceFee::class, 'module')
+            ->with(['service' => function ($query) {
+                $query->withoutGlobalScopes();
+            }]);
     }
-    
-
-
 }

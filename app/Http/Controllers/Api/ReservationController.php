@@ -22,13 +22,11 @@ class ReservationController extends Controller
     public function index()
     {
 
-        // بتحولها بشكل أتوماتيك laravel ال  json response ل model مش محتاج أحول ال
 
         $reservations = ReservationResource::collection(Reservation::get());
 
         return $this->apiResponse($reservations, 'All Reservations', 200);
 
-        // return Reservation::all();
 
     }
 

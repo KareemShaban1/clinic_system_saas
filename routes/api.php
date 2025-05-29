@@ -4,7 +4,8 @@ use App\Http\Controllers\Api\AccessTokenController;
 use App\Http\Controllers\Api\Auth\PatientAuthController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DoctorInformationController;
-use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\Patient\ClinicController;
+use App\Http\Controllers\Api\Patient\ReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -162,9 +163,18 @@ Route::prefix('patient')->group(function () {
     Route::post('login', [PatientAuthController::class, 'login']);
     Route::post('forgot-password', [PatientAuthController::class, 'forgotPassword']);
 
-    Route::middleware('auth:patient')->group(function () {
+    Route::middleware('auth:patient_api')->group(function () {
         Route::post('logout', [PatientAuthController::class, 'logout']);
         Route::post('update-profile', [PatientAuthController::class, 'updateProfile']);
+
+        Route::get('reservations', [ReservationController::class, 'index']);
+        Route::get('reservation/{id}', [ReservationController::class, 'show']);
+
+        Route::get('clinics', [ClinicController::class, 'index']);
+        Route::get('clinic/{id}', [ClinicController::class, 'show']);
+
+
+
     });
 });
 
