@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class GlassesDistance extends Model
 {
     use HasFactory;
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'reservation_id',
+        'patient_id',
+        'clinic_id',
+    ];
+    
     protected $fillable = [
         'id',
         'patient_id',

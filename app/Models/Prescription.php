@@ -17,6 +17,19 @@ class Prescription extends Model implements HasMedia
     ];
     protected $table = 'prescriptions';
 
+    protected $appends = ['images'];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'reservation_id',
+        'patient_id',
+        'clinic_id',
+    ];
+
+
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);
