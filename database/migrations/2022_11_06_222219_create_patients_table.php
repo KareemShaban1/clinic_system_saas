@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('blood_group', 
             ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'])->nullable();
             $table->enum('gender', ['male', 'female']);
+            $table->boolean('active')->default(value: false);
             // new updates 24/9/2023
             $table->string('height')->nullable();
             $table->string('weight')->nullable();

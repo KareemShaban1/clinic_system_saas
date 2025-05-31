@@ -166,6 +166,8 @@ Route::prefix('patient')->group(function () {
     Route::middleware('auth:patient_api')->group(function () {
         Route::post('logout', [PatientAuthController::class, 'logout']);
         Route::post('update-profile', [PatientAuthController::class, 'updateProfile']);
+        Route::post('change-password', [PatientAuthController::class, 'changePassword']);
+        Route::post('delete-profile', [PatientAuthController::class, 'deleteProfile']);
 
         Route::get('reservations', [ReservationController::class, 'index']);
         Route::get('reservation/{id}', [ReservationController::class, 'show']);
