@@ -25,4 +25,9 @@ class ChronicDisease extends Model
     {
         return $this->belongsTo(Clinic::class);
     }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }
