@@ -23,16 +23,7 @@
                                   <h5 class="f-w-500">{{ trans('backend/drugs_trans.Prescription_Image') }}<span
                                           class="pull-left">:</span></h5>
                               </div>
-                              <div class="col-lg-9 col-md-8 col-sm-6 col-12">
-                                  <?php $images = explode('|', $prescription->images); ?>
-                                  @foreach ($images as $value)
-                                  <a  href="{{ URL::asset('storage/prescriptions/' . $value) }}" download
-                                  title="تحميل الصورة">
-                                      <img class="prescription-image" src="{{ URL::asset('storage/prescriptions/' . $value) }}"
-                                      alt="تحميل الصورة"   width="350" height="500">
-                                  </a>        
-                                  @endforeach
-                              </div>
+                              
                           </div>
                       </div>
                   </div>

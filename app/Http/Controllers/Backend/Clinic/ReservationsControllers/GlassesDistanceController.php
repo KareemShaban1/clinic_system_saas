@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Settings;
 use App\Models\GlassesDistance;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use PDF;
 
@@ -21,6 +22,18 @@ class GlassesDistanceController extends Controller
         $this->authorizeCheck('view-glasses-distances');
         $glasses_distances = $glassesDistance->all();
         return view('backend.dashboards.clinic.pages.glasses_distance.index', compact('glasses_distances'));
+    }
+
+    public function data(){
+        $glasses_distances = GlassesDistance::all();
+        return datatables()->of($glasses_distances)
+        ->addColumn('action', function ($glasses_distance) {
+        })
+        ->addColumn('patient', function ($glasses_distance) {
+            return $glasses_distance->patient->name ?? 'N/A';
+        })
+
+        ->make(true);
     }
 
     public function add(Request $request, Reservation $reservation, $id)
@@ -42,14 +55,15 @@ class GlassesDistanceController extends Controller
         try {
 
             $data = $request->all();
+            $data['clinic_id'] = Auth::user()->organization->id;
 
             $glassesDistance->create($data);
 
-            return redirect()->route('backend.glasses_distance.index');
+            return redirect()->route('clinic.glasses_distance.index');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
 
@@ -72,11 +86,12 @@ class GlassesDistanceController extends Controller
 
             $glasses_distance->update($data);
 
-            return redirect()->route('backend.glasses_distance.index');
+            return redirect()->route('clinic.glasses_distance.index');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+
+            return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
 

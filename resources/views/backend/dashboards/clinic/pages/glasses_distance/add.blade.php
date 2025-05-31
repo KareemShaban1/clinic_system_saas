@@ -22,9 +22,8 @@
                 <form action="{{ Route('clinic.glasses_distance.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
-
-
                     <br>
+                    <input type="text" name="patient_id" value="{{ $reservation->patient->id }}" hidden>
 
                     <div class="row">
                         <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 child-repeater-table">
@@ -32,7 +31,7 @@
 
                                 <thead>
                                     <tr style="text-align: center">
-                                        <th><input class="form-control" name="id" hidden
+                                        <th><input class="form-control" name="reservation_id" hidden
                                                 value="{{ $reservation->id }}" type="text"></th>
                                         <th colspan="3">{{ trans('backend/glasses_distance_trans.Right') }}</th>
                                         <th colspan="3">{{ trans('backend/glasses_distance_trans.Left') }}</th>

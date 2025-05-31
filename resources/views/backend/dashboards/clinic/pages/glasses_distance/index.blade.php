@@ -24,46 +24,17 @@
         <div class="card card-statistics h-100">
             <div class="card-body">
 
-                <table id="table_id" class="display">
+                <table id="glasses_distances_table" class="table dt-responsive nowrap w-100">
                     <thead>
                         <tr>
                             <th>{{trans('backend/glasses_distance_trans.Id')}}</th>
-                            <th>{{trans('backend/glasses_distance_trans.id')}}</th>
+                            <th>{{trans('backend/glasses_distance_trans.Patient')}}</th>
 
                             <th>{{trans('backend/glasses_distance_trans.Control')}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($glasses_distances as $glasses_distance)
-                        <tr>
-                            <td>{{ $glasses_distance->id }}</td>
-                            <td>{{ $glasses_distance->id }}</td>
-                           
-                           
-                            <td>
-                                <a href="" class="btn btn-primary btn-sm">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="{{Route('clinic.glasses_distance.edit',$glasses_distance->id)}}" class="btn btn-warning btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                               
-                               
-                                <form action="" method="post" style="display:inline">
-                                    @csrf
-                                    @method('delete')
-                                    
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash"></i> 
-                                    </button>   
-                                </form>
-                                
-
-                               
-                            </td>
-                            
-                        </tr>
-                        @endforeach
+                      
                     </tbody>
                 </table>
             </div>
@@ -72,6 +43,40 @@
 </div>
 <!-- row closed -->
 @endsection
-@section('js')
+@push('scripts')
+<script>
+    $(document).ready(function() {
 
-@endsection
+        var table = $('#glasses_distances_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('clinic.glasses_distance.data') }}",
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'patient',
+                    name: 'patient'
+                },
+               
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            order: [
+                [0, 'desc']
+            ],
+            language: languages[language],
+            pageLength: 10,
+            responsive: true,
+            "drawCallback": function() {
+                $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+            }
+        });
+    });
+</script>
+@endpush

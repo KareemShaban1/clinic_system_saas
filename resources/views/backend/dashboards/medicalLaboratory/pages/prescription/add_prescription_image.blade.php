@@ -4,7 +4,7 @@
                   <div class="card-body">
 
                       <form method="post" enctype="multipart/form-data"
-                          action="{{ Route('clinic.prescription.UploadPrescription') }}" autocomplete="off">
+                          action="{{ Route('clinic.prescription.storePrescription') }}" autocomplete="off">
 
                           @csrf
                           
