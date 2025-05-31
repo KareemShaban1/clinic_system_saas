@@ -228,6 +228,9 @@ class ReservationController extends Controller
                                     <a href="' . route('clinic.chronic_diseases.add', $reservation->id) . '" class="btn btn-success btn-sm">
                                         ' . trans('backend/reservations_trans.Add') . '
                                     </a>
+                                    <a href="' . route('clinic.reservations.editChronicDisease', $reservation->id) . '" class="btn btn-info btn-sm">
+                                        ' . trans('backend/reservations_trans.Edit') . '
+                                    </a>
                                     <a href="' . route('clinic.chronic_diseases.show', $reservation->id) . '" class="btn btn-info btn-sm">
                                         ' . trans('backend/reservations_trans.Show') . '
                                     </a>
@@ -291,9 +294,6 @@ class ReservationController extends Controller
                         return '<div class="res_control">
                                     <a href="' . route('clinic.glasses_distance.add', $reservation->id) . '" class="btn btn-success btn-sm">
                                         ' . trans('backend/reservations_trans.Add') . '
-                                    </a>
-                                    <a href="' . route('clinic.glasses_distance.show', $reservation->id) . '" class="btn btn-info btn-sm">
-                                        ' . trans('backend/reservations_trans.Show') . '
                                     </a>
                                     <a href="' . route('clinic.glasses_distance.edit', $reservation->id) . '" class="btn btn-warning btn-sm">
                                         ' . trans('backend/reservations_trans.Edit') . '
@@ -801,7 +801,58 @@ class ReservationController extends Controller
             'today_reservation_slots' =>  $reservation_slots
         ];
 
-        // Return the data as JSON response
         return response()->json($data);
+    }
+
+    public function editChronicDisease($id)
+    {
+        $this->authorizeCheck('edit-chronic-disease');
+
+        $reservation = $this->reservation->findOrFail($id);
+        $chronic_diseases = ChronicDisease::where('reservation_id', $id)->get();
+
+        return view(
+            'backend.dashboards.clinic.pages.reservations.editChronicDisease',
+            compact('chronic_diseases', 'reservation')
+        );
+    }
+    public function updateChronicDisease(Request $request, $reservation_id)
+    {
+        try {
+
+            $validated = $request->validate([
+                'name.*' => 'nullable|string',
+                'measure.*' => 'nullable|string',
+                'date.*' => 'nullable|date',
+                'notes.*' => 'nullable|string',
+                'id.*' => 'nullable|integer|exists:chronic_diseases,id',
+            ]);
+
+
+            // Update or create chronic diseases
+            foreach ($request->name as $index => $name) {
+                $data = [
+                    'patient_id' => $request->patient_id,
+                    'reservation_id' => $request->reservation_id,
+                    'name' => $name,
+                    'measure' => $request->measure[$index] ?? null,
+                    'date' => $request->date[$index] ?? null,
+                    'notes' => $request->notes[$index] ?? null,
+                    'clinic_id' => Auth::user()->organization->id,
+                ];
+
+                $id = $request->id[$index] ?? null;
+
+                if ($id) {
+                    ChronicDisease::where('id', $id)->update($data);
+                } else {
+                    ChronicDisease::create($data);
+                }
+            }
+
+            return redirect()->back()->with('toast_success', __('backend/messages.updated_successfully'));
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('toast_error', __('backend/messages.something_went_wrong'));
+        }
     }
 }

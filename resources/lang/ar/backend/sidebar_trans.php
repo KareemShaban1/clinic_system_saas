@@ -66,6 +66,7 @@ return [
   'Types'=>'الأنواع',
   'All_Types'=>'كل الأنواع',
   'Add_Patient_Using_Code'=>'أضافة مريض باستخدام كود',
+  'Glasses_Distances' => 'مسافات العدسات',
   ''=>'',
   ''=>'',
   ''=>'',

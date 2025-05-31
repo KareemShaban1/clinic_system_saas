@@ -26,4 +26,9 @@ class GlassesDistance extends Model
         'CYL_L_N',
         'AX_L_N'
     ];
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
 }

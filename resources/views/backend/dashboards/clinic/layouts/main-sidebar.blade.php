@@ -199,6 +199,21 @@
                     </li>
 
                     <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#glasses_distances-menu">
+                            <div class="pull-left"><i class="fa fa-stethoscope"></i><span
+                                    class="right-nav-text">{{ trans('backend/sidebar_trans.Glasses_Distances') }}</span>
+                            </div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="glasses_distances-menu" class="collapse" data-parent="#sidebarnav">
+                            <li> <a href="{{ Route('clinic.glasses_distance.index') }}">
+                                    {{ trans('backend/sidebar_trans.All_Glasses_Distances') }}</a> </li>
+                           
+                        </ul>
+                    </li>
+
+                    <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#rays-menu">
                             <div class="pull-left"><i class="fa fa-stethoscope"></i><span
                                     class="right-nav-text">{{ trans('backend/sidebar_trans.Rays') }}</span>

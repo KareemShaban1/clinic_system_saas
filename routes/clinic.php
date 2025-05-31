@@ -86,6 +86,8 @@ Route::group(
                 Route::delete('/force_delete/{id}', 'forceDelete')->name('forceDelete');
                 Route::get('/get_res_slot_number_add', 'getResNumberOrSlotAdd');
                 Route::get('/get_res_slot_number_edit', 'getResNumberOrSlotEdit');
+                Route::get('/editChronicDisease/{reservation_id}', 'editChronicDisease')->name('editChronicDisease');
+                Route::put('/updateChronicDisease/{reservation_id}', 'updateChronicDisease')->name('updateChronicDisease');
             }
         );
 
@@ -226,6 +228,7 @@ Route::group(
                 Route::get('/edit/{disease_id}', 'edit')->name('edit');
                 Route::post('/update/{disease_id}', 'update')->name('update');
                 Route::get('/show/{id}', 'show')->name('show');
+                Route::delete('/{disease_id}', 'destroy')->name('destroy');
             }
         );
 
@@ -239,6 +242,7 @@ Route::group(
             ],
             function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/data', 'data')->name('data');
                 Route::get('/add/{id}', 'add')->name('add');
                 Route::post('/store', 'store')->name('store');
                 Route::get('/edit/{disease_id}', 'edit')->name('edit');

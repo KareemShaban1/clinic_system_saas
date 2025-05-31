@@ -41,8 +41,6 @@ class ChronicDiseasesController extends Controller
     public function store(StoreChronicDiseaseRequest $request)
     {
         $this->authorizeCheck('add-chronic-disease');
-
-        // dd($request->all());
         $request->validated();
 
         try {
@@ -54,14 +52,15 @@ class ChronicDiseasesController extends Controller
                     'notes' => $request->notes[$index],
                     'patient_id' => $request->patient_id,
                     'reservation_id' => $request->reservation_id,
-                    'clinic_id' => Auth::user()->clinic_id,
+                    'clinic_id' => Auth::user()->organization_id,
                 ];
                 DB::table('chronic_diseases')->insert($data);
             }
 
             return redirect()->route('clinic.reservations.index')->with('toast_success', 'Chronic diseases added successfully');
         } catch (\Exception $e) {
-            dd($e->getMessage());
+
+            // dd($e->getMessage());
             return redirect()->back()->with('toast_error', $e->getMessage());
         }
     }
@@ -85,11 +84,13 @@ class ChronicDiseasesController extends Controller
         return view('backend.dashboards.clinic.pages.chronicDiseases.edit', compact('chronic_disease'));
     }
 
+
+
+
+
     public function update(UpdateChronicDiseaseRequest $request, $id)
     {
         $this->authorizeCheck('edit-chronic-disease');
-
-        // dd($request->all());
 
         $request->validated();
 
@@ -98,22 +99,23 @@ class ChronicDiseasesController extends Controller
             $chronicDisease = $this->chronicDisease->findOrFail($id);
             $chronicDisease->update($request->all());
 
-
-            // foreach ($request->title as $index => $title) {
-            //     $data = [
-            //         'name' => $title,
-            //         'measure' => $request->measure[$index],
-            //         'date' => $request->date[$index],
-            //         'notes' => $request->notes[$index],
-            //         'patient_id' => $request->patient_id[$index],
-            //         'reservation_id' => $request->reservation_id[$index],
-            //     ];
-            //     $this->chronicDisease->where('id', $chronicDisease->id)->update($data);
-            // }
-
             return redirect()->route('clinic.reservations.index')->with('toast_success', 'Chronic diseases updated successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
         }
+    }
+
+    public function destroy($id)
+    {
+        $this->authorizeCheck('delete-chronic-disease');
+
+        $chronicDisease = $this->chronicDisease->findOrFail($id);
+        $chronicDisease->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Chronic disease deleted successfully',
+        ]);
+
     }
 }

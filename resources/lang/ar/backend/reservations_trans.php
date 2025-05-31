@@ -96,6 +96,7 @@ return [
           'Add_Number_of_Reservation'=>'أضافة عدد الحجوزات',
           'Number_of_Reservations'=>'عدد الحجوزات',
           'Reservation Slots'=>'خانات الحجز',
+          'reservation_status_updated'=>'تم تحديث حالة الحجز',
           ''=>'',
           ''=>'',
           ''=>'',
