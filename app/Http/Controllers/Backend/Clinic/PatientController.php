@@ -8,20 +8,18 @@ use App\Http\Requests\Backend\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Models\Reservation;
 use App\Models\Settings;
+use App\Traits\WhatsAppNotificationTrait;
 use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use App\Http\Traits\AuthorizeCheck;
 use App\Models\Clinic;
-use App\Models\OrganizationAssignment;
-use App\Models\Scopes\ClinicScope;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class PatientController extends Controller
 {
-    use AuthorizeCheck;
+    use AuthorizeCheck, WhatsAppNotificationTrait;
 
     protected $patient;
     protected $reservation;
@@ -54,19 +52,19 @@ class PatientController extends Controller
                 return $patient->reservations->count();
             })
             ->addColumn('add_reservation', function ($patient) {
-                return '<a href="' . route('clinic.reservations.add', $patient->id) . '" 
+                return '<a href="' . route('clinic.reservations.add', $patient->id) . '"
                             class="btn btn-info btn-sm">
                             ' . trans('backend/patients_trans.Add_Reservation') . '
                         </a>';
             })
             ->addColumn('add_online_reservation', function ($patient) {
-                return '<a href="' . route('clinic.online_reservations.add', $patient->id) . '" 
+                return '<a href="' . route('clinic.online_reservations.add', $patient->id) . '"
                             class="btn btn-info btn-sm">
                             ' . trans('backend/patients_trans.Add_Online_Reservation') . '
                         </a>';
             })
             ->addColumn('patient_card', function ($patient) {
-                return '<a href="' . route('clinic.patients.patient_pdf', $patient->id) . '" 
+                return '<a href="' . route('clinic.patients.patient_pdf', $patient->id) . '"
                             class="btn btn-primary btn-sm">
                             ' . trans('backend/patients_trans.Show_Patient_Card') . '
                         </a>';
@@ -92,7 +90,7 @@ class PatientController extends Controller
                         <form action="' . $deleteUrl . '" method="POST" style="display:inline;">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-danger btn-sm" 
+                            <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm(\'Are you sure you want to delete this item?\')">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -100,7 +98,7 @@ class PatientController extends Controller
                         <form action="' . $unassignUrl . '" method="POST" style="display:inline;">
                             ' . csrf_field() . '
                             ' . method_field('POST') . '
-                            <button type="submit" class="btn btn-secondary btn-sm" 
+                            <button type="submit" class="btn btn-secondary btn-sm"
                                     onclick="return confirm(\'Are you sure you want to unassign this item?\')">
                                 <i class="fa fa-link-slash"></i>
                             </button>
@@ -180,6 +178,10 @@ class PatientController extends Controller
                 'assigned' => true,
             ]);
 
+            if ($this->isWhatsAppEnabled()) {
+                $this->sendPatientCredentialsWhatsApp($patient, $request->password);
+            }
+
 
             return redirect()->route('clinic.patients.index')->with('toast_success', 'Patient added toast_successfully');
         } catch (\Exception $e) {
@@ -257,7 +259,7 @@ class PatientController extends Controller
                 <form action="' . $forceDeleteUrl . '" method="POST" style="display:inline;">
                     ' . csrf_field() . '
                     ' . method_field('DELETE') . '
-                    <button type="submit" class="btn btn-danger btn-sm" 
+                    <button type="submit" class="btn btn-danger btn-sm"
                             onclick="return confirm(\'Are you sure you want to delete this item?\')">
                         <i class="fa fa-trash"></i>
                     </button>
